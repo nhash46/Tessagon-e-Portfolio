@@ -1,7 +1,7 @@
 
 
 const newUserForm = (req, res) => {
-    res.render("index.pug")
+    res.send('<H1>User Page</H1>');
 };
 
 module.exports = {
