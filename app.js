@@ -9,7 +9,7 @@ console.log(db);
 
 // GET home page
 app.get('/', (req, res) => {
-    res.send('<H1>Tessagon</H1>')
+    res.render("index.pug")
 });
 
 // routes
