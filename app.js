@@ -18,7 +18,7 @@ const userRouter = require("./routes/userRouter.js");
 // user routes handled by userRouter
 app.use('/user', userRouter);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Tessagon is listening on port 3000!')
 });
 
