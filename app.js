@@ -9,6 +9,10 @@ console.log(db);
 
 // GET home page
 app.get('/', (req, res) => {
+    res.render("login.pug")
+});
+// GET home page
+app.get('/profile', (req, res) => {
     res.render("index.pug")
 });
 
