@@ -2,26 +2,26 @@ extends layout
 
 block content
     .container-fluid
-    .row.no-gutter
-        .d-none.d-md-flex.col-md-4.col-lg-6.bg-image
-        .col-md-8.col-lg-6
-        .login.d-flex.align-items-center.py-5
-            .container
-            .row
-                .col-md-9.col-lg-8.mx-auto
-                h3.login-heading.mb-4 Welcome back!
-                form
-                    .form-label-group
-                    input#inputEmail.form-control(type='email' placeholder='Email address' required='' autofocus='')
-                    label(for='inputEmail') Email address
-                    .form-label-group
-                    input#inputPassword.form-control(type='password' placeholder='Password' required='')
-                    label(for='inputPassword') Password
-                    .custom-control.custom-checkbox.mb-3
-                    input#customCheck1.custom-control-input(type='checkbox')
-                    label.custom-control-label(for='customCheck1') Remember password
-                    button.btn.btn-lg.btn-primary.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(type='submit')#hi Sign in
-                    .text-center
-                    a.small(href='#') Forgot password?
+        .row.no-gutter
+            .d-none.d-md-flex.col-md-4.col-lg-6.bg-image
+            .col-md-8.col-lg-6
+                .login.d-flex.align-items-center.py-5
+                    .container
+                        .row
+                            .col-md-9.col-lg-8.mx-auto
+                                h3.login-heading.mb-4#hi Welcome back!
+                                form
+                                    .form-label-group
+                                        input#inputEmail.form-control(type='email' placeholder='Email address' required='' autofocus='')
+                                        label(for='inputEmail') Email address
+                                    .form-label-group
+                                        input#inputPassword.form-control(type='password' placeholder='Password' required='')
+                                        label(for='inputPassword') Password
+                                    .custom-control.custom-checkbox.mb-3
+                                        input#customCheck1.custom-control-input(type='checkbox')
+                                        label.custom-control-label(for='customCheck1') Remember password
+                                    button.btn.btn-lg.btn-primary.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(type='submit') Sign in
+                                    .text-center
+                                        a.small(href='#') Forgot password?
 
-       
+        
