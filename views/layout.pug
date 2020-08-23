@@ -6,10 +6,29 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
   // Bootstrap CSS
   link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
-  
-  
-  title Tessagon | Your ePortfolio! 
+  // icons
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
 
+title Tessagon | Your ePortfolio! 
+
+nav.navbar.navbar-expand-lg.navbar-light.border-bottom.border-dark
+  a.navbar-brand(href='#') e-Portfolio
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarNavAltMarkup.collapse.navbar-collapse
+    .navbar-nav
+      a.nav-item.nav-link.active(href='#')
+        | Profile 
+        span.sr-only (current)
+      a.nav-item.nav-link(href='#') About me
+      a.nav-item.nav-link(href='#') Blogs
+      a.nav-item.nav-link(href='#') Experience
+      a.nav-item.nav-link(href='#') Achievements
+      a.nav-item.nav-link(href='#') Contact
+  form.form-inline.my-2.my-lg-0
+    .navbar-nav
+      a.nav-item.nav-link(href='#') Login
+    
 
 
 
