@@ -22,6 +22,10 @@ app.get('/', (req, res) => {
 app.get('/profile', (req, res) => {
     res.render("index")
 });
+app.get('/signup', (req, res) => {
+    res.render("signup")
+});
+
 
 // routes
 const userRouter = require("./routes/userRouter.js");
