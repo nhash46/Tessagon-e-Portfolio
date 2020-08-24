@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
 const express = require('express');
+const path = require('path');
 const app = express();
 
 // load database
 const db = require("./models");
 console.log(db);
 
+// Set public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // GET home page
 app.get('/', (req, res) => {
