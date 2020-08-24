@@ -3,6 +3,10 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+// load view engine
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
 // load database
 const db = require("./models");
 console.log(db);
@@ -12,11 +16,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // GET home page
 app.get('/', (req, res) => {
-    res.render("login.pug")
+    res.render("login")
 });
 // GET home page
 app.get('/profile', (req, res) => {
-    res.render("index.pug")
+    res.render("index")
 });
 
 // routes
