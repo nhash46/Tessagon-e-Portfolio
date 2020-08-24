@@ -86,6 +86,10 @@
   color: #777;
 }
 
+.btn-google {
+  color: white;
+  background-color: #ea4335;
+}
 /* Fallback for Edge
 -------------------------------------------------- */
 
@@ -109,4 +113,8 @@
   .form-label-group input:-ms-input-placeholder {
     color: #777;
   }
+}
+
+#white-background {
+  background-color: white;
 }
