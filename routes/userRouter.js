@@ -1,4 +1,5 @@
 const express = require("express");
+const userValidator = require("../validators/userValidator.js");
 
 // create router
 const userRouter = express.Router();
@@ -6,7 +7,7 @@ const userRouter = express.Router();
 const userController = require("../controllers/userController");
 
 // Signing up
-userRouter.post("/signup", userController.addUser);
+userRouter.post("/signup", userValidator.addUser, userController.addUser);
 
 // Sign Up form
 userRouter.get("/signup", userController.newUserForm);

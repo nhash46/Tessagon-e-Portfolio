@@ -38,7 +38,7 @@ const addUser = (req, res) => {
           newUser.save((err) => {
             if (err) {
               console.log(err);
-              return;
+
             } else {
               req.flash('success', 'Successful registration! You can now log in');
               res.redirect('login');
