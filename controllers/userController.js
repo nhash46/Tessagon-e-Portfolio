@@ -27,15 +27,15 @@ const addUser = (req, res) => {
           errors: errors.mapped()
         });
     } else {
-      bcrypt.genSalt(10, function(err, salt){
-        bcrypt.hash(newUser.password, salt, function(err, hash){
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
           if(err){
             console.log(err);
           }
           newUser.password = hash;
   
           // add user to database
-          newUser.save(function (err) {
+          newUser.save((err) => {
             if (err) {
               console.log(err);
               return;
