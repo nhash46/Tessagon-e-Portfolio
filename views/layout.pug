@@ -20,7 +20,7 @@ html
   
 
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      a.navbar-brand(href='#') ePortfolio
+      a.navbar-brand(href='/') ePortfolio
       button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarTogglerDemo02' aria-controls='navbarTogglerDemo02' aria-expanded='false' aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarTogglerDemo02.collapse.navbar-collapse
@@ -35,9 +35,19 @@ html
             a.nav-link(href='#') Blog
           li.nav-item
             a.nav-link(href='#') Contact
-      form.form-inline.my-2.my-lg-0
-        input.form-control.mr-sm-2(type='search' placeholder='Search')
-        button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+      ul.navbar-nav.ml-auto.nav-flex-icons
+        li.nav-item
+          a.navbar-brand(href='https://myaccount.google.com/')
+           i.fa.fa-google-plus(aria-hidden='true')
+        li.nav-item
+          a.navbar-brand(href='https://www.linkedin.com/')
+            i.fa.fa-linkedin-square(aria-hidden='true')
+        li.nav-item.dropdown
+          a#navbarDropdownMenuLink-333.nav-link.dropdown-toggle(data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+            i.fa.fa-user-o(aria-hidden='true')
+          .dropdown-menu.dropdown-menu-right.dropdown-default(aria-labelledby='navbarDropdownMenuLink-333')
+            a.dropdown-item(href='#') Edit profile
+            a.dropdown-item(href='#') Sign out
       
   block content
 
@@ -48,5 +58,5 @@ html
 // jQuery first, then Popper.js, then Bootstrap JS
 script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
 script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js' integrity='sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN' crossorigin='anonymous')
-script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js' integrity='sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV' crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js' integrity='sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV' crossorigin='anonymous')
 
