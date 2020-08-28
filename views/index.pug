@@ -1,4 +1,404 @@
-extends layout 
-
-block content
-    h1 Tessagon on pug 
+doctype html
+head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title John Doe - UX Designer &amp; Front End Developer
+    meta(name='description' content='')
+    meta(name='author' content='')
+    //
+      Favicons
+      ==================================================
+    link(rel='shortcut icon' href='img/favicon.ico' type='image/x-icon')
+    link(rel='apple-touch-icon' href='img/apple-touch-icon.png')
+    link(rel='apple-touch-icon' sizes='72x72' href='img/apple-touch-icon-72x72.png')
+    link(rel='apple-touch-icon' sizes='114x114' href='img/apple-touch-icon-114x114.png')
+    // Bootstrap
+    link(rel='stylesheet' type='text/css' href='css/bootstrap.css')
+    link(rel='stylesheet' type='text/css' href='fonts/font-awesome/css/font-awesome.css')
+    //
+      Stylesheet
+      ==================================================
+    link(rel='stylesheet' type='text/css' href='css/index.css')
+    link(rel='stylesheet' type='text/css' href='css/prettyPhoto.css')
+    link(href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css')
+    script(type='text/javascript' src='js/modernizr.custom.js')
+    // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+// Header
+header#header
+    .intro
+        .container
+            .row
+                .intro-text
+                    h1
+                        | Hello, I&apos;m
+                        span.name John Doe
+                    p UX Designer &amp; Front End Developer
+                    a.btn.btn-default.btn-lg.page-scroll(href='#about') Learn More
+// Navigation
+#nav
+    nav.navbar.navbar-custom
+        .container
+            .navbar-header
+                button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-main-collapse')
+                    i.fa.fa-bars
+                a.navbar-brand.page-scroll(href='#page-top') John Doe
+            // Collect the nav links, forms, and other content for toggling
+            .collapse.navbar-collapse.navbar-right.navbar-main-collapse
+                ul.nav.navbar-nav
+                    // Hidden li included to remove active class from about link when scrolled up past about section
+                    li.hidden
+                        a(href='#page-top')
+                    li
+                        a.page-scroll(href='#about') About
+                    li
+                        a.page-scroll(href='#skills') Skills
+                    li
+                        a.page-scroll(href='#portfolio') Portfolio
+                    li
+                        a.page-scroll(href='#resume') Resume
+                    li
+                        a.page-scroll(href='#contact') Contact
+// About Section
+#about
+    .container
+        .section-title.text-center.center
+            h2 About Me
+            hr
+        .row
+            .col-md-12.text-center
+                img.img-responsive(src='img/about.jpg')
+            .col-md-8.col-md-offset-2
+                .about-text
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh.
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare.
+                    p.text-center
+                        a.btn.btn-primary(href='#')
+                            i.fa.fa-download
+                            |  Download Resume
+// Skills Section
+#skills.text-center
+    .container
+        .section-title.center
+            h2 Skills
+            hr
+        .row
+            .col-md-4.col-sm-6.skill
+                span.chart(data-percent='95')
+                    span.percent 95
+                h4 HTML5
+            .col-md-4.col-sm-6.skill
+                span.chart(data-percent='85')
+                    span.percent 85
+                h4 CSS3
+            .col-md-4.col-sm-6.skill
+                span.chart(data-percent='80')
+                    span.percent 80
+                h4 jQuery
+            .col-md-4.col-sm-6.skill
+                span.chart(data-percent='80')
+                    span.percent 80
+                h4 WordPress
+            .col-md-4.col-sm-6.skill
+                span.chart(data-percent='70')
+                    span.percent 70
+                h4 Photoshop
+            .col-md-4.col-sm-6.skill
+                span.chart(data-percent='65')
+                    span.percent 65
+                h4 Illustrator
+// Portfolio Section
+#portfolio
+    .container
+        .section-title.text-center.center
+            h2 Portfolio
+            hr
+        .categories
+            ul.cat
+                li
+                    ol.type
+                        li
+                            a.active(href='#' data-filter='*') All
+                        li
+                            a(href='#' data-filter='.web') Web Design
+                        li
+                            a(href='#' data-filter='.app') App Development
+                        li
+                            a(href='#' data-filter='.branding') Branding
+            .clearfix
+        .row
+            .portfolio-items
+                .col-sm-6.col-md-3.col-lg-3.web
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/portfolio/01-large.jpg' title='Project description' rel='prettyPhoto')
+                                .hover-text
+                                    h4 Project Title
+                                    small Web Design
+                                img.img-responsive(src='img/portfolio/01-small.jpg' alt='Project Title')
+                .col-sm-6.col-md-3.col-lg-3.app
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/portfolio/02-large.jpg' title='Project description' rel='prettyPhoto')
+                                .hover-text
+                                    h4 Project Title
+                                    small App Development
+                                img.img-responsive(src='img/portfolio/02-small.jpg' alt='Project Title')
+                .col-sm-6.col-md-3.col-lg-3.web
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/portfolio/03-large.jpg' title='Project description' rel='prettyPhoto')
+                                .hover-text
+                                    h4 Project Title
+                                    small Web Design
+                                img.img-responsive(src='img/portfolio/03-small.jpg' alt='Project Title')
+                .col-sm-6.col-md-3.col-lg-3.web
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/portfolio/04-large.jpg' title='Project description' rel='prettyPhoto')
+                                .hover-text
+                                    h4 Project Title
+                                    small Web Design
+                                img.img-responsive(src='img/portfolio/04-small.jpg' alt='Project Title')
+                .col-sm-6.col-md-3.col-lg-3.app
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/portfolio/05-large.jpg' title='Project description' rel='prettyPhoto')
+                                .hover-text
+                                    h4 Project Title
+                                    small App Development
+                                img.img-responsive(src='img/portfolio/05-small.jpg' alt='Project Title')
+                .col-sm-6.col-md-3.col-lg-3.branding
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/portfolio/06-large.jpg' title='Project description' rel='prettyPhoto')
+                                .hover-text
+                                    h4 Project Title
+                                    small Branding
+                                img.img-responsive(src='img/portfolio/06-small.jpg' alt='Project Title')
+                .col-sm-6.col-md-3.col-lg-3.branding.app
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/portfolio/07-large.jpg' title='Project description' rel='prettyPhoto')
+                                .hover-text
+                                    h4 Project Title
+                                    small App Development, Branding
+                                img.img-responsive(src='img/portfolio/07-small.jpg' alt='Project Title')
+                .col-sm-6.col-md-3.col-lg-3.web
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/portfolio/08-large.jpg' title='Project description' rel='prettyPhoto')
+                                .hover-text
+                                    h4 Project Title
+                                    small Web Design
+                                img.img-responsive(src='img/portfolio/08-small.jpg' alt='Project Title')
+// Achievements Section
+#achievements.text-center
+    .container
+        .section-title.center
+            h2 Some Stats
+            hr
+        .row
+            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='200ms')
+                .achievement-box
+                    span.count 310
+                    h4 Happy Clients
+            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='400ms')
+                .achievement-box
+                    span.count 4700
+                    h4 Hours of Work
+            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='600ms')
+                .achievement-box
+                    span.count 30
+                    h4 Awards Won
+            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='800ms')
+                .achievement-box
+                    span.count 8
+                    h4 Years of Experience
+// Resume Section
+#resume.text-center
+    .container
+        .section-title.center
+            h2 Experience
+            hr
+        .row
+            .col-lg-12
+                ul.timeline
+                    li
+                        .timeline-image
+                            h4
+                                | Feb 2013
+                                br
+                                |                 -
+                                br
+                                |                 Present
+                        .timeline-panel
+                            .timeline-heading
+                                h4 Creative Agency
+                                h4.subheading UX Developer
+                            .timeline-body
+                                p
+                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                    li.timeline-inverted
+                        .timeline-image
+                            h4
+                                | Nov 2011
+                                br
+                                |                 -
+                                br
+                                |                 Jan 2013
+                        .timeline-panel
+                            .timeline-heading
+                                h4 Creative Agency
+                                h4.subheading Front-end Developer
+                            .timeline-body
+                                p
+                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                    li
+                        .timeline-image
+                            h4
+                                | Dec 2009
+                                br
+                                |                 -
+                                br
+                                |                 May 2011
+                        .timeline-panel
+                            .timeline-heading
+                                h4 Creative Agency
+                                h4.subheading UX Designer
+                            .timeline-body
+                                p
+                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+    .container
+        .section-title.center
+            h2 Education
+            hr
+        .row
+            .col-lg-12
+                ul.timeline
+                    // Education Section
+                    li
+                        .timeline-image
+                            h4
+                                | 2010
+                                br
+                                |                 -
+                                br
+                                |                 2011
+                        .timeline-panel
+                            .timeline-heading
+                                h4 Design University
+                                h4.subheading Master Degree of Design
+                            .timeline-body
+                                p
+                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                    li.timeline-inverted
+                        .timeline-image
+                            h4
+                                | 2007
+                                br
+                                |                 -
+                                br
+                                |                 2010
+                        .timeline-panel
+                            .timeline-heading
+                                h4 Design University
+                                h4.subheading Bachelor Degree of Design
+                            .timeline-body
+                                p
+                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                    li
+                        .timeline-image
+                            h4
+                                | 2004
+                                br
+                                |                 -
+                                br
+                                |                 2007
+                        .timeline-panel
+                            .timeline-heading
+                                h4 School Name
+                                h4.subheading High School Degree
+                            .timeline-body
+                                p.text-muted
+                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+// Contact Section
+#contact.text-center
+    .container
+        .section-title.center
+            h2 Contact
+            hr
+        .col-md-8.col-md-offset-2
+            .col-md-4
+                i.fa.fa-map-marker.fa-2x
+                p
+                    | 4321 California St,
+                    br
+                    |           San Francisco, CA 12345
+            .col-md-4
+                i.fa.fa-envelope-o.fa-2x
+                p info@company.com
+            .col-md-4
+                i.fa.fa-phone.fa-2x
+                p  +1 123 456 1234
+            .clearfix
+        .col-md-8.col-md-offset-2
+            h3 Leave me a message
+            form#contactForm(name='sentMessage' novalidate='')
+                .row
+                    .col-md-6
+                        .form-group
+                            input#name.form-control(type='text' placeholder='Name' required='required')
+                            p.help-block.text-danger
+                    .col-md-6
+                        .form-group
+                            input#email.form-control(type='email' placeholder='Email' required='required')
+                            p.help-block.text-danger
+                .form-group
+                    textarea#message.form-control(name='message' rows='4' placeholder='Message' required='')
+                    p.help-block.text-danger
+                #success
+                button.btn.btn-default(type='submit') Send Message
+            .social
+                ul
+                    li
+                        a(href='#')
+                            i.fa.fa-facebook
+                    li
+                        a(href='#')
+                            i.fa.fa-twitter
+                    li
+                        a(href='#')
+                            i.fa.fa-dribbble
+                    li
+                        a(href='#')
+                            i.fa.fa-github
+                    li
+                        a(href='#')
+                            i.fa.fa-instagram
+                    li
+                        a(href='#')
+                            i.fa.fa-linkedin
+#footer
+    .container.text-center
+        .fnav
+            p
+                | Copyright &copy; 2016 John Doe. Designed by
+                a(href='http://www.templatewire.com' rel='nofollow') TemplateWire
+script(type='text/javascript' src='js/jquery.1.11.1.js')
+script(type='text/javascript' src='js/bootstrap.js')
+script(type='text/javascript' src='js/SmoothScroll.js')
+script(type='text/javascript' src='js/easypiechart.js')
+script(type='text/javascript' src='js/jquery.prettyPhoto.js')
+script(type='text/javascript' src='js/jquery.isotope.js')
+script(type='text/javascript' src='js/jquery.counterup.js')
+script(type='text/javascript' src='js/waypoints.js')
+script(type='text/javascript' src='js/jqBootstrapValidation.js')
+script(type='text/javascript' src='js/contact_me.js')
+script(type='text/javascript' src='js/main.js')
