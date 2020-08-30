@@ -8,15 +8,23 @@ MONGO_URL = CONNECTION_STRING.replace("<password>", process.env.MONGO_PASSWORD);
 
 console.log(MONGO_URL);
 
+function connect() {
+  return new Promise((resolve, reject) => {
+    mongoose.connect(MONGO_URL || config.database, {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      dbName: "eportfolio"
+    })
+        .then(() => { resolve()})
+        .catch((err) => { reject(err)})
+  });
+}
 
-
-mongoose.connect(MONGO_URL || config.database, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  dbName: "eportfolio"
-});
+function close() {
+  return mongoose.disconnect();
+}
 
 const db = mongoose.connection;
 db.on("error", err => {
@@ -28,3 +36,8 @@ db.once("open", async () => {
 });
 
 require("./user");
+
+module.exports = {
+  connect,
+  close
+};
