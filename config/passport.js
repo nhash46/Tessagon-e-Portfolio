@@ -32,12 +32,25 @@ module.exports = (passport) => {
     passport.use(new GoogleStrategy({
             clientID: google.GOOGLE.client_id,
             clientSecret: google.GOOGLE.client_secret,
-            callbackURL: "https://tessagon-dan.herokuapp.com/user/auth/google/callback"
+            callbackURL: "http://tessagon-e-portfolio/user/auth/google/callback"
         },
-        function(accessToken, refreshToken, profile, cb) {
-            user = { ...profile };
-            console.log(user);
-            return cb(null, profile);
+        (accessToken, refreshToken, profile, cb) => {
+
+            // check if user exists
+            User.findOne({googleId: profile.id}).then((currUser) => {
+                if(currUser){
+                    console.log('user is' + currUser);
+                    cb(null, currUser);
+                } else {
+                    new User({
+                        username: profile.displayName,
+                        googleId: profile.id,
+                    }).save().then((newUser) => {
+                        console.log('new user created' + newUser);
+                        cb(null, newUser);
+                    });
+                }
+            });
         }
     ));
 

@@ -7,6 +7,14 @@ const {validationResult} = require('express-validator');
 // import user model
 const User = mongoose.model("User");
 
+const authCheck = (req, res, next) => {
+    if(!req.user){
+        // if user not logged in
+        res.redirect('/')
+    } else {
+        next();
+    }
+}
 // function to add user
 const addUser = (req, res) => {
 
@@ -98,5 +106,6 @@ module.exports = {
     logOutUser,
     logInPage,
     logInGoogle,
-    logInGoogleCallback
+    logInGoogleCallback,
+    authCheck
 };

@@ -54,12 +54,15 @@ app.get('*', function(req, res, next){
     next();
 });
 
+// import userController so can authCheck routes
+const userController = require("./controllers/userController");
+
 // GET home page
 app.get('/', (req, res) => {
     res.render("login")
 });
 // GET home page
-app.get('/profile', (req, res) => {
+app.get('/profile', userController.authCheck, (req, res) => {
     res.render("index")
 });
 app.get('/signup', (req, res) => {
@@ -69,6 +72,7 @@ app.get('/signup', (req, res) => {
 
 // routes
 const userRouter = require("./routes/userRouter.js");
+
 
 // user routes handled by userRouter
 app.use('/user', userRouter);
