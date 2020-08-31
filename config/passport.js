@@ -34,7 +34,7 @@ module.exports = (passport) => {
             callbackURL: "https://tessagon-e-portfolio.herokuapp.com/user/auth/google/callback"
         },
         function(accessToken, refreshToken, profile, cb) {
-            console.log("inside cb");
+            console.log(profile.id);
             return cb();
             /*User.findOrCreate({ googleId: profile.id }, function (err, user) {
                 return cb(err, user);
