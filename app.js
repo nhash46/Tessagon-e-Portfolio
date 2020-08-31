@@ -5,6 +5,7 @@ const passport = require('passport');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const bodyParser = require("body-parser");
+const cors = require('cors');
 const app = express();
 
 // load view engine
@@ -38,6 +39,8 @@ app.use(function (req, res, next) {
 
 // Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cors());
 
 // Passport Config
 require('./config/passport')(passport);
