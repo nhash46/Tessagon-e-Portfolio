@@ -18,6 +18,12 @@ userRouter.get("/login", userController.logInPage);
 // logging in
 userRouter.post("/login", userController.logIn);
 
+// google auth
+userRouter.get("/auth/google", userController.logInGoogle)
+
+// google auth callback
+userRouter.get("/auth/google/callback", userController.logInGoogleCallback)
+
 // logging out
 userRouter.get("/logout", userController.logOutUser);
 
