@@ -61,14 +61,29 @@ const logInPage = (req, res) => {
 
 // function to handle a request to login
 const logIn = (req, res, next) => {
-
     passport.authenticate('local', {
       successRedirect:'/profile',
       failureRedirect:'/',
       failureFlash: true
 
     })(req, res, next);
-  };
+};
+
+// goggle auth handle
+const logInGoogle = (req, res, next) => {
+    passport.authenticate('google', {
+        scope: ['profile'] });
+}
+// google auth handle callback
+const logInGoogleCallback = (req, res, next) => {
+    passport.authenticate('google', {
+        failureRedirect: '/'
+    }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/profile');
+    }
+}
 
 // log out the current user
 const logOutUser = (req, res) => {
@@ -82,5 +97,7 @@ module.exports = {
     newUserForm,
     logIn,
     logOutUser,
-    logInPage
+    logInPage,
+    logInGoogle,
+    logInGoogleCallback
 };

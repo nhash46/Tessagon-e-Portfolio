@@ -1,7 +1,9 @@
 const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/user');
 const config = require('../config/database');
 const bcrypt = require('bcryptjs');
+const google = require('./google');
 
 module.exports = (passport) => {
     // Local Strategy
@@ -25,6 +27,18 @@ module.exports = (passport) => {
             });
         });
     }));
+
+    passport.use(new GoogleStrategy({
+            clientID: google.GOOGLE.client_id,
+            clientSecret: google.GOOGLE.client_secret,
+            callbackURL: "https://tessagon-e-portfolio.herokuapp.com/profile"
+        },
+        function(accessToken, refreshToken, profile, cb) {
+            User.findOrCreate({ googleId: profile.id }, function (err, user) {
+                return cb(err, user);
+            });
+        }
+    ));
 
     passport.serializeUser((user, done) => {
         done(null, user.id);
