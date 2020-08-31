@@ -71,8 +71,9 @@ const logIn = (req, res, next) => {
 
 // goggle auth handle
 const logInGoogle = (req, res, next) => {
+    console.log("in right handle");
     passport.authenticate('google', {
-        scope: ['profile'] });
+        scope: ['profile'] })(req, res, next);
 }
 // google auth handle callback
 const logInGoogleCallback = (req, res, next) => {
