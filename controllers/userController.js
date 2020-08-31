@@ -71,7 +71,6 @@ const logIn = (req, res, next) => {
 
 // goggle auth handle
 const logInGoogle = (req, res, next) => {
-    console.log("in right handle");
     passport.authenticate('google', {
         scope: ['profile'] })(req, res, next);
 }
@@ -90,7 +89,7 @@ const logInGoogleCallback = (req, res, next) => {
 const logOutUser = (req, res) => {
     req.logout();
     // req.flash('success', 'You have successfully logged out. Come back soon!');
-    res.redirect('/login');
+    res.redirect('/');
 };
 
 module.exports = {
