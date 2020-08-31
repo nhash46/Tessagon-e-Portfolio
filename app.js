@@ -25,6 +25,9 @@ app.get('/profile', (req, res) => {
 app.get('/signup', (req, res) => {
     res.render("signup")
 });
+app.get('/signup/form', (req, res) => {
+    res.render("form")
+});
 
 
 // routes
