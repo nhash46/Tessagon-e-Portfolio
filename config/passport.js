@@ -1,7 +1,9 @@
 const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/user');
 const config = require('../config/database');
 const bcrypt = require('bcryptjs');
+const google = require('./google');
 
 module.exports = (passport) => {
     // Local Strategy
@@ -33,19 +35,19 @@ module.exports = (passport) => {
         },
         function(accessToken, refreshToken, profile, cb) {
             console.log("inside cb");
-            /*User.findOrCreate({ googleId: profile.id }, function (err, user) {
+            User.findOrCreate({ googleId: profile.id }, function (err, user) {
                 return cb(err, user);
-            });*/
+            });
         }
     ));
 
     passport.serializeUser((user, done) => {
         done(null, user.id);
-      });
-      
-      passport.deserializeUser((id, done) => {
+    });
+
+    passport.deserializeUser((id, done) => {
         User.findById(id, (err, user) => {
-          done(err, user);
+            done(err, user);
         });
-      });
+    });
 }
