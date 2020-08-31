@@ -79,12 +79,9 @@ const logInGoogle = (req, res, next) => {
 const logInGoogleCallback = (req, res, next) => {
     console.log("auth callback handle");
     passport.authenticate('google', {
+        successRedirect:'/profile',
         failureRedirect: '/'
-    })(req, res, next),
-        function(req, res) {
-            // Successful authentication, redirect home.
-            res.redirect('/profile');
-        }
+    })(req, res, next)
 }
 
 // log out the current user

@@ -4,6 +4,7 @@ const User = require('../models/user');
 const config = require('../config/database');
 const bcrypt = require('bcryptjs');
 const google = require('./google');
+let user = {};
 
 module.exports = (passport) => {
     // Local Strategy
@@ -34,11 +35,9 @@ module.exports = (passport) => {
             callbackURL: "https://tessagon-dan.herokuapp.com/user/auth/google/callback"
         },
         function(accessToken, refreshToken, profile, cb) {
-            console.log(profile.id);
-            return cb();
-            /*User.findOrCreate({ googleId: profile.id }, function (err, user) {
-                return cb(err, user);
-            });*/
+            user = { ...profile };
+            console.log(user);
+            return cb(null, profile);
         }
     ));
 
