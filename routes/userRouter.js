@@ -1,6 +1,8 @@
 const express = require("express");
 const userValidator = require("../validators/userValidator.js");
 
+const passport = require('passport');
+
 // create router
 const userRouter = express.Router();
 
@@ -22,7 +24,12 @@ userRouter.post("/login", userController.logIn);
 userRouter.get("/auth/google", userController.logInGoogle)
 
 // google auth callback
-userRouter.get("/auth/google/callback", userController.logInGoogleCallback)
+userRouter.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/' }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/profile');
+    });
 
 // logging out
 userRouter.get("/logout", userController.logOutUser);

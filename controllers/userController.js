@@ -71,14 +71,16 @@ const logIn = (req, res, next) => {
 
 // goggle auth handle
 const logInGoogle = (req, res, next) => {
+    console.log("auth hanlde");
     passport.authenticate('google', {
         scope: ['profile'] })(req, res, next);
 }
 // google auth handle callback
 const logInGoogleCallback = (req, res, next) => {
+    console.log("auth callback handle");
     passport.authenticate('google', {
         failureRedirect: '/'
-    }),
+    })(req, res, next),
     function(req, res) {
         // Successful authentication, redirect home.
         res.redirect('/profile');
