@@ -5,6 +5,7 @@ const passport = require('passport');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const bodyParser = require("body-parser");
+const cors = require('cors');
 const app = express();
 
 // load view engine
@@ -23,21 +24,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Express Session Middleware
 app.use(session({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
 }));
 
 
 // Express Messages Middleware
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
+    res.locals.messages = require('express-messages')(req, res);
+    next();
 });
 
 // Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cors());
 
 // Passport Config
 require('./config/passport')(passport);
@@ -47,8 +50,8 @@ app.use(passport.session());
 
 // global user object
 app.get('*', function(req, res, next){
-  res.locals.user = req.user || null;
-  next();
+    res.locals.user = req.user || null;
+    next();
 });
 
 // GET home page
@@ -72,9 +75,9 @@ app.use('/user', userRouter);
 
 db.connect()
     .then(() => {
-    app.listen(process.env.PORT || 3000, () => {
-        console.log('Tessagon is listening on port 3000!')
-    });
+        app.listen(process.env.PORT || 3000, () => {
+            console.log('Tessagon is listening on port 3000!')
+        });
     })
     .catch((err) => console.log(err));
 
