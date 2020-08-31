@@ -35,6 +35,7 @@ module.exports = (passport) => {
         },
         function(accessToken, refreshToken, profile, cb) {
             console.log("inside cb");
+            return cb();
             /*User.findOrCreate({ googleId: profile.id }, function (err, user) {
                 return cb(err, user);
             });*/
