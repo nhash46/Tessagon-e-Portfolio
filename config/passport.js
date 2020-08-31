@@ -35,30 +35,8 @@ module.exports = (passport) => {
         },
         function(accessToken, refreshToken, profile, cb) {
             console.log("inside cb");
-            User.findOne({
-                'google.id': profile.id
-            }, function(err, user) {
-                if (err) {
-                    return cb(err);
-                }
-                //No user was found... so create a new user with values from Google (all the profile. stuff)
-                if (!user) {
-                    user = new User({
-                        name: profile.displayName,
-                        email: profile.emails[0].value,
-                        username: profile.username,
-                        provider: 'google',
-                        //now in the future searching on User.findOne({'google.id': profile.id } will match because of this next line
-                        google: profile._json
-                    });
-                    user.save(function(err) {
-                        if (err) console.log(err);
-                        return cb(err, user);
-                    });
-                } else {
-                    //found user. Return
-                    return cb(err, user);
-                }
+            User.findOrCreate({ googleId: profile.id }, function (err, user) {
+                return cb(err, user);
             });
         }
     ));
