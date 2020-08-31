@@ -7,47 +7,55 @@ const {validationResult} = require('express-validator');
 // import user model
 const User = mongoose.model("User");
 
+const authCheck = (req, res, next) => {
+    if(!req.user){
+        // if user not logged in
+        res.redirect('/')
+    } else {
+        next();
+    }
+}
 // function to add user
 const addUser = (req, res) => {
 
     var newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      
-    });
-  
-    let errors = validationResult(req);
-  
-    if (!errors.isEmpty()) {
-      req.flash(errors);
-      res.render('signup',
-        { 
-          newUser:newUser,
-          errors: errors.mapped()
-        });
-    } else {
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if(err){
-            console.log(err);
-          }
-          newUser.password = hash;
-  
-          // add user to database
-          newUser.save((err) => {
-            if (err) {
-              console.log(err);
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
 
-            } else {
-              req.flash('success', 'Successful registration! You can now log in');
-              res.redirect('login');
-            }
-          });
+    });
+
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        req.flash(errors);
+        res.render('signup',
+            {
+                newUser:newUser,
+                errors: errors.mapped()
+            });
+    } else {
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                if(err){
+                    console.log(err);
+                }
+                newUser.password = hash;
+
+                // add user to database
+                newUser.save((err) => {
+                    if (err) {
+                        console.log(err);
+
+                    } else {
+                        req.flash('success', 'Successful registration! You can now log in');
+                        res.redirect('login');
+                    }
+                });
+            });
         });
-      });
     }
-  };
+};
 
 const newUserForm = (req, res) => {
     res.render('signup');
@@ -62,9 +70,9 @@ const logInPage = (req, res) => {
 // function to handle a request to login
 const logIn = (req, res, next) => {
     passport.authenticate('local', {
-      successRedirect:'/profile',
-      failureRedirect:'/',
-      failureFlash: true
+        successRedirect:'/profile',
+        failureRedirect:'/',
+        failureFlash: true
 
     })(req, res, next);
 };
@@ -79,12 +87,9 @@ const logInGoogle = (req, res, next) => {
 const logInGoogleCallback = (req, res, next) => {
     console.log("auth callback handle");
     passport.authenticate('google', {
+        successRedirect:'/profile',
         failureRedirect: '/'
-    })(req, res, next),
-    function(req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/profile');
-    }
+    })(req, res, next)
 }
 
 // log out the current user
@@ -101,5 +106,6 @@ module.exports = {
     logOutUser,
     logInPage,
     logInGoogle,
-    logInGoogleCallback
+    logInGoogleCallback,
+    authCheck
 };

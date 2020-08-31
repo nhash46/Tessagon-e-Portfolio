@@ -24,17 +24,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Express Session Middleware
 app.use(session({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
 }));
 
 
 // Express Messages Middleware
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
+    res.locals.messages = require('express-messages')(req, res);
+    next();
 });
 
 // Set public folder
@@ -50,16 +50,19 @@ app.use(passport.session());
 
 // global user object
 app.get('*', function(req, res, next){
-  res.locals.user = req.user || null;
-  next();
+    res.locals.user = req.user || null;
+    next();
 });
+
+// import userController so can authCheck routes
+const userController = require("./controllers/userController");
 
 // GET home page
 app.get('/', (req, res) => {
     res.render("login")
 });
 // GET home page
-app.get('/profile', (req, res) => {
+app.get('/profile', userController.authCheck, (req, res) => {
     res.render("index")
 });
 app.get('/signup', (req, res) => {
@@ -70,14 +73,15 @@ app.get('/signup', (req, res) => {
 // routes
 const userRouter = require("./routes/userRouter.js");
 
+
 // user routes handled by userRouter
 app.use('/user', userRouter);
 
 db.connect()
     .then(() => {
-    app.listen(process.env.PORT || 3000, () => {
-        console.log('Tessagon is listening on port 3000!')
-    });
+        app.listen(process.env.PORT || 3000, () => {
+            console.log('Tessagon is listening on port 3000!')
+        });
     })
     .catch((err) => console.log(err));
 

@@ -21,6 +21,7 @@ describe('User Tests', () => {
     });
 
     after(function (done) {
+        console.log("closing");
         this.timeout(10000);
         conn.close()
             .then(() => done())
@@ -33,7 +34,7 @@ describe('User Tests', () => {
             await User.deleteOne({username: "tessagon"});
         })
 
-        it('OK, creating new user works', (done) => {
+        it('Should redirect to login page', (done) => {
             request(app).post('/user/signup')
                 .send({
                     username: "tessagon",
@@ -49,54 +50,31 @@ describe('User Tests', () => {
         });
     });
 
-    /*afterEach(async () => {
-        await User.remove({});
-    });
+    describe('login', () => {
 
-    after(async () => {
-        await mongoose.connection.close();
-    });
-
-    it('has a module', () => {
-        expect(User).toBeDefined();
-    })
-    */
-
-    /*describe("addUser", () => {
-        it("add a user", async () => {
-
-            const fake = sinon.fake();
-            const req = mockRequest({}, {
-                username: "tessagon",
-                email: "tessagon@tessagon.com",
-                password: "cold"
-            });
-            const res = mockResponse(fake);
-
-            userController.addUser(req, res);
-            const result = fake.lastArg;
-            console.log(result);
-
-            /*result.forEach(element => {
-                expect(element).to.have.keys(["username", "email", "password"]);
-            });
-        });
-    });*/
-
-    /*describe("addUser", () => {
-        it("should add a user, and redirct to logIn", (done) => {
-            request(app)
-                .post('/user/singup')
-                .send({
-                    username: "tessagon",
-                    email: "tessagon@tessagon.com",
-                    password: "cold"
-                })
-                .end((err, res) => {
-                    res.should.have.status(200);
+        it('Should redirect to profile page', (done) => {
+            request(app).post('/user/login')
+                .send({username: 'dccol', password: 'cold'})
+                .then((res) => {
+                    expect(res.statusCode).to.equal(302);
+                    expect(res.headers.location).to.equal('/profile');
                     done();
-                });
-        });
-    });*/
+                })
+                .catch((err) => done(err));
+        })
+    })
+
+    describe('logout', () => {
+
+        it('Should redirect to login page', (done) => {
+            request(app).get('/user/logout')
+                .then((res) => {
+                    expect(res.statusCode).to.equal(302);
+                    expect(res.headers.location).to.equal('/');
+                    done();
+                })
+                .catch((err) => done(err));
+        })
+    })
 
 });
