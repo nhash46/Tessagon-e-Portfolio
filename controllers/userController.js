@@ -11,43 +11,43 @@ const User = mongoose.model("User");
 const addUser = (req, res) => {
 
     var newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      
-    });
-  
-    let errors = validationResult(req);
-  
-    if (!errors.isEmpty()) {
-      req.flash(errors);
-      res.render('signup',
-        { 
-          newUser:newUser,
-          errors: errors.mapped()
-        });
-    } else {
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if(err){
-            console.log(err);
-          }
-          newUser.password = hash;
-  
-          // add user to database
-          newUser.save((err) => {
-            if (err) {
-              console.log(err);
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
 
-            } else {
-              req.flash('success', 'Successful registration! You can now log in');
-              res.redirect('login');
-            }
-          });
+    });
+
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        req.flash(errors);
+        res.render('signup',
+            {
+                newUser:newUser,
+                errors: errors.mapped()
+            });
+    } else {
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                if(err){
+                    console.log(err);
+                }
+                newUser.password = hash;
+
+                // add user to database
+                newUser.save((err) => {
+                    if (err) {
+                        console.log(err);
+
+                    } else {
+                        req.flash('success', 'Successful registration! You can now log in');
+                        res.redirect('login');
+                    }
+                });
+            });
         });
-      });
     }
-  };
+};
 
 const newUserForm = (req, res) => {
     res.render('signup');
@@ -61,14 +61,31 @@ const logInPage = (req, res) => {
 
 // function to handle a request to login
 const logIn = (req, res, next) => {
-
     passport.authenticate('local', {
-      successRedirect:'/profile',
-      failureRedirect:'/',
-      failureFlash: true
+        successRedirect:'/profile',
+        failureRedirect:'/',
+        failureFlash: true
 
     })(req, res, next);
-  };
+};
+
+// goggle auth handle
+const logInGoogle = (req, res, next) => {
+    console.log("auth hanlde");
+    passport.authenticate('google', {
+        scope: ['profile'] })(req, res, next);
+}
+// google auth handle callback
+const logInGoogleCallback = (req, res, next) => {
+    console.log("auth callback handle");
+    passport.authenticate('google', {
+        failureRedirect: '/'
+    })(req, res, next),
+        function(req, res) {
+            // Successful authentication, redirect home.
+            res.redirect('/profile');
+        }
+}
 
 // log out the current user
 const logOutUser = (req, res) => {
@@ -82,5 +99,7 @@ module.exports = {
     newUserForm,
     logIn,
     logOutUser,
-    logInPage
+    logInPage,
+    logInGoogle,
+    logInGoogleCallback
 };
