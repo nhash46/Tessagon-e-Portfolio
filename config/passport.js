@@ -32,7 +32,7 @@ module.exports = (passport) => {
     passport.use(new GoogleStrategy({
             clientID: google.GOOGLE.client_id,
             clientSecret: google.GOOGLE.client_secret,
-            callbackURL: "https://tessagon-dan.herokuapp.com/user/auth/google/callback"
+            callbackURL: "https://tessagon-e-portfolio.herokuapp.com//user/auth/google/callback"
         },
         (accessToken, refreshToken, profile, cb) => {
 
