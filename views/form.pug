@@ -6,8 +6,8 @@ block content
             .col-lg-10.col-xl-9.mx-auto
                 .card.card-signin.flex-row.my-5
                     .card-body
-                        h5.card-title.text-center Basic Information!                 
-                        form(method='POST', action='/signup').form-signin
+                        h5.card-title.text-center Basic Information.               
+                        form(method='POST', action='/signup').form-signin 
                             .form-label-group
                                 input#inputFirstname.form-control(type='text' placeholder='Firstname' autofocus='' required='isRequired')
                                 label(for='inputFirstname') Firstname
@@ -28,7 +28,7 @@ block content
                                 .form-label-group.col-md-6
                                     input#inputState.form-control(type='text' placeholder='State' autofocus='')
                                     label(for='inputState') State
-                                hr           
+                                hr
                                 .form-label-group.col-md-12 
                                     input#Aboutme.form-control(type='text' placeholder='Aboutme' autofocus='' maxlength='500')
                                     label(for='Aboutme') Tell me about yourself! Max 500 characters.
@@ -65,11 +65,8 @@ block content
                                 .col-md-6#dates
                                     label(for='end') End date:     
                                     input#EndDate(type='date' name='job-end' value='2018-07-22' min='2018-01-01' max='2020-12-31')  
-
-                                
-                                
-
-
+                                br
+                                br
                                 button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Submit
 
 

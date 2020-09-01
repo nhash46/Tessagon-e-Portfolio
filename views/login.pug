@@ -27,25 +27,23 @@ block content
                         .row
                             .col-md-9.col-lg-8.mx-auto
                                 h3.login-heading.mb-4#hi Welcome back!
-                                form(method='POST', action='/user/login')
-                                    .form-label-group
-                                        input#inputUsername.form-control(name= 'username' type='text' placeholder='Username' required='' autofocus='')
-                                        label(for='inputUsername') Username
-                                    .form-label-group
-                                        input#inputPassword.form-control(name='password' type='password' placeholder='Password' required='')
-                                        label(for='inputPassword') Password
-                                    .custom-control.custom-checkbox.mb-3
-                                        input#customCheck1.custom-control-input(type='checkbox')
-                                        label.custom-control-label(for='customCheck1') Remember password
-                                    button.btn.btn-lg.btn-primary.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(type='submit') Sign in
+                                .container
+                                    form(method='POST', action='/user/login')
+                                        .form-label-group
+                                            input#inputUsername.form-control(name= 'username' type='text' placeholder='Username' required='' autofocus='')
+                                            label(for='inputUsername') Username
+                                        .form-label-group
+                                            input#inputPassword.form-control(name='password' type='password' placeholder='Password' required='')
+                                            label(for='inputPassword') Password
+                                        .custom-control.custom-checkbox.mb-3
+                                            input#customCheck1.custom-control-input(type='checkbox')
+                                            label.custom-control-label(for='customCheck1') Remember password
+                                        button.btn.btn-lg.btn-primary.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(type='submit') Sign in
                                     hr.my-4
-                                    button.btn.btn-lg.btn-google.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(type='submit')
+                                    a.button.btn.btn-lg.btn-google.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(href='/user/auth/google')
                                         i.fa.fa-google.mr-2
                                         |  Sign in with Google
                                     .text-center
                                         a.small(href='#') Forgot password?
                                         br
                                         a.small(href='/signup') Sign up!
-                                        br
-                                        a.small(href='/user/auth/google') Sign in with Google
-
