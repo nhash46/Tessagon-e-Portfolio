@@ -1,13 +1,17 @@
-.fa-linkedin-square:hover{
-    color: rgb(14,118,168);
-    font-weight: 1000;
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: 0.75rem;
 }
-.fa-google-plus:hover {
-    color: rgb(219,74,57);
-    font-weight: 1000;
+
+.login,
+.image {
+  min-height: 100vh;
 }
-.fa-user-o:hover {
-    font-weight: 1000;
+
+.bg-image {
+  background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
+  background-size: cover;
+  background-position: center;
 }
 
 .login-heading {
@@ -113,26 +117,4 @@
 
 #white-background {
   background-color: white;
-}
-#contactNumber {
-  padding-left: 1.15vw;
-}
-#inputEmail4 {
-  padding-left: 1.15vw;
-}
-#inputCity {
-  padding-left: 1.15vw;
-}
-#inputState {
-  padding-left: 1.15vw;
-}
-#Aboutme {
-  padding-bottom: 10vh;
-}
-#dates {
-  padding: 0.5vh;
-  padding: 0.5vw;
-}
-#EndDate{
-  margin-left: 0.5vw;
 }
