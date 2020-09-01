@@ -49,7 +49,7 @@ const addUser = (req, res) => {
 
                     } else {
                         req.flash('success', 'Successful registration! You can now log in');
-                        res.redirect('/user/info');
+                        res.redirect('/signup/form');
                     }
                 });
             });
@@ -66,7 +66,10 @@ const newUserForm = (req, res) => {
 };
 
 const infoPage = (req, res) => {
-    res.render('form');
+    //console.log(req.query.user);
+    res.render('form', {
+        //username: req.query.user.username
+    });
 }
 
 // function that loads form page for logging in
@@ -90,21 +93,26 @@ const logInGoogle = (req, res, next) => {
     passport.authenticate('google', {
         scope: ['profile', 'email'] })(req, res, next);
 }
-// google auth handle callback
+// google auth handle callback - doesn't keep user state
 const logInGoogleCallback = (req, res, next) => {
-    passport.authenticate('google', {
-        failureRedirect: '/',
-        successRedirect: '/profile'
-    })(req, res, next)
+    passport.authenticate('google', { failureRedirect: '/' }),
+        function(req, res) {
+            if(!req.user.bio){
+                res.redirect('/signup/form/');
+            } else {
+                res.redirect('/profile');
+            }
+        }(req, res, next)
 }
 
 /*const logInGoogleCallback = (req, res, next) => {
     passport.authenticate('google', (err, user, info) => {
+        console.log(user);
         if(err) {
             res.redirect('/');
         }
         if(!user.bio){
-            res.send('send user to info page');
+            res.redirect('/signup/form/');
         } else {
             res.redirect('/profile');
         }

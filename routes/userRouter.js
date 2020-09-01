@@ -14,9 +14,6 @@ userRouter.post("/signup", userValidator.addUser, userController.addUser);
 // Sign Up form
 userRouter.get("/signup", userController.newUserForm);
 
-// Info Form
-userRouter.get("/info", userController.infoPage);
-
 // Populate info using info form details
 userRouter.post("/populateInfo", userController.populateInfo)
 
@@ -30,7 +27,17 @@ userRouter.post("/login", userController.logIn);
 userRouter.get("/auth/google", userController.logInGoogle)
 
 // google auth callback
-userRouter.get("/auth/google/callback", userController.logInGoogleCallback)
+//userRouter.get("/auth/google/callback", userController.logInGoogleCallback)
+
+// google auth callback -lose state if we go via userController
+userRouter.get("/auth/google/callback",
+    passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
+        if(!req.user.bio){
+            res.redirect('/signup/form/');
+        } else {
+            res.redirect('/profile');
+        }
+    });
 
 // logging out
 userRouter.get("/logout", userController.logOutUser);
