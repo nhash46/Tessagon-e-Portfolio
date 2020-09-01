@@ -14,38 +14,19 @@ block content
                             .form-label-group
                                 input#inputEmail.form-control(type='email' placeholder='Surname' required='')
                                 label(for='inputEmail') Surname
-                            hr
-                            .form-label-group
-                                input#inputPassword.form-control(type='text' placeholder='About you.' required='')
-                                label(for='inputPassword') About you. Explain a bit about yourself in 2-3 senteces.                     
-                        hr        
+                            hr       
                         form
                             .form-row
                                 .form-label-group.col-md-6
                                     input#inputEmail4.form-control(type='email' placeholder='Email' autofocus='')
                                     label(for='inputEmail4') Email
                                 .form-label-group.col-md-6
-                                    input#inputPassword4.form-control(type='text' placeholder='mobile number')
-                                    label(for='inputPassword4') Mobile number
+                                    input#contactNumber.form-control(type='tel' placeholder='contactNumber' autofocus='' )
+                                    label(for='contactNumber') Contact number
                             .form-label-group
-                                input#inputAddress.form-control(type='text' placeholder='1234 Main St')
-                                label(for='inputAddress') Address
+                                input#inputCity.form-control(type='text' placeholder='City' autofocus='')
+                                label(for='inputCity') City
                             .form-label-group
-                                input#inputAddress2.form-control(type='text' placeholder='Apartment, studio, or floor')
-                                label(for='inputAddress2') Address 2
-                            .form-row
-                                .form-label-group.col-md-6
-                                    input#inputCity.form-control(type='text')
-                                    label(for='inputCity') City
-                                .form-label-group.col-md-4
-                                    input#inputCity.form-control(type='text')
-                                    label(for='inputState') State
-                                .form-label-group.col-md-2
-                                    input#inputState.form-control(type='text')
-                                    label(for='Postcode') Postcode
-                            .form-label-group
-                                .form-check
-                                    input#gridCheck.form-check-input(type='checkbox')
-                                    label.form-check-label(for='gridCheck')
-                                        | Check me out
-                            button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Submit
+                                input#inputState.form-control(type='text' placeholder='State' autofocus='')
+                                label(for='inputState') State
+                            button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Next
