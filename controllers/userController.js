@@ -81,7 +81,7 @@ const logIn = (req, res, next) => {
 const logInGoogle = (req, res, next) => {
     console.log("auth hanlde");
     passport.authenticate('google', {
-        scope: ['profile'] })(req, res, next);
+        scope: ['profile', 'email'] })(req, res, next);
 }
 // google auth handle callback
 const logInGoogleCallback = (req, res, next) => {
