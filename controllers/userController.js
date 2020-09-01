@@ -49,13 +49,17 @@ const addUser = (req, res) => {
 
                     } else {
                         req.flash('success', 'Successful registration! You can now log in');
-                        res.redirect('login');
+                        res.redirect('/user/info');
                     }
                 });
             });
         });
     }
 };
+
+const populateInfo = (req, res) => {
+    res.send("blah");
+}
 
 const newUserForm = (req, res) => {
     res.render('signup');
@@ -116,6 +120,7 @@ const logOutUser = (req, res) => {
 
 module.exports = {
     addUser,
+    populateInfo,
     newUserForm,
     infoPage,
     logIn,
