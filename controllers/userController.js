@@ -61,6 +61,10 @@ const newUserForm = (req, res) => {
     res.render('signup');
 };
 
+const infoPage = (req, res) => {
+    res.render('form');
+}
+
 // function that loads form page for logging in
 const logInPage = (req, res) => {
     res.render('login', {
@@ -113,6 +117,7 @@ const logOutUser = (req, res) => {
 module.exports = {
     addUser,
     newUserForm,
+    infoPage,
     logIn,
     logOutUser,
     logInPage,
