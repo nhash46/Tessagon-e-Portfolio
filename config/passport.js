@@ -37,13 +37,15 @@ module.exports = (passport) => {
 
             // check if user exists
             User.findOne({googleId: profile.id}).then((currUser) => {
+
                 if(currUser){
                     console.log('user is' + currUser);
                     cb(null, currUser);
                 } else {
                     new User({
-                        username: profile.displayName,
                         googleId: profile.id,
+                        username: profile.displayName,
+                        email: profile._json.email
                     }).save().then((newUser) => {
                         console.log('new user created' + newUser);
                         cb(null, newUser);

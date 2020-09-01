@@ -79,18 +79,29 @@ const logIn = (req, res, next) => {
 
 // goggle auth handle
 const logInGoogle = (req, res, next) => {
-    console.log("auth hanlde");
     passport.authenticate('google', {
-        scope: ['profile'] })(req, res, next);
+        scope: ['profile', 'email'] })(req, res, next);
 }
 // google auth handle callback
 const logInGoogleCallback = (req, res, next) => {
-    console.log("auth callback handle");
     passport.authenticate('google', {
-        successRedirect:'/profile',
-        failureRedirect: '/'
+        failureRedirect: '/',
+        successRedirect: '/profile'
     })(req, res, next)
 }
+
+/*const logInGoogleCallback = (req, res, next) => {
+    passport.authenticate('google', (err, user, info) => {
+        if(err) {
+            res.redirect('/');
+        }
+        if(!user.bio){
+            res.send('send user to info page');
+        } else {
+            res.redirect('/profile');
+        }
+    })(req,res,next)
+}*/
 
 // log out the current user
 const logOutUser = (req, res) => {
