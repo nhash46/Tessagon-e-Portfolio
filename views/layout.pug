@@ -14,10 +14,14 @@ html
     script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js' integrity='sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN' crossorigin='anonymous')
     script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js' integrity='sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV' crossorigin='anonymous')
 
+    link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css' rel='stylesheet')
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    script(src='//code.jquery.com/jquery-1.11.1.min.js')
+    
     style
       include ../public/css/style.css
       include ../public/css/signup.css
-    
+      include ../public/css/form.css
 
 
 
@@ -27,7 +31,7 @@ html
   block content
 
 
-
+script(type='text/javascript' src='js/form.js')
 
 // Optional JavaScript
 // jQuery first, then Popper.js, then Bootstrap JS

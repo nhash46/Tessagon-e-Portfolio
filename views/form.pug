@@ -7,26 +7,57 @@ block content
                 .card.card-signin.flex-row.my-5
                     .card-body
                         h5.card-title.text-center Basic Information!
-                        form.form-signin
-                            .form-label-group
-                                input#inputUserame.form-control(type='text' placeholder='Firstname' required='' autofocus='')
-                                label(for='inputUserame') Firstname
-                            .form-label-group
-                                input#inputEmail.form-control(type='email' placeholder='Surname' required='')
-                                label(for='inputEmail') Surname
-                            hr       
-                        form
-                            .form-row
-                                .form-label-group.col-md-6
-                                    input#inputEmail4.form-control(type='email' placeholder='Email' autofocus='')
-                                    label(for='inputEmail4') Email
-                                .form-label-group.col-md-6
-                                    input#contactNumber.form-control(type='tel' placeholder='contactNumber' autofocus='' )
-                                    label(for='contactNumber') Contact number
-                            .form-label-group
-                                input#inputCity.form-control(type='text' placeholder='City' autofocus='')
-                                label(for='inputCity') City
-                            .form-label-group
-                                input#inputState.form-control(type='text' placeholder='State' autofocus='')
-                                label(for='inputState') State
-                            button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Next
+                        .board
+                            ul.nav.nav-tabs
+                                .liner
+                                li.active(rel-index='0')
+                                    a.btn(href='#step-1' aria-controls='step-1' role='tab' data-toggle='tab')
+                                        span
+                                            i.glyphicon.glyphicon-user
+                                li(rel-index='1')
+                                    a.btn.disabled(href='#step-2' aria-controls='step-2' role='tab' data-toggle='tab')
+                                        span
+                                            i.glyphicon.glyphicon-heart
+                                li(rel-index='2')
+                                    a.btn.disabled(href='#step-3' aria-controls='step-3' role='tab' data-toggle='tab')
+                                        span
+                                            i.glyphicon.glyphicon-plus
+                                li(rel-index='3')
+                                    a.btn.disabled(href='#step-4' aria-controls='step-4' role='tab' data-toggle='tab')
+                                        span
+                                            i.glyphicon.glyphicon-ok
+                        .tab-content                   
+                            #step-1.tab-pane.active(role='tabpanel') 
+                                .col-md-12                   
+                                    form.form-signin
+                                        .form-label-group
+                                            input#inputUserame.form-control(type='text' placeholder='Firstname' required='' autofocus='')
+                                            label(for='inputUserame') Firstname
+                                        .form-label-group
+                                            input#inputEmail.form-control(type='email' placeholder='Surname' required='')
+                                            label(for='inputEmail') Surname
+                                        hr       
+                                    form
+                                        .form-row
+                                            .form-label-group.col-md-6
+                                                input#inputEmail4.form-control(type='email' placeholder='Email' autofocus='')
+                                                label(for='inputEmail4') Email
+                                            .form-label-group.col-md-6
+                                                input#contactNumber.form-control(type='tel' placeholder='contactNumber' autofocus='' )
+                                                label(for='contactNumber') Contact number
+                                        .form-label-group
+                                            input#inputCity.form-control(type='text' placeholder='City' autofocus='')
+                                            label(for='inputCity') City
+                                        .form-label-group
+                                            input#inputState.form-control(type='text' placeholder='State' autofocus='')
+                                            label(for='inputState') State
+                                    button#step-1-next.btn.btn-lg.btn-primary.nextBtn.pull-right Next
+                            #step-2.tab-pane(role='tabpanel')
+                                .col-md-12
+                                    button#step-2-next.btn.btn-lg.btn-primary.nextBtn.pull-right Next
+                            #step-3.tab-pane(role='tabpanel')
+                                .col-md-12
+                                    button#step-3-next.btn.btn-lg.btn-primary.nextBtn.pull-right Next
+                            #step-4.tab-pane(role='tabpanel')
+                                .col-md-12
+                                    button#step-4-next.btn.btn-lg.btn-primary.pull-right Continue
