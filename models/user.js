@@ -10,16 +10,13 @@ const userSchema = new Schema({
     first_name: String,
     last_name: String,
     email: {type: String, unique: true},
-    details: {
-        bio: String,
-        education: String,
-        experience: [
-            {type: String}
-        ],
-        documents: [
-            {type: Schema.Types.Mixed}
-        ],
-    }
+    bio: String,
+    city: String,
+    state: String,
+    phone_number: String,
+    education: [ {type: String} ],
+    experience: [ {type: String} ],
+    documents: [ {type: Schema.Types.Mixed} ],
 });
 
 userSchema.plugin(findOrCreate);
