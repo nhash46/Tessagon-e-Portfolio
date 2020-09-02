@@ -35,10 +35,10 @@ block content
                                 label(for='inputEmail') Email address
                             hr
                             .form-label-group
-                                input#inputPassword.form-control(name='password' type='password' placeholder='Password' required='')
+                                input#inputPassword.form-control(name='password' type='password' placeholder='Password' required='' pattern='(?=.*?[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}')
                                 label(for='inputPassword') Password
                             .form-label-group
-                                input#inputConfirmPassword.form-control(name='password2' type='password' placeholder='Password' required='')
+                                input#inputConfirmPassword.form-control(name='password2' type='password' placeholder='Password' required='' pattern='(?=.*?[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}')
                                 label(for='inputConfirmPassword') Confirm password
                                 != messages('message', locals)
                                 if errors
