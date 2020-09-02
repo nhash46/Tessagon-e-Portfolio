@@ -6,31 +6,31 @@ block content
             .col-lg-10.col-xl-9.mx-auto
                 .card.card-signin.flex-row.my-5
                     .card-body
-                        h5.card-title.text-center Basic Information. #{user.username}
-                        form(method='POST', action='/user/populateInfo').form-signin
+                        h5.card-title.text-center Basic Information.
+                        form(method='POST', action='/user/populateInfo/').form-signin
                             .form-label-group
-                                input#inputFirstname.form-control(type='text' placeholder='Firstname' autofocus='' required='isRequired')
+                                input#inputFirstname.form-control(name="first_name" type='text' placeholder='Firstname' autofocus='' required='isRequired')
                                 label(for='inputFirstname') Firstname
                             .form-label-group
-                                input#inputSurname.form-control(type='text' placeholder='Surname' required='')
+                                input#inputSurname.form-control(name="last_name" type='text' placeholder='Surname' required='')
                                 label(for='inputSurname') Surname
                             hr       
                             .form-row
                                 .form-label-group.col-md-6
-                                    input#inputEmail4.form-control(type='email' placeholder='Email' autofocus='')
+                                    input#inputEmail4.form-control(name="email" type='email' placeholder='Email' autofocus='')
                                     label(for='inputEmail4') Email
                                 .form-label-group.col-md-6
-                                    input#contactNumber.form-control(type='tel' placeholder='phone' name='contactNumber' autofocus='' pattern='[0-9]{4} [0-9]{3} [0-9]{3}' )
+                                    input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' pattern='[0-9]{4} [0-9]{3} [0-9]{3}' )
                                     label(for='contactNumber') Contact number (E.g 0412 345 678)
                                 .form-label-group.col-md-6
-                                    input#inputCity.form-control(type='text' placeholder='City' autofocus='')
+                                    input#inputCity.form-control(name="city" type='text' placeholder='City' autofocus='')
                                     label(for='inputCity') City
                                 .form-label-group.col-md-6
-                                    input#inputState.form-control(type='text' placeholder='State' autofocus='')
+                                    input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='')
                                     label(for='inputState') State
                                 hr
                                 .form-label-group.col-md-12 
-                                    input#Aboutme.form-control(type='text' placeholder='Aboutme' autofocus='' maxlength='500')
+                                    input#Aboutme.form-control(name="bio" type='text' placeholder='Aboutme' autofocus='' maxlength='500')
                                     label(for='Aboutme') Tell me about yourself! Max 500 characters.
                                 .form-group
                                 label(for='exampleFormControlFile1') Upload your resume!

@@ -48,7 +48,6 @@ const addUser = (req, res, next) => {
                         console.log(err);
 
                     } else {
-                        req.flash('success', 'Successful registration! You can now log in');
                         next();
                     }
                 });
@@ -58,7 +57,30 @@ const addUser = (req, res, next) => {
 };
 
 const populateInfo = (req, res) => {
-    res.send("blah");
+    // extract info. from body
+
+    let user = {};
+
+    user.first_name = req.body.first_name;
+    user.last_name = req.body.last_name;
+    user.email = req.body.email;
+    user.phone_number = req.body.number;
+    user.city = req.body.city;
+    user.state = req.body.state;
+    user.bio = req.body.bio;
+
+    let query = {_id:req.user._id}
+
+
+    User.updateOne(query, user, function (err) {
+    if (err){
+        console.log(err);
+    }
+    else{
+        req.flash('success','details saved');
+        res.redirect('/profile');
+    }
+    });
 }
 
 const newUserForm = (req, res) => {
