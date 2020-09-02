@@ -16,7 +16,7 @@ const authCheck = (req, res, next) => {
     }
 }
 // function to add user
-const addUser = (req, res) => {
+const addUser = (req, res, next) => {
 
     var newUser = new User({
         username: req.body.username,
@@ -49,7 +49,7 @@ const addUser = (req, res) => {
 
                     } else {
                         req.flash('success', 'Successful registration! You can now log in');
-                        res.redirect('/signup/form');
+                        next();
                     }
                 });
             });
@@ -78,14 +78,16 @@ const logInPage = (req, res) => {
     });
 };
 
-// function to handle a request to login
+// function to handle a request to login - NOT IN USE
 const logIn = (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect:'/profile',
-        failureRedirect:'/',
-        failureFlash: true
-
-    })(req, res, next);
+    passport.authenticate('google', { failureRedirect: '/' }),
+        function(req, res) {
+            if(!req.user.bio){
+                res.redirect('/signup/form/');
+            } else {
+                res.redirect('/profile');
+            }
+        }(req, res, next);
 };
 
 // goggle auth handle
@@ -93,7 +95,7 @@ const logInGoogle = (req, res, next) => {
     passport.authenticate('google', {
         scope: ['profile', 'email'] })(req, res, next);
 }
-// google auth handle callback - doesn't keep user state
+// google auth handle callback - doesn't keep user state - NOT IN USE
 const logInGoogleCallback = (req, res, next) => {
     passport.authenticate('google', { failureRedirect: '/' }),
         function(req, res) {
