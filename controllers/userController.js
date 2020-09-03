@@ -16,7 +16,7 @@ const authCheck = (req, res, next) => {
     }
 }
 // function to add user
-const addUser = (req, res) => {
+const addUser = (req, res, next) => {
 
     var newUser = new User({
         username: req.body.username,
@@ -48,8 +48,7 @@ const addUser = (req, res) => {
                         console.log(err);
 
                     } else {
-                        req.flash('success', 'Successful registration! You can now log in');
-                        res.redirect('login');
+                        next();
                     }
                 });
             });
@@ -57,9 +56,65 @@ const addUser = (req, res) => {
     }
 };
 
+const populateInfo = (req, res) => {
+    // extract info. from body
+
+    let user = {};
+
+    user.first_name = req.body.first_name;
+    user.last_name = req.body.last_name;
+    user.email = req.body.email;
+    user.phone_number = req.body.number;
+    user.city = req.body.city;
+    user.state = req.body.state;
+    user.bio = req.body.bio;
+
+    /**
+    let userEducation = {
+        university: req.body.education,
+        degree: req.body.degree,
+        educationStartDate: req.body.educationStartDate,
+        educationEndDate: req.body.educationEndDate
+    }
+
+    let userExperience = {
+        company: req.body.company,
+        role: req.body.role,
+        experienceStartDate: req.body.experienceStartDate,
+        experienceEndDate: req.body.experienceEndDate
+    }
+
+    user.experience.push(userExperience);
+    user.education.push(userEducation);
+     */
+
+
+    let query = {_id:req.user._id}
+
+    User.updateOne(query, user, function (err) {
+        if (err){
+            console.log(err);
+        }
+        else{
+            // User.findOneAndUpdate({_id: query}, {$push: {experience: userExperience}});
+            // User.findOneAndUpdate({_id: query}, {$push: {education: userEducation}});
+            console.log("saved");
+            res.redirect('/profile');
+        }
+    });
+}
+
+
 const newUserForm = (req, res) => {
     res.render('signup');
 };
+
+const infoPage = (req, res) => {
+    //console.log(req.query.user);
+    res.render('form', {
+        //username: req.query.user.username
+    });
+}
 
 // function that loads form page for logging in
 const logInPage = (req, res) => {
@@ -67,14 +122,16 @@ const logInPage = (req, res) => {
     });
 };
 
-// function to handle a request to login
+// function to handle a request to login - NOT IN USE
 const logIn = (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect:'/profile',
-        failureRedirect:'/',
-        failureFlash: true
-
-    })(req, res, next);
+    passport.authenticate('google', { failureRedirect: '/' }),
+        function(req, res) {
+            if(!req.user.bio){
+                res.redirect('/signup/form/');
+            } else {
+                res.redirect('/profile');
+            }
+        }(req, res, next);
 };
 
 // goggle auth handle
@@ -82,21 +139,26 @@ const logInGoogle = (req, res, next) => {
     passport.authenticate('google', {
         scope: ['profile', 'email'] })(req, res, next);
 }
-// google auth handle callback
+// google auth handle callback - doesn't keep user state - NOT IN USE
 const logInGoogleCallback = (req, res, next) => {
-    passport.authenticate('google', {
-        failureRedirect: '/',
-        successRedirect: '/profile'
-    })(req, res, next)
+    passport.authenticate('google', { failureRedirect: '/' }),
+        function(req, res) {
+            if(!req.user.bio){
+                res.redirect('/signup/form/');
+            } else {
+                res.redirect('/profile');
+            }
+        }(req, res, next)
 }
 
 /*const logInGoogleCallback = (req, res, next) => {
     passport.authenticate('google', (err, user, info) => {
+        console.log(user);
         if(err) {
             res.redirect('/');
         }
         if(!user.bio){
-            res.send('send user to info page');
+            res.redirect('/signup/form/');
         } else {
             res.redirect('/profile');
         }
@@ -112,7 +174,9 @@ const logOutUser = (req, res) => {
 
 module.exports = {
     addUser,
+    populateInfo,
     newUserForm,
+    infoPage,
     logIn,
     logOutUser,
     logInPage,
