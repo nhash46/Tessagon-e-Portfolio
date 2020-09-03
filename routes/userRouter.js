@@ -15,7 +15,7 @@ userRouter.post("/signup", userValidator.addUser, userController.addUser,
         if(!req.user.bio){
             res.redirect('/signup/form/');
         } else {
-            res.redirect('/profile');
+            res.redirect('/user/profile');
         }
     });
 
@@ -37,7 +37,7 @@ userRouter.post("/login", passport.authenticate('local', { failureRedirect: '/' 
         if(!req.user.bio){
             res.redirect('/signup/form/');
         } else {
-            res.redirect('/profile');
+            res.redirect('/user/profile');
         }
     });
 
@@ -53,12 +53,17 @@ userRouter.get("/auth/google/callback",
         if(!req.user.bio){
             res.redirect('/signup/form/');
         } else {
-            res.redirect('/profile');
+            res.redirect('/user/profile');
         }
     });
 
 // logging out
 userRouter.get("/logout", userController.logOutUser);
-userRouter.get("/:username", userController.userID);
+
+// loads another user's profile
+userRouter.get("/profile/:username", userController.userID);
+
+// load global user's profile
+userRouter.get('/profile', userController.authCheck, userController.getUserProfile);
 
 module.exports = userRouter;

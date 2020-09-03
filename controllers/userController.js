@@ -99,7 +99,7 @@ const populateInfo = (req, res) => {
             // User.findOneAndUpdate({_id: query}, {$push: {experience: userExperience}});
             // User.findOneAndUpdate({_id: query}, {$push: {education: userEducation}});
             console.log("saved");
-            res.redirect('/profile');
+            res.redirect('/user/profile');
         }
     });
 }
@@ -126,10 +126,10 @@ const logInPage = (req, res) => {
 const logIn = (req, res, next) => {
     passport.authenticate('google', { failureRedirect: '/' }),
         function(req, res) {
-            if(!req.user.bio){
+            if(!req.user.first_name){
                 res.redirect('/signup/form/');
             } else {
-                res.redirect('/profile');
+                res.redirect('/user/profile');
             }
         }(req, res, next);
 };
@@ -146,7 +146,7 @@ const logInGoogleCallback = (req, res, next) => {
             if(!req.user.bio){
                 res.redirect('/signup/form/');
             } else {
-                res.redirect('/profile');
+                res.redirect('/user/profile');
             }
         }(req, res, next)
 }
@@ -171,6 +171,7 @@ const logOutUser = (req, res) => {
     // req.flash('success', 'You have successfully logged out. Come back soon!');
     res.redirect('/');
 };
+
 
 const userID = async (req,res) => {
     
@@ -202,6 +203,12 @@ const userID = async (req,res) => {
         }
     };
 
+// function that renders the user profile
+const getUserProfile = async (req, res) => {
+    res.render('profile', {
+    });
+};
+
 module.exports = {
     addUser,
     populateInfo,
@@ -213,5 +220,6 @@ module.exports = {
     logInGoogle,
     logInGoogleCallback,
     authCheck,
-    userID
+    userID,
+    getUserProfile
 };
