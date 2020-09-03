@@ -187,19 +187,20 @@ const userID = async (req,res) => {
         } else {
             // Finds the relevant user within the database
             User.findOne({username:req.params.username}, async function (err, user) {
-                const first_name = user.first_name;
-                const last_name = user.last_name;
-                const bio = user.bio;
-                const city = user.city;
-                const state = user.state;
-                const phone = user.phone_number;
-                const education = user.education;
-                const experience = user.experience;
-                const links = user.links;
-                const documents = user.documents;
                 return res.render('index', {
-                    first_name: first_name,
-                    last_name: last_name,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    bio: user.bio,
+                    city: user.city,
+                    state: user.state,
+                    phone: user.phone,
+                    education: user.education,
+                    experience: user.experience,
+                    links: user.links,
+                    documents: user.documents,
+                    educationStartDate: user.educationStartDate,
+                    degree: user.education
+
                 })
             });
         }

@@ -2,7 +2,7 @@ doctype html
 head
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    title John Doe - UX Designer &amp; Front End Developer
+    title E-Portfolio | #{first_name} #{last_name}
     meta(name='description' content='')
     meta(name='author' content='')
     //
@@ -53,7 +53,7 @@ header#header
             .navbar-header
                 button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-main-collapse')
                     i.fa.fa-bars
-                a.navbar-brand.page-scroll(href='#page-top') John Doe
+                a.navbar-brand.page-scroll(href='#page-top') #{first_name} #{last_name}
             // Collect the nav links, forms, and other content for toggling
             .collapse.navbar-collapse.navbar-right.navbar-main-collapse
                 ul.nav.navbar-nav
@@ -87,9 +87,7 @@ header#header
             .col-md-8.col-md-offset-2
                 .about-text
                     p
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh.
-                    p
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare.
+                        | #{bio}
                     p.text-center
                         a.btn.btn-primary(href='#')
                             i.fa.fa-download
@@ -245,7 +243,7 @@ header#header
                     li
                         .timeline-image
                             h4
-                                | Feb 2013
+                                | #{experience.experienceStartDate}
                                 br
                                 |                 -
                                 br
@@ -298,15 +296,15 @@ header#header
                     li
                         .timeline-image
                             h4
-                                | 2010
+                                | #{educationStartDate}
                                 br
                                 |                 -
                                 br
-                                |                 2011
+                                |                 #{educationEndDate}
                         .timeline-panel
                             .timeline-heading
                                 h4 Design University
-                                h4.subheading Master Degree of Design
+                                h4.subheading #{degree}
                             .timeline-body
                                 p
                                     | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
@@ -352,13 +350,13 @@ header#header
                 p
                     | 4321 California St,
                     br
-                    |           San Francisco, CA 12345
+                    |           #{city}, #{state}
             .col-md-4
                 i.fa.fa-envelope-o.fa-2x
                 p info@company.com
             .col-md-4
                 i.fa.fa-phone.fa-2x
-                p  +1 123 456 1234
+                p  #{phone}
             .clearfix
         .col-md-8.col-md-offset-2
             h3 Leave me a message
