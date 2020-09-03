@@ -76,8 +76,8 @@ describe('User Tests', () => {
                 .catch((err) => done(err));
         })
     })
-
-
+    
+    /**
     describe('populate profile', () => {
 
         var newUser;
@@ -102,8 +102,7 @@ describe('User Tests', () => {
             })
 
             done();
-
-            /**
+            
             request(app)
                 .post('/user/signup')
                 .send({
@@ -117,7 +116,7 @@ describe('User Tests', () => {
                     token = res.user._id;
                     done();
                   });
-            */
+
         });
         
         after(async () => {
@@ -145,6 +144,7 @@ describe('User Tests', () => {
                 .catch((err) => done(err));
         })
     })
+    */
     
 
 });
