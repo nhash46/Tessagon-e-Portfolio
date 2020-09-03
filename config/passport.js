@@ -31,23 +31,25 @@ module.exports = (passport) => {
     passport.use(new GoogleStrategy({
             clientID: google.GOOGLE.client_id,
             clientSecret: google.GOOGLE.client_secret,
-            callbackURL: "https://tessagon-e-portfolio.herokuapp.com/user/auth/google/callback"
+            callbackURL: "http://localhost:3000/user/auth/google/callback"
         },
         (accessToken, refreshToken, profile, cb) => {
 
             // check if user exists
             User.findOne({googleId: profile.id}).then((currUser) => {
-
+                //console.log(profile);
                 if(currUser){
-                    console.log('user is' + currUser);
+                    //console.log('user is' + currUser);
                     cb(null, currUser);
                 } else {
                     new User({
                         googleId: profile.id,
                         username: profile.displayName,
-                        email: profile._json.email
+                        email: profile._json.email,
+                        first_name: profile.name.givenName,
+                        last_name: profile.name.familyName
                     }).save().then((newUser) => {
-                        console.log('new user created' + newUser);
+                        //console.log('new user created' + newUser);
                         cb(null, newUser);
                     });
                 }

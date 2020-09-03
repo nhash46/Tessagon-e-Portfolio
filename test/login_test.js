@@ -1,4 +1,4 @@
-
+'use strict';
 const conn = require('../models/index')
 const User = require('../models/user');
 const userController = require('../controllers/userController');
@@ -34,7 +34,7 @@ describe('User Tests', () => {
             await User.deleteOne({username: "tessagon"});
         })
 
-        it('Should redirect to login page', (done) => {
+        it('Should redirect to basic info form', (done) => {
             request(app).post('/user/signup')
                 .send({
                     username: "tessagon",
@@ -44,6 +44,7 @@ describe('User Tests', () => {
                 })
                 .then((res) => {
                     expect(res.statusCode).to.equal(302);
+                    expect(res.headers.location).to.equal('/signup/form/');
                     done();
                 })
                 .catch((err) => done(err));
@@ -57,7 +58,6 @@ describe('User Tests', () => {
                 .send({username: 'dccol', password: 'cold'})
                 .then((res) => {
                     expect(res.statusCode).to.equal(302);
-                    expect(res.headers.location).to.equal('/profile');
                     done();
                 })
                 .catch((err) => done(err));
@@ -76,5 +76,75 @@ describe('User Tests', () => {
                 .catch((err) => done(err));
         })
     })
+    
+    /**
+    describe('populate profile', () => {
+
+        var newUser;
+        before(function (done) {
+
+            var userInfo = {
+                username: "tessagon",
+                email: "tessagon@tessagon.com",
+                password: "cold",
+                password2: "cold"
+            }
+
+            newUser = User(userInfo);
+
+            newUser.save((err) => {
+                if (err) {
+                    console.log(err);
+
+                } else {
+                    console.log('saved');
+                }
+            })
+
+            done();
+            
+            request(app)
+                .post('/user/signup')
+                .send({
+                    username: "tessagon",
+                    email: "tessagon@tessagon.com",
+                    password: "cold",
+                    password2: "cold"
+                })
+                .end(function(err, res) {
+                    if (err) throw err;
+                    token = res.user._id;
+                    done();
+                  });
+
+        });
+        
+        after(async () => {
+            await User.deleteOne({username: "tessagon"});
+        });
+
+
+        it('Should redirect to profile page', (done) => {
+            request(app)
+                .post('/user/populateInfo')
+                .send({
+                    first_name: 'Naz',
+                    last_name: 'Hashem',
+                    bio: "Hey I'm Naz ...",
+                    city: 'Melbourne',
+                    state: 'VIC',
+                    phone_number: '0412345678',
+                })
+                .query({_id: newUser._id})
+                .then((res) => {
+                    expect(res.statusCode).to.equal(302);
+                    expect(res.headers.location).to.equal('/profile');
+                    done();
+                })
+                .catch((err) => done(err));
+        })
+    })
+    */
+    
 
 });
