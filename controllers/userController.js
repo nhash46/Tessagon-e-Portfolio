@@ -68,8 +68,11 @@ const populateInfo = (req, res) => {
     user.city = req.body.city;
     user.state = req.body.state;
     user.bio = req.body.bio;
+    user.education = [];
+    user.experience = [];
+    user.documents = [];
 
-    /**
+    
     let userEducation = {
         university: req.body.education,
         degree: req.body.degree,
@@ -86,7 +89,6 @@ const populateInfo = (req, res) => {
 
     user.experience.push(userExperience);
     user.education.push(userEducation);
-     */
 
 
     let query = {_id:req.user._id}

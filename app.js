@@ -62,9 +62,6 @@ app.get('/', (req, res) => {
     res.render("login")
 });
 // GET home page
-app.get('/profile', userController.authCheck, (req, res) => {
-    res.render("index")
-});
 app.get('/signup', (req, res) => {
     res.render("signup")
 });
