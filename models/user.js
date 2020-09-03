@@ -14,8 +14,29 @@ const userSchema = new Schema({
     city: String,
     state: String,
     phone_number: String,
-    education: [ {type: String} ],
-    experience: [ {type: String} ],
+    links: 
+        [{ 
+            facebook: String,
+            twitter: String,
+            dribble: String,
+            github: String,
+            instagram: String,
+            linkedIn: String
+        }],
+    education: 
+        [{
+            university: String, 
+            degree: String,
+            startDate: Date,
+            EndDate: Date
+        }],
+    experience: 
+        [{
+            company: String, 
+            role: String,
+            startDate: Date,
+            EndDate: Date
+        }],
     documents: [ {type: Schema.Types.Mixed} ],
 });
 
