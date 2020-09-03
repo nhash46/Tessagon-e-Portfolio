@@ -15,27 +15,27 @@ const userSchema = new Schema({
     state: String,
     phone_number: String,
     links: 
-        [{ 
+        { 
             facebook: String,
             twitter: String,
             dribble: String,
             github: String,
             instagram: String,
             linkedIn: String
-        }],
+        },
     education: 
         [{
             university: String, 
             degree: String,
-            startDate: Date,
-            EndDate: Date
+            educationStartDate: Date,
+            educationEndDate: Date
         }],
     experience: 
         [{
             company: String, 
             role: String,
-            startDate: Date,
-            EndDate: Date
+            experienceStartDate: Date,
+            experienceEndDate: Date
         }],
     documents: [ {type: Schema.Types.Mixed} ],
 });

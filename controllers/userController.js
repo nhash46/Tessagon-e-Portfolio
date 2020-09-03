@@ -69,19 +69,41 @@ const populateInfo = (req, res) => {
     user.state = req.body.state;
     user.bio = req.body.bio;
 
+    /**
+    let userEducation = {
+        university: req.body.education,
+        degree: req.body.degree,
+        educationStartDate: req.body.educationStartDate,
+        educationEndDate: req.body.educationEndDate
+    }
+
+    let userExperience = {
+        company: req.body.company,
+        role: req.body.role,
+        experienceStartDate: req.body.experienceStartDate,
+        experienceEndDate: req.body.experienceEndDate
+    }
+
+    user.experience.push(userExperience);
+    user.education.push(userEducation);
+     */
+
+
     let query = {_id:req.user._id}
 
-
     User.updateOne(query, user, function (err) {
-    if (err){
-        console.log(err);
-    }
-    else{
-        req.flash('success','details saved');
-        res.redirect('/profile');
-    }
+        if (err){
+            console.log(err);
+        }
+        else{
+            // User.findOneAndUpdate({_id: query}, {$push: {experience: userExperience}});
+            // User.findOneAndUpdate({_id: query}, {$push: {education: userEducation}});
+            console.log("saved");
+            res.redirect('/profile');
+        }
     });
 }
+
 
 const newUserForm = (req, res) => {
     res.render('signup');
