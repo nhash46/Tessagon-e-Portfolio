@@ -59,5 +59,6 @@ userRouter.get("/auth/google/callback",
 
 // logging out
 userRouter.get("/logout", userController.logOutUser);
+userRouter.get("/:username", userController.userID);
 
 module.exports = userRouter;

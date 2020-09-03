@@ -172,6 +172,36 @@ const logOutUser = (req, res) => {
     res.redirect('/');
 };
 
+const userID = async (req,res) => {
+    
+
+        var exists = await User.exists({username: req.params.username});
+        // Ensures that the user exists
+        if (!exists) {
+            res.render('/', {
+                message:"Invalid user profile"
+            });
+        } else {
+            // Finds the relevant user within the database
+            User.findOne({username:req.params.username}, async function (err, user) {
+                const first_name = user.first_name;
+                const last_name = user.last_name;
+                const bio = user.bio;
+                const city = user.city;
+                const state = user.state;
+                const phone = user.phone_number;
+                const education = user.education;
+                const experience = user.experience;
+                const links = user.links;
+                const documents = user.documents;
+                return res.render('index', {
+                    first_name: first_name,
+                    last_name: last_name,
+                })
+            });
+        }
+    };
+
 module.exports = {
     addUser,
     populateInfo,
@@ -182,5 +212,6 @@ module.exports = {
     logInPage,
     logInGoogle,
     logInGoogleCallback,
-    authCheck
+    authCheck,
+    userID
 };
