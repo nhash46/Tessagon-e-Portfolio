@@ -63,9 +63,10 @@ userRouter.get("/auth/google/callback",
 userRouter.get("/logout", userController.logOutUser);
 
 // loads another user's profile
-userRouter.get("/profile/:username", userController.userID);
+userRouter.get("/profile/:username", userController.getOtherUserProfile);
 
 // load global user's profile
 userRouter.get('/profile', userController.authCheck, userController.getUserProfile);
+
 
 module.exports = userRouter;
