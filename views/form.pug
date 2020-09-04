@@ -40,31 +40,31 @@ block content
                                 .col-md-12 
                                     h5.card-title.text-center Experience
                                 .form-label-group.col-md-6
-                                    input#companyName.form-control(type='text' placeholder='companyName' autofocus='')
+                                    input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='')
                                     label(for='companyName') Company
                                 .form-label-group.col-md-6
-                                    input#roleName.form-control(type='text' placeholder='roleName' autofocus='')
+                                    input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='')
                                     label(for='roleName') Role Title
                                 .col-md-6.dates
                                     label(for='startDate') Start date:
-                                    input#startDate(type='date' name='job-start' value='2018-07-22' min='2000-01-01' max='2020-12-31')
+                                    input#startDate(name= "experienceStartDate" type='date' value='2018-07-22' min='2000-01-01' max='2020-12-31')
                                 .col-md-6.dates
                                     label(for='endDate') End date:
-                                    input#endDate(type='date' name='job-end' value='2018-07-22' min='2018-01-01' max='2020-12-31')
+                                    input#endDate(name= "experienceEndDate" value='2018-07-22' min='2018-01-01' max='2020-12-31')
                                 .col-md-12 
                                     h5.card-title.text-center Education
                                 .form-label-group.col-md-6
-                                    input#universityName.form-control(type='text' placeholder='companyName' autofocus='')
+                                    input#universityName.form-control(name= "university" type='text' placeholder='companyName' autofocus='')
                                     label(for='universityName') University
                                 .form-label-group.col-md-6
-                                    input#degree.form-control(type='text' placeholder='roleName' autofocus='')
+                                    input#degree.form-control(name= "degree" type='text' placeholder='roleName' autofocus='')
                                     label(for='degree') Degree
                                 .col-md-6.dates
                                     label(for='uniStartDate') Start date:
-                                    input#uniStartDate(type='date' name='job-start' value='2018-07-22' min='2000-01-01' max='2020-12-31')
+                                    input#uniStartDate(name= "educationStartDate" type='date' value='2018-07-22' min='2000-01-01' max='2020-12-31')
                                 .col-md-6.dates
                                     label(for='uniEndDate') End date:
-                                    input#uniEndDate(type='date' name='job-end' value='2018-07-22' min='2018-01-01' max='2020-12-31')
+                                    input#uniEndDate(name= "educationEndDate"  value='2018-07-22' min='2018-01-01' max='2020-12-31')
                                 br
                                 br
                                 button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Submit

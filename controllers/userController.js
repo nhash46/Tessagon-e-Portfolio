@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const flash = require('connect-flash');
 const {validationResult} = require('express-validator');
+const Education = require("../models/education");
 
 // import user model
 const User = mongoose.model("User");
@@ -56,7 +57,7 @@ const addUser = (req, res, next) => {
     }
 };
 
-const populateInfo = (req, res) => {
+const populateInfo = (req, res, next) => {
     // extract info. from body
 
     let user = {};
@@ -68,28 +69,6 @@ const populateInfo = (req, res) => {
     user.city = req.body.city;
     user.state = req.body.state;
     user.bio = req.body.bio;
-    user.education = [];
-    user.experience = [];
-    user.documents = [];
-
-    
-    let userEducation = {
-        university: req.body.education,
-        degree: req.body.degree,
-        educationStartDate: req.body.educationStartDate,
-        educationEndDate: req.body.educationEndDate
-    }
-
-    let userExperience = {
-        company: req.body.company,
-        role: req.body.role,
-        experienceStartDate: req.body.experienceStartDate,
-        experienceEndDate: req.body.experienceEndDate
-    }
-
-    user.experience.push(userExperience);
-    user.education.push(userEducation);
-
 
     let query = {_id:req.user._id}
 
@@ -98,10 +77,8 @@ const populateInfo = (req, res) => {
             console.log(err);
         }
         else{
-            // User.findOneAndUpdate({_id: query}, {$push: {experience: userExperience}});
-            // User.findOneAndUpdate({_id: query}, {$push: {education: userEducation}});
             console.log("saved");
-            res.redirect('/user/profile');
+            next();
         }
     });
 }
@@ -207,7 +184,11 @@ const userID = async (req,res) => {
 
 // function that renders the user profile
 const getUserProfile = async (req, res) => {
-    res.render('profile', {
+    User.findById(req.user._id).populate('education').populate('experience').exec((err,user1) => { 
+        console.log(user1);
+        res.render('profile', {
+            user1: user1
+        });
     });
 };
 

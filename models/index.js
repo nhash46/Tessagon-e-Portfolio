@@ -36,6 +36,8 @@ db.once("open", async () => {
 });
 
 require("./user");
+require("./education");
+require("./experience");
 
 module.exports = {
   connect,

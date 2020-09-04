@@ -23,20 +23,8 @@ const userSchema = new Schema({
             instagram: String,
             linkedIn: String
         },
-    education: 
-        [{
-            university: String, 
-            degree: String,
-            educationStartDate: Date,
-            educationEndDate: Date
-        }],
-    experience: 
-        [{
-            company: String, 
-            role: String,
-            experienceStartDate: Date,
-            experienceEndDate: Date
-        }],
+    education: [{type: Schema.Types.ObjectId, ref: "Education"}],
+    experience: [{type: Schema.Types.ObjectId, ref: "Experience"}],
     documents: [ {type: Schema.Types.Mixed} ],
 });
 
