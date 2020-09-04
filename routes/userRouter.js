@@ -7,6 +7,8 @@ const passport = require('passport');
 const userRouter = express.Router();
 
 const userController = require("../controllers/userController");
+const educationController = require("../controllers/educationController.js");
+const experienceController = require("../controllers/experienceController.js");
 
 // Signing up - authenticate newUser, then direct to info form
 userRouter.post("/signup", userValidator.addUser, userController.addUser,
@@ -26,7 +28,7 @@ userRouter.get("/signup", userController.newUserForm);
 userRouter.get("/signup/form", userController.infoPage);
 
 // Populate info using info form details
-userRouter.post("/populateInfo", userController.populateInfo)
+userRouter.post("/populateInfo", userController.populateInfo, experienceController.addExperience, educationController.addEducation);
 
 // log in form
 userRouter.get("/login", userController.logInPage);
@@ -61,9 +63,10 @@ userRouter.get("/auth/google/callback",
 userRouter.get("/logout", userController.logOutUser);
 
 // loads another user's profile
-userRouter.get("/profile/:username", userController.userID);
+userRouter.get("/profile/:username", userController.getOtherUserProfile);
 
 // load global user's profile
 userRouter.get('/profile', userController.authCheck, userController.getUserProfile);
+
 
 module.exports = userRouter;

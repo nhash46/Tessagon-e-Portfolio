@@ -40,7 +40,19 @@ header#header
                 .intro-text
                     h1
                         | Hello, I&apos;m
-                        span.name  #{first_name}
+                        span.name  #{user2.first_name}
+
+                            each c in user2.education
+                                span #{c.university}
+                                span #{c.degree}
+                                span #{c.educationStartDate}
+                                span #{c.educationEndDate}
+
+                            each c in user2.experience
+                                span #{c.company}
+                                span #{c.role}
+                                span #{c.experienceStartDate}
+                                span #{c.experienceEndDate}
                     p 
                         |I'm a  
                         span.txt-rotate(data-period='1000' data-rotate='[ "Designer.", "Developer.", "Typewriter!" ]')
