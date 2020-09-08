@@ -91,14 +91,15 @@ header#header
                     p
                         | #{user1.bio}
                     p.text-center
-                    button.open-button(onclick='openForm') Edit Bio
-                    #bioForm.form-popup
-                        form.form-container(method='UPDATE' action='/user/populateInfo/')
-                            h1 Edit Bio
-                            label(for='bio')
-                            input#bio(type='text' placeholder= 'edit me' name='bio' required='isRequired')
-                            button.btn(type='submit') Save
-                            button.btn.cancel(type='button' onclick='closeForm') Close
+                    // Trigger/Open The Modal
+                    button#myBtn Open Modal
+                    // The Modal
+                    #myModal.modal
+                        // Modal content
+                        .modal-content
+                            span.close &times;
+                            p Some text in the Modal..
+
                     a.btn.btn-primary(href='#')
                         i.fa.fa-download
                         |  Download Resume
