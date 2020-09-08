@@ -43,7 +43,7 @@ header#header
                         span.name  #{user1.first_name}
                     p
                         |I'm a
-                        span.txt-rotate(data-period='1000' data-rotate='[ "Designer.", "Developer.", "Typewriter!" ]')
+                        span.txt-rotate(data-period='1000' data-rotate='[ " Designer.", " Developer.", " Typewriter!" ]')
 
                     a.btn.btn-default.btn-lg.page-scroll(href='#about') Learn More
                     br
@@ -80,7 +80,10 @@ header#header
                         a.page-scroll(href='#contact') Contact
                     li
                         // if user change this to edit..
-                        a.page-scroll(href='/') Login
+                        a.btn(href='/') Logout
+                    li 
+                        a.button.btn(type='button' data-toggle='modal' data-target='#contactModal') Edit Account Details
+
 
 
 // About Section
@@ -96,9 +99,12 @@ header#header
                 .about-text
                     p
                         | #{user1.bio}
-                    p.text-center
-                    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#bioModal')
-                        | Edit About Me
+                    .text-center
+                        p.text-center
+                        button.btn.btn-primary(type='button' data-toggle='modal' data-target='#bioModal')
+                            | Edit About Me
+                    br
+                    br
                     // Modal
                     #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
                         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
@@ -118,10 +124,10 @@ header#header
                                 .modal-footer
                                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                                     button.btn.btn-secondary(type='button') Save changes
-
-                    a.btn.btn-primary(href='#')
-                        i.fa.fa-download
-                        |  Download Resume
+                    .text-center
+                        a.btn.btn-primary(href='#')
+                            i.fa.fa-download
+                            |  Download Resume
 // Skills Section
 #skills.text-center
     .container
@@ -381,8 +387,6 @@ header#header
     .container
         .section-title.center
             h2 Contact
-            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#contactModal')
-                | Edit Contact Details
             br
             br
             hr
@@ -471,7 +475,20 @@ script(type='text/javascript' src='/js/typewriter.js')
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
-                |Edit experience here
+                input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.experience[0].company)
+                label(for='companyName') Company
+                br
+                input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.experience[0].role)
+                label(for='roleName') Role Title
+                br
+                label(for='startDate') Start date: NEED TO FIX
+                br
+                input#startDate(name= "experienceStartDate" type='month' required='isRequired' value = user1.experience[0].experienceStartDate) 
+                br
+                label(for='endDate') End date: NEED TO FIX
+                br
+                input#endDate(name= "experienceEndDate" type='month' required='isRequired' value = user1.experience[0].experienceEndDate)
+
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                 button.btn.btn-secondary(type='button') Save changes
@@ -484,7 +501,19 @@ script(type='text/javascript' src='/js/typewriter.js')
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
-                |Edit education here
+                input#universityName.form-control(name= "university" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.education[0].university)
+                label(for='universityName') University
+                br
+                input#degree.form-control(name= "degree" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.education[0].degree)
+                label(for='degree') Degree
+                br
+                br
+                label(for='uniStartDate') Start date:
+                input#uniStartDate(name= "educationStartDate" type='month' required='isRequired' value = user1.education[0].educationStartDate)
+                br
+                br
+                label(for='uniEndDate') Start date:
+                input#uniStartDate(name= "educationEndDate" type='month' required='isRequired' value = user1.education[0].educationEndDate)
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                 button.btn.btn-secondary(type='button') Save changes
@@ -497,7 +526,18 @@ script(type='text/javascript' src='/js/typewriter.js')
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
-                |Edit education here
+                input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' pattern='[0-9]{4} [0-9]{3} [0-9]{3}' required='isRequired' value = user1.phone_number)
+                label(for='contactNumber') Contact number (E.g 0412 345 678)
+                br
+                input#inputCity.form-control(name="city" type='text' placeholder='City' autofocus='' required='isRequired' value = user1.city)
+                label(for='inputCity') City
+                br
+                input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired' value.user1.state)
+                label(for='inputState') State
+                br
+                input#inputEmail.form-control(name='email' type='email' placeholder='Email address' required='' value = user1.email)
+                label(for='inputEmail') Email address
+
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                 button.btn.btn-secondary(type='button') Save changes
@@ -511,6 +551,18 @@ script(type='text/javascript' src='/js/typewriter.js')
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
+                input#inputFirstname.form-control(name="first_name" type='text' autofocus='' required='isRequired' value = user1.first_name)
+                label(for='inputFirstname') First Name
+                br
+                input#inputSurname.form-control(name="last_name" type='text' autofocus='' required='isRequired' value = user1.last_name)
+                label(for='inputSurname') Last Name
+                br
+                br
+                input#editBackgroundPic.form-control-file(type='file')
+                label(for='editBackgroundPic') Edit your background picture!
+                
+
             .modal-footer
+                
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                 button.btn.btn-secondary(type='button') Save changes
