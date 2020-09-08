@@ -46,6 +46,12 @@ header#header
                         span.txt-rotate(data-period='1000' data-rotate='[ "Designer.", "Developer.", "Typewriter!" ]')
 
                     a.btn.btn-default.btn-lg.page-scroll(href='#about') Learn More
+                    br
+                    br
+                    a.btn.btn-default.btn-lg.page-scroll(type='button' data-toggle='modal' data-target='#homeModal')
+                        |Edit Home Page
+
+
 // Navigation
 #nav
     nav.navbar.navbar-custom
@@ -91,14 +97,27 @@ header#header
                     p
                         | #{user1.bio}
                     p.text-center
-                    // Trigger/Open The Modal
-                    button#myBtn Open Modal
-                    // The Modal
-                    #myModal.modal
-                        // Modal content
-                        .modal-content
-                            span.close &times;
-                            p Some text in the Modal..
+                    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#bioModal')
+                        | Edit About Me
+                    // Modal
+                    #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
+                        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+                            .modal-content
+                                .modal-header
+                                    h5#bioModalLabel.modal-title Edit Bio
+                                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                                        span(aria-hidden='true') &times;
+                                .modal-body
+                                    input#AboutMe.form-control(name="bio" type='text' autofocus='' maxlength='500' required='isRequired' value = user1.bio)
+                                    label(for='AboutMe') Tell me about yourself! Max 500 characters.
+                                    br
+                                    label(for='editResume') Edit your resume!
+                                    input#editResume.form-control-file(type='file')
+                                    label(for='editProfilePic') Edit your profile picture!
+                                    input#editProfilePic.form-control-file(type='file')
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                                    button.btn.btn-secondary(type='button') Save changes
 
                     a.btn.btn-primary(href='#')
                         i.fa.fa-download
@@ -139,6 +158,10 @@ header#header
     .container
         .section-title.text-center.center
             h2 Portfolio
+            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#portfolioModal')
+                |Edit Portfolio
+            br
+            br
             hr
             .clearfix
         .row
@@ -212,6 +235,10 @@ header#header
     .container
         .section-title.center
             h2 Experience
+            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#experienceModal')
+                | Edit Experience
+            br
+            br
             hr
         .row
             .col-lg-12
@@ -280,6 +307,10 @@ header#header
     .container
         .section-title.center
             h2 Education
+            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#educationModal')
+                | Edit Education
+            br
+            br
             hr
         .row
             .col-lg-12
@@ -350,6 +381,10 @@ header#header
     .container
         .section-title.center
             h2 Contact
+            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#contactModal')
+                | Edit Contact Details
+            br
+            br
             hr
         .col-md-8.col-md-offset-2
             .col-md-4
@@ -413,6 +448,69 @@ script(type='text/javascript' src='/js/jqBootstrapValidation.js')
 script(type='text/javascript' src='/js/contact_me.js')
 script(type='text/javascript' src='/js/main.js')
 script(type='text/javascript' src='/js/typewriter.js')
-script(type='test/javascript' src='/js/editPopup.js')
 
 
+#portfolioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#portfolioModalLabel.modal-title Edit Bio
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                |Edit documents here
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button.btn.btn-secondary(type='button') Save changes
+
+#experienceModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='experienceModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#experienceModalLabel.modal-title Edit Bio
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                |Edit experience here
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button.btn.btn-secondary(type='button') Save changes
+
+#educationModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='educationModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#educationModalLabel.modal-title Edit Bio
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                |Edit education here
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button.btn.btn-secondary(type='button') Save changes
+
+#contactModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='contactModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#contactModalLabel.modal-title Edit Bio
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                |Edit education here
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button.btn.btn-secondary(type='button') Save changes
+
+
+#homeModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='homeModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#homeModalLabel.modal-title Edit Home Page
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button.btn.btn-secondary(type='button') Save changes

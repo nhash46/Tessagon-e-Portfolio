@@ -80,7 +80,7 @@ hr {
 }
 /* Navigation */
 #nav {
-	z-index: 9999;
+	z-index: 9500;
 }
 #nav.affix {
 	position: fixed;
@@ -748,42 +748,34 @@ header .intro-text {
 
 {box-sizing: border-box;}
 
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0,0,0); /* Fallback color */
-	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+#bioModal {
+	z-index: 9999;
+	margin-top: 15vh;
 }
 
-/* Modal Content/Box */
-.modal-content {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 80%; /* Could be more or less, depending on screen size */
+#portfolioModal {
+	z-index: 9999;
+	margin-top: 15vh;
 }
 
-/* The Close Button */
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
+#experienceModal {
+	z-index: 9999;
+	margin-top: 15vh;
 }
 
-.close:hover,
-.close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
+#educationModal {
+	z-index: 9999;
+	margin-top: 15vh;
+}
+
+#contactModal {
+	z-index: 9999;
+	margin-top: 15vh;
+}
+
+#AboutMe {
+	padding-bottom: 25vh;
+	padding-left: 1.15vw;
 }
 
 
