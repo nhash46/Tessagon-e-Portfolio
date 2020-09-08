@@ -25,7 +25,7 @@ userRouter.post("/signup", userValidator.addUser, userController.addUser,
 userRouter.get("/signup", userController.newUserForm);
 
 // Basic Info form
-userRouter.get("/signup/form", userController.infoPage);
+userRouter.get("/signup/form", userController.authCheck, userController.infoPage);
 
 // Populate info using info form details
 userRouter.post("/populateInfo", userController.populateInfo, experienceController.addExperience, educationController.addEducation);
