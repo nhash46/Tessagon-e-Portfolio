@@ -82,7 +82,7 @@ const populateInfo = (req, res, next) => {
     });
 }
 
-const editHomeInfo = (req,res,next) => {
+const editHomeInfo = (req,res) => {
 
     let user = {};
 
@@ -90,7 +90,7 @@ const editHomeInfo = (req,res,next) => {
     user.last_name = req.body.last_name;
     // need to be able to edit photo
 
-    let query = {_id:req.user._id}
+    let query = {_id:req.user._id};
 
     User.updateOne(query, user, function (err) {
        if (err){
@@ -104,7 +104,7 @@ const editHomeInfo = (req,res,next) => {
 
 };
 
-const editNavInfo = (req,res,next) => {
+const editNavInfo = (req,res) => {
 
     let user = {};
 
@@ -113,7 +113,7 @@ const editNavInfo = (req,res,next) => {
     user.state = req.body.state;
     user.email = req.body.email;
 
-    let query = {_id:req.user._id}
+    let query = {_id:req.user._id};
 
     User.updateOne(query, user, function (err) {
         if (err){
@@ -126,13 +126,13 @@ const editNavInfo = (req,res,next) => {
     });
 };
 
-const editAboutMe = (req,res,next) => {
+const editAboutMe = (req,res) => {
 
     let user = {};
 
     user.bio = req.body.bio;
 
-    let query = {_id:req.user._id}
+    let query = {_id:req.user._id};
 
     User.updateOne(query, user, function (err) {
         if (err){

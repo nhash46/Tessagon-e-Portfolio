@@ -105,26 +105,6 @@ header#header
                             | Edit About Me
                     br
                     br
-                    // Modal
-                    #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
-                        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-                            .modal-content
-                                .modal-header
-                                    h5#bioModalLabel.modal-title Edit Bio
-                                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                                        span(aria-hidden='true') &times;
-                                .modal-body
-                                    input#AboutMe.form-control(name="bio" type='text' autofocus='' maxlength='500' required='isRequired' value = user1.bio)
-                                    label(for='AboutMe') Tell me about yourself! Max 500 characters.
-                                    br
-                                    label(for='editResume') Edit your resume!
-                                    input#editResume.form-control-file(type='file')
-                                    label(for='editProfilePic') Edit your profile picture!
-                                    input#editProfilePic.form-control-file(type='file')
-                                form(method='POST', action='/user/editHomeInfo')
-                                .modal-footer
-                                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                                    button.btn.btn-secondary(type='submit') Save changes
                     .text-center
                         a.btn.btn-primary(href='#')
                             i.fa.fa-download
@@ -567,3 +547,24 @@ script(type='text/javascript' src='/js/typewriter.js')
                 
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                 button.btn.btn-secondary(type='button') Save changes
+
+
+#bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#bioModalLabel.modal-title Edit Bio
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                input#AboutMe.form-control(name="bio" type='text' autofocus='' maxlength='500' required='isRequired' value = user1.bio)
+                label(for='AboutMe') Tell me about yourself! Max 500 characters.
+                br
+                label(for='editResume') Edit your resume!
+                input#editResume.form-control-file(type='file')
+                label(for='editProfilePic') Edit your profile picture!
+                input#editProfilePic.form-control-file(type='file')
+            form(method='POST', action='/user/editAboutMe')
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type='submit') Save changes
