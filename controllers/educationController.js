@@ -12,7 +12,7 @@ const addEducation = async (req, res) => {
         degree : req.body.degree,
         educationStartDate : req.body.educationStartDate,
         educationEndDate : req.body.educationEndDate
-    })
+    });
 
     // need to add this Id to Parent document 'comment' field 
     try{
@@ -36,6 +36,37 @@ const addEducation = async (req, res) => {
     });
   };
 
-  module.exports = {
-    addEducation
-  };
+const editEducation = (req,res,next) => {
+    let education = {_id:req.education._id};
+
+    education.university = req.body.university;
+    education.degree = req.body.degree;
+    education.educationStartDate = req.body.educationStartDate;
+    education.educationEndDate = req.body.educationEndDate;
+
+    try{
+        const filter = { _id: req.user._id};
+        const update = { "$push" : {"education" : education._id}};
+        //new might be false depending on implimentation
+        let user = User.findOneAndUpdate(filter, update, {new : true});
+        console.log(user.education);
+    } catch(err){
+        res.status(400);
+        return res.send("Database query failed");
+    }
+
+    education.save(function (err) {
+        if (err) {
+            res.status(400);
+            return console.error(err);
+        } else {
+            next();
+        }
+    });
+
+};
+
+module.exports = {
+    addEducation,
+    editEducation
+};

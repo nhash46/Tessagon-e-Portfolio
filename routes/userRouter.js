@@ -30,7 +30,16 @@ userRouter.get("/signup/form", userController.infoPage);
 // Populate info using info form details
 userRouter.post("/populateInfo", userController.populateInfo, experienceController.addExperience, educationController.addEducation);
 
-// log in form
+// Edit info nav bar
+userRouter.post("/editNavInfo", userController.editNavInfo);
+
+// Edit info on the home page
+userRouter.post("/editHomeInfo", userController.editHomeInfo);
+
+// Edit about me
+userRouter.post("/editAboutMe", userController.editAboutMe);
+
+// log in form Home
 userRouter.get("/login", userController.logInPage);
 
 // logging in - auth done in route to prevent state loss

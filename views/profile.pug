@@ -121,9 +121,10 @@ header#header
                                     input#editResume.form-control-file(type='file')
                                     label(for='editProfilePic') Edit your profile picture!
                                     input#editProfilePic.form-control-file(type='file')
+                                form(method='POST', action='/user/editHomeInfo')
                                 .modal-footer
                                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                                    button.btn.btn-secondary(type='button') Save changes
+                                    button.btn.btn-secondary(type='submit', formmethod='post') Save changes
                     .text-center
                         a.btn.btn-primary(href='#')
                             i.fa.fa-download

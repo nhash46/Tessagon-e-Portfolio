@@ -83,6 +83,62 @@ const populateInfo = (req, res, next) => {
     });
 }
 
+const editHomeInfo = (req,res,next) => {
+
+    let user = {_id:req.user._id};
+    user.first_name = req.body.first_name;
+    user.last_name = req.body.last_name;
+    // need to be able to edit photo
+
+    User.updateOne(user, user, function (err) {
+       if (err){
+           console.log(err);
+       }
+       else {
+           console.log("edited home page");
+           next();
+       }
+    });
+
+};
+
+const editNavInfo = (req,res,next) => {
+
+    let user = {_id:req.user._id};
+
+    user.phone_number = req.body.phone_number;
+    user.city = req.body.city;
+    user.state = req.body.state;
+    user.email = req.body.email;
+
+    User.updateOne(user, user, function (err) {
+        if (err){
+            console.log(err);
+        }
+        else {
+            console.log("edited account details");
+            next();
+        }
+    });
+};
+
+const editAboutMe = (req,res,next) => {
+
+    let user = {_id:req.user._id};
+
+    user.bio = req.body.bio;
+
+    User.updateOne(user, user, function (err) {
+        if (err){
+            console.log(err);
+        }
+        else {
+            console.log("edited about me");
+            next();
+        }
+    });
+
+};
 
 const newUserForm = (req, res) => {
     res.render('signup');
@@ -215,5 +271,8 @@ module.exports = {
     authCheck,
     userID,
     getUserProfile,
-    getOtherUserProfile
+    getOtherUserProfile,
+    editHomeInfo,
+    editNavInfo,
+    editAboutMe
 };
