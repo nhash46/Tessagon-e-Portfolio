@@ -2,28 +2,28 @@ doctype html
 head
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    title John Doe - UX Designer &amp; Front End Developer
+    title E-Portfolio | #{user1.first_name} #{user1.last_name}
     meta(name='description' content='')
     meta(name='author' content='')
     //
       Favicons
       ==================================================
-    link(rel='shortcut icon' href='img/favicon.ico' type='image/x-icon')
-    link(rel='apple-touch-icon' href='img/apple-touch-icon.png')
-    link(rel='apple-touch-icon' sizes='72x72' href='img/apple-touch-icon-72x72.png')
-    link(rel='apple-touch-icon' sizes='114x114' href='img/apple-touch-icon-114x114.png')
+    link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+    link(rel='apple-touch-icon' href='/img/apple-touch-icon.png')
+    link(rel='apple-touch-icon' sizes='72x72' href='/img/apple-touch-icon-72x72.png')
+    link(rel='apple-touch-icon' sizes='114x114' href='/img/apple-touch-icon-114x114.png')
     // icons
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     // Bootstrap
-    link(rel='stylesheet' type='text/css' href='css/bootstrap.css')
-    link(rel='stylesheet' type='text/css' href='fonts/font-awesome/css/font-awesome.css')
+    link(rel='stylesheet' type='text/css' href='/css/bootstrap.css')
+    link(rel='stylesheet' type='text/css' href='/fonts/font-awesome/css/font-awesome.css')
     //
       Stylesheet
       ==================================================
-    
-    link(rel='stylesheet' type='text/css' href='css/typewriter.css')
-    link(rel='stylesheet' type='text/css' href='css/index.css')
-    link(rel='stylesheet' type='text/css' href='css/prettyPhoto.css')
+
+    link(rel='stylesheet' type='text/css' href='/css/typewriter.css')
+    link(rel='stylesheet' type='text/css' href='/css/index.css')
+    link(rel='stylesheet' type='text/css' href='/css/prettyPhoto.css')
     link(href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css')
     script(type='text/javascript' src='js/modernizr.custom.js')
@@ -41,24 +41,17 @@ header#header
                     h1
                         | Hello, I&apos;m
                         span.name  #{user1.first_name}
-
-                    each c in user1.education
-                        span #{c.university}
-                        span #{c.degree}
-                        span #{c.educationStartDate}
-                        span #{c.educationEndDate}
-                    
-                    each c in user1.experience
-                        span #{c.company}
-                        span #{c.role}
-                        span #{c.experienceStartDate}
-                        span #{c.experienceEndDate}
-
-                    p 
-                        |I'm a  
-                        span.txt-rotate(data-period='1000' data-rotate='[ "Designer.", "Developer.", "Typewriter!" ]')
+                    p
+                        |I'm a
+                        span.txt-rotate(data-period='1000' data-rotate='[ " Designer.", " Developer.", " Typewriter!" ]')
 
                     a.btn.btn-default.btn-lg.page-scroll(href='#about') Learn More
+                    br
+                    br
+                    a.btn.btn-default.btn-lg.page-scroll(type='button' data-toggle='modal' data-target='#homeModal')
+                        |Edit Home Page
+
+
 // Navigation
 #nav
     nav.navbar.navbar-custom
@@ -66,7 +59,7 @@ header#header
             .navbar-header
                 button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-main-collapse')
                     i.fa.fa-bars
-                a.navbar-brand.page-scroll(href='#page-top') John Doe
+                a.navbar-brand.page-scroll(href='#page-top') #{user1.first_name} #{user1.last_name}
             // Collect the nav links, forms, and other content for toggling
             .collapse.navbar-collapse.navbar-right.navbar-main-collapse
                 ul.nav.navbar-nav
@@ -80,14 +73,19 @@ header#header
                     li
                         a.page-scroll(href='#portfolio') Portfolio
                     li
-                        a.page-scroll(href='#resume') Resume
+                        a.page-scroll(href='#experience') Experience
+                    li
+                        a.page-scroll(href='#education') Education
                     li
                         a.page-scroll(href='#contact') Contact
                     li
-                        // if user change this to edit.. 
-                        a.page-scroll(href='/') Login
-                
-                    
+                        // if user change this to edit..
+                        a.btn(href='/') Logout
+                    li 
+                        a.button.btn(type='button' data-toggle='modal' data-target='#contactModal') Edit Account Details
+
+
+
 // About Section
 #about
     .container
@@ -100,10 +98,33 @@ header#header
             .col-md-8.col-md-offset-2
                 .about-text
                     p
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh.
-                    p
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare.
-                    p.text-center
+                        | #{user1.bio}
+                    .text-center
+                        p.text-center
+                        button.btn.btn-primary(type='button' data-toggle='modal' data-target='#bioModal')
+                            | Edit About Me
+                    br
+                    br
+                    // Modal
+                    #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
+                        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+                            .modal-content
+                                .modal-header
+                                    h5#bioModalLabel.modal-title Edit Bio
+                                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                                        span(aria-hidden='true') &times;
+                                .modal-body
+                                    input#AboutMe.form-control(name="bio" type='text' autofocus='' maxlength='500' required='isRequired' value = user1.bio)
+                                    label(for='AboutMe') Tell me about yourself! Max 500 characters.
+                                    br
+                                    label(for='editResume') Edit your resume!
+                                    input#editResume.form-control-file(type='file')
+                                    label(for='editProfilePic') Edit your profile picture!
+                                    input#editProfilePic.form-control-file(type='file')
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                                    button.btn.btn-secondary(type='button') Save changes
+                    .text-center
                         a.btn.btn-primary(href='#')
                             i.fa.fa-download
                             |  Download Resume
@@ -143,19 +164,11 @@ header#header
     .container
         .section-title.text-center.center
             h2 Portfolio
+            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#portfolioModal')
+                |Edit Portfolio
+            br
+            br
             hr
-        .categories
-            ul.cat
-                li
-                    ol.type
-                        li
-                            a.active(href='#' data-filter='*') All
-                        li
-                            a(href='#' data-filter='.web') Web Design
-                        li
-                            a(href='#' data-filter='.app') App Development
-                        li
-                            a(href='#' data-filter='.branding') Branding
             .clearfix
         .row
             .portfolio-items
@@ -223,34 +236,15 @@ header#header
                                     h4 Project Title
                                     small Web Design
                                 img.img-responsive(src='img/portfolio/08-small.jpg' alt='Project Title')
-// Achievements Section
-#achievements.text-center
-    .container
-        .section-title.center
-            h2 Some Stats
-            hr
-        .row
-            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='200ms')
-                .achievement-box
-                    span.count 310
-                    h4 Happy Clients
-            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='400ms')
-                .achievement-box
-                    span.count 4700
-                    h4 Hours of Work
-            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='600ms')
-                .achievement-box
-                    span.count 30
-                    h4 Awards Won
-            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='800ms')
-                .achievement-box
-                    span.count 8
-                    h4 Years of Experience
 // Resume Section
-#resume.text-center
+#experience.text-center
     .container
         .section-title.center
             h2 Experience
+            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#experienceModal')
+                | Edit Experience
+            br
+            br
             hr
         .row
             .col-lg-12
@@ -258,51 +252,71 @@ header#header
                     li
                         .timeline-image
                             h4
-                                | Feb 2013
+                                for c in user1.experience
+                                    span #{(c.experienceStartDate)}
+                                |
                                 br
                                 |                 -
                                 br
-                                |                 Present
+                                for c in user1.experience
+                                    span #{c.experienceEndDate}
                         .timeline-panel
                             .timeline-heading
-                                h4 Creative Agency
-                                h4.subheading UX Developer
+                                h4
+                                    for c in user1.experience
+                                        span #{c.company}
+                                h4.subheading
+                                    for c in user1.experience
+                                        span #{c.role}
                             .timeline-body
                                 p
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                                    | INSERT YOUR DESCRIPTION HERE !
                     li.timeline-inverted
                         .timeline-image
                             h4
-                                | Nov 2011
+                                | PLACEHOLDER
                                 br
                                 |                 -
                                 br
-                                |                 Jan 2013
+                                |                 PLACEHOLDER
                         .timeline-panel
                             .timeline-heading
-                                h4 Creative Agency
-                                h4.subheading Front-end Developer
+                                h4
+                                    for c in user1.experience
+                                        span #{c.company}
+                                h4.subheading
+                                    for c in user1.experience
+                                        span #{c.role}
                             .timeline-body
                                 p
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                                    | INSERT YOUR DESCRIPTION HERE !
                     li
                         .timeline-image
                             h4
-                                | Dec 2009
+                                | PLACEHOLDER
                                 br
                                 |                 -
                                 br
-                                |                 May 2011
+                                |                 PLACEHOLDER
                         .timeline-panel
                             .timeline-heading
-                                h4 Creative Agency
-                                h4.subheading UX Designer
+                                h4
+                                    for c in user1.experience
+                                        span #{c.company}
+                                h4.subheading
+                                    for c in user1.experience
+                                        span #{c.role}
                             .timeline-body
                                 p
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                                    | INSERT YOUR DESCRIPTION HERE !
+#education.text-center
     .container
         .section-title.center
             h2 Education
+            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#educationModal')
+                | Edit Education
+            br
+            br
             hr
         .row
             .col-lg-12
@@ -311,67 +325,81 @@ header#header
                     li
                         .timeline-image
                             h4
-                                | 2010
+                                for c in user1.education
+                                    span #{(c.educationStartDate)}
+                                |
                                 br
                                 |                 -
                                 br
-                                |                 2011
+                                for c in user1.education
+                                    span #{c.educationEndDate}
                         .timeline-panel
                             .timeline-heading
-                                h4 Design University
-                                h4.subheading Master Degree of Design
+                                h4
+                                    for c in user1.education
+                                        span #{c.university}
+                                h4.subheading
+                                    for c in user1.education
+                                        span #{c.degree}
                             .timeline-body
                                 p
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                                    | INSERT YOUR DESCRIPTION HERE!
                     li.timeline-inverted
                         .timeline-image
                             h4
-                                | 2007
+                                |PLACEHOLDER
                                 br
                                 |                 -
                                 br
-                                |                 2010
+                                |PLACEHOLDER
                         .timeline-panel
                             .timeline-heading
-                                h4 Design University
-                                h4.subheading Bachelor Degree of Design
+                                h4
+                                    for c in user1.education
+                                        span #{c.university}
+                                h4.subheading
+                                    for c in user1.education
+                                        span #{c.degree}
                             .timeline-body
                                 p
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
-                    li
+                                    | INSERT YOUR DESCRIPTION HERE!
+                    li.time-line-inverted
                         .timeline-image
                             h4
-                                | 2004
+                                | PLACEHOLDER
                                 br
                                 |                 -
                                 br
-                                |                 2007
+                                | PLACEHOLDER
                         .timeline-panel
                             .timeline-heading
-                                h4 School Name
-                                h4.subheading High School Degree
+                                h4
+                                    for c in user1.education
+                                        span #{c.university}
+                                h4.subheading
+                                    for c in user1.education
+                                        span #{c.degree}
                             .timeline-body
-                                p.text-muted
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                                p
+                                    | INSERT YOUR DESCRIPTION HERE!
 // Contact Section
 #contact.text-center
     .container
         .section-title.center
             h2 Contact
+            br
+            br
             hr
         .col-md-8.col-md-offset-2
             .col-md-4
                 i.fa.fa-map-marker.fa-2x
-                p
-                    | 4321 California St,
-                    br
-                    |           San Francisco, CA 12345
+                p #{user1.city}, #{user1.state}
             .col-md-4
                 i.fa.fa-envelope-o.fa-2x
-                p info@company.com
+                p #{user1.email}
             .col-md-4
                 i.fa.fa-phone.fa-2x
-                p  +1 123 456 1234
+                p  #{user1.phone}
             .clearfix
         .col-md-8.col-md-offset-2
             h3 Leave me a message
@@ -400,9 +428,6 @@ header#header
                             i.fa.fa-twitter
                     li
                         a(href='#')
-                            i.fa.fa-dribbble
-                    li
-                        a(href='#')
                             i.fa.fa-github
                     li
                         a(href='#')
@@ -414,19 +439,130 @@ header#header
     .container.text-center
         .fnav
             p
-                | Copyright &copy; 2016 John Doe. Designed by
-                a(href='http://www.templatewire.com' rel='nofollow') TemplateWire
-script(type='text/javascript' src='js/jquery.1.11.1.js')
-script(type='text/javascript' src='js/bootstrap.js')
-script(type='text/javascript' src='js/SmoothScroll.js')
-script(type='text/javascript' src='js/easypiechart.js')
-script(type='text/javascript' src='js/jquery.prettyPhoto.js')
-script(type='text/javascript' src='js/jquery.isotope.js')
-script(type='text/javascript' src='js/jquery.counterup.js')
-script(type='text/javascript' src='js/waypoints.js')
-script(type='text/javascript' src='js/jqBootstrapValidation.js')
-script(type='text/javascript' src='js/contact_me.js')
-script(type='text/javascript' src='js/main.js')
-script(type='text/javascript' src='js/typewriter.js')
+                | Tessagon
+script(type='text/javascript' src='/js/jquery.1.11.1.js')
+script(type='text/javascript' src='/js/bootstrap.js')
+script(type='text/javascript' src='/js/SmoothScroll.js')
+script(type='text/javascript' src='/js/easypiechart.js')
+script(type='text/javascript' src='/js/jquery.prettyPhoto.js')
+script(type='text/javascript' src='/js/jquery.isotope.js')
+script(type='text/javascript' src='/js/jquery.counterup.js')
+script(type='text/javascript' src='/js/waypoints.js')
+script(type='text/javascript' src='/js/jqBootstrapValidation.js')
+script(type='text/javascript' src='/js/contact_me.js')
+script(type='text/javascript' src='/js/main.js')
+script(type='text/javascript' src='/js/typewriter.js')
 
 
+#portfolioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#portfolioModalLabel.modal-title Edit Bio
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                |Edit documents here
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button.btn.btn-secondary(type='button') Save changes
+
+#experienceModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='experienceModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#experienceModalLabel.modal-title Edit Bio
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.experience[0].company)
+                label(for='companyName') Company
+                br
+                input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.experience[0].role)
+                label(for='roleName') Role Title
+                br
+                label(for='startDate') Start date: NEED TO FIX
+                br
+                input#startDate(name= "experienceStartDate" type='month' required='isRequired' value = user1.experience[0].experienceStartDate) 
+                br
+                label(for='endDate') End date: NEED TO FIX
+                br
+                input#endDate(name= "experienceEndDate" type='month' required='isRequired' value = user1.experience[0].experienceEndDate)
+
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button.btn.btn-secondary(type='button') Save changes
+
+#educationModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='educationModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#educationModalLabel.modal-title Edit Bio
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                input#universityName.form-control(name= "university" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.education[0].university)
+                label(for='universityName') University
+                br
+                input#degree.form-control(name= "degree" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.education[0].degree)
+                label(for='degree') Degree
+                br
+                br
+                label(for='uniStartDate') Start date:
+                input#uniStartDate(name= "educationStartDate" type='month' required='isRequired' value = user1.education[0].educationStartDate)
+                br
+                br
+                label(for='uniEndDate') Start date:
+                input#uniStartDate(name= "educationEndDate" type='month' required='isRequired' value = user1.education[0].educationEndDate)
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button.btn.btn-secondary(type='button') Save changes
+
+#contactModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='contactModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#contactModalLabel.modal-title Edit Bio
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' pattern='[0-9]{4} [0-9]{3} [0-9]{3}' required='isRequired' value = user1.phone_number)
+                label(for='contactNumber') Contact number (E.g 0412 345 678)
+                br
+                input#inputCity.form-control(name="city" type='text' placeholder='City' autofocus='' required='isRequired' value = user1.city)
+                label(for='inputCity') City
+                br
+                input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired' value.user1.state)
+                label(for='inputState') State
+                br
+                input#inputEmail.form-control(name='email' type='email' placeholder='Email address' required='' value = user1.email)
+                label(for='inputEmail') Email address
+
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button.btn.btn-secondary(type='button') Save changes
+
+
+#homeModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='homeModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#homeModalLabel.modal-title Edit Home Page
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                input#inputFirstname.form-control(name="first_name" type='text' autofocus='' required='isRequired' value = user1.first_name)
+                label(for='inputFirstname') First Name
+                br
+                input#inputSurname.form-control(name="last_name" type='text' autofocus='' required='isRequired' value = user1.last_name)
+                label(for='inputSurname') Last Name
+                br
+                br
+                input#editBackgroundPic.form-control-file(type='file')
+                label(for='editBackgroundPic') Edit your background picture!
+                
+
+            .modal-footer
+                
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button.btn.btn-secondary(type='button') Save changes

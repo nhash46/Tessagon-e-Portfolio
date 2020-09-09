@@ -80,7 +80,7 @@ hr {
 }
 /* Navigation */
 #nav {
-	z-index: 9999;
+	z-index: 9500;
 }
 #nav.affix {
 	position: fixed;
@@ -173,7 +173,7 @@ hr {
 	padding: 100px 0;
 	text-align: center;
 	color: #fff;
-	background: url(../img/intro-bg.jpg) no-repeat center top;
+	background: url(../img/profolio-tight.png)no-repeat center top;
 	background-color: #7bc3d1;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -405,7 +405,7 @@ ol.type li a:hover {
 	margin: 0;
 }
 /* Resume Section */
-#resume {
+#education {
 	padding: 100px 0;
 	background: #f6f6f6;
 }
@@ -507,6 +507,11 @@ ol.type li a:hover {
 }
 .timeline .timeline-body>p, .timeline .timeline-body>ul {
 	margin-bottom: 0;
+}
+/* Experience Section */
+#experience {
+	padding: 100px 0;
+	background: #f6f6f6;
 }
 /* Contact Section */
 #contact {
@@ -740,3 +745,37 @@ header .intro-text {
 	padding: 10px 100px 20px 20px;
 }
 }
+
+{box-sizing: border-box;}
+
+#bioModal {
+	z-index: 9999;
+	margin-top: 15vh;
+}
+
+#portfolioModal {
+	z-index: 9999;
+	margin-top: 15vh;
+}
+
+#experienceModal {
+	z-index: 9999;
+	margin-top: 15vh;
+}
+
+#educationModal {
+	z-index: 9999;
+	margin-top: 15vh;
+}
+
+#contactModal {
+	z-index: 9999;
+	margin-top: 15vh;
+}
+
+#AboutMe {
+	padding-bottom: 25vh;
+	padding-left: 1.15vw;
+}
+
+

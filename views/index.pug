@@ -2,7 +2,7 @@ doctype html
 head
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    title E-Portfolio | #{first_name} #{last_name}
+    title E-Portfolio | #{user2.first_name} #{user2.last_name}
     meta(name='description' content='')
     meta(name='author' content='')
     //
@@ -41,18 +41,6 @@ header#header
                     h1
                         | Hello, I&apos;m
                         span.name  #{user2.first_name}
-
-                            each c in user2.education
-                                span #{c.university}
-                                span #{c.degree}
-                                span #{c.educationStartDate}
-                                span #{c.educationEndDate}
-
-                            each c in user2.experience
-                                span #{c.company}
-                                span #{c.role}
-                                span #{c.experienceStartDate}
-                                span #{c.experienceEndDate}
                     p 
                         |I'm a  
                         span.txt-rotate(data-period='1000' data-rotate='[ "Designer.", "Developer.", "Typewriter!" ]')
@@ -65,7 +53,7 @@ header#header
             .navbar-header
                 button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-main-collapse')
                     i.fa.fa-bars
-                a.navbar-brand.page-scroll(href='#page-top') #{first_name} #{last_name}
+                a.navbar-brand.page-scroll(href='#page-top') #{user2.first_name} #{user2.last_name}
             // Collect the nav links, forms, and other content for toggling
             .collapse.navbar-collapse.navbar-right.navbar-main-collapse
                 ul.nav.navbar-nav
@@ -79,7 +67,9 @@ header#header
                     li
                         a.page-scroll(href='#portfolio') Portfolio
                     li
-                        a.page-scroll(href='#resume') Resume
+                        a.page-scroll(href='#experience') Experience
+                    li
+                        a.page-scroll(href='#education') Education
                     li
                         a.page-scroll(href='#contact') Contact
                     li
@@ -99,7 +89,7 @@ header#header
             .col-md-8.col-md-offset-2
                 .about-text
                     p
-                        | #{bio}
+                        | #{user2.bio}
                     p.text-center
                         a.btn.btn-primary(href='#')
                             i.fa.fa-download
@@ -141,18 +131,6 @@ header#header
         .section-title.text-center.center
             h2 Portfolio
             hr
-        .categories
-            ul.cat
-                li
-                    ol.type
-                        li
-                            a.active(href='#' data-filter='*') All
-                        li
-                            a(href='#' data-filter='.web') Web Design
-                        li
-                            a(href='#' data-filter='.app') App Development
-                        li
-                            a(href='#' data-filter='.branding') Branding
             .clearfix
         .row
             .portfolio-items
@@ -220,31 +198,8 @@ header#header
                                     h4 Project Title
                                     small Web Design
                                 img.img-responsive(src='img/portfolio/08-small.jpg' alt='Project Title')
-// Achievements Section
-#achievements.text-center
-    .container
-        .section-title.center
-            h2 Some Stats
-            hr
-        .row
-            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='200ms')
-                .achievement-box
-                    span.count 310
-                    h4 Happy Clients
-            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='400ms')
-                .achievement-box
-                    span.count 4700
-                    h4 Hours of Work
-            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='600ms')
-                .achievement-box
-                    span.count 30
-                    h4 Awards Won
-            .col-md-3.col-sm-3.wow.fadeInDown(data-wow-delay='800ms')
-                .achievement-box
-                    span.count 8
-                    h4 Years of Experience
 // Resume Section
-#resume.text-center
+#experience.text-center
     .container
         .section-title.center
             h2 Experience
@@ -255,48 +210,64 @@ header#header
                     li
                         .timeline-image
                             h4
-                                | Feb 2013
+                                for c in user2.experience
+                                   span #{(c.experienceStartDate)}
+                                |
                                 br
                                 |                 -
                                 br
-                                |                 Present
+                                for c in user2.experience
+                                    span #{c.experienceEndDate}
                         .timeline-panel
                             .timeline-heading
-                                h4 Creative Agency
-                                h4.subheading UX Developer
+                                h4
+                                    for c in user2.experience
+                                        span #{c.company}
+                                h4.subheading
+                                    for c in user2.experience
+                                        span #{c.role}
                             .timeline-body
                                 p
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                                    | INSERT YOUR DESCRIPTION HERE !
                     li.timeline-inverted
                         .timeline-image
                             h4
-                                | Nov 2011
+                                | PLACEHOLDER
                                 br
                                 |                 -
                                 br
-                                |                 Jan 2013
+                                |                 PLACEHOLDER
                         .timeline-panel
                             .timeline-heading
-                                h4 Creative Agency
-                                h4.subheading Front-end Developer
+                                h4
+                                    for c in user2.experience
+                                        span #{c.company}
+                                h4.subheading
+                                    for c in user2.experience
+                                        span #{c.role}
                             .timeline-body
                                 p
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                                    | INSERT YOUR DESCRIPTION HERE !
                     li
                         .timeline-image
                             h4
-                                | Dec 2009
+                                | PLACEHOLDER
                                 br
                                 |                 -
                                 br
-                                |                 May 2011
+                                |                 PLACEHOLDER
                         .timeline-panel
                             .timeline-heading
-                                h4 Creative Agency
-                                h4.subheading UX Designer
+                                h4
+                                    for c in user2.experience
+                                        span #{c.company}
+                                h4.subheading
+                                    for c in user2.experience
+                                        span #{c.role}
                             .timeline-body
                                 p
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                                    | INSERT YOUR DESCRIPTION HERE !
+#education.text-center
     .container
         .section-title.center
             h2 Education
@@ -308,48 +279,63 @@ header#header
                     li
                         .timeline-image
                             h4
-                                | #{educationStartDate}
+                                for c in user2.education
+                                    span #{(c.educationStartDate)}
+                                |
                                 br
                                 |                 -
                                 br
-                                |                 #{educationEndDate}
+                                for c in user2.education
+                                    span #{c.educationEndDate}
                         .timeline-panel
                             .timeline-heading
-                                h4 Design University
-                                h4.subheading #{degree}
+                                h4
+                                    for c in user2.education
+                                        span #{c.university}
+                                h4.subheading
+                                    for c in user2.education
+                                        span #{c.degree}
                             .timeline-body
                                 p
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                                    | INSERT YOUR DESCRIPTION HERE!
                     li.timeline-inverted
                         .timeline-image
                             h4
-                                | 2007
+                                |PLACEHOLDER
                                 br
                                 |                 -
                                 br
-                                |                 2010
+                                |PLACEHOLDER
                         .timeline-panel
                             .timeline-heading
-                                h4 Design University
-                                h4.subheading Bachelor Degree of Design
+                                h4
+                                    for c in user2.education
+                                        span #{c.university}
+                                h4.subheading
+                                    for c in user2.education
+                                        span #{c.degree}
                             .timeline-body
                                 p
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
-                    li
+                                    | INSERT YOUR DESCRIPTION HERE!
+                    li.time-line-inverted
                         .timeline-image
                             h4
-                                | 2004
+                                | PLACEHOLDER
                                 br
                                 |                 -
                                 br
-                                |                 2007
+                                | PLACEHOLDER
                         .timeline-panel
                             .timeline-heading
-                                h4 School Name
-                                h4.subheading High School Degree
+                                h4
+                                    for c in user2.education
+                                        span #{c.university}
+                                h4.subheading
+                                    for c in user2.education
+                                        span #{c.degree}
                             .timeline-body
-                                p.text-muted
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.
+                                p
+                                    | INSERT YOUR DESCRIPTION HERE!
 // Contact Section
 #contact.text-center
     .container
@@ -359,16 +345,13 @@ header#header
         .col-md-8.col-md-offset-2
             .col-md-4
                 i.fa.fa-map-marker.fa-2x
-                p
-                    | 4321 California St,
-                    br
-                    |           #{city}, #{state}
+                p #{user2.city}, #{user2.state}
             .col-md-4
                 i.fa.fa-envelope-o.fa-2x
-                p info@company.com
+                p #{user2.email}
             .col-md-4
                 i.fa.fa-phone.fa-2x
-                p  #{phone}
+                p  #{user2.phone}
             .clearfix
         .col-md-8.col-md-offset-2
             h3 Leave me a message
@@ -397,9 +380,6 @@ header#header
                             i.fa.fa-twitter
                     li
                         a(href='#')
-                            i.fa.fa-dribbble
-                    li
-                        a(href='#')
                             i.fa.fa-github
                     li
                         a(href='#')
@@ -411,8 +391,7 @@ header#header
     .container.text-center
         .fnav
             p
-                | Copyright &copy; 2016 John Doe. Designed by
-                a(href='http://www.templatewire.com' rel='nofollow') TemplateWire
+                | Tessagon
 script(type='text/javascript' src='/js/jquery.1.11.1.js')
 script(type='text/javascript' src='/js/bootstrap.js')
 script(type='text/javascript' src='/js/SmoothScroll.js')
