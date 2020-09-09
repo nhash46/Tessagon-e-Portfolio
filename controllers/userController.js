@@ -11,7 +11,7 @@ const User = mongoose.model("User");
 const authCheck = (req, res, next) => {
     if(!req.user){
         // if user not logged in
-        res.redirect('/')
+        res.redirect('/profile');
     } else {
         next();
     }
@@ -64,7 +64,6 @@ const populateInfo = (req, res, next) => {
 
     user.first_name = req.body.first_name;
     user.last_name = req.body.last_name;
-    user.email = req.body.email;
     user.phone_number = req.body.number;
     user.city = req.body.city;
     user.state = req.body.state;
@@ -85,18 +84,21 @@ const populateInfo = (req, res, next) => {
 
 const editHomeInfo = (req,res,next) => {
 
-    let user = {_id:req.user._id};
+    let user = {};
+
     user.first_name = req.body.first_name;
     user.last_name = req.body.last_name;
     // need to be able to edit photo
 
-    User.updateOne(user, user, function (err) {
+    let query = {_id:req.user._id}
+
+    User.updateOne(query, user, function (err) {
        if (err){
            console.log(err);
        }
        else {
            console.log("edited home page");
-           next();
+           res.redirect('/user/profile');
        }
     });
 
@@ -104,37 +106,41 @@ const editHomeInfo = (req,res,next) => {
 
 const editNavInfo = (req,res,next) => {
 
-    let user = {_id:req.user._id};
+    let user = {};
 
     user.phone_number = req.body.phone_number;
     user.city = req.body.city;
     user.state = req.body.state;
     user.email = req.body.email;
 
-    User.updateOne(user, user, function (err) {
+    let query = {_id:req.user._id}
+
+    User.updateOne(query, user, function (err) {
         if (err){
             console.log(err);
         }
         else {
             console.log("edited account details");
-            next();
+            res.redirect('/user/profile');
         }
     });
 };
 
 const editAboutMe = (req,res,next) => {
 
-    let user = {_id:req.user._id};
+    let user = {};
 
     user.bio = req.body.bio;
 
-    User.updateOne(user, user, function (err) {
+    let query = {_id:req.user._id}
+
+    User.updateOne(query, user, function (err) {
         if (err){
             console.log(err);
         }
         else {
             console.log("edited about me");
-            next();
+            res.redirect('/user/profile');
         }
     });
 
