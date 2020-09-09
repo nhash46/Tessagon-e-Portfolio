@@ -532,21 +532,19 @@ script(type='text/javascript' src='/js/typewriter.js')
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
-                input#inputFirstname.form-control(name="first_name" type='text' autofocus='' required='isRequired' value = user1.first_name)
-                label(for='inputFirstname') First Name
-                br
-                input#inputSurname.form-control(name="last_name" type='text' autofocus='' required='isRequired' value = user1.last_name)
-                label(for='inputSurname') Last Name
-                br
-                br
-                input#editBackgroundPic.form-control-file(type='file')
-                label(for='editBackgroundPic') Edit your background picture!
-                
-
-            .modal-footer
-                
-                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                button.btn.btn-secondary(type='button') Save changes
+                form(method='POST', action='/user/editAboutMe').form-signin
+                    input#inputFirstname.form-control(name="first_name" type='text' autofocus='' required='isRequired' value = user1.first_name)
+                    label(for='inputFirstname') First Name
+                    br
+                    input#inputSurname.form-control(name="last_name" type='text' autofocus='' required='isRequired' value = user1.last_name)
+                    label(for='inputSurname') Last Name
+                    br
+                    br
+                    input#editBackgroundPic.form-control-file(type='file')
+                    label(for='editBackgroundPic') Edit your background picture!
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type='submit' data-dismiss='modal') Save changes
 
 
 #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
