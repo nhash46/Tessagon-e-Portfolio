@@ -105,26 +105,6 @@ header#header
                             | Edit About Me
                     br
                     br
-                    // Modal
-                    #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
-                        form#bioForm(name = "bioForm" method='POST' action='/editAboutMe')
-                            .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-                                .modal-content
-                                    .modal-header
-                                        h5#bioModalLabel.modal-title Edit Bio
-                                        button.close(type='button' data-dismiss='modal' aria-label='Close')
-                                            span(aria-hidden='true') &times;
-                                    .modal-body
-                                        input#AboutMe.form-control(name="bio" type='text' autofocus='' maxlength='500' required='isRequired' value = user1.bio)
-                                        label(for='AboutMe') Tell me about yourself! Max 500 characters.
-                                        br
-                                        label(for='editResume') Edit your resume!
-                                        input#editResume.form-control-file(type='file')
-                                        label(for='editProfilePic') Edit your profile picture!
-                                        input#editProfilePic.form-control-file(type='file')
-                                    .modal-footer
-                                        button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                                        button.btn.btn-secondary(type='submit') Save changes
                     .text-center
                         a.btn.btn-primary(href='#')
                             i.fa.fa-download
@@ -452,104 +432,128 @@ script(type='text/javascript' src='/js/typewriter.js')
                 |Edit documents here
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                button.btn.btn-secondary(type='button') Save changes
+                button.btn.btn-secondary(type='button') Save change
+
+#bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/editAboutMe')
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#bioModalLabel.modal-title Edit Bio
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input#AboutMe.form-control(name="bio" type='text' autofocus='' maxlength='500' required='isRequired' value = user1.bio)
+                    label(for='AboutMe') Tell me about yourself! Max 500 characters.
+                    br
+                    label(for='editResume') Edit your resume!
+                    input#editResume.form-control-file(type='file')
+                    label(for='editProfilePic') Edit your profile picture!
+                    input#editProfilePic.form-control-file(type='file')
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type='submit') Save changes            
 
 #experienceModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='experienceModalLabel' aria-hidden='true')
-    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-        .modal-content
-            .modal-header
-                h5#experienceModalLabel.modal-title Edit Bio
-                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                    span(aria-hidden='true') &times;
-            .modal-body
-                input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.experience[0].company)
-                label(for='companyName') Company
-                br
-                input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.experience[0].role)
-                label(for='roleName') Role Title
-                br
-                label(for='startDate') Start date: NEED TO FIX
-                br
-                input#startDate(name= "experienceStartDate" type='month' required='isRequired' value = user1.experience[0].experienceStartDate) 
-                br
-                label(for='endDate') End date: NEED TO FIX
-                br
-                input#endDate(name= "experienceEndDate" type='month' required='isRequired' value = user1.experience[0].experienceEndDate)
+    form(method='POST' action='/user/editExperience')
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#experienceModalLabel.modal-title Edit Bio
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.experience[0].company)
+                    label(for='companyName') Company
+                    br
+                    input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.experience[0].role)
+                    label(for='roleName') Role Title
+                    br
+                    label(for='startDate') Start date: NEED TO FIX
+                    br
+                    input#startDate(name= "experienceStartDate" type='month' required='isRequired' value = user1.experience[0].experienceStartDate) 
+                    br
+                    label(for='endDate') End date: NEED TO FIX
+                    br
+                    input#endDate(name= "experienceEndDate" type='month' required='isRequired' value = user1.experience[0].experienceEndDate)
 
-            .modal-footer
-                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                button.btn.btn-secondary(type='button') Save changes
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type='submit') Save changes
 
 #educationModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='educationModalLabel' aria-hidden='true')
-    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-        .modal-content
-            .modal-header
-                h5#educationModalLabel.modal-title Edit Bio
-                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                    span(aria-hidden='true') &times;
-            .modal-body
-                input#universityName.form-control(name= "university" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.education[0].university)
-                label(for='universityName') University
-                br
-                input#degree.form-control(name= "degree" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.education[0].degree)
-                label(for='degree') Degree
-                br
-                br
-                label(for='uniStartDate') Start date:
-                input#uniStartDate(name= "educationStartDate" type='month' required='isRequired' value = user1.education[0].educationStartDate)
-                br
-                br
-                label(for='uniEndDate') Start date:
-                input#uniStartDate(name= "educationEndDate" type='month' required='isRequired' value = user1.education[0].educationEndDate)
-            .modal-footer
-                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                button.btn.btn-secondary(type='button') Save changes
+    form(method='POST' action='/user/editEducation')
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#educationModalLabel.modal-title Edit Bio
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input#universityName.form-control(name= "university" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.education[0].university)
+                    label(for='universityName') University
+                    br
+                    input#degree.form-control(name= "degree" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.education[0].degree)
+                    label(for='degree') Degree
+                    br
+                    br
+                    label(for='uniStartDate') Start date:
+                    input#uniStartDate(name= "educationStartDate" type='month' required='isRequired' value = user1.education[0].educationStartDate)
+                    br
+                    br
+                    label(for='uniEndDate') Start date:
+                    input#uniStartDate(name= "educationEndDate" type='month' required='isRequired' value = user1.education[0].educationEndDate)
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type='submit') Save changes
 
 #contactModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='contactModalLabel' aria-hidden='true')
-    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-        .modal-content
-            .modal-header
-                h5#contactModalLabel.modal-title Edit Bio
-                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                    span(aria-hidden='true') &times;
-            .modal-body
-                input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' pattern='[0-9]{4} [0-9]{3} [0-9]{3}' required='isRequired' value = user1.phone_number)
-                label(for='contactNumber') Contact number (E.g 0412 345 678)
-                br
-                input#inputCity.form-control(name="city" type='text' placeholder='City' autofocus='' required='isRequired' value = user1.city)
-                label(for='inputCity') City
-                br
-                input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired' value.user1.state)
-                label(for='inputState') State
-                br
-                input#inputEmail.form-control(name='email' type='email' placeholder='Email address' required='' value = user1.email)
-                label(for='inputEmail') Email address
+    form(method='POST' action='/user/editNavInfo')
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#contactModalLabel.modal-title Edit Bio
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' pattern='[0-9]{4} [0-9]{3} [0-9]{3}' required='isRequired' value = user1.phone_number)
+                    label(for='contactNumber') Contact number (E.g 0412 345 678)
+                    br
+                    input#inputCity.form-control(name="city" type='text' placeholder='City' autofocus='' required='isRequired' value = user1.city)
+                    label(for='inputCity') City
+                    br
+                    input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired' value.user1.state)
+                    label(for='inputState') State
+                    br
+                    input#inputEmail.form-control(name='email' type='email' placeholder='Email address' required='' value = user1.email)
+                    label(for='inputEmail') Email address
 
-            .modal-footer
-                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                button.btn.btn-secondary(type='button') Save changes
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type='submit') Save changes
 
 
 #homeModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='homeModalLabel' aria-hidden='true')
-    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-        .modal-content
-            .modal-header
-                h5#homeModalLabel.modal-title Edit Home Page
-                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                    span(aria-hidden='true') &times;
-            .modal-body
-                input#inputFirstname.form-control(name="first_name" type='text' autofocus='' required='isRequired' value = user1.first_name)
-                label(for='inputFirstname') First Name
-                br
-                input#inputSurname.form-control(name="last_name" type='text' autofocus='' required='isRequired' value = user1.last_name)
-                label(for='inputSurname') Last Name
-                br
-                br
-                input#editBackgroundPic.form-control-file(type='file')
-                label(for='editBackgroundPic') Edit your background picture!
-                
+    form(method='POST' action='/user/editHomeInfo')
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#homeModalLabel.modal-title Edit Home Page
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input#inputFirstname.form-control(name="first_name" type='text' autofocus='' required='isRequired' value = user1.first_name)
+                    label(for='inputFirstname') First Name
+                    br
+                    input#inputSurname.form-control(name="last_name" type='text' autofocus='' required='isRequired' value = user1.last_name)
+                    label(for='inputSurname') Last Name
+                    br
+                    br
+                    input#editBackgroundPic.form-control-file(type='file')
+                    label(for='editBackgroundPic') Edit your background picture!
+                    
 
-            .modal-footer
-                
-                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                button.btn.btn-secondary(type='button') Save changes
+                .modal-footer
+                    
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type='submit') Save changes

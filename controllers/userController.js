@@ -121,7 +121,7 @@ const editNavInfo = (req,res) => {
         }
         else {
             console.log("edited account details");
-            res.redirect('/user/profile');
+            res.redirect('/user/profile#contact');
         }
     });
 };
@@ -140,7 +140,7 @@ const editAboutMe = (req,res) => {
         }
         else {
             console.log("edited about me");
-            res.redirect('/user/profile');
+            res.redirect('/user/profile#about');
         }
     });
 
