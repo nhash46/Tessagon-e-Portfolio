@@ -39,6 +39,12 @@ userRouter.post("/editHomeInfo", userController.editHomeInfo);
 // Edit about me
 userRouter.post("/editAboutMe", userController.editAboutMe);
 
+// Edit education
+userRouter.post("/editEducation", educationController.editEducation);
+
+// Edit experience
+userRouter.post("/editExperience", experienceController.editExperience);
+
 // log in form Home
 userRouter.get("/login", userController.logInPage);
 
