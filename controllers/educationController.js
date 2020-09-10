@@ -36,32 +36,26 @@ const addEducation = async (req, res) => {
     });
   };
 
-const editEducation = (req,res,next) => {
-    let education = {_id:req.education._id};
+const editEducation = (req,res) => {
+
+    let education = {};
 
     education.university = req.body.university;
     education.degree = req.body.degree;
     education.educationStartDate = req.body.educationStartDate;
     education.educationEndDate = req.body.educationEndDate;
-
-    try{
-        const filter = { _id: req.user._id};
-        const update = { "$push" : {"education" : education._id}};
-        //new might be false depending on implimentation
-        let user = User.findOneAndUpdate(filter, update, {new : true});
-        console.log(user.education);
-    } catch(err){
+    
+    let query = {_id:req.user._id}
+  
+    // add post into db
+    Education.updateOne(query, education, function (err) {
+      if (err){
+        console.log(err);
         res.status(400);
-        return res.send("Database query failed");
-    }
-
-    education.save(function (err) {
-        if (err) {
-            res.status(400);
-            return console.error(err);
-        } else {
-            next();
-        }
+      }
+      else{
+        res.redirect('/user/profile#education');
+      } 
     });
 
 };

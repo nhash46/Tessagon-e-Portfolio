@@ -746,7 +746,7 @@ header .intro-text {
 }
 }
 
-{box-sizing: border-box;}
+/**{box-sizing: border-box;}*/
 
 #bioModal {
 	z-index: 9999;

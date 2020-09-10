@@ -36,32 +36,26 @@ const addExperience = async (req, res, next) => {
     });
   };
 
-const editExperience = (req,res,next) => {
-    let exp = {_id:req.experience._id};
+const editExperience = (req,res) => {
 
-    exp.company = req.body.company;
-    exp.role = req.body.role;
-    exp.experienceStartDate = req.body.experienceStartDate;
-    exp.experienceEndDate = req.body.experienceEndDate;
-
-    try{
-        const filter = { _id: req.user._id};
-        const update = { "$push" : {"experience" : exp._id}};
-        //new might be false depending on implimentation
-        let user = User.findOneAndUpdate(filter, update, {new : true});
-        console.log(user.experience);
-    } catch(err){
+    let experience = {};
+    
+    experience.company = req.body.company;
+    experience.role = req.body.role;
+    experience.experienceStartDate = req.body.experienceStartDate;
+    experience.experienceEndDate = req.body.experienceEndDate;
+    
+    let query = {_id:req.user._id}
+  
+    // add post into db
+    Experience.updateOne(query, experience, function (err) {
+      if (err){
+        console.log(err);
         res.status(400);
-        return res.send("Database query failed");
-    }
-
-    exp.save(function (err) {
-        if (err) {
-            res.status(400);
-            return console.error(err);
-        } else {
-            next();
-        }
+      }
+      else{
+        res.redirect('/user/profile#experience');
+      } 
     });
 
 };

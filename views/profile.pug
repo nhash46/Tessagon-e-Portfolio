@@ -8,7 +8,7 @@ head
     //
       Favicons
       ==================================================
-    link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+    link(rel='shortcut icon' href='/img/favicon1.ico' type='image/x-icon')
     link(rel='apple-touch-icon' href='/img/apple-touch-icon.png')
     link(rel='apple-touch-icon' sizes='72x72' href='/img/apple-touch-icon-72x72.png')
     link(rel='apple-touch-icon' sizes='114x114' href='/img/apple-touch-icon-114x114.png')
@@ -222,147 +222,69 @@ header#header
     .container
         .section-title.center
             h2 Experience
-            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#experienceModal')
-                | Edit Experience
+            
             br
             br
             hr
         .row
             .col-lg-12
                 ul.timeline
-                    li
-                        .timeline-image
-                            h4
-                                for c in user1.experience
+                    for c in user1.experience
+                        li
+                            .timeline-image
+                                h4
                                     span #{(c.experienceStartDate)}
-                                |
-                                br
-                                |                 -
-                                br
-                                for c in user1.experience
+                                    |
+                                    br
+                                    |                 -
+                                    br
                                     span #{c.experienceEndDate}
-                        .timeline-panel
-                            .timeline-heading
-                                h4
-                                    for c in user1.experience
+                            .timeline-panel
+                                .timeline-heading
+                                    h4
                                         span #{c.company}
-                                h4.subheading
-                                    for c in user1.experience
+                                    h4.subheading
                                         span #{c.role}
-                            .timeline-body
-                                p
-                                    | INSERT YOUR DESCRIPTION HERE !
-                    li.timeline-inverted
-                        .timeline-image
-                            h4
-                                | PLACEHOLDER
-                                br
-                                |                 -
-                                br
-                                |                 PLACEHOLDER
-                        .timeline-panel
-                            .timeline-heading
-                                h4
-                                    for c in user1.experience
-                                        span #{c.company}
-                                h4.subheading
-                                    for c in user1.experience
-                                        span #{c.role}
-                            .timeline-body
-                                p
-                                    | INSERT YOUR DESCRIPTION HERE !
-                    li
-                        .timeline-image
-                            h4
-                                | PLACEHOLDER
-                                br
-                                |                 -
-                                br
-                                |                 PLACEHOLDER
-                        .timeline-panel
-                            .timeline-heading
-                                h4
-                                    for c in user1.experience
-                                        span #{c.company}
-                                h4.subheading
-                                    for c in user1.experience
-                                        span #{c.role}
-                            .timeline-body
-                                p
-                                    | INSERT YOUR DESCRIPTION HERE !
+                                .timeline-body
+                                    p
+                                        | INSERT YOUR DESCRIPTION HERE !
+                                    br
+                                    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#experienceModal')
+                                        | Edit Experience
+// Education section                   
 #education.text-center
     .container
         .section-title.center
             h2 Education
-            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#educationModal')
-                | Edit Education
             br
             br
             hr
         .row
             .col-lg-12
                 ul.timeline
-                    // Education Section
-                    li
-                        .timeline-image
-                            h4
-                                for c in user1.education
+                    for c in user1.education
+                        li.timeline-inverted
+                            .timeline-image
+                                h4
                                     span #{(c.educationStartDate)}
-                                |
-                                br
-                                |                 -
-                                br
-                                for c in user1.education
+                                    |
+                                    br
+                                    |                 -
+                                    br
                                     span #{c.educationEndDate}
-                        .timeline-panel
-                            .timeline-heading
-                                h4
-                                    for c in user1.education
+                            .timeline-panel
+                                .timeline-heading
+                                    h4
                                         span #{c.university}
-                                h4.subheading
-                                    for c in user1.education
+                                    h4.subheading
                                         span #{c.degree}
-                            .timeline-body
-                                p
-                                    | INSERT YOUR DESCRIPTION HERE!
-                    li.timeline-inverted
-                        .timeline-image
-                            h4
-                                |PLACEHOLDER
-                                br
-                                |                 -
-                                br
-                                |PLACEHOLDER
-                        .timeline-panel
-                            .timeline-heading
-                                h4
-                                    for c in user1.education
-                                        span #{c.university}
-                                h4.subheading
-                                    for c in user1.education
-                                        span #{c.degree}
-                            .timeline-body
-                                p
-                                    | INSERT YOUR DESCRIPTION HERE!
-                    li.time-line-inverted
-                        .timeline-image
-                            h4
-                                | PLACEHOLDER
-                                br
-                                |                 -
-                                br
-                                | PLACEHOLDER
-                        .timeline-panel
-                            .timeline-heading
-                                h4
-                                    for c in user1.education
-                                        span #{c.university}
-                                h4.subheading
-                                    for c in user1.education
-                                        span #{c.degree}
-                            .timeline-body
-                                p
-                                    | INSERT YOUR DESCRIPTION HERE!
+                                .timeline-body
+                                    p
+                                        | INSERT YOUR DESCRIPTION HERE !
+                                    br
+                                    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#educationModal')
+                                        | Edit Education
+                   
 // Contact Section
 #contact.text-center
     .container
