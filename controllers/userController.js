@@ -11,7 +11,7 @@ const User = mongoose.model("User");
 const authCheck = (req, res, next) => {
     if(!req.user){
         // if user not logged in
-        res.redirect('/profile');
+        res.redirect('/');
     } else {
         next();
     }
