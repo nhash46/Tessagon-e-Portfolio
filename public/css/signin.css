@@ -118,3 +118,11 @@
 #white-background {
   background-color: white;
 }
+
+#logo {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}

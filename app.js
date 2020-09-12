@@ -62,20 +62,17 @@ app.get('/', (req, res) => {
     res.render("login")
 });
 // GET home page
-app.get('/profile', userController.authCheck, (req, res) => {
-    res.render("index")
-});
 app.get('/signup', (req, res) => {
     res.render("signup")
 });
-app.get('/signup/form', (req, res) => {
+app.get('/signup/form', userController.authCheck, (req, res) => {
     res.render("form")
 });
 
 
 
 // routes
-const userRouter = require("./routes/userRouter.js");
+const userRouter = require("./routes/userRouter");
 
 
 // user routes handled by userRouter

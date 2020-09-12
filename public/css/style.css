@@ -128,11 +128,44 @@
 }
 #Aboutme {
   padding-bottom: 10vh;
+  padding-left: 1.15vw;
 }
-#dates {
+
+#companyName {
+  padding-left: 1.15vw;
+}
+
+#roleName {
+  padding-left: 1.15vw;
+}
+
+#degree {
+  padding-left: 1.15vw;
+}
+
+#universityName {
+  padding-left: 1.15vw;
+}
+.dates {
   padding: 0.5vh;
   padding: 0.5vw;
+}
+#endDate{
+  margin-left: 0.5vw;
+}
+#startDate{
+  margin-left: 0.5vw;
 }
 #EndDate{
   margin-left: 0.5vw;
 }
+#StartDate{
+  margin-left: 0.5vw;
+}
+#uniEndDate{
+  margin-left: 0.5vw;
+}
+#uniStartDate{
+  margin-left: 0.5vw;
+}
+
