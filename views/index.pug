@@ -74,8 +74,11 @@ header#header
                     li
                         a.page-scroll(href='#contact') Contact
                     li
-                        // if user change this to edit.. 
-                        a.page-scroll(href='/') Login
+                        if user
+                            a.page-scroll(href='/user/logout') Logout
+                        
+                        else
+                            a.page-scroll(href='/user/login') Login
                 
                     
 // About Section
@@ -231,8 +234,7 @@ header#header
                                     p
                                         | INSERT YOUR DESCRIPTION HERE !
                                     br
-                                    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#experienceModal')
-                                        | Edit Experience
+
 // Education section                   
 #education.text-center
     .container
@@ -264,8 +266,7 @@ header#header
                                     p
                                         | INSERT YOUR DESCRIPTION HERE !
                                     br
-                                    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#educationModal')
-                                        | Edit Education
+
 // Contact Section
 #contact.text-center
     .container
