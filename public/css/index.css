@@ -777,5 +777,8 @@ header .intro-text {
 	padding-bottom: 25vh;
 	padding-left: 1.15vw;
 }
+.dateSize {
+	font-size: 13px;
+}
 
 

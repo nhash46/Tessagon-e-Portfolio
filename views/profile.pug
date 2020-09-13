@@ -233,12 +233,12 @@ header#header
                         li
                             .timeline-image
                                 h4
-                                    span #{(c.experienceStartDate)}
+                                    span.dateSize #{moment(c.experienceStartDate).format('LL')}
                                     |
                                     br
                                     |                 -
                                     br
-                                    span #{c.experienceEndDate}
+                                    span.dateSize #{moment(c.experienceEndDate).format('LL')}
                             .timeline-panel
                                 .timeline-heading
                                     h4
@@ -266,12 +266,12 @@ header#header
                         li.timeline-inverted
                             .timeline-image
                                 h4
-                                    span #{(c.educationStartDate)}
+                                    span.dateSize #{moment(c.educationStartDate).format('LL')}
                                     |
                                     br
                                     |                 -
                                     br
-                                    span #{c.educationEndDate}
+                                    span.dateSize #{moment(c.educationEndDate).format('LL')}
                             .timeline-panel
                                 .timeline-heading
                                     h4

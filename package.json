@@ -28,6 +28,7 @@
     "express-rate-limit": "^5.1.3",
     "express-session": "^1.17.1",
     "express-validator": "^6.6.1",
+    "moment": "^2.27.0",
     "moments": "0.0.2",
     "mongoose": "^5.10.0",
     "mongoose-findorcreate": "^3.0.0",
