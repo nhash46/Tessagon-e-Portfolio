@@ -40,10 +40,10 @@ userRouter.post("/editHomeInfo", userController.editHomeInfo);
 userRouter.post("/editAboutMe", userController.editAboutMe);
 
 // Edit education
-userRouter.post("/editEducation", educationController.editEducation);
+userRouter.post("/editEducation/:_id", educationController.editEducation);
 
 // Edit experience
-userRouter.post("/editExperience", experienceController.editExperience);
+userRouter.post("/editExperience/:_id", experienceController.editExperience);
 
 // log in form Home
 userRouter.get("/login", userController.logInPage);
