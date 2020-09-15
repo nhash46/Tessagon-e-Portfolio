@@ -248,8 +248,36 @@ header#header
                                     p
                                         | INSERT YOUR DESCRIPTION HERE !
                                     br
-                                    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#experienceModal')
+                                    a.btn.btn-primary(type='button' data-toggle='modal' data-target='#experienceModal')
                                         | Edit Experience
+                        
+                        #experienceModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='experienceModalLabel' aria-hidden='true')
+                                form(method='POST' action='/user/editExperience/'+ c._id)
+                                    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+                                        .modal-content
+                                            .modal-header
+                                                h5#experienceModalLabel.modal-title Edit Bio
+                                                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                                                    span(aria-hidden='true') &times;
+                                            .modal-body
+                                                input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' value = c.company)
+                                                label(for='companyName') Company
+                                                br
+                                                input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' value = c.role)
+                                                label(for='roleName') Role Title
+                                                br
+                                                label(for='startDate') Start date: NEED TO FIX
+                                                br
+                                                input#startDate(name= "experienceStartDate" type='month' required='isRequired' value = c.experienceStartDate) 
+                                                br
+                                                label(for='endDate') End date: NEED TO FIX
+                                                br
+                                                input#endDate(name= "experienceEndDate" type='month' required='isRequired' value = c.experienceEndDate)
+
+                                            .modal-footer
+                                                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                                                button.btn.btn-secondary.edit-experience(type='submit' experience-id=c._id) Save changes
+
 // Education section                   
 #education.text-center
     .container
@@ -282,7 +310,34 @@ header#header
                                     br
                                     button.btn.btn-primary(type='button' data-toggle='modal' data-target='#educationModal')
                                         | Edit Education
-                   
+
+                        #educationModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='educationModalLabel' aria-hidden='true')
+                            form(method='POST' action='/user/editEducation/' + c._id)
+                                .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+                                    .modal-content
+                                        .modal-header
+                                            h5#educationModalLabel.modal-title Edit Bio
+                                            button.close(type='button' data-dismiss='modal' aria-label='Close')
+                                                span(aria-hidden='true') &times;
+                                        .modal-body
+                                            input#universityName.form-control(name= "university" type='text' placeholder='companyName' autofocus='' required='isRequired' value = c.university)
+                                            label(for='universityName') University
+                                            br
+                                            input#degree.form-control(name= "degree" type='text' placeholder='roleName' autofocus='' required='isRequired' value = c.degree)
+                                            label(for='degree') Degree
+                                            br
+                                            br
+                                            label(for='uniStartDate') Start date:
+                                            input#uniStartDate(name= "educationStartDate" type='month' required='isRequired' value = c.educationStartDate)
+                                            br
+                                            br
+                                            label(for='uniEndDate') Start date:
+                                            input#uniStartDate(name= "educationEndDate" type='month' required='isRequired' value = c.educationEndDate)
+                                        .modal-footer
+                                            button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                                            button.btn.btn-secondary.edit-education(type='submit') Save changes
+
+                        
 // Contact Section
 #contact.text-center
     .container
@@ -373,59 +428,6 @@ script(type='text/javascript' src='/js/typewriter.js')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save changes            
-
-#experienceModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='experienceModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editExperience')
-        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-            .modal-content
-                .modal-header
-                    h5#experienceModalLabel.modal-title Edit Bio
-                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                        span(aria-hidden='true') &times;
-                .modal-body
-                    input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.experience[0].company)
-                    label(for='companyName') Company
-                    br
-                    input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.experience[0].role)
-                    label(for='roleName') Role Title
-                    br
-                    label(for='startDate') Start date: NEED TO FIX
-                    br
-                    input#startDate(name= "experienceStartDate" type='month' required='isRequired' value = user1.experience[0].experienceStartDate) 
-                    br
-                    label(for='endDate') End date: NEED TO FIX
-                    br
-                    input#endDate(name= "experienceEndDate" type='month' required='isRequired' value = user1.experience[0].experienceEndDate)
-
-                .modal-footer
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                    button.btn.btn-secondary(type='submit') Save changes
-
-#educationModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='educationModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editEducation')
-        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-            .modal-content
-                .modal-header
-                    h5#educationModalLabel.modal-title Edit Bio
-                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                        span(aria-hidden='true') &times;
-                .modal-body
-                    input#universityName.form-control(name= "university" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.education[0].university)
-                    label(for='universityName') University
-                    br
-                    input#degree.form-control(name= "degree" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.education[0].degree)
-                    label(for='degree') Degree
-                    br
-                    br
-                    label(for='uniStartDate') Start date:
-                    input#uniStartDate(name= "educationStartDate" type='month' required='isRequired' value = user1.education[0].educationStartDate)
-                    br
-                    br
-                    label(for='uniEndDate') Start date:
-                    input#uniStartDate(name= "educationEndDate" type='month' required='isRequired' value = user1.education[0].educationEndDate)
-                .modal-footer
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                    button.btn.btn-secondary(type='submit') Save changes
 
 #contactModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='contactModalLabel' aria-hidden='true')
     form(method='POST' action='/user/editNavInfo')

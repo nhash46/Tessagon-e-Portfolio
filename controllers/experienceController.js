@@ -45,7 +45,7 @@ const editExperience = (req,res) => {
     experience.experienceStartDate = req.body.experienceStartDate;
     experience.experienceEndDate = req.body.experienceEndDate;
     
-    let query = {_id:req.user._id}
+    let query = {_id:req.params._id}
   
     // add post into db
     Experience.updateOne(query, experience, function (err) {

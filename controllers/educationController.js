@@ -45,7 +45,7 @@ const editEducation = (req,res) => {
     education.educationStartDate = req.body.educationStartDate;
     education.educationEndDate = req.body.educationEndDate;
     
-    let query = {_id:req.user._id}
+    let query = {_id:req.params._id}
   
     // add post into db
     Education.updateOne(query, education, function (err) {
