@@ -256,23 +256,23 @@ header#header
                                     .modal-dialog.modal-dialog-centered.modal-lg(role='document')
                                         .modal-content
                                             .modal-header
-                                                h5#experienceModalLabel.modal-title Edit Bio
+                                                h5#experienceModalLabel.modal-title Edit Experience
                                                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                                                     span(aria-hidden='true') &times;
                                             .modal-body
-                                                input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' value = c.company)
+                                                input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' value=c.company)
                                                 label(for='companyName') Company
                                                 br
-                                                input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' value = c.role)
+                                                input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' value=c.role)
                                                 label(for='roleName') Role Title
                                                 br
                                                 label(for='startDate') Start date: NEED TO FIX
                                                 br
-                                                input#startDate(name= "experienceStartDate" type='month' required='isRequired' value = c.experienceStartDate) 
+                                                input#startDate(name= "experienceStartDate" type='month' required='isRequired' value=c.experienceStartDate) 
                                                 br
                                                 label(for='endDate') End date: NEED TO FIX
                                                 br
-                                                input#endDate(name= "experienceEndDate" type='month' required='isRequired' value = c.experienceEndDate)
+                                                input#endDate(name= "experienceEndDate" type='month' required='isRequired' value=c.experienceEndDate)
 
                                             .modal-footer
                                                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
@@ -316,7 +316,7 @@ header#header
                                 .modal-dialog.modal-dialog-centered.modal-lg(role='document')
                                     .modal-content
                                         .modal-header
-                                            h5#educationModalLabel.modal-title Edit Bio
+                                            h5#educationModalLabel.modal-title Edit Education
                                             button.close(type='button' data-dismiss='modal' aria-label='Close')
                                                 span(aria-hidden='true') &times;
                                         .modal-body
