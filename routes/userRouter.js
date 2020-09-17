@@ -24,8 +24,10 @@ const db = require("../models");
 let gfs;
 mongoose.connection.once("open", async () => {
     // Init stream
-    gfs = Grid(mongoose.connection.db, mongoose.mongo);
-    gfs.collection('uploads');
+    gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
+        bucketName: 'uploads'
+    });
+    //gfs.collection('uploads');
     console.log("The gfs object" + gfs);
 });
 
@@ -94,7 +96,7 @@ userRouter.post("/upload", upload.single('file'), async (req, res) => {
 
 // GET files by userID
 userRouter.get("/files", (req,res) => {
-    gfs.files.find({user: req.user._id}).toArray((err, files) => {
+    gfs.find({user: req.user._id}).toArray((err, files) => {
         if (!files || files.length === 0){
             return res.status(404).json({
                 err: 'No files belong to that user'
@@ -113,22 +115,37 @@ userRouter.get("/files", (req,res) => {
 userRouter.get("/images/:id", (req,res) => {
 
     const fileId = new mongoose.mongo.ObjectId(req.params.id);
-    gfs.files.findOne({_id: fileId},(err, file) => {
-        if (!file || file.length === 0){
-            return res.status(404).json({
-                err: 'No files belong to that user'
-            });
-        }
+    // console.log('id', req.params.id)
+    const file = gfs
+        .find({
+            _id: fileId
+        })
+        .toArray((err, files) => {
+            if (!files || files.length === 0) {
+                console.log('no files exist');
+                return res.status(404).json({
+                    err: "no files exist"
+                });
+            }
+            gfs.openDownloadStream(fileId).pipe(res);
+        });
+});
 
-        // if file is renderable display
-        if(file.contentType === 'image/png' || file.contentType === 'image/jpg') {
-            const readStream = gfs.createReadStream(file.filename)
-            readStream.pipe(res);
-        }
-        else{
-            console.log("not an image");
-        }
-    });
+userRouter.get("/image/:filename", (req, res) => {
+    // console.log('id', req.params.id)
+    gfs
+        .find({
+            filename: req.params.filename
+        })
+        .toArray((err, files) => {
+            if (!files || files.length === 0) {
+                console.log('no files exist');
+                return res.status(404).json({
+                    err: "no files exist"
+                });
+            }
+            gfs.openDownloadStreamByName(req.params.filename).pipe(res);
+        });
 });
 
 // Sign Up form
