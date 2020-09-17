@@ -38,7 +38,7 @@ userRouter.post("/editNavInfo", userController.editNavInfo);
 userRouter.post("/editHomeInfo", userController.editHomeInfo);
 
 // Edit about me
-userRouter.post("/editAboutMe", userController.editAboutMe, uploadController.uploadProfilePic);
+userRouter.post("/editAboutMe", userController.editAboutMe);
 
 // Edit education
 userRouter.post("/editEducation/:_id", educationController.editEducation);
@@ -52,7 +52,7 @@ userRouter.get("/login", userController.logInPage);
 // logging in - auth done in route to prevent state loss
 userRouter.post("/login", passport.authenticate('local', { failureRedirect: '/' }),
     function(req, res) {
-        if(!req.user.bio){
+        if(!req.user.state){
             res.redirect('/signup/form/');
         } else {
             res.redirect('/user/profile');
@@ -68,7 +68,7 @@ userRouter.get("/auth/google", userController.logInGoogle)
 // google auth callback -lose state if we go via userController
 userRouter.get("/auth/google/callback",
     passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
-        if(!req.user.bio){
+        if(!req.user.state){
             res.redirect('/signup/form/');
         } else {
             res.redirect('/user/profile');

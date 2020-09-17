@@ -139,8 +139,8 @@ const editAboutMe = (req,res,next) => {
         }
         else {
             console.log("edited about me");
-            //res.redirect('/user/profile#about');
-            next();
+            res.redirect('/user/profile#about');
+            //next();
         }
     });
 

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const crypto = require('crypto');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
+const path = require('path');
 
 const db = require("../models");
 
@@ -50,5 +51,6 @@ const uploadProfilePic = async (req,res,next) => {
     }
 }
 module.exports = {
-    uploadProfilePic
+    uploadProfilePic,
+    upload
 }
