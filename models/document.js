@@ -8,6 +8,6 @@ const documentSchema = new Schema({
     }
 }, { strict: false });
 
-const Document = mongoose.model('Document', documentSchema, 'fs.files');
+const Document = mongoose.model('Document', documentSchema, 'uploads.files');
 
 module.exports = Document;
