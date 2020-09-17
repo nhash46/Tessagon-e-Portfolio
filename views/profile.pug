@@ -410,7 +410,7 @@ script(type='text/javascript' src='/js/typewriter.js')
                 button.btn.btn-secondary(type='button') Save change
 
 #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editAboutMe')
+    form(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
@@ -424,7 +424,7 @@ script(type='text/javascript' src='/js/typewriter.js')
                     label(for='editResume') Edit your resume!
                     input#editResume.form-control-file(type='file')
                     label(for='editProfilePic') Edit your profile picture!
-                    input#editProfilePic.form-control-file(type='file')
+                    input#editProfilePic.form-control-file(name='file' type='file')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save changes            

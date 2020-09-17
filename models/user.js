@@ -25,7 +25,7 @@ const userSchema = new Schema({
         },
     education: [{type: Schema.Types.ObjectId, ref: "Education"}],
     experience: [{type: Schema.Types.ObjectId, ref: "Experience"}],
-    documents: [ {type: Schema.Types.Mixed} ],
+    document: [ {type: Schema.Types.ObjectId, ref: "Document"}],
 });
 
 userSchema.plugin(findOrCreate);

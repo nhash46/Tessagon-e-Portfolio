@@ -7,6 +7,10 @@ const bcrypt = require('bcryptjs');
 const bodyParser = require("body-parser");
 moment = require('moment');
 const cors = require('cors');
+const crypto = require('crypto');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
 const app = express();
 
 // load view engine
@@ -55,6 +59,13 @@ app.get('*', function(req, res, next){
     next();
 });
 
+
+
+// file is name of field in form
+/*app.post('/upload', upload.single('file'), (req, res) =>{
+    res.json({file: req.file});
+});*/
+
 // import userController so can authCheck routes
 const userController = require("./controllers/userController");
 
@@ -70,11 +81,8 @@ app.get('/signup/form', userController.authCheck, (req, res) => {
     res.render("form")
 });
 
-
-
 // routes
 const userRouter = require("./routes/userRouter");
-
 
 // user routes handled by userRouter
 app.use('/user', userRouter);

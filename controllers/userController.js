@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const flash = require('connect-flash');
 const {validationResult} = require('express-validator');
-const Education = require("../models/education");
 
 // import user model
 const User = mongoose.model("User");
@@ -126,7 +125,7 @@ const editNavInfo = (req,res) => {
     });
 };
 
-const editAboutMe = (req,res) => {
+const editAboutMe = (req,res,next) => {
 
     let user = {};
 
@@ -140,7 +139,8 @@ const editAboutMe = (req,res) => {
         }
         else {
             console.log("edited about me");
-            res.redirect('/user/profile#about');
+            //res.redirect('/user/profile#about');
+            next();
         }
     });
 
@@ -184,7 +184,7 @@ const logInGoogle = (req, res, next) => {
 const logInGoogleCallback = (req, res, next) => {
     passport.authenticate('google', { failureRedirect: '/' }),
         function(req, res) {
-            if(!req.user.bio){
+            if(!req.user.state){
                 res.redirect('/signup/form/');
             } else {
                 res.redirect('/user/profile');

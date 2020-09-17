@@ -9,6 +9,7 @@ const userRouter = express.Router();
 const userController = require("../controllers/userController");
 const educationController = require("../controllers/educationController.js");
 const experienceController = require("../controllers/experienceController.js");
+const uploadController = require("../controllers/uploadController");
 
 // Signing up - authenticate newUser, then direct to info form
 userRouter.post("/signup", userValidator.addUser, userController.addUser,
@@ -37,7 +38,7 @@ userRouter.post("/editNavInfo", userController.editNavInfo);
 userRouter.post("/editHomeInfo", userController.editHomeInfo);
 
 // Edit about me
-userRouter.post("/editAboutMe", userController.editAboutMe);
+userRouter.post("/editAboutMe", userController.editAboutMe, uploadController.uploadProfilePic);
 
 // Edit education
 userRouter.post("/editEducation/:_id", educationController.editEducation);

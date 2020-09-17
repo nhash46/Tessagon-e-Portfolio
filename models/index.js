@@ -1,6 +1,7 @@
 require('dotenv').config()
 const mongoose = require("mongoose");
-const config = require("../config/database")
+const config = require("../config/database");
+const Grid = require('gridfs-stream');
 
 // Connect to MongoDB
 CONNECTION_STRING = "mongodb+srv://nhash:<password>@mylibraryapp-n8rlv.mongodb.net/test?retryWrites=true&w=majority";
@@ -31,15 +32,25 @@ db.on("error", err => {
   console.error(err);
   process.exit(1);
 });
+
+let gfs;
+
 db.once("open", async () => {
   console.log("Mongo connection started on " + db.host + ":" + db.port);
+  // Init stream
+  gfs = Grid(db.db, mongoose.mongo);
+  gfs.collection('fs.files');
+  console.log("The gfs object" + gfs);
 });
 
 require("./user");
 require("./education");
 require("./experience");
+require("./document");
 
 module.exports = {
   connect,
-  close
+  close,
+  gfs,
+  MONGO_URL
 };
