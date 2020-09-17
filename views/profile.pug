@@ -74,7 +74,7 @@ header#header.d-flex.flex-column.justify-content-center
                 a.button.btn(type='button' data-toggle='modal' data-target='#contactModal')
                     i.fa.fa-wrench.navbar-icons 
                         span Edit Account Details
-    
+
 
 #hero.d-flex.flex-column.justify-content-center
     .intro
@@ -93,6 +93,22 @@ header#header.d-flex.flex-column.justify-content-center
                     br
                     a.btn.btn-default.btn-lg.page-scroll(type='button' data-toggle='modal' data-target='#homeModal')
                         |Edit Home Page
+
+#nav
+    nav.navbar.navbar-custom
+        .container
+            .navbar-header
+                button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-main-collapse')
+                    i.fa.fa-bars
+                a.navbar-brand.page-scroll(href='#page-top') #{user1.first_name} #{user1.last_name}
+            // Collect the nav links, forms, and other content for toggling
+            .collapse.navbar-collapse.navbar-right.navbar-main-collapse
+                ul.nav.navbar-nav
+                    li.topnavbar
+                        // if user change this to edit..
+                        a.btn(href='/user/logout') Logout
+                    li.topnavbar
+                        a.button.btn(type='button' data-toggle='modal' data-target='#contactModal') Edit Account Details
 
 
 
