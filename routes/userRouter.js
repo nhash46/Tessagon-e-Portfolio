@@ -1,6 +1,9 @@
 const express = require("express");
 const userValidator = require("../validators/userValidator.js");
-
+const crypto = require('crypto');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const path = require('path');
 const passport = require('passport');
 
 // create router
@@ -10,6 +13,30 @@ const userController = require("../controllers/userController");
 const educationController = require("../controllers/educationController.js");
 const experienceController = require("../controllers/experienceController.js");
 const uploadController = require("../controllers/uploadController");
+
+const db = require("../models")
+const storage = new GridFsStorage({
+    url: db.MONGO_URL,
+    file: (req, file) => {
+        return new Promise((resolve, reject) => {
+            crypto.randomBytes(16, (err, buf) => {
+                if (err) {
+                    return reject(err);
+                }
+                const filename = buf.toString('hex') + path.extname(file.originalname);
+                const fileInfo = {
+                    // ref to parent user
+                    user: req.user._id,
+                    filename: filename,
+                    // the name of the document collection
+                    bucketName: 'eportfolio'
+                };
+                resolve(fileInfo);
+            });
+        });
+    }
+});
+const upload = multer({ storage });
 
 // Signing up - authenticate newUser, then direct to info form
 userRouter.post("/signup", userValidator.addUser, userController.addUser,
@@ -22,6 +49,15 @@ userRouter.post("/signup", userValidator.addUser, userController.addUser,
         }
     });
 
+// Lod Upload form
+userRouter.get("/upload", (req, res) => {
+    res.render('upload');
+});
+
+// Upload form
+userRouter.post("/upload", upload.single('file'), (req, res) => {
+    res.json({file: req.file});
+});
 // Sign Up form
 userRouter.get("/signup", userController.newUserForm);
 

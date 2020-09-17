@@ -10,7 +10,7 @@ const User = mongoose.model("User");
 const Document = mongoose.model("Document");
 
 // Upload file storage
-const storage = new GridFsStorage({
+/*const storage = new GridFsStorage({
     url: db.MONGO_URL,
     file: (req, file) => {
         return new Promise((resolve, reject) => {
@@ -31,7 +31,7 @@ const storage = new GridFsStorage({
         });
     }
 });
-const upload = multer({ storage });
+const upload = multer({ storage });*/
 
 const uploadProfilePic = async (req,res,next) => {
 
@@ -52,5 +52,4 @@ const uploadProfilePic = async (req,res,next) => {
 }
 module.exports = {
     uploadProfilePic,
-    upload
 }
