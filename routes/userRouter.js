@@ -4,6 +4,7 @@ const userValidator = require("../validators/userValidator.js");
 const crypto = require('crypto');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
 const path = require('path');
 const passport = require('passport');
 
@@ -18,7 +19,16 @@ const educationController = require("../controllers/educationController.js");
 const experienceController = require("../controllers/experienceController.js");
 const uploadController = require("../controllers/uploadController");
 
-const db = require("../models")
+const db = require("../models");
+
+let gfs;
+mongoose.connection.once("open", async () => {
+    // Init stream
+    gfs = Grid(mongoose.connection.db, mongoose.mongo);
+    gfs.collection('uploads');
+    console.log("The gfs object" + gfs);
+});
+
 const storage = new GridFsStorage({
     url: db.MONGO_URL,
     file: (req, file) => {
@@ -61,17 +71,14 @@ userRouter.get("/upload", (req, res) => {
 // Upload form
 userRouter.post("/upload", upload.single('file'), async (req, res) => {
 
-    // req.file to access the file
-    //console.log(req.file);
-    //res.json({file: req.file});
     console.log(req.file);
     try {
         // add the user id reference
         let doc = await Document.findById({_id: req.file.id})
         doc.user = req.user._id;
         console.log(doc);
-        doc.save();
-        console.log('saved, now referecne');
+        await doc.save();
+
         // add the file id reference to the user
         const filter = { _id: req.user._id};
         const update = { "$push" : {"document" : req.file.id}};
@@ -84,6 +91,53 @@ userRouter.post("/upload", upload.single('file'), async (req, res) => {
         return res.send("Didn't work dumbass");
     }
 });
+
+// GET files by userID
+userRouter.get("/files", (req,res) => {
+    gfs.files.find({user: req.user._id}).toArray((err, files) => {
+        if (!files || files.length === 0){
+            return res.status(404).json({
+                err: 'No files belong to that user'
+            });
+        }
+
+        files.forEach((element) => {
+            console.log(element);
+        })
+
+        return res.json(files);
+    });
+});
+
+// GET file by userID and filename
+userRouter.get("/images/:filename", (req,res) => {
+    gfs.files.findOne({user: req.user._id, filename: req.params.filename},(err, file) => {
+        if (!file || file.length === 0){
+            return res.status(404).json({
+                err: 'No files belong to that user'
+            });
+        }
+        // if want to apply to each element in toArray()
+        /*files.forEach((element) => {
+            if(element.contentType === 'image/png' || element.contentType === 'image/jpg'){
+                const readStream = gfs.createReadStream(element.filename)
+                readStream.pipe(res);
+            }
+            else {
+                console.log("not an image");
+            }
+        })*/
+
+        if(file.contentType === 'image/png' || file.contentType === 'image/jpg') {
+            const readStream = gfs.createReadStream(file.filename)
+            readStream.pipe(res);
+        }
+        else{
+            console.log("not an image");
+        }
+    });
+});
+
 // Sign Up form
 userRouter.get("/signup", userController.newUserForm);
 

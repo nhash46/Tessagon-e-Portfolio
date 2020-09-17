@@ -33,14 +33,8 @@ db.on("error", err => {
   process.exit(1);
 });
 
-let gfs;
-
 db.once("open", async () => {
   console.log("Mongo connection started on " + db.host + ":" + db.port);
-  // Init stream
-  gfs = Grid(db.db, mongoose.mongo);
-  gfs.collection('uploads');
-  console.log("The gfs object" + gfs);
 });
 
 require("./user");
@@ -51,6 +45,5 @@ require("./document");
 module.exports = {
   connect,
   close,
-  gfs,
-  MONGO_URL
+  MONGO_URL,
 };
