@@ -4,7 +4,7 @@ const config = require("../config/database");
 const Grid = require('gridfs-stream');
 
 // Connect to MongoDB
-CONNECTION_STRING = "mongodb+srv://nhash:<password>@mylibraryapp-n8rlv.mongodb.net/test?retryWrites=true&w=majority";
+CONNECTION_STRING = "mongodb+srv://nhash:<password>@mylibraryapp-n8rlv.mongodb.net/eportfolio?retryWrites=true&w=majority";
 MONGO_URL = CONNECTION_STRING.replace("<password>", process.env.MONGO_PASSWORD);
 
 console.log(MONGO_URL);
@@ -39,7 +39,7 @@ db.once("open", async () => {
   console.log("Mongo connection started on " + db.host + ":" + db.port);
   // Init stream
   gfs = Grid(db.db, mongoose.mongo);
-  gfs.collection('fs.files');
+  gfs.collection('uploads');
   console.log("The gfs object" + gfs);
 });
 

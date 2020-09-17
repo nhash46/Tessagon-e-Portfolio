@@ -29,7 +29,7 @@ const storage = new GridFsStorage({
                     user: req.user._id,
                     filename: filename,
                     // the name of the document collection
-                    bucketName: 'eportfolio'
+                    bucketName: 'uploads'
                 };
                 resolve(fileInfo);
             });
