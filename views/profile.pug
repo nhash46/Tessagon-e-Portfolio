@@ -41,6 +41,7 @@ header#header
                     h1
                         | Hello, I&apos;m
                         span.name  #{user1.first_name}
+
                     p
                         |I'm a
                         span.txt-rotate(data-period='1000' data-rotate='[ " Designer.", " Developer.", " Typewriter!" ]')
@@ -94,7 +95,7 @@ header#header
             hr
         .row
             .col-md-12.text-center
-                img.img-responsive(src='img/about.jpg')
+                img.img-responsive(src='http://localhost:3000/user/images/'+user1.document[0]._id)
             .col-md-8.col-md-offset-2
                 .about-text
                     p
@@ -153,70 +154,16 @@ header#header
             .clearfix
         .row
             .portfolio-items
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/01-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/01-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/02-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development
-                                img.img-responsive(src='img/portfolio/02-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/03-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/03-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/04-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/04-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/05-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development
-                                img.img-responsive(src='img/portfolio/05-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.branding
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/06-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Branding
-                                img.img-responsive(src='img/portfolio/06-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.branding.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/07-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development, Branding
-                                img.img-responsive(src='img/portfolio/07-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/08-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/08-small.jpg' alt='Project Title')
+                for doc in user1.document
+                    .col-sm-6.col-md-3.col-lg-3.web
+                        .portfolio-item
+                            .hover-bg
+                                a(href='preview/route' title=doc.filename rel='prettyPhoto')
+                                    .hover-text
+                                        h4 Project Title
+                                        small Web Design
+                                    img.img-responsive(src='http://localhost:3000/user/images/'+doc._id)
+
 // Resume Section
 #experience.text-center
     .container

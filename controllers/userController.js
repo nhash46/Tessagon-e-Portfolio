@@ -249,7 +249,6 @@ const userID = async (req,res) => {
 // function that renders the user profile
 const getUserProfile = async (req, res) => {
     User.findById(req.user._id).populate('education').populate('experience').populate('document').exec((err,user1) => {
-        console.log(user1);
         res.render('profile', {
             user1: user1
         });

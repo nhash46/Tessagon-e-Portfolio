@@ -110,24 +110,17 @@ userRouter.get("/files", (req,res) => {
 });
 
 // GET file by userID and filename
-userRouter.get("/images/:filename", (req,res) => {
-    gfs.files.findOne({user: req.user._id, filename: req.params.filename},(err, file) => {
+userRouter.get("/images/:id", (req,res) => {
+
+    const fileId = new mongoose.mongo.ObjectId(req.params.id);
+    gfs.files.findOne({_id: fileId},(err, file) => {
         if (!file || file.length === 0){
             return res.status(404).json({
                 err: 'No files belong to that user'
             });
         }
-        // if want to apply to each element in toArray()
-        /*files.forEach((element) => {
-            if(element.contentType === 'image/png' || element.contentType === 'image/jpg'){
-                const readStream = gfs.createReadStream(element.filename)
-                readStream.pipe(res);
-            }
-            else {
-                console.log("not an image");
-            }
-        })*/
 
+        // if file is renderable display
         if(file.contentType === 'image/png' || file.contentType === 'image/jpg') {
             const readStream = gfs.createReadStream(file.filename)
             readStream.pipe(res);

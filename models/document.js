@@ -5,7 +5,10 @@ const documentSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    filename: String,
+    contentType: String
+
 }, { strict: false });
 
 const Document = mongoose.model('Document', documentSchema, 'uploads.files');
