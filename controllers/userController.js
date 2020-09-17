@@ -6,6 +6,7 @@ const {validationResult} = require('express-validator');
 
 // import user model
 const User = mongoose.model("User");
+const Document = mongoose.model("Document");
 
 const authCheck = (req, res, next) => {
     if(!req.user){
@@ -247,8 +248,8 @@ const userID = async (req,res) => {
 
 // function that renders the user profile
 const getUserProfile = async (req, res) => {
-    User.findById(req.user._id).populate('education').populate('experience').exec((err,user1) => { 
-        //console.log(user1);
+    User.findById(req.user._id).populate('education').populate('experience').populate('document').exec((err,user1) => {
+        console.log(user1);
         res.render('profile', {
             user1: user1
         });
