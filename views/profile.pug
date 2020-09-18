@@ -79,9 +79,9 @@ header#header.d-flex.flex-column.justify-content-center
 #hero.d-flex.flex-column.justify-content-center
     .intro
         .container
-            .row
+            .row#homescreen
                 .intro-text
-                    h1
+                    h1.title
                         | Hello, I&apos;m
                         span.name  #{user1.first_name}
                     p
@@ -100,6 +100,7 @@ header#header.d-flex.flex-column.justify-content-center
             .navbar-header
                 button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-main-collapse')
                     i.fa.fa-bars
+                img(src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png", alt="", width = "50vh")
                 a.navbar-brand.page-scroll(href='#page-top') #{user1.first_name} #{user1.last_name}
             // Collect the nav links, forms, and other content for toggling
             .collapse.navbar-collapse.navbar-right.navbar-main-collapse
