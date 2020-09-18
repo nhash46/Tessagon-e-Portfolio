@@ -41,12 +41,10 @@ block content
                                     h5.card-title.text-center Experience
                                 div(data-role='dynamic-fields')
                                     .form-inline
-                                        .form-label-group.col-md-6
-                                            input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' style='width:24vw')
-                                            label(for='companyName') Company
-                                        .form-label-group.col-md-6
-                                            input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' style='width:24vw')
-                                            label(for='roleName') Role Title
+                                        .form-group.col-md-6
+                                            input.round.form-control(name= "company" type='text' placeholder='Company' autofocus='' required='isRequired' style='width:24vw')
+                                        .form-group.col-md-6
+                                            input.round.form-control(name= "role" type='text' placeholder='Role Name' autofocus='' required='isRequired' style='width:24vw')
                                         .dates
                                         label(for='startDate') Start date:
                                         input#startDate(name= "experienceStartDate" type='month' required='isRequired')
@@ -61,12 +59,10 @@ block content
                                     h5.card-title.text-center Education
                                 div(data-role='dynamic-fields')
                                     .form-inline
-                                        .form-label-group.col-md-6
-                                            input#universityName.form-control(name= "university" type='text' placeholder='companyName' autofocus='' required='isRequired' style='width:24vw')
-                                            label(for='universityName') University
-                                        .form-label-group.col-md-6
-                                            input#degree.form-control(name= "degree" type='text' placeholder='roleName' autofocus='' required='isRequired' style='width:24vw')
-                                            label(for='degree') Degree
+                                        .form-group.col-md-6
+                                            input.round.form-control(name= "university" type='text' placeholder='University' autofocus='' required='isRequired' style='width:24vw')
+                                        .form-group.col-md-6
+                                            input.round.form-control(name= "degree" type='text' placeholder='Degree' autofocus='' required='isRequired' style='width:24vw')
                                         .dates
                                         label(for='uniStartDate') Start date:
                                         input#uniStartDate(name= "educationStartDate" type='month' required='isRequired')
