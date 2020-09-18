@@ -50,7 +50,7 @@ block content
                                         .dates
                                         label(for='startDate') Start date:
                                         input#startDate(name= "experienceStartDate" type='month' required='isRequired')
-                                        .dates
+                                        .col-md-2.dates
                                         label(for='endDate') End date:
                                         input#endDate(name= "experienceEndDate" type='month' required='isRequired')
                                         button.btn.btn-danger(data-role='remove')
@@ -67,18 +67,16 @@ block content
                                         .form-label-group.col-md-6
                                             input#degree.form-control(name= "degree" type='text' placeholder='roleName' autofocus='' required='isRequired' style='width:24vw')
                                             label(for='degree') Degree
-                                        .col-md-6.dates
-                                            label(for='uniStartDate') Start date:
-                                            input#uniStartDate(name= "educationStartDate" type='month' required='isRequired')
-                                        .col-md-6.dates
-                                            label(for='uniEndDate') End date:
-                                            input#uniEndDate(name= "educationEndDate" type='month' required='isRequired')
+                                        .dates
+                                        label(for='uniStartDate') Start date:
+                                        input#uniStartDate(name= "educationStartDate" type='month' required='isRequired')
+                                        .col-md-2.dates
+                                        label(for='uniEndDate') End date:
+                                        input#uniEndDate(name= "educationEndDate" type='month' required='isRequired')
                                         button.btn.btn-danger(data-role='remove')
                                             span.glyphicon.glyphicon-remove
                                         button.btn.btn-primary(data-role='add')
                                             span.glyphicon.glyphicon-plus
-                                br
-                                br
                                 br
                                 button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Submit
 
