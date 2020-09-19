@@ -691,27 +691,8 @@ header .intro-text {
 
 /**{box-sizing: border-box;}*/
 
-#bioModal {
-	z-index: 9999;
-	margin-top: 15vh;
-}
 
-#portfolioModal {
-	z-index: 9999;
-	margin-top: 15vh;
-}
-
-#experienceModal {
-	z-index: 9999;
-	margin-top: 15vh;
-}
-
-#educationModal {
-	z-index: 9999;
-	margin-top: 15vh;
-}
-
-#contactModal {
+.topModal {
 	z-index: 9999;
 	margin-top: 15vh;
 }
@@ -926,4 +907,8 @@ header .intro-text {
 
 #homescreen {
 	margin-top: 30vh;
+}
+
+.padButton {
+	margin: 0.5vw;
 }
