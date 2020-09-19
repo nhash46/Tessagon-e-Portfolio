@@ -693,6 +693,11 @@ header .intro-text {
 
 
 .topModal {
+	z-index: 9000;
+	margin-top: 15vh;
+}
+
+.ToptopModal {
 	z-index: 9999;
 	margin-top: 15vh;
 }
