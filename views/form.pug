@@ -39,22 +39,23 @@ block content
                                 hr
                                 .col-md-12
                                     h5.card-title.text-center Experience
-                                div(data-role='dynamic-fields')
-                                    .form-inline
-                                        .form-group.col-md-6
-                                            input.round.form-control(name= "company" type='text' placeholder='Company' autofocus='' required='isRequired' style='width:24vw')
-                                        .form-group.col-md-6
-                                            input.round.form-control(name= "role" type='text' placeholder='Role Name' autofocus='' required='isRequired' style='width:24vw')
-                                        .dates
-                                        label(for='startDate') Start date:
-                                        input#startDate(name= "experienceStartDate" type='month' required='isRequired')
-                                        .col-md-2.dates
-                                        label(for='endDate') End date:
-                                        input#endDate(name= "experienceEndDate" type='month' required='isRequired')
-                                        button.btn.btn-danger(data-role='remove')
-                                            span.glyphicon.glyphicon-remove
-                                        button.btn.btn-primary(data-role='add')
-                                            span.glyphicon.glyphicon-plus
+                                each i in [1, 2, 3]
+                                    div(data-role='dynamic-fields')
+                                        .form-inline
+                                            .form-group.col-md-6
+                                                input.round.form-control(name= "company" + i type='text' placeholder='Company' autofocus='' required='isRequired' style='width:24vw')
+                                            .form-group.col-md-6
+                                                input.round.form-control(name= "role" + i type='text' placeholder='Role Name' autofocus='' required='isRequired' style='width:24vw')
+                                            .dates
+                                            label(for='startDate') Start date:
+                                            input#startDate(name= "experienceStartDate" + i type='month' required='isRequired')
+                                            .col-md-2.dates
+                                            label(for='endDate') End date:
+                                            input#endDate(name= "experienceEndDate" + i type='month' required='isRequired')
+                                            button.btn.btn-danger(data-role='remove')
+                                                span.glyphicon.glyphicon-remove
+                                            button.btn.btn-primary(data-role='add')
+                                                span.glyphicon.glyphicon-plus
                                 .col-md-12 
                                     h5.card-title.text-center Education
                                 div(data-role='dynamic-fields')

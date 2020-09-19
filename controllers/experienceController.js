@@ -6,14 +6,41 @@ const User = mongoose.model("User");
 // adds a comment to comment collection
 const addExperience = async (req, res, next) => {
 
-    var newExperience = new Experience({
+    var newExperience1 = new Experience({
         user: req.user._id,  
-        company : req.body.company,
-        role : req.body.role,
-        experienceStartDate : req.body.experienceStartDate,
-        experienceEndDate : req.body.experienceEndDate
+        company : req.body.company1,
+        role : req.body.role1,
+        experienceStartDate : req.body.experienceStartDate1,
+        experienceEndDate : req.body.experienceEndDate1
     })
 
+    var newExperience2 = new Experience({
+      user: req.user._id,  
+      company : req.body.company2,
+      role : req.body.role2,
+      experienceStartDate : req.body.experienceStartDate2,
+      experienceEndDate : req.body.experienceEndDate2
+    })
+
+    var newExperience3 = new Experience({
+    user: req.user._id,  
+    company : req.body.company3,
+    role : req.body.role3,
+    experienceStartDate : req.body.experienceStartDate3,
+    experienceEndDate : req.body.experienceEndDate3
+    })
+
+    experiences = [newExperience1, newExperience2, newExperience3]; 
+
+    Experience.collection.insertMany(experiences, function (err, docs) {
+      if (err){ 
+          return console.error(err);
+      } else {
+        console.log("Multiple documents inserted to Collection");
+      }
+    });
+
+    /**
     // need to add this Id to Parent document 'comment' field 
     try{
         const filter = { _id: req.user._id};
@@ -34,6 +61,7 @@ const addExperience = async (req, res, next) => {
           next();
       }
     });
+     */
   };
 
 const editExperience = (req,res) => {
