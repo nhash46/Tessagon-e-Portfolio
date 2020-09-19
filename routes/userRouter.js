@@ -28,13 +28,13 @@ userRouter.get("/signup", userController.newUserForm);
 userRouter.get("/signup/form", userController.authCheck, userController.infoPage);
 
 // Populate info using info form details
-userRouter.post("/populateInfo", userController.populateInfo, experienceController.addExperience, educationController.addEducation)
+userRouter.post("/populateInfo", userController.populateInfo, experienceController.addExperience, educationController.addEducation, userController.redirectProfile)
 
 // Adds new experience object to user
-userRouter.post("/addExperience", experienceController.addExperience);
+userRouter.post("/addExperience", experienceController.addExperience, userController.redirectExperience);
 
 // Adds new experience object to user
-userRouter.post("/addEducation", educationController.addEducation);
+userRouter.post("/addEducation", educationController.addEducation, userController.redirectEducation);
 
 // Edit info nav bar
 userRouter.post("/editNavInfo", userController.editNavInfo);

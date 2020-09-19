@@ -4,7 +4,7 @@ const Education = mongoose.model("Education");
 const User = mongoose.model("User");
 
 // adds a comment to comment collection
-const addEducation = async (req, res) => {
+const addEducation = async (req, res, next) => {
 
     var newEducation = new Education({
         user: req.user._id,  
@@ -31,7 +31,7 @@ const addEducation = async (req, res) => {
           return console.error(err);
       } else {
         res.status(302);
-        res.redirect('/user/profile');
+          next();
       }
     });
   };
