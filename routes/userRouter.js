@@ -38,7 +38,7 @@ userRouter.get("/upload", (req, res) => {
 });
 
 // Upload form
-userRouter.post("/upload", uploadController.upload.single('file'), uploadController.uploadFile);
+userRouter.post("/upload", uploadController.upload.single('file'), uploadController.uploadLink);
 
 // GET files by userID
 userRouter.get("/files", uploadController.getFilesByID);

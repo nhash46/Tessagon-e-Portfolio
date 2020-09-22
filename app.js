@@ -7,14 +7,12 @@ const bcrypt = require('bcryptjs');
 const bodyParser = require("body-parser");
 moment = require('moment');
 const cors = require('cors');
-<<<<<<< Updated upstream
 const crypto = require('crypto');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
-var busboyBodyParser = require('busboy-body-parser');
-=======
->>>>>>> Stashed changes
+const busboyBodyParser = require('busboy-body-parser');
+
 const app = express();
 
 // load view engine
