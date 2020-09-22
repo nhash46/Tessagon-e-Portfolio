@@ -11,6 +11,7 @@ const crypto = require('crypto');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
+var busboyBodyParser = require('busboy-body-parser');
 const app = express();
 
 // load view engine
@@ -24,8 +25,12 @@ console.log(db);
 // use the body-parser middleware, which parses request bodies into req.body
 // support parsing of json
 app.use(bodyParser.json());
+
 // support parsing of urlencoded bodies (e.g. for forms)
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//parse multipart/form-data    
+app.use(busboyBodyParser());
 
 // Express Session Middleware
 app.use(session({
