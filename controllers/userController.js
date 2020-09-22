@@ -59,7 +59,7 @@ const addUser = (req, res, next) => {
 
 const populateInfo = (req, res, next) => {
     // extract info. from body
-
+    console.log(req.body);
     let user = {};
 
     user.first_name = req.body.first_name;

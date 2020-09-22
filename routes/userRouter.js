@@ -21,16 +21,6 @@ const uploadController = require("../controllers/uploadController");
 
 const db = require("../models");
 
-let gfs;
-mongoose.connection.once("open", async () => {
-    // Init stream
-    gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
-        bucketName: 'uploads'
-    });
-    //gfs.collection('uploads');
-    console.log("The gfs object" + gfs);
-});
-
 const storage = new GridFsStorage({
     url: db.MONGO_URL,
     file: (req, file) => {
@@ -71,29 +61,8 @@ userRouter.get("/upload", (req, res) => {
 });
 
 // Upload form
-userRouter.post("/upload", upload.single('file'), async (req, res) => {
-
-    console.log(req.file);
-    try {
-        // add the user id reference
-        let doc = await Document.findById({_id: req.file.id})
-        doc.user = req.user._id;
-        console.log(doc);
-        await doc.save();
-
-        // add the file id reference to the user
-        const filter = { _id: req.user._id};
-        const update = { "$push" : {"document" : req.file.id}};
-        let user = await User.findOneAndUpdate(filter, update, {new : true});
-        console.log(user.document);
-
-        res.redirect('/user/profile');
-    } catch(err) {
-        res.status(400);
-        return res.send("Didn't work dumbass");
-    }
-});
-
+userRouter.post("/upload", upload.single('file'), uploadController.uploadFile);
+/*
 // GET files by userID
 userRouter.get("/files", (req,res) => {
     gfs.find({user: req.user._id}).toArray((err, files) => {
@@ -147,7 +116,7 @@ userRouter.get("/image/:filename", (req, res) => {
             gfs.openDownloadStreamByName(req.params.filename).pipe(res);
         });
 });
-
+*/
 // Sign Up form
 userRouter.get("/signup", userController.newUserForm);
 
@@ -155,7 +124,29 @@ userRouter.get("/signup", userController.newUserForm);
 userRouter.get("/signup/form", userController.authCheck, userController.infoPage);
 
 // Populate info using info form details
-userRouter.post("/populateInfo", userController.populateInfo, experienceController.addExperience, educationController.addEducation);
+userRouter.post("/populateInfo", (req, res, next) => {
+    console.log(req.body);
+    let user = {};
+
+    user.first_name = req.body.first_name;
+    user.last_name = req.body.last_name;
+    user.phone_number = req.body.number;
+    user.city = req.body.city;
+    user.state = req.body.state;
+    user.bio = req.body.bio;
+
+    let query = {_id:req.user._id}
+
+    User.updateOne(query, user, function (err) {
+        if (err){
+            console.log(err);
+        }
+        else{
+            console.log("saved");
+            next();
+        }
+    });
+}, experienceController.addExperience, educationController.addEducation);
 
 // Edit info nav bar
 userRouter.post("/editNavInfo", userController.editNavInfo);

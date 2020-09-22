@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const crypto = require('crypto');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
 const path = require('path');
 
 const db = require("../models");
@@ -9,29 +10,38 @@ const db = require("../models");
 const User = mongoose.model("User");
 const Document = mongoose.model("Document");
 
-// Upload file storage
-/*const storage = new GridFsStorage({
-    url: db.MONGO_URL,
-    file: (req, file) => {
-        return new Promise((resolve, reject) => {
-            crypto.randomBytes(16, (err, buf) => {
-                if (err) {
-                    return reject(err);
-                }
-                const filename = buf.toString('hex') + path.extname(file.originalname);
-                const fileInfo = {
-                    // ref to parent user
-                    user: req.user._id,
-                    filename: filename,
-                    // the name of the document collection
-                    bucketName: 'fs.files'
-                };
-                resolve(fileInfo);
-            });
-        });
-    }
+let gfs;
+mongoose.connection.once("open", async () => {
+    // Init stream
+    gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
+        bucketName: 'uploads'
+    });
+    //gfs.collection('uploads');
+    console.log("The gfs object" + gfs);
 });
-const upload = multer({ storage });*/
+
+const uploadFile = async (req,res,next) => {
+
+    console.log(req.file);
+    try {
+        // add the user id reference
+        let doc = await Document.findById({_id: req.file.id})
+        doc.user = req.user._id;
+        console.log(doc);
+        await doc.save();
+
+        // add the file id reference to the user
+        const filter = { _id: req.user._id};
+        const update = { "$push" : {"document" : req.file.id}};
+        let user = await User.findOneAndUpdate(filter, update, {new : true});
+        console.log(user.document);
+
+        res.redirect('/user/profile');
+    } catch(err) {
+        res.status(400);
+        return res.send("Didn't work");
+    }
+}
 
 const uploadProfilePic = async (req,res,next) => {
 
@@ -52,4 +62,5 @@ const uploadProfilePic = async (req,res,next) => {
 }
 module.exports = {
     uploadProfilePic,
+    uploadFile
 }
