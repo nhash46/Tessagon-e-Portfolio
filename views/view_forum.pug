@@ -1,0 +1,56 @@
+extends layout
+
+block content
+    #whiteBG
+        
+        .container
+            h5 Posted by 
+                a(href = '/user/profile/'+forum.author) #{forum.author} 
+                span #[ #{moment(forum.date).startOf('day').fromNow()}]
+            #forum-title
+                h1= forum.title
+            br
+            p= forum.body
+            if user
+                if user.username == forum.author
+                    a.btn.btn-default.btn-sm(href='/forum-posts/edit/'+forum._id) Edit
+                    a.btn.btn-danger.btn-sm.delete-forum(href='#', data-id=forum._id) Delete
+            hr
+            .container
+                #forum-title
+                    h3 Comments
+                each c in forum.comments
+                    .panel
+                        .panel-default
+                            .panel-body
+                                #comment-top #{c.content}
+                                if user
+                                    if user.username == c.author
+                                        a.btn.btn-link.delete-comment(href='#', forum-id=c.parentPost, comment-id=c._id) delete
+                                        a.btn.btn-link.edit-comment(type= 'button') edit
+
+                                form.edit-comment-form(method='POST', action='/comments/edit/'+c._id)
+                                    br
+                                    br
+                                    input.form-control(name='content', value= c.content)#updated-comment
+                                    input.btn.btn-link.save-comment(type='submit', value='save')
+                            
+                                
+                            .panel-footer#comment-bottom
+                                p #[a(href = '/user/profile/'+c.author) #[i.glyphicon.glyphicon-user] #{' ' + c.author} ]
+                                    span #[ #{' | ' + moment(c.date).startOf('day').fromNow()}]
+                                
+            script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
+            
+            if user
+                form(method='POST', action='/comments/'+forum._id)
+                    .form-group
+                        label Comment as #{user.username}:
+                        input.form-control(name='content')
+
+                    input.btn.btn-primary(type='submit', value='Post')
+            
+            if (!user)
+                h5 Sign in to join the discussion!
+
+

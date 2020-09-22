@@ -70,14 +70,16 @@ app.get('/signup/form', userController.authCheck, (req, res) => {
     res.render("form")
 });
 
-
-
 // routes
 const userRouter = require("./routes/userRouter");
+const commentRouter = require("./routes/commentRouter");
 
 
 // user routes handled by userRouter
 app.use('/user', userRouter);
+
+// comment routes handled by commentRouter
+app.use('/comments', commentRouter);
 
 db.connect()
     .then(() => {

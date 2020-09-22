@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    .container#whiteBGEditForum
+        #forum-title
+            h1 #{title}
+        form(method='POST', action='/forum-posts/edit/'+forum._id)
+            #form-group
+                label Title:
+                input.form-control(name='title', type='text', value=forum.title)
+            #form-group
+                label Body:
+                textarea.form-control(name='body')= forum.body
+            br
+            input.btn.btn-primary(type='submit', value='Submit')
