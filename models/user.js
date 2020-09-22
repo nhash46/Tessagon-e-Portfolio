@@ -14,6 +14,7 @@ const userSchema = new Schema({
     city: String,
     state: String,
     phone_number: String,
+    profilePicID: {type: Schema.Types.ObjectId, ref: "Document"},
     links: 
         { 
             facebook: String,

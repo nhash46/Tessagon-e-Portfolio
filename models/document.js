@@ -7,7 +7,8 @@ const documentSchema = new Schema({
         ref: "User"
     },
     filename: String,
-    contentType: String
+    contentType: String,
+    docType: String
 
 }, { strict: false });
 

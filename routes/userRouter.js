@@ -38,13 +38,13 @@ userRouter.get("/upload", (req, res) => {
 });
 
 // Upload form
-userRouter.post("/upload", uploadController.upload.single('file'), uploadController.uploadLink);
+userRouter.post("/upload", uploadController.upload.single('file'), uploadController.uploadLink, uploadController.uploadProfilePic);
 
 // GET files by userID
 userRouter.get("/files", uploadController.getFilesByID);
 
 // GET file by userID and ID
-userRouter.get("/image/:id", uploadController.getFileByID);
+//userRouter.get("/image/:id", uploadController.getFileByID);
 
 // GET file by userID and Filename
 userRouter.get("/image/:filename", uploadController.getFileByFilename);

@@ -30,9 +30,6 @@ app.use(bodyParser.json());
 // support parsing of urlencoded bodies (e.g. for forms)
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//parse multipart/form-data    
-app.use(busboyBodyParser());
-
 // Express Session Middleware
 app.use(session({
     secret: 'keyboard cat',

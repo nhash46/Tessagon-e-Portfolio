@@ -43,7 +43,7 @@ const upload = multer({ storage });
 
 const uploadLink = async (req,res,next) => {
 
-    console.log(req.file);
+    //console.log(req.file);
     try {
         // add the user id reference
         let doc = await Document.findById({_id: req.file.id})
@@ -57,7 +57,8 @@ const uploadLink = async (req,res,next) => {
         let user = await User.findOneAndUpdate(filter, update, {new : true});
         console.log(user.document);
 
-        res.redirect('/user/profile');
+        //res.redirect('/user/profile');
+        next();
     } catch(err) {
         res.status(400);
         return res.send("Didn't work");
@@ -115,10 +116,31 @@ const getFileByFilename = (req, res, next) => {
             gfs.openDownloadStreamByName(req.params.filename).pipe(res);
         });
 }
+
+const uploadProfilePic = async (req, res, next) => {
+
+    const fileId = new mongoose.mongo.ObjectId(req.params.id);
+
+    // console.log('id', req.params.id)
+    gfs
+        .find({
+            _id: fileId
+        })
+        .toArray((err, files) => {
+            if (!files || files.length === 0) {
+                console.log('no files exist');
+                return res.status(404).json({
+                    err: "no files exist"
+                });
+            }
+            gfs.openDownloadStream(fileId).pipe(res);
+        });
+}
 module.exports = {
     upload,
     uploadLink,
     getFilesByID,
     getFileByID,
-    getFileByFilename
+    getFileByFilename,
+    uploadProfilePic
 }
