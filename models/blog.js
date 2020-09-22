@@ -13,6 +13,6 @@ const blogSchema = new mongoose.Schema({
     date: {type: Date, default: Date.now}
 });
 
-const Post = mongoose.model("Post", blogSchema, "blog");
+const Blog = mongoose.model("Blog", blogSchema, "blog");
 
-module.exports = Post;
+module.exports = Blog;

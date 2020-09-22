@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const Comment = mongoose.model("Comment");
-const Post = mongoose.model("Post");
+const Blog = mongoose.model("Blog");
 
-const blogController = require("../controllers/blogContoller");
+const blogController = require("../controllers/blogController");
 
 // adds a comment to comment collection
 const addComment = async (req, res) => {
@@ -18,8 +18,8 @@ const addComment = async (req, res) => {
     try {
         const filter = {_id: req.params._id};
         const update = {"$push": {"comments": newComment._id}};
-        let post = await Post.findOneAndUpdate(filter, update, {new: true});
-        console.log(post.comment);
+        let blog = await Blog.findOneAndUpdate(filter, update, {new: true});
+        console.log(blog.comment);
     } catch(err){
         res.status(400);
         return res.send("Database query failed");

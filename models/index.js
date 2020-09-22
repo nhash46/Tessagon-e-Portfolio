@@ -38,6 +38,8 @@ db.once("open", async () => {
 require("./user");
 require("./education");
 require("./experience");
+require("./comment")
+require("./blog");
 
 module.exports = {
   connect,

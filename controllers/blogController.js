@@ -1,8 +1,8 @@
 const mongoose = require = require("mongoose");
-const {validationResult} = require('express-validator/check');
+//const {validationResult} = require('express-validator/check');
 
 // imprt forum model
-const Forum = mongoose.model("Post");
+const Blog = mongoose.model("Blog");
 
 // import comment model
 const Comment = mongoose.model("Comment");
@@ -12,7 +12,7 @@ const User = mongoose.model("User");
 
 // function to handle request to add
 const addBlog = (req, res) => {
-    let errors = validationResult(req);
+    //let errors = validationResult(req);
 
     if (!errors.isEmpty()) {
         console.log(errors);
@@ -30,3 +30,7 @@ const addBlog = (req, res) => {
         });
     }
 };
+
+module.exports = {
+    addBlog
+}

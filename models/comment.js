@@ -7,7 +7,7 @@ const commentSchema = new mongoose.Schema({
     content: {type: String},
     parentPost : {
         type: Schema.Types.ObjectId,
-        ref: "Post"
+        ref: "Blog"
     },
     date: {type:Date, default: Date.now}
 });
