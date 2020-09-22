@@ -36,7 +36,7 @@ const addEducation = async (req, res, next) => {
     });
   };
 
-const editEducation = (req,res, next => {
+const editEducation = (req,res,next) => {
 
     let education = {};
 
@@ -58,7 +58,7 @@ const editEducation = (req,res, next => {
       } 
     });
 
-});
+};
 
 module.exports = {
     addEducation,

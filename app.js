@@ -23,12 +23,12 @@ app.set('view engine', 'pug');
 const db = require("./models");
 console.log(db);
 
+// support parsing of urlencoded bodies (e.g. for forms)
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // use the body-parser middleware, which parses request bodies into req.body
 // support parsing of json
 app.use(bodyParser.json());
-
-// support parsing of urlencoded bodies (e.g. for forms)
-app.use(bodyParser.urlencoded({ extended: false }));
 
 // Express Session Middleware
 app.use(session({

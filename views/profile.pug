@@ -360,7 +360,7 @@ script(type='text/javascript' src='/js/typewriter.js')
                 button.btn.btn-secondary(type='button') Save change
 
 #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editAboutMe')
+    form(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header

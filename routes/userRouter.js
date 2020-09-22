@@ -20,7 +20,6 @@ const experienceController = require("../controllers/experienceController.js");
 const uploadController = require("../controllers/uploadController");
 
 const db = require("../models");
-const { redirectEducation } = require("../controllers/userController");
 
 // Signing up - authenticate newUser, then direct to info form
 userRouter.post("/signup", userValidator.addUser, userController.addUser,
@@ -57,7 +56,13 @@ userRouter.get("/signup", userController.newUserForm);
 userRouter.get("/signup/form", userController.authCheck, userController.infoPage);
 
 // Populate info using info form details
-userRouter.post("/populateInfo", userController.populateInfo, experienceController.addExperience, educationController.addEducation, userController.redirectProfile);
+userRouter.post("/populateInfo", 
+    userController.populateInfo, 
+    uploadController.upload.single('propic'), 
+    uploadController.uploadLink, 
+    experienceController.addExperience, 
+    educationController.addEducation, 
+    userController.redirectProfile);
 
 // Edit info nav bar
 userRouter.post("/editNavInfo", userController.editNavInfo);

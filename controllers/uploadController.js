@@ -57,11 +57,11 @@ const uploadLink = async (req,res,next) => {
         let user = await User.findOneAndUpdate(filter, update, {new : true});
         console.log(user.document);
 
-        //res.redirect('/user/profile');
         next();
     } catch(err) {
+        console.log(err);
         res.status(400);
-        return res.send("Didn't work");
+        return res.send(err);
     }
 }
 
