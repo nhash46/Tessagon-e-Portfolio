@@ -36,7 +36,7 @@ const addExperience = async (req, res, next) => {
     });
   };
 
-const editExperience = (req,res) => {
+const editExperience = (req,res, next) => {
 
     let experience = {};
     
@@ -54,7 +54,7 @@ const editExperience = (req,res) => {
         res.status(400);
       }
       else{
-        res.redirect('/user/profile#experience');
+        next();
       } 
     });
 

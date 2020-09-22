@@ -20,6 +20,7 @@ const experienceController = require("../controllers/experienceController.js");
 const uploadController = require("../controllers/uploadController");
 
 const db = require("../models");
+const { redirectEducation } = require("../controllers/userController");
 
 // Signing up - authenticate newUser, then direct to info form
 userRouter.post("/signup", userValidator.addUser, userController.addUser,
@@ -56,7 +57,7 @@ userRouter.get("/signup", userController.newUserForm);
 userRouter.get("/signup/form", userController.authCheck, userController.infoPage);
 
 // Populate info using info form details
-userRouter.post("/populateInfo", userController.populateInfo, experienceController.addExperience, educationController.addEducation);
+userRouter.post("/populateInfo", userController.populateInfo, experienceController.addExperience, educationController.addEducation, userController.redirectProfile);
 
 // Edit info nav bar
 userRouter.post("/editNavInfo", userController.editNavInfo);
@@ -68,10 +69,10 @@ userRouter.post("/editHomeInfo", userController.editHomeInfo);
 userRouter.post("/editAboutMe", userController.editAboutMe);
 
 // Edit education
-userRouter.post("/editEducation/:_id", educationController.editEducation);
+userRouter.post("/editEducation/:_id", educationController.editEducation, userController.redirectEducation);
 
 // Edit experience
-userRouter.post("/editExperience/:_id", experienceController.editExperience);
+userRouter.post("/editExperience/:_id", experienceController.editExperience, userController.redirectExperience);
 
 // log in form Home
 userRouter.get("/login", userController.logInPage);
