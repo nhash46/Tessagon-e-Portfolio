@@ -95,9 +95,9 @@ header#header
             hr
         .row
             .col-md-12.text-center
-                if !(user1.document.length === 0)
+                if user1.profilePicID
                     img.img-responsive(src='http://localhost:3000/user/image/'+ user1.profilePicID.filename)
-                if user1.document.length === 0
+                if !user1.profilePicID
                     img.img-responsive(src='' alt='No Profile Picture')
             .col-md-8.col-md-offset-2
                 .about-text

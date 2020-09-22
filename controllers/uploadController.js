@@ -70,6 +70,7 @@ const uploadProfilePic = async (req, res, next) => {
     try {
         // add the user id reference
         let doc = await Document.findById({_id: req.file.id})
+        doc.user = req.user._id;
         doc.docType = "profilePic";
         //console.log(doc);
         await doc.save();

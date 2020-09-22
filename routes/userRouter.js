@@ -1,15 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const userValidator = require("../validators/userValidator.js");
-const crypto = require('crypto');
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
-const path = require('path');
-const passport = require('passport');
 
-const User = mongoose.model("User");
-const Document = mongoose.model("Document");
+const passport = require('passport');
 
 // create router
 const userRouter = express.Router();
@@ -39,8 +32,7 @@ userRouter.get("/upload", (req, res) => {
 
 // Upload form
 userRouter.post("/upload", 
-    uploadController.upload.single('file'), 
-    uploadController.uploadLink, 
+    uploadController.upload.single('file'),
     uploadController.uploadProfilePic, 
     userController.redirectProfile
     );
@@ -62,8 +54,7 @@ userRouter.get("/signup/form", userController.authCheck, userController.infoPage
 
 // Populate info using info form details
 userRouter.post("/populateInfo", 
-    uploadController.upload.single('propic'), 
-    uploadController.uploadLink, 
+    uploadController.upload.single('propic'),
     uploadController.uploadProfilePic,
     userController.populateInfo,
     experienceController.addExperience, 
