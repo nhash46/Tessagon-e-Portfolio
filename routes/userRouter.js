@@ -38,7 +38,12 @@ userRouter.get("/upload", (req, res) => {
 });
 
 // Upload form
-userRouter.post("/upload", uploadController.upload.single('file'), uploadController.uploadLink, uploadController.uploadProfilePic, userController.redirectProfile);
+userRouter.post("/upload", 
+    uploadController.upload.single('file'), 
+    uploadController.uploadLink, 
+    uploadController.uploadProfilePic, 
+    userController.redirectProfile
+    );
 
 // GET files by userID
 userRouter.get("/files", uploadController.getFilesByID);
@@ -57,12 +62,14 @@ userRouter.get("/signup/form", userController.authCheck, userController.infoPage
 
 // Populate info using info form details
 userRouter.post("/populateInfo", 
-    userController.populateInfo, 
     uploadController.upload.single('propic'), 
     uploadController.uploadLink, 
+    uploadController.uploadProfilePic,
+    userController.populateInfo,
     experienceController.addExperience, 
     educationController.addEducation, 
-    userController.redirectProfile);
+    userController.redirectProfile
+    );
 
 // Edit info nav bar
 userRouter.post("/editNavInfo", userController.editNavInfo);

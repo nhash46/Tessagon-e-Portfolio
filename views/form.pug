@@ -7,7 +7,7 @@ block content
                 .card.card-signin.flex-row.my-5
                     .card-body
                         h5.card-title.text-center Basic Information.
-                        form(method='POST', action='/user/populateInfo/').form-signin
+                        form(method='POST', action='/user/populateInfo/' enctype='multipart/form-data').form-signin
                             .form-label-group
                                 input#inputFirstname.form-control(name="first_name" type='text' placeholder='Firstname' autofocus='' required='isRequired')
                                 label(for='inputFirstname') Firstname
@@ -31,7 +31,7 @@ block content
                                     label(for='Aboutme') Tell me about yourself! Max 500 characters.
                                 .form-group
                                 label(for='uploadProfilePic') Upload a picture of yourself!
-                                input#uploadProfilePic.form-control-file(name= 'propic' required='isRequired')
+                                input#uploadProfilePic.form-control-file(name='propic' type='file' required='isRequired')
                                 br
                                 hr
                                 .col-md-12
