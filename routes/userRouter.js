@@ -21,29 +21,6 @@ const uploadController = require("../controllers/uploadController");
 
 const db = require("../models");
 
-const storage = new GridFsStorage({
-    url: db.MONGO_URL,
-    file: (req, file) => {
-        return new Promise((resolve, reject) => {
-            crypto.randomBytes(16, (err, buf) => {
-                if (err) {
-                    return reject(err);
-                }
-                const filename = buf.toString('hex') + path.extname(file.originalname);
-                const fileInfo = {
-                    // ref to parent user
-                    user: req.user._id,
-                    filename: filename,
-                    // the name of the document collection
-                    bucketName: 'uploads'
-                };
-                resolve(fileInfo);
-            });
-        });
-    }
-});
-const upload = multer({ storage });
-
 // Signing up - authenticate newUser, then direct to info form
 userRouter.post("/signup", userValidator.addUser, userController.addUser,
     passport.authenticate('local', { failureRedirect: '/' }),
@@ -61,62 +38,17 @@ userRouter.get("/upload", (req, res) => {
 });
 
 // Upload form
-userRouter.post("/upload", upload.single('file'), uploadController.uploadFile);
-/*
+userRouter.post("/upload", uploadController.upload.single('file'), uploadController.uploadFile);
+
 // GET files by userID
-userRouter.get("/files", (req,res) => {
-    gfs.find({user: req.user._id}).toArray((err, files) => {
-        if (!files || files.length === 0){
-            return res.status(404).json({
-                err: 'No files belong to that user'
-            });
-        }
+userRouter.get("/files", uploadController.getFilesByID);
 
-        files.forEach((element) => {
-            console.log(element);
-        })
+// GET file by userID and ID
+userRouter.get("/image/:id", uploadController.getFileByID);
 
-        return res.json(files);
-    });
-});
+// GET file by userID and Filename
+userRouter.get("/image/:filename", uploadController.getFileByFilename);
 
-// GET file by userID and filename
-userRouter.get("/images/:id", (req,res) => {
-
-    const fileId = new mongoose.mongo.ObjectId(req.params.id);
-    // console.log('id', req.params.id)
-    const file = gfs
-        .find({
-            _id: fileId
-        })
-        .toArray((err, files) => {
-            if (!files || files.length === 0) {
-                console.log('no files exist');
-                return res.status(404).json({
-                    err: "no files exist"
-                });
-            }
-            gfs.openDownloadStream(fileId).pipe(res);
-        });
-});
-
-userRouter.get("/image/:filename", (req, res) => {
-    // console.log('id', req.params.id)
-    gfs
-        .find({
-            filename: req.params.filename
-        })
-        .toArray((err, files) => {
-            if (!files || files.length === 0) {
-                console.log('no files exist');
-                return res.status(404).json({
-                    err: "no files exist"
-                });
-            }
-            gfs.openDownloadStreamByName(req.params.filename).pipe(res);
-        });
-});
-*/
 // Sign Up form
 userRouter.get("/signup", userController.newUserForm);
 
@@ -124,29 +56,7 @@ userRouter.get("/signup", userController.newUserForm);
 userRouter.get("/signup/form", userController.authCheck, userController.infoPage);
 
 // Populate info using info form details
-userRouter.post("/populateInfo", (req, res, next) => {
-    console.log(req.body);
-    let user = {};
-
-    user.first_name = req.body.first_name;
-    user.last_name = req.body.last_name;
-    user.phone_number = req.body.number;
-    user.city = req.body.city;
-    user.state = req.body.state;
-    user.bio = req.body.bio;
-
-    let query = {_id:req.user._id}
-
-    User.updateOne(query, user, function (err) {
-        if (err){
-            console.log(err);
-        }
-        else{
-            console.log("saved");
-            next();
-        }
-    });
-}, experienceController.addExperience, educationController.addEducation);
+userRouter.post("/populateInfo", userController.populateInfo, experienceController.addExperience, educationController.addEducation);
 
 // Edit info nav bar
 userRouter.post("/editNavInfo", userController.editNavInfo);
