@@ -65,6 +65,28 @@ const uploadLink = async (req,res,next) => {
     }
 }
 
+const uploadProfilePic = async (req, res, next) => {
+
+    try {
+        // add the user id reference
+        let doc = await Document.findById({_id: req.file.id})
+        doc.docType = "profilePic";
+        //console.log(doc);
+        await doc.save();
+
+        let user = await User.findById({_id: req.user._id});
+        user.profilePicID = doc._id
+        await user.save();
+        //console.log(user);
+
+        next();
+    } catch(err) {
+        res.status(400);
+        return res.send("Didn't work");
+    }
+
+}
+
 const getFilesByID = (req, res, next) => {
     gfs.find({user: req.user._id}).toArray((err, files) => {
         if (!files || files.length === 0){
@@ -117,25 +139,6 @@ const getFileByFilename = (req, res, next) => {
         });
 }
 
-const uploadProfilePic = async (req, res, next) => {
-
-    const fileId = new mongoose.mongo.ObjectId(req.params.id);
-
-    // console.log('id', req.params.id)
-    gfs
-        .find({
-            _id: fileId
-        })
-        .toArray((err, files) => {
-            if (!files || files.length === 0) {
-                console.log('no files exist');
-                return res.status(404).json({
-                    err: "no files exist"
-                });
-            }
-            gfs.openDownloadStream(fileId).pipe(res);
-        });
-}
 module.exports = {
     upload,
     uploadLink,
