@@ -134,3 +134,32 @@ $(document).ready(function(){
       });
   });
 });
+
+
+// allows user to edit comment
+$(document).ready(function(){
+    $(".edit-comment-form").hide();
+    $('.edit-comment').on('click', function(e){
+        e.stopPropagation();
+        $(this).siblings().toggle('slow');
+    });
+});
+
+$(document).ready(function(){
+    $('.delete-comment').on('click', function(e){
+        $target = $(e.target);
+        const blog_id = $target.attr('blog-id');
+        const comment_id =$target.attr('comment-id');
+        $.ajax({
+            type: 'DELETE',
+            url: '/comments/'+comment_id,
+            success: function(response){
+                alert('Deleting Comment');
+                window.location.href='/blog-posts/'+blog_id;
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+});
