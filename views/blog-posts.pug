@@ -42,3 +42,10 @@ block content
                         input.btn.btn-primary(type='submit', value='Create a post', onclick='createPost()')
                     if !user
                             input.btn.btn-primary(type='submit', value='Sign in to create a post!', onclick='signIn()')
+                    script.
+                        function createPost() {
+                            window.location.href = '/blog-posts/submit'
+                        }
+                        function signIn() {
+                            window.location.href = '/user/login'
+                        }
