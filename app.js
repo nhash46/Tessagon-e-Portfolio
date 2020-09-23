@@ -73,6 +73,7 @@ app.get('/signup/form', userController.authCheck, (req, res) => {
 // routes
 const userRouter = require("./routes/userRouter");
 const commentRouter = require("./routes/commentRouter");
+const blogRouter = require("./routes/blogRouter");
 
 
 // user routes handled by userRouter
@@ -80,6 +81,9 @@ app.use('/user', userRouter);
 
 // comment routes handled by commentRouter
 app.use('/comments', commentRouter);
+
+// blog routes handled by blogRouter
+app.use('/blog-posts', blogRouter);
 
 db.connect()
     .then(() => {

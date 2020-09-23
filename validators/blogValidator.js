@@ -1,5 +1,5 @@
-const expressValidator = require('express-validator/check');
-const {check} = require('express-validator/check');
+const expressValidator = require('express-validator');
+const {check} = require('express-validator');
 
 // validates that fields arent left empty
 exports.addBlog =

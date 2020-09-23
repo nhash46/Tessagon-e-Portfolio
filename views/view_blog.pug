@@ -5,28 +5,28 @@ block content
         
         .container
             h5 Posted by 
-                a(href = '/user/profile/'+forum.author) #{forum.author} 
-                span #[ #{moment(forum.date).startOf('day').fromNow()}]
-            #forum-title
-                h1= forum.title
+                a(href = '/user/profile/'+blog.author) #{blog.author}
+                span #[ #{moment(blog.date).startOf('day').fromNow()}]
+            #blog-title
+                h1= blog.title
             br
-            p= forum.body
+            p= blog.body
             if user
-                if user.username == forum.author
-                    a.btn.btn-default.btn-sm(href='/forum-posts/edit/'+forum._id) Edit
-                    a.btn.btn-danger.btn-sm.delete-forum(href='#', data-id=forum._id) Delete
+                if user.username == blog.author
+                    a.btn.btn-default.btn-sm(href='/blog-posts/edit/'+blog._id) Edit
+                    a.btn.btn-danger.btn-sm.delete-blog(href='#', data-id=blog._id) Delete
             hr
             .container
-                #forum-title
+                #blog-title
                     h3 Comments
-                each c in forum.comments
+                each c in blog.comments
                     .panel
                         .panel-default
                             .panel-body
                                 #comment-top #{c.content}
                                 if user
                                     if user.username == c.author
-                                        a.btn.btn-link.delete-comment(href='#', forum-id=c.parentPost, comment-id=c._id) delete
+                                        a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id) delete
                                         a.btn.btn-link.edit-comment(type= 'button') edit
 
                                 form.edit-comment-form(method='POST', action='/comments/edit/'+c._id)
@@ -43,7 +43,7 @@ block content
             script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
             
             if user
-                form(method='POST', action='/comments/'+forum._id)
+                form(method='POST', action='/comments/'+blog._id)
                     .form-group
                         label Comment as #{user.username}:
                         input.form-control(name='content')

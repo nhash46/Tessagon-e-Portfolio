@@ -1,12 +1,12 @@
 extends layout
 
 block content
-    #whiteBGAddForum
-        .forumcontainer
-            #forum-title
+    #whiteBGAddBlog
+        .blogcontainer
+            #blog-title
                 h1 #{title}
             br
-            form(method='POST', action='/forum-posts/submit')
+            form(method='POST', action='/blog-posts/submit')
                 .form-group
                     label Title:
                     input.form-control(name='title', type='text')
