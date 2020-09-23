@@ -3,10 +3,10 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const flash = require('connect-flash');
 const {validationResult} = require('express-validator');
-const Education = require("../models/education");
 
 // import user model
 const User = mongoose.model("User");
+const Document = mongoose.model("Document");
 
 const authCheck = (req, res, next) => {
     if(!req.user){
@@ -59,7 +59,7 @@ const addUser = (req, res, next) => {
 
 const populateInfo = (req, res, next) => {
     // extract info. from body
-
+    console.log(req.body);
     let user = {};
 
     user.first_name = req.body.first_name;
@@ -126,7 +126,7 @@ const editNavInfo = (req,res) => {
     });
 };
 
-const editAboutMe = (req,res) => {
+const editAboutMe = (req,res,next) => {
 
     let user = {};
 
@@ -141,6 +141,7 @@ const editAboutMe = (req,res) => {
         else {
             console.log("edited about me");
             res.redirect('/user/profile#about');
+            //next();
         }
     });
 
@@ -184,12 +185,27 @@ const logInGoogle = (req, res, next) => {
 const logInGoogleCallback = (req, res, next) => {
     passport.authenticate('google', { failureRedirect: '/' }),
         function(req, res) {
-            if(!req.user.bio){
+            if(!req.user.state){
                 res.redirect('/signup/form/');
             } else {
                 res.redirect('/user/profile');
             }
         }(req, res, next)
+}
+
+// redirects to profile page
+const redirectProfile = (req, res) => {
+    res.redirect('/user/profile');
+}
+
+// redirects to education section
+const redirectEducation = (req, res) => {
+    res.redirect('/user/profile#education');
+}
+
+// redirects to experience section
+const redirectExperience = (req, res) => {
+    res.redirect('/user/profile#experience');
 }
 
 /*const logInGoogleCallback = (req, res, next) => {
@@ -247,7 +263,7 @@ const userID = async (req,res) => {
 
 // function that renders the user profile
 const getUserProfile = async (req, res) => {
-    User.findById(req.user._id).populate('education').populate('experience').exec((err,user1) => { 
+    User.findById(req.user._id).populate('education').populate('experience').populate('document').populate('profilePicID').exec((err,user1) => {
         console.log(user1);
         res.render('profile', {
             user1: user1
@@ -256,7 +272,7 @@ const getUserProfile = async (req, res) => {
 };
 
 const getOtherUserProfile = async (req, res) => {
-    User.findOne({username:req.params.username}).populate('education').populate('experience').exec((err, user2) => {
+    User.findOne({username:req.params.username}).populate('education').populate('experience').populate("profilePicID").exec((err, user2) => {
         console.log(user2);
         res.render('index', {
             user2: user2
@@ -280,5 +296,8 @@ module.exports = {
     getOtherUserProfile,
     editHomeInfo,
     editNavInfo,
-    editAboutMe
+    editAboutMe,
+    redirectEducation,
+    redirectExperience,
+    redirectProfile
 };
