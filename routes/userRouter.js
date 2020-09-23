@@ -69,7 +69,11 @@ userRouter.post("/editNavInfo", userController.editNavInfo);
 userRouter.post("/editHomeInfo", userController.editHomeInfo);
 
 // Edit about me
-userRouter.post("/editAboutMe", userController.editAboutMe);
+userRouter.post("/editAboutMe", 
+    uploadController.upload.single('propic'),
+    uploadController.uploadProfilePic,
+    userController.editAboutMe
+    );
 
 // Edit education
 userRouter.post("/editEducation/:_id", educationController.editEducation, userController.redirectEducation);

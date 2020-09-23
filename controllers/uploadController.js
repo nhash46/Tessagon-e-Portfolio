@@ -68,7 +68,8 @@ const uploadLink = async (req,res,next) => {
 const uploadProfilePic = async (req, res, next) => {
 
     try {
-        // add the user id reference
+        if(req.file){
+            // add the user id reference
         let doc = await Document.findById({_id: req.file.id})
         doc.user = req.user._id;
         doc.docType = "profilePic";
@@ -79,9 +80,13 @@ const uploadProfilePic = async (req, res, next) => {
         user.profilePicID = doc._id
         await user.save();
         //console.log(user);
-
         next();
+        } else {
+            next();
+        }
+        
     } catch(err) {
+        console.log(err);
         res.status(400);
         return res.send("Didn't work");
     }
