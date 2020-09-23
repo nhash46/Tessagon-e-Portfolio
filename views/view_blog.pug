@@ -2,56 +2,58 @@ extends blog-layout
 
 block content
 
-    #whiteBG
-        
+
+    br
+    br
+    .container
+        h5 Posted by 
+            a(href = '/user/profile/'+blog.author) #{blog.author}
+            span  #[ #{moment(blog.date).startOf('day').fromNow()}]
+        #blog-title
+            h1= blog.title
+        hr
+        br
+        p= blog.body
+        if user
+            if user.username == blog.author
+                a.btn.btn-default.btn-sm(href='/blog-posts/edit/'+blog._id) Edit
+                a.btn.btn-danger.btn-sm.delete-blog(href='#', data-id=blog._id) Delete
+        hr
         .container
-            h5 Posted by 
-                a(href = '/user/profile/'+blog.author) #{blog.author}
-                span #[ #{moment(blog.date).startOf('day').fromNow()}]
-            #blog-title
-                h1= blog.title
-            br
-            p= blog.body
-            if user
-                if user.username == blog.author
-                    a.btn.btn-default.btn-sm(href='/blog-posts/edit/'+blog._id) Edit
-                    a.btn.btn-danger.btn-sm.delete-blog(href='#', data-id=blog._id) Delete
-            hr
-            .container
-                #blog-title
-                    h3 Comments
-                each c in blog.comments
-                    .panel
-                        .panel-default
-                            .panel-body
-                                #comment-top #{c.content}
-                                if user
-                                    if user.username == c.author
-                                        a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id) delete
-                                        a.btn.btn-link.edit-comment(type= 'button') edit
-
-                                form.edit-comment-form(method='POST', action='/comments/edit/'+c._id)
-                                    br
-                                    br
-                                    input.form-control(name='content', value= c.content)#updated-comment
-                                    input.btn.btn-link.save-comment(type='submit', value='save')
-                            
-                                
-                            .panel-footer#comment-bottom
-                                p #[a(href = '/user/profile/'+c.author) #[i.glyphicon.glyphicon-user] #{' ' + c.author} ]
-                                    span #[ #{' | ' + moment(c.date).startOf('day').fromNow()}]
-                                
-            script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
-            
-            if user
-                form(method='POST', action='/comments/'+blog._id)
-                    .form-group
-                        label Comment as #{user.username}:
-                        input.form-control(name='content')
-
-                    input.btn.btn-primary(type='submit', value='Post')
-            
+            if (user)
+                // Comments Form
+                .card.my-4
+                    h5.card-header Leave a comment as #{user.username}:
+                    .card-body
+                        form(method='POST', action='/comments/'+blog._id)
+                            .form-group
+                                textarea.form-control(rows='3' name='content')
+                            button.btn.btn-primary(type='submit') Submit
             if (!user)
-                h5 Sign in to join the discussion!
+                .card.my-4
+                    h5.card-header Sign in to join the discussion!
+                    .card-body
+                        form
+                            .form-group
+                                button.btn.btn-primary(href="/") Sign in!
+            br
+            br
+            each c in blog.comments
+                .media.mb-4
+                    img.d-flex.mr-3.rounded-circle(src='http://placehold.it/50x50' alt='')
+                    .media-body
+                        h5.mt-0 #{c.author}  
+                        #comment-top #{c.content}   
+                            if user
+                                if user.username == c.author
+                                    a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id) delete
+                                    a.btn.btn-link.edit-comment(type= 'button') edit
+   
+                        .panel-footer#comment-bottom
+                            p #[a(href = '/user/profile/'+c.author) #[i.glyphicon.glyphicon-user] #{' ' } ]
+                                span #{moment(c.date).startOf('day').fromNow()}
+                            
+        script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
+    
 
 
