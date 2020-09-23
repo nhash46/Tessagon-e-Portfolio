@@ -79,27 +79,27 @@ const newBlogForm = (req, res) => {
 // function to handle a request to get all blogs
 const getAllBlogPosts = async (req, res) => {
 
-    Blog.find({}, function(err, blog){
+    Blog.find({}, function(err, blogs){
 
         if(err){
             console.log(err);
         } else {
             res.render("blog-posts", {
                 title: 'Blogs',
-                blog: blog
+                blogs: blogs
             });
         }
     });
 };
 
 // function to search for forums upon query
-const showBlog = (req, res) => {
+const showBlogs = (req, res) => {
     const searchQuery = null;
     var noMatch = null;
     if(req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all blogs from DB
-        Blog.find({title: regex}, function(err, allBlog){
+        Blog.find({title: regex}, function(err, allBlogs){
             if(err){
                 console.log(err);
             } else {
@@ -111,21 +111,21 @@ const showBlog = (req, res) => {
                     {
                         title: 'Blog',
                         searchQuery: req.query.search,
-                        blog: allBlog,
+                        blogs: allBlogs,
                         noMatch: noMatch
                     });
             }
         });
     } else {
         // Get all blogs from DB
-        Blog.find({}, function(err, allBlog){
+        Blog.find({}, function(err, allBlogs){
             if(err){
                 console.log(err);
             } else {
-                res.render("Blog-posts",
+                res.render("blog-posts",
                     {
                         title: 'Blog',
-                        blog: allBlog,
+                        blogs: allBlogs,
                         noMatch: noMatch
                     });
             }
@@ -264,5 +264,5 @@ module.exports = {
     updateBlog,
     deleteBlog,
     //ensureAuthenticated,
-    showBlog
+    showBlogs
 };

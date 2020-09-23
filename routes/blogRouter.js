@@ -8,7 +8,7 @@ const blogController = require("../controllers/blogController.js");
 
 // route that retrieves all blogs if there is no query
 // upon query, searches for specific blogs
-blogRouter.get('/', blogController.showBlog);
+blogRouter.get('/', blogController.showBlogs);
 
 // form page for new post
 blogRouter.get('/submit', blogController.newBlogForm);
