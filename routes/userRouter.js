@@ -9,6 +9,7 @@ const userRouter = express.Router();
 const userController = require("../controllers/userController");
 const educationController = require("../controllers/educationController.js");
 const experienceController = require("../controllers/experienceController.js");
+const blogController = require("../controllers/blogController.js");
 
 // Signing up - authenticate newUser, then direct to info form
 userRouter.post("/signup", userValidator.addUser, userController.addUser,

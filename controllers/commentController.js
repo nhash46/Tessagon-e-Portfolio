@@ -54,8 +54,33 @@ const getCommentByParentId = async (req,res) => {
   }
 };
 
+// function to handle request to delete comment
+ const deleteComment = (req, res) => {
+    // check if user is logged in
+    if(!req.user._id){
+      res.status(500).send();
+    }
+    let query = {_id:req.params._id}
+  
+    // check if user is the author of post
+    Comment.findById(query, function(err, comment){
+      if(comment.author != req.user.username){
+        res.status(500).send();
+      } 
+      else {
+        Comment.remove(query, function(err){
+          if(err){
+            console.log(err);
+          }
+          res.send('Success');
+        });
+      }
+    });
+  }
+
 module.exports = {
     addComment,
     getAllComments,
-    getCommentByParentId
+    getCommentByParentId,
+    deleteComment
 };
