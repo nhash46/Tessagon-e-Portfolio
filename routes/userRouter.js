@@ -33,7 +33,7 @@ userRouter.get("/upload", (req, res) => {
 // Upload form
 userRouter.post("/upload", 
     uploadController.upload.single('file'),
-    uploadController.uploadProfilePic, 
+    uploadController.uploadDocument,
     userController.redirectProfile
     );
 
