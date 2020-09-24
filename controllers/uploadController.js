@@ -41,7 +41,7 @@ const storage = new GridFsStorage({
 });
 const upload = multer({ storage });
 
-const uploadLink = async (req,res,next) => {
+const uploadDocument = async (req,res,next) => {
 
     //console.log(req.file);
     try {
@@ -175,7 +175,7 @@ const getFileByFilename = (req, res, next) => {
 
 module.exports = {
     upload,
-    uploadLink,
+    uploadDocument,
     getFilesByID,
     getFileByID,
     getFileByFilename,
