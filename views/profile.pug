@@ -69,7 +69,10 @@ header#header.d-flex.flex-column.justify-content-center
 
 #hero.d-flex.flex-column.justify-content-center
     .intro
-        img.background(src='http://localhost:3000/user/image/' + user1.backgroundPicID.filename alt='no_image')
+        if user1.backgroundPicID
+            img.background(src='http://localhost:3000/user/image/' + user1.backgroundPicID.filename alt='no_image')
+        if !user1.backgroundPicID
+            img.background(src='/img/profolio-tight.png' alt='no_image')
         .container
             .row#homescreen
                 .intro-text
@@ -168,6 +171,7 @@ header#header.d-flex.flex-column.justify-content-center
     .container
         .section-title.text-center.center
             h2 Portfolio
+            //embed(src='http://localhost:3000/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
             button.btn.btn-primary(type='button' data-toggle='modal' data-target='#portfolioModal')
                 |Edit Portfolio
             br
@@ -184,7 +188,7 @@ header#header.d-flex.flex-column.justify-content-center
                                     .hover-text
                                         h4 Project Title
                                         small Web Design
-                                    object(data='http://localhost:3000/user/document/'+doc.filename type='application/pdf')
+                                    embed(src='http://localhost:3000/user/document/'+doc.filename type='application/pdf' width='300' height='300' )
 
 // Resume Section
 #experience.text-center

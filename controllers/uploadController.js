@@ -188,7 +188,7 @@ const getDocumentByFilename = (req,res,next) => {
         }
 
         res.set('Content-Type', files[0].contentType);
-        res.set('Content-Disposition', `inline`);
+        res.set('Content-Disposition', `inline; filename:`+req.params.filename);
         console.log(files[0]);
         gfs.openDownloadStreamByName(req.params.filename).pipe(res);
     });

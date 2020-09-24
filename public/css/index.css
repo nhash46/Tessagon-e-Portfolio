@@ -136,6 +136,7 @@ hr {
 	width: 100%;
 	height: 100%;
 	z-index: -1;
+	background-color: #7bc3d1;
 }
 .section-title.center {
 	padding: 25px 0 45px 0;
