@@ -71,8 +71,8 @@ $(document).ready(function(){
         $target = $(e.target);
         const _id = $target.attr('data-id');
         $.ajax({
-            method: 'DELETE',
             url: '/blog-posts/'+_id,
+            type: 'DELETE',
             success: function(response){
                 alert('Deleting Blog');
                 window.location.href='/blog-posts';
