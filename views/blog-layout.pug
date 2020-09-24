@@ -21,8 +21,11 @@ html
         link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+Great+Primer:ital@1&display=swap")
         link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap")    
 
+    body
         style
             include ../public/css/blog.css
+        script
+            include ../public/js/main.js
         nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
             .container
                 a.navbar-brand(href='/blog-posts') Blogs
@@ -36,8 +39,7 @@ html
                             span.sr-only (current)
         br
         br
-    
-        
+
         block content
 
 
@@ -52,5 +54,4 @@ footer.py-5.bg-dark
     .container
         p.m-0.text-center.text-white Tessagon
 
-script(src='/bower_components/jquery/dist/jquery.js')      
-script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+
