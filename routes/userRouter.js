@@ -46,6 +46,9 @@ userRouter.get("/files", uploadController.getFilesByID);
 // GET file by userID and Filename
 userRouter.get("/image/:filename", uploadController.getFileByFilename);
 
+// GET document by filename
+userRouter.get("/document/:filename", uploadController.getDocumentByFilename);
+
 // Sign Up form
 userRouter.get("/signup", userController.newUserForm);
 
