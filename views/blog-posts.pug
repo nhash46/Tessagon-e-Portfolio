@@ -12,15 +12,18 @@ block content
                 h1.my-4
                  | User blogs
                  small    Read below...
-                each blog, i in blogs
-                    .card.mb-4
-                            .card-body
-                                h2.card-title #{blog.title}
-                                p.card-text #{blog.body}
-                                a.btn.btn-primary(href='/blog-posts/'+blog._id) Read More &rarr;
-                            .card-footer.text-muted
-                                | posted by #{blog.author}, #{moment(blog.date).startOf('day').fromNow()}
-                // Pagination
+                if noMatch
+                    h5 Sorry, there were no blogs titled "#{searchQuery}". Try search again!
+                if !noMatch
+                    each blog, i in blogs
+                        .card.mb-4
+                                .card-body
+                                    h2.card-title #{blog.title}
+                                    p.card-text #{blog.body}
+                                    a.btn.btn-primary(href='/blog-posts/'+blog._id) Read More &rarr;
+                                .card-footer.text-muted
+                                    | posted by #{blog.author}, #{moment(blog.date).startOf('day').fromNow()}
+                    // Pagination
                 ul.pagination.justify-content-center.mb-4
                     li.page-item
                         a.page-link(href='#') &larr; Older
@@ -33,10 +36,10 @@ block content
                 .card.my-4
                    h5.card-header Search
                     .card-body
-                        .input-group
-                            input.form-control(type='text' placeholder='Search for...')
-                            span.input-group-append
-                            button.btn.btn-secondary(type='button') Go!
+                        form.form-inlne(action="/blog-posts" method="GET")
+                            div.form-group
+                                input.form-control#normalfont(name='search', type='text', placeholder= 'Blog search...' class='form-control')
+                                input.btn.btn-primary(type='submit', value='Search')
                 .card.my-4
                     if user
                         input.btn.btn-primary(type='submit', value='Create a post', onclick='createPost()')

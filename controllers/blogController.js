@@ -103,7 +103,7 @@ const showBlogs = (req, res) => {
             if(err){
                 console.log(err);
             } else {
-                if(allBlog.length < 1) {
+                if(allBlogs.length < 1) {
                     noMatch = true;
 
                 }
@@ -124,7 +124,6 @@ const showBlogs = (req, res) => {
             } else {
                 res.render("blog-posts",
                     {
-                        title: 'Blog',
                         blogs: allBlogs,
                         noMatch: noMatch
                     });
