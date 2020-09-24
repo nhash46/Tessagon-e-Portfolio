@@ -26,7 +26,7 @@ head
     link(rel='stylesheet' type='text/css' href='/css/prettyPhoto.css')
     link(href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css')
-    script(type='text/javascript' src='js/modernizr.custom.js')
+    script(type='text/javascript' src='/js/modernizr.custom.js')
     // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
     // WARNING: Respond.js doesn't work if you view the page via file://
     //if lt IE 9
@@ -268,32 +268,6 @@ header#header.d-flex.flex-column.justify-content-center
                                     p
                                         | INSERT YOUR DESCRIPTION HERE !
                                     br
-                            #experienceModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='experienceModalLabel' aria-hidden='true')
-                                    form(method='POST' action='/user/editExperience/'+ c._id)
-                                        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-                                            .modal-content
-                                                .modal-header
-                                                    h5#experienceModalLabel.modal-title Edit Experience
-                                                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                                                        span(aria-hidden='true') &times;
-                                                .modal-body
-                                                    input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' value=c.company)
-                                                    label(for='companyName') Company
-                                                    br
-                                                    input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' value=c.role)
-                                                    label(for='roleName') Role Title
-                                                    br
-                                                    label(for='startDate') Start date: NEED TO FIX
-                                                    br
-                                                    input#startDate(name= "experienceStartDate" type='month' required='isRequired' value=c.experienceStartDate)
-                                                    br
-                                                    label(for='endDate') End date: NEED TO FIX
-                                                    br
-                                                    input#endDate(name= "experienceEndDate" type='month' required='isRequired' value=c.experienceEndDate)
-
-                                                .modal-footer
-                                                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                                                    button.btn.btn-secondary.edit-experience(type='submit' experience-id=c._id) Save changes
 
 // Education section                   
 #education.text-center
@@ -411,6 +385,7 @@ script(type='text/javascript' src='/js/jqBootstrapValidation.js')
 script(type='text/javascript' src='/js/contact_me.js')
 script(type='text/javascript' src='/js/main.js')
 script(type='text/javascript' src='/js/typewriter.js')
+script(type='text/javascript' src='/js/modalID.js')
 
 
 #portfolioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
@@ -531,39 +506,50 @@ script(type='text/javascript' src='/js/typewriter.js')
     .modal-dialog.modal-dialog-centered.modal-lg(role='document')
         .modal-content
             .modal-header
-                h5#editExperiencelabel.modal-title Add new Experience
+                h5#editExperiencelabel.modal-title Edit Experience
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
                 for i in user1.experience
                     h5
-                        #{i.company} #{i.role}
-                        a.btn.btn-primary.padButton(type='button' data-toggle='modal' data-target='#experienceModal', data-dismiss='modal') Edit
-                            #experienceModal.ToptopModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='experienceModalLabel' aria-hidden='true')
-                                form(method='POST' action='/user/editExperience/' + i._id)
-                                    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-                                        .modal-content
-                                            .modal-header
-                                                h5#experienceModalLabel.modal-title Edit Experience
-                                                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                                                    span(aria-hidden='true') &times;
-                                            .modal-body
-                                                input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' value=i.company)
-                                                label(for='companyName') Company
-                                                br
-                                                input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' value=i.role)
-                                                label(for='roleName') Role Title
-                                                br
-                                                label(for='startDate') Start date: NEED TO FIX
-                                                br
-                                                input#startDate(name= "experienceStartDate" type='month' required='isRequired' value=i.experienceStartDate)
-                                                br
-                                                label(for='endDate') End date: NEED TO FIX
-                                                br
-                                                input#endDate(name= "experienceEndDate" type='month' required='isRequired' value=i.experienceEndDate)
-
-                                            .modal-footer
-                                                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                                                button.btn.btn-secondary.edit-experience(type='submit' experience-id=i._id) Save changes
+                    #{i.company} #{i.role}
+                    form(method='POST' action='/user/editExperience/' + i._id)
+                        input.form-control(name="company" type='text' autofocus='' required='isRequired' value=i.company)
+                        br
+                        input.form-control(name="role" type='text' autofocus='' required='isRequired' value=i.role)
+                        br
+                        | Start date:
+                        input(name= "experienceStartDate" type='month' required='isRequired' value=i.experienceStartDate)
+                        br
+                        | End date: NEED TO FIX
+                        input(name= "experienceEndDate" type='month' required='isRequired' value=i.experienceEndDate)
+                        button.btn.btn-secondary.edit-experience(type='submit' experience-id=i._id) Save changes
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+
+//#experienceModal.ToptopModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='experienceModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/editExperience/' + i._id)
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#experienceModalLabel.modal-title Edit Experience
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input#companyName.form-control(name= "company" type='text' autofocus='' required='isRequired' value=i.company)
+                    label(for='companyName') Company
+                    br
+                    input#roleName.form-control(name= "role" type='text' autofocus='' required='isRequired' value=i.role)
+                    label(for='roleName') Role Title
+                    br
+                    label(for='startDate') Start date: NEED TO FIX
+                    br
+                    input#startDate(name= "experienceStartDate" type='month' required='isRequired' value=i.experienceStartDate)
+                    br
+                    label(for='endDate') End date: NEED TO FIX
+                    br
+                    input#endDate(name= "experienceEndDate" type='month' required='isRequired' value=i.experienceEndDate)
+
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary.edit-experience(type='submit' experience-id=i._id) Save changes
