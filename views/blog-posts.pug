@@ -1,0 +1,51 @@
+extends blog-layout
+
+block content
+    
+    br
+    br
+    //Page content
+    .container
+        .row
+            // Blog Entries Column
+            .col-md-8
+                h1.my-4
+                 | User blogs
+                 small    Read below...
+                each blog, i in blogs
+                    .card.mb-4
+                            .card-body
+                                h2.card-title #{blog.title}
+                                p.card-text #{blog.body}
+                                a.btn.btn-primary(href='/blog-posts/'+blog._id) Read More &rarr;
+                            .card-footer.text-muted
+                                | posted by #{blog.author}, #{moment(blog.date).startOf('day').fromNow()}
+                // Pagination
+                ul.pagination.justify-content-center.mb-4
+                    li.page-item
+                        a.page-link(href='#') &larr; Older
+                    li.page-item.disabled
+                        a.page-link(href='#') Newer &rarr;                
+                              
+            // Sidebar Widgets Column
+            .col-md-4
+                // Search Widget
+                .card.my-4
+                   h5.card-header Search
+                    .card-body
+                        .input-group
+                            input.form-control(type='text' placeholder='Search for...')
+                            span.input-group-append
+                            button.btn.btn-secondary(type='button') Go!
+                .card.my-4
+                    if user
+                        input.btn.btn-primary(type='submit', value='Create a post', onclick='createPost()')
+                    if !user
+                            input.btn.btn-primary(type='submit', value='Sign in to create a post!', onclick='signIn()')
+                    script.
+                        function createPost() {
+                            window.location.href = '/blog-posts/submit'
+                        }
+                        function signIn() {
+                            window.location.href = '/user/login'
+                        }

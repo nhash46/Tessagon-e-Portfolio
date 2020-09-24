@@ -13,6 +13,7 @@ const experienceController = require("../controllers/experienceController.js");
 const uploadController = require("../controllers/uploadController");
 
 const db = require("../models");
+const blogController = require("../controllers/blogController.js");
 
 // Signing up - authenticate newUser, then direct to info form
 userRouter.post("/signup", userValidator.addUser, userController.addUser,
