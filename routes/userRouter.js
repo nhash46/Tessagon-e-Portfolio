@@ -66,7 +66,11 @@ userRouter.post("/populateInfo",
 userRouter.post("/editNavInfo", userController.editNavInfo);
 
 // Edit info on the home page
-userRouter.post("/editHomeInfo", userController.editHomeInfo);
+userRouter.post("/editHomeInfo",
+    uploadController.upload.single('background'),
+    uploadController.uploadBackgroundPic,
+    userController.editHomeInfo
+);
 
 // Edit about me
 userRouter.post("/editAboutMe", 

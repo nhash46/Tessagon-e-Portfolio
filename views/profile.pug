@@ -424,7 +424,7 @@ script(type='text/javascript' src='/js/typewriter.js')
 
 
 #homeModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='homeModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editHomeInfo')
+    form(method='POST' action='/user/editHomeInfo' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
@@ -439,11 +439,8 @@ script(type='text/javascript' src='/js/typewriter.js')
                     label(for='inputSurname') Last Name
                     br
                     br
-                    input#editBackgroundPic.form-control-file(type='file')
+                    input#editBackgroundPic.form-control-file(name='background' type='file')
                     label(for='editBackgroundPic') Edit your background picture!
-                    
-
                 .modal-footer
-                    
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save changes

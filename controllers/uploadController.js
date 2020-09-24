@@ -88,9 +88,37 @@ const uploadProfilePic = async (req, res, next) => {
     } catch(err) {
         console.log(err);
         res.status(400);
+        // Need error page handling
         return res.send("Didn't work");
     }
+}
 
+const uploadBackgroundPic = async (req, res, next) => {
+
+    try {
+        if(req.file){
+            // add the user id reference
+            let doc = await Document.findById({_id: req.file.id})
+            doc.user = req.user._id;
+            doc.docType = "backgroundPic";
+            console.log(doc);
+            await doc.save();
+
+            let user = await User.findById({_id: req.user._id});
+            user.backgroundPicID = doc._id
+            await user.save();
+            console.log(user);
+            next();
+        } else {
+            next();
+        }
+
+    } catch(err) {
+        console.log(err);
+        res.status(400);
+        // Need error page handling
+        return res.send("Didn't work");
+    }
 }
 
 const getFilesByID = (req, res, next) => {
@@ -151,5 +179,6 @@ module.exports = {
     getFilesByID,
     getFileByID,
     getFileByFilename,
-    uploadProfilePic
+    uploadProfilePic,
+    uploadBackgroundPic
 }
