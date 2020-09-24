@@ -68,7 +68,8 @@ header#header.d-flex.flex-column.justify-content-center
 
 
 #hero.d-flex.flex-column.justify-content-center
-    .intro(style="'http://localhost:3000/user/image/'"+ user1.backgroundPicID.filename)
+    .intro
+        img(src='http://localhost:3000/user/image/' + user1.backgroundPicID.filename alt='no_image')
         .container
             .row#homescreen
                 .intro-text
