@@ -38,8 +38,8 @@ block content
             br
             br
             each c in blog.comments
-                .media.mb-4
-                    img.d-flex.mr-3.rounded-circle(src='http://placehold.it/50x50' alt='')
+                .media.mb-4#borderComment
+                    img#commentProfilePic(src='http://localhost:3000/user/images/'+ c.profilePicID alt='no_image')     
                     .media-body
                         h5.mt-0 #{c.author}  
                         #comment-top #{c.content}   
@@ -51,6 +51,7 @@ block content
                         .panel-footer#comment-bottom
                             p #[a(href = '/user/profile/'+c.author) #[i.glyphicon.glyphicon-user] #{' ' } ]
                                 span #{moment(c.date).startOf('day').fromNow()}
+                hr
                             
         script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
 

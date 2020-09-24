@@ -1,0 +1,13 @@
+#commentProfilePic {
+    border-radius: 20vw;
+    border: 1px solid ;
+    width: 4vw;
+    margin-right: 1vw;
+}
+#borderComment{
+    border: 1vw dashed transparent ;
+    padding: 1vw;
+    background-color: #D3D3D3;
+    border-radius: 20vw;
+
+}

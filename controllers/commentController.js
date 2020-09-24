@@ -11,6 +11,7 @@ const addComment = async (req, res) => {
     var newComment = new Comment({
         author : req.user.username,
         content : req.body.content,
+        profilePicID : req.user.profilePicID,
         parentPost : req.params._id,
         date: Date.now()
     });
@@ -30,6 +31,7 @@ const addComment = async (req, res) => {
         if (err) return console.error(err);
     });
     res.redirect('/blog-posts/'+req.params._id);
+    console.log(newComment);
 
 };
 
