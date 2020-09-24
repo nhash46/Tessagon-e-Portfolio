@@ -6,7 +6,7 @@ block content
     br
     br
     .container
-        h5 Posted by 
+        h5 Posted by
             a(href = '/user/profile/'+blog.author) #{blog.author}
             span  #[ #{moment(blog.date).startOf('day').fromNow()}]
         #blog-title
@@ -42,18 +42,18 @@ block content
                 .media.mb-4
                     img.d-flex.mr-3.rounded-circle(src='http://placehold.it/50x50' alt='')
                     .media-body
-                        h5.mt-0 #{c.author}  
-                        #comment-top #{c.content}   
+                        h5.mt-0 #{c.author}
+                        #comment-top #{c.content}
                             if user
                                 if user.username == c.author
                                     a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id) delete
                                     a.btn.btn-link.edit-comment(type= 'button') edit
-   
+
                         .panel-footer#comment-bottom
                             p #[a(href = '/user/profile/'+c.author) #[i.glyphicon.glyphicon-user] #{' ' } ]
                                 span #{moment(c.date).startOf('day').fromNow()}
-                            
+
         script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
-    
+
 
 
