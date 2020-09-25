@@ -917,3 +917,17 @@ header .intro-text {
 .padButton {
 	margin: 0.5vw;
 }
+
+.wide {
+	width: 50vw;
+	margin-top: 2vh;
+	color: black;
+}
+
+.edit-experience {
+	margin-left: 2vw;
+}
+
+.padDate {
+	margin-left: 0.5vw;
+}

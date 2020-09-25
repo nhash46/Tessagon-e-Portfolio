@@ -511,19 +511,28 @@ script(type='text/javascript' src='/js/modalID.js')
                     span(aria-hidden='true') &times;
             .modal-body
                 for i in user1.experience
-                    h5
-                    #{i.company} #{i.role}
+                    h3 #{i.company}
                     form(method='POST' action='/user/editExperience/' + i._id)
                         input.form-control(name="company" type='text' autofocus='' required='isRequired' value=i.company)
                         br
                         input.form-control(name="role" type='text' autofocus='' required='isRequired' value=i.role)
                         br
-                        | Start date:
-                        input(name= "experienceStartDate" type='month' required='isRequired' value=i.experienceStartDate)
+                        .container
+                            .row
+                                .col-md-6
+                                    | Start date:
+                                    input.padDate(name= "experienceStartDate" type='month' required='isRequired' value=i.experienceStartDate)
+                                .col-md-6
+                                    | End date:
+                                    input.padDate(name= "experienceEndDate" type='month' required='isRequired' value=i.experienceEndDate)
                         br
-                        | End date: NEED TO FIX
-                        input(name= "experienceEndDate" type='month' required='isRequired' value=i.experienceEndDate)
-                        button.btn.btn-secondary.edit-experience(type='submit' experience-id=i._id) Save changes
+                        .container
+                            .row
+                                .col-md-6
+                                    button.btn.btn-secondary(type='submit' experience-id=i._id) Save changes
+                                    button.btn.btn-secondary.edit-experience(type='submit') Delete Experience
+                        br
+                        hr.wide
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
 
