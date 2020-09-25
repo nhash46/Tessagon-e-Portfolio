@@ -29,7 +29,7 @@ const addComment = async (req, res) => {
     newComment.save(function (err) {
         if (err) return console.error(err);
     });
-    res.redirect('/blog-posts/'+req.params._id);
+    res.redirect('/blog-posts/'+req.params.username+'/'+req.params._id);
 
 };
 

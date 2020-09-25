@@ -13,12 +13,13 @@ $(document).ready(function(){
         $target = $(e.target);
         const blog_id = $target.attr('blog-id');
         const comment_id =$target.attr('comment-id');
+        const username = $target.attr('user-username');
         $.ajax({
             type: 'DELETE',
             url: '/comments/'+comment_id,
             success: function(response){
                 alert('Deleting Comment');
-                window.location.href='/blog-posts/'+blog_id;
+                window.location.href='/blog-posts/'+username+'/'+blog_id;
             },
             error: function(err){
                 console.log(err);
@@ -32,12 +33,13 @@ $(document).ready(function(){
     $('.delete-blog').on('click', function(e){
         $target = $(e.target);
         const _id = $target.attr('data-id');
+        const username = $target.attr('user-username');
         $.ajax({
-            url: '/blog-posts/'+_id,
+            url: '/blog-posts/'+username+'/'+_id,
             type: 'DELETE',
             success: function(response){
                 alert('Deleting Blog');
-                window.location.href='/blog-posts';
+                window.location.href='/blog-posts/'+username;
             },
             error: function(err){
                 console.log(err);

@@ -40,7 +40,7 @@ const addBlog = (req, res) => {
             }
             else{
                 //TODO change to blog-posts
-                res.redirect('/blog-posts');
+                res.redirect('/blog-posts/'+req.user.username);
             }
         });
     }
@@ -99,7 +99,7 @@ const showBlogs = (req, res) => {
     if(req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all blogs from DB
-        Blog.find({title: regex}, function(err, allBlogs){
+        Blog.find({title: regex, author: req.params.username}, function(err, allBlogs){
             if(err){
                 console.log(err);
             } else {
@@ -112,20 +112,23 @@ const showBlogs = (req, res) => {
                         title: 'Blog',
                         searchQuery: req.query.search,
                         blogs: allBlogs,
-                        noMatch: noMatch
+                        noMatch: noMatch,
+                        blogAuthor: req.params.username
                     });
             }
         });
     } else {
         // Get all blogs from DB
-        Blog.find({}, function(err, allBlogs){
+        Blog.find({author: req.params.username}, function(err, allBlogs){
             if(err){
                 console.log(err);
             } else {
                 res.render("blog-posts",
-                    {
+                    {   
+                        title: 'Blog',
                         blogs: allBlogs,
-                        noMatch: noMatch
+                        noMatch: noMatch,
+                        blogAuthor: req.params.username
                     });
             }
         });
@@ -217,7 +220,7 @@ const updateBlog = (req, res) => {
         }
         else{
             //req.flash('success','Post Updated');
-            res.redirect('/blog-posts');
+            res.redirect('/blog-posts/'+req.user.username+'/'+req.params._id);
         }
     });
 };
@@ -251,6 +254,15 @@ function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
 
+const authCheck = (req, res, next) => {
+    if(req.user.username == req.params.username){
+        // if blog author
+        next()
+    } else {
+        res.redirect('/blog-posts/'+req.params.username);
+    }
+}
+
 // remember to export the functions
 module.exports = {
     getAllBlogPosts,
@@ -263,5 +275,6 @@ module.exports = {
     updateBlog,
     deleteBlog,
     //ensureAuthenticated,
-    showBlogs
+    showBlogs,
+    authCheck
 };

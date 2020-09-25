@@ -20,7 +20,7 @@ block content
                                 .card-body
                                     h2.card-title #{blog.title}
                                     p.card-text #{blog.body}
-                                    a.btn.btn-primary(href='/blog-posts/'+blog._id) Read More &rarr;
+                                    a.btn.btn-primary(href='/blog-posts/'+blogAuthor+'/'+blog._id) Read More &rarr;
                                 .card-footer.text-muted
                                     | posted by #{blog.author}, #{moment(blog.date).startOf('day').fromNow()}
                     // Pagination
@@ -41,13 +41,14 @@ block content
                                 input.form-control#normalfont(name='search', type='text', placeholder= 'Blog search...' class='form-control')
                                 input.btn.btn-primary(type='submit', value='Search')
                 .card.my-4
-                    if user
-                        input.btn.btn-primary(type='submit', value='Create a post', onclick='createPost()')
+                    if user && (user.username == blogAuthor)
+                        a.btn.btn-primary(href='/blog-posts/'+user.username+'/submit') Create a post
                     if !user
-                            input.btn.btn-primary(type='submit', value='Sign in to create a post!', onclick='signIn()')
-                    script.
+                        a.btn.btn-primary(href='/user/login') Sign in to comment on a post!
+                    
+                    //script.
                         function createPost() {
-                            window.location.href = '/blog-posts/submit'
+                            window.location.href = '/blog-posts/'+user.username+'/submit'
                         }
                         function signIn() {
                             window.location.href = '/user/login'

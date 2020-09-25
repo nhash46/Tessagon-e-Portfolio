@@ -15,8 +15,8 @@ block content
         p= blog.body
         if user
             if user.username == blog.author
-                a.btn.btn-default.btn-sm(href='/blog-posts/edit/'+blog._id) Edit
-                a.btn.btn-danger.btn-sm.delete-blog(href='#', data-id=blog._id) Delete
+                a.btn.btn-default.btn-sm(href='/blog-posts/'+user.username+'/edit/'+blog._id) Edit
+                a.btn.btn-danger.btn-sm.delete-blog(href='#', data-id=blog._id, user-username=user.username) Delete
         hr
         .container
             if (user)
@@ -34,7 +34,7 @@ block content
                     .card-body
                         form
                             .form-group
-                                a.btn.btn-primary(href="/") Sign in to create a post!
+                                a.btn.btn-primary(href="/user/login") Sign in to comment!
                                 
             br
             br
@@ -46,7 +46,7 @@ block content
                         #comment-top #{c.content}   
                             if user
                                 if user.username == c.author
-                                    a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id) delete
+                                    a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id, user-username=user.username) delete
                                     a.btn.btn-link.edit-comment(type= 'button') edit
    
                         .panel-footer#comment-bottom
