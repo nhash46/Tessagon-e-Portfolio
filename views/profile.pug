@@ -26,7 +26,9 @@ head
     link(rel='stylesheet' type='text/css' href='/css/prettyPhoto.css')
     link(href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css')
+    script(src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous")
     script(type='text/javascript' src='/js/modernizr.custom.js')
+
     // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
     // WARNING: Respond.js doesn't work if you view the page via file://
     //if lt IE 9
@@ -386,6 +388,8 @@ script(type='text/javascript' src='/js/contact_me.js')
 script(type='text/javascript' src='/js/main.js')
 script(type='text/javascript' src='/js/typewriter.js')
 script(type='text/javascript' src='/js/modalID.js')
+script(src='/js/experienceScript.js')
+script(src='/js/educationScript.js')
 
 
 #portfolioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
@@ -530,7 +534,7 @@ script(type='text/javascript' src='/js/modalID.js')
                             .row
                                 .col-md-6
                                     button.btn.btn-secondary(type='submit' experience-id=i._id) Save changes
-                                    button.btn.btn-secondary.edit-experience(type='submit') Delete Experience
+                                    a.btn.btn-secondary.delete-experience(href='/user/profile#experience' experience-id=i._id) Delete Experience
                         br
                         hr.wide
             .modal-footer

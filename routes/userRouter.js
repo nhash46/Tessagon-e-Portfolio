@@ -89,5 +89,11 @@ userRouter.get("/profile/:username", userController.getOtherUserProfile);
 // load global user's profile
 userRouter.get('/profile', userController.authCheck, userController.getUserProfile);
 
+// delete experience object
+userRouter.delete('/experience/:_id', experienceController.deleteExperience);
+
+// delete education object
+userRouter.delete('/education/:_id', educationController.deleteEducation);
+
 
 module.exports = userRouter;
