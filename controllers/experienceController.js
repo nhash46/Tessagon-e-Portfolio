@@ -60,7 +60,37 @@ const editExperience = (req,res) => {
 
 };
 
+const deleteExperience = (req, res) => {
+  // check if user is logged in
+  if(!req.user){
+    console.log('user not logged in!');
+    res.status(500).send();
+  }
+
+  let query = {_id:req.params._id}
+
+  // check if experience object belongs to user
+  Experience.findById(query, function(err, experience){
+    if(experience.user.toString() != req.user._id.toString()){
+      console.log('experience user _id: ' + experience.user._id);
+      console.log('global user _id:     ' + req.user._id);
+      console.log('_id not found!');
+      res.status(500).send();
+    } 
+    else {
+      Experience.remove(query, function(err){
+        if(err){
+          console.log(err);
+        }
+        res.send('Success')
+
+      });
+    }
+  });
+}
+
 module.exports = {
     addExperience,
-    editExperience
+    editExperience,
+    deleteExperience
 };
