@@ -188,7 +188,7 @@ header#header.d-flex.flex-column.justify-content-center
                                     .hover-text
                                         h4 Project Title
                                         small Web Design
-                                    embed(src='http://localhost:3000/user/document/'+doc.filename type='application/pdf' width='300' height='300' )
+                                    embed(src='http://localhost:3000/user/document/'+doc.filename+'?iframe=true&width=100&height=100' type='application/pdf' width='300' height='300' rel='prettyPhoto')
 
 // Resume Section
 #experience.text-center
@@ -370,17 +370,19 @@ script(type='text/javascript' src='/js/typewriter.js')
 
 
 #portfolioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
-    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-        .modal-content
-            .modal-header
-                h5#portfolioModalLabel.modal-title Edit Bio
-                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                    span(aria-hidden='true') &times;
-            .modal-body
-                |Edit documents here
-            .modal-footer
-                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                button.btn.btn-secondary(type='button') Save change
+    form(method='POST' action='/user/upload' enctype="multipart/form-data").form-signin
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#portfolioModalLabel.modal-title Edit Bio
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    label(for='uploadDocuments') Upload a document
+                    input#uploadDocuments.form-control-file(name='file' type='file' required='isRequired')
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type ='submit') Upload file
 
 #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
     form(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
