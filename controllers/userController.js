@@ -263,7 +263,13 @@ const userID = async (req,res) => {
 
 // function that renders the user profile
 const getUserProfile = async (req, res) => {
-    User.findById(req.user._id).populate('education').populate('experience').populate('document').populate('profilePicID').exec((err,user1) => {
+    User.findById(req.user._id)
+        .populate('education')
+        .populate('experience')
+        .populate('document')
+        .populate('profilePicID')
+        .populate('backgroundPicID')
+        .exec((err,user1) => {
         console.log(user1);
         res.render('profile', {
             user1: user1
@@ -272,7 +278,13 @@ const getUserProfile = async (req, res) => {
 };
 
 const getOtherUserProfile = async (req, res) => {
-    User.findOne({username:req.params.username}).populate('education').populate('experience').populate("profilePicID").exec((err, user2) => {
+    User.findOne({username:req.params.username})
+        .populate('education')
+        .populate('experience')
+        .populate('document')
+        .populate("profilePicID")
+        .populate('backgroundPicID')
+        .exec((err, user2) => {
         console.log(user2);
         res.render('index', {
             user2: user2

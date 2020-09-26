@@ -69,6 +69,10 @@ header#header.d-flex.flex-column.justify-content-center
 
 #hero.d-flex.flex-column.justify-content-center
     .intro
+        if user1.backgroundPicID
+            img.background(src='http://localhost:3000/user/image/' + user1.backgroundPicID.filename alt='no_image')
+        if !user1.backgroundPicID
+            img.background(src='/img/profolio-tight.png' alt='no_image')
         .container
             .row#homescreen
                 .intro-text
@@ -167,6 +171,7 @@ header#header.d-flex.flex-column.justify-content-center
     .container
         .section-title.text-center.center
             h2 Portfolio
+            //embed(src='http://localhost:3000/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
             button.btn.btn-primary(type='button' data-toggle='modal' data-target='#portfolioModal')
                 |Edit Portfolio
             br
@@ -183,7 +188,7 @@ header#header.d-flex.flex-column.justify-content-center
                                     .hover-text
                                         h4 Project Title
                                         small Web Design
-                                    img.img-responsive(src='http://localhost:3000/user/image/'+doc.filename)
+                                    embed(src='http://localhost:3000/user/document/'+doc.filename type='application/pdf' width='300' height='300' )
 
 // Resume Section
 #experience.text-center
@@ -424,7 +429,7 @@ script(type='text/javascript' src='/js/typewriter.js')
 
 
 #homeModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='homeModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editHomeInfo')
+    form(method='POST' action='/user/editHomeInfo' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
@@ -439,11 +444,8 @@ script(type='text/javascript' src='/js/typewriter.js')
                     label(for='inputSurname') Last Name
                     br
                     br
-                    input#editBackgroundPic.form-control-file(type='file')
+                    input#editBackgroundPic.form-control-file(name='background' type='file')
                     label(for='editBackgroundPic') Edit your background picture!
-                    
-
                 .modal-footer
-                    
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save changes

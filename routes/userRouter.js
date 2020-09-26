@@ -34,7 +34,7 @@ userRouter.get("/upload", (req, res) => {
 // Upload form
 userRouter.post("/upload", 
     uploadController.upload.single('file'),
-    uploadController.uploadProfilePic, 
+    uploadController.uploadDocument,
     userController.redirectProfile
     );
 
@@ -46,6 +46,9 @@ userRouter.get("/files", uploadController.getFilesByID);
 
 // GET file by userID and Filename
 userRouter.get("/image/:filename", uploadController.getFileByFilename);
+
+// GET document by filename
+userRouter.get("/document/:filename", uploadController.getDocumentByFilename);
 
 // Sign Up form
 userRouter.get("/signup", userController.newUserForm);
@@ -67,7 +70,11 @@ userRouter.post("/populateInfo",
 userRouter.post("/editNavInfo", userController.editNavInfo);
 
 // Edit info on the home page
-userRouter.post("/editHomeInfo", userController.editHomeInfo);
+userRouter.post("/editHomeInfo",
+    uploadController.upload.single('background'),
+    uploadController.uploadBackgroundPic,
+    userController.editHomeInfo
+);
 
 // Edit about me
 userRouter.post("/editAboutMe", 

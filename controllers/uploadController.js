@@ -41,7 +41,7 @@ const storage = new GridFsStorage({
 });
 const upload = multer({ storage });
 
-const uploadLink = async (req,res,next) => {
+const uploadDocument = async (req,res,next) => {
 
     //console.log(req.file);
     try {
@@ -88,9 +88,37 @@ const uploadProfilePic = async (req, res, next) => {
     } catch(err) {
         console.log(err);
         res.status(400);
+        // Need error page handling
         return res.send("Didn't work");
     }
+}
 
+const uploadBackgroundPic = async (req, res, next) => {
+
+    try {
+        if(req.file){
+            // add the user id reference
+            let doc = await Document.findById({_id: req.file.id})
+            doc.user = req.user._id;
+            doc.docType = "backgroundPic";
+            console.log(doc);
+            await doc.save();
+
+            let user = await User.findById({_id: req.user._id});
+            user.backgroundPicID = doc._id
+            await user.save();
+            console.log(user);
+            next();
+        } else {
+            next();
+        }
+
+    } catch(err) {
+        console.log(err);
+        res.status(400);
+        // Need error page handling
+        return res.send("Didn't work");
+    }
 }
 
 const getFilesByID = (req, res, next) => {
@@ -145,11 +173,34 @@ const getFileByFilename = (req, res, next) => {
         });
 }
 
+const getDocumentByFilename = (req,res,next) => {
+
+    gfs
+        .find({
+            filename: req.params.filename
+        })
+        .toArray(function(err, files){
+            if(!files || files.length === 0){
+                console.log('no files exist');
+                return res.status(404).json({
+                    err: "no files exist"
+                });
+        }
+
+        res.set('Content-Type', files[0].contentType);
+        res.set('Content-Disposition', `inline; filename:`+req.params.filename);
+        console.log(files[0]);
+        gfs.openDownloadStreamByName(req.params.filename).pipe(res);
+    });
+}
+
 module.exports = {
     upload,
-    uploadLink,
+    uploadDocument,
+    uploadProfilePic,
+    uploadBackgroundPic,
     getFilesByID,
     getFileByID,
     getFileByFilename,
-    uploadProfilePic
+    getDocumentByFilename
 }

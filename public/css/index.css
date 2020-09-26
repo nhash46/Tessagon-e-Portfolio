@@ -109,19 +109,34 @@ hr {
 	margin-right: 10px;
 }
 /* Home Section */
-.intro {
+/*.intro {
 	display: table;
 	width: 100%;
 	height: auto;
 	padding: 100px 0;
 	text-align: center;
 	color: #fff;
-	background: url(../img/profolio-tight.png)no-repeat center top;
 	background-color: #7bc3d1;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
 	-o-background-size: cover;
+}*/
+.intro {
+	display: table;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.background {
+	display: table;
+	pointer-events: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	background-color: #7bc3d1;
 }
 .section-title.center {
 	padding: 25px 0 45px 0;
