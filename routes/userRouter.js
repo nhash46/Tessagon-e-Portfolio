@@ -17,7 +17,7 @@ const blogController = require("../controllers/blogController.js");
 
 // Signing up - authenticate newUser, then direct to info form
 userRouter.post("/signup", userValidator.addUser, userController.addUser,
-    passport.authenticate('heroku-passport', { failureRedirect: '/' }),
+    passport.authenticate('local', { failureRedirect: '/' }),
     function(req, res) {
         if(!req.user.bio){
             res.redirect('/signup/form/');
