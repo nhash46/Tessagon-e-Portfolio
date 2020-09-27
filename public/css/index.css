@@ -942,3 +942,6 @@ header .intro-text {
 #homescreen {
 	margin-top: 30vh;
 }
+#down {
+	margin-bottom: -13px;
+}
