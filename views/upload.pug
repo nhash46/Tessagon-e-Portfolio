@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    .container
+        .row
+            .col-lg-10.col-xl-9.mx-auto
+                .card.card-signin.flex-row.my-5
+                    .card-body
+                        h5.card-title.text-center Basic Information.
+                        form(method='POST', action='/user/upload/' enctype="multipart/form-data").form-signin
+                            hr
+                            .form-row
+                                .form-group
+                                label(for='uploadProfilePic') Upload a picture of yourself!
+                                input#uploadProfilePic.form-control-file(name='file' type='file')
+                                br
+                                hr
+                                button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Submit
+
+
+

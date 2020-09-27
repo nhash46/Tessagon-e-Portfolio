@@ -66,6 +66,7 @@ header#header.d-flex.flex-column.justify-content-center
                     i.fa.fa-address-card.navbar-icons
                         span Contact
 
+
 #hero.d-flex.flex-column.justify-content-center
     .intro
         .container
@@ -74,6 +75,7 @@ header#header.d-flex.flex-column.justify-content-center
                     h1.title
                         | Hello, I&apos;m
                         span.name  #{user1.first_name}
+
                     p
                         |I'm a
                         span.txt-rotate(data-period='1000' data-rotate='[ " Designer.", " Developer.", " Typewriter!" ]')
@@ -111,7 +113,10 @@ header#header.d-flex.flex-column.justify-content-center
             hr
         .row
             .col-md-12.text-center
-                img.img-responsive(src='img/about.jpg')
+                if user1.profilePicID
+                    img.img-responsive(src='http://localhost:3000/user/image/'+ user1.profilePicID.filename)
+                if !user1.profilePicID
+                    img.img-responsive(src='' alt='No Profile Picture')
             .col-md-8.col-md-offset-2
                 .about-text
                     p
@@ -170,70 +175,16 @@ header#header.d-flex.flex-column.justify-content-center
             .clearfix
         .row
             .portfolio-items
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/01-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/01-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/02-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development
-                                img.img-responsive(src='img/portfolio/02-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/03-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/03-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/04-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/04-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/05-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development
-                                img.img-responsive(src='img/portfolio/05-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.branding
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/06-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Branding
-                                img.img-responsive(src='img/portfolio/06-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.branding.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/07-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development, Branding
-                                img.img-responsive(src='img/portfolio/07-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/08-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/08-small.jpg' alt='Project Title')
+                for doc in user1.document
+                    .col-sm-6.col-md-3.col-lg-3.web
+                        .portfolio-item
+                            .hover-bg
+                                a(href='preview/route' title=doc.filename rel='prettyPhoto')
+                                    .hover-text
+                                        h4 Project Title
+                                        small Web Design
+                                    img.img-responsive(src='http://localhost:3000/user/image/'+doc.filename)
+
 // Resume Section
 #experience.text-center
     .container
@@ -427,7 +378,7 @@ script(type='text/javascript' src='/js/typewriter.js')
                 button.btn.btn-secondary(type='button') Save change
 
 #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editAboutMe')
+    form(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
@@ -441,7 +392,7 @@ script(type='text/javascript' src='/js/typewriter.js')
                     label(for='editResume') Edit your resume!
                     input#editResume.form-control-file(type='file')
                     label(for='editProfilePic') Edit your profile picture!
-                    input#editProfilePic.form-control-file(type='file')
+                    input#editProfilePic.form-control-file(name='propic' type='file')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save changes            
