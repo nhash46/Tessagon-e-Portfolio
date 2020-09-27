@@ -312,7 +312,7 @@ header#header.d-flex.flex-column.justify-content-center
                                             button.btn.btn-secondary.edit-education(type='submit') Save changes
                
 // Contact Section
-#contact.text-center(onload="myShareFunction()")
+#contact.text-center
     .container
         .section-title.center
             h2 Contact
@@ -336,7 +336,7 @@ header#header.d-flex.flex-column.justify-content-center
             .social
                 ul
                     li
-                        iframe#shareURL(src='' width='77' height='28' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowtransparency='true' allow='encrypted-media')
+                        iframe#shareURL(src='https://tessagon-e-portfolio.herokuapp.com/user/profile/#{user1.usernmae}' + width='77' height='28' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowtransparency='true' allow='encrypted-media')
                     li
                         a(href='#')
                             i.fa.fa-twitter
@@ -367,8 +367,6 @@ script(type='text/javascript' src='/js/jqBootstrapValidation.js')
 script(type='text/javascript' src='/js/contact_me.js')
 script(type='text/javascript' src='/js/main.js')
 script(type='text/javascript' src='/js/typewriter.js')
-script(type='text/javascript' src='/js/shareAPI.js')
-
 
 #portfolioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
     .modal-dialog.modal-dialog-centered.modal-lg(role='document')
