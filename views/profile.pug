@@ -188,7 +188,7 @@ header#header.d-flex.flex-column.justify-content-center
                                     .hover-text
                                         h4=doc.filename
                                         small Web Design
-                                    embed(src='http://localhost:3000/user/document/'+doc.filename type='application/pdf' width='300' height='300')
+                                    embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='300' height='300')
 
 // Resume Section
 #experience.text-center
