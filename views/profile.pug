@@ -27,6 +27,9 @@ head
     link(href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css')
     script(type='text/javascript' src='js/modernizr.custom.js')
+
+    // linkedIn share api
+    script(src='https://platform.linkedin.com/in.js' type='text/javascript')
     // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
     // WARNING: Respond.js doesn't work if you view the page via file://
     //if lt IE 9
@@ -336,7 +339,8 @@ header#header.d-flex.flex-column.justify-content-center
             .social
                 ul
                     li
-                        iframe(src='https://www.facebook.com/plugins/share_button.php?href=https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user1.username + '%2F&layout=button&size=small&width=67&height=20&appId'  width='77' height='28' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowtransparency='true' allow='encrypted-media')
+                        a(href='#')
+                            i.fa.fa-facebook
                     li
                         a(href='#')
                             i.fa.fa-twitter
@@ -355,6 +359,14 @@ header#header.d-flex.flex-column.justify-content-center
         .fnav
             p
                 | Tessagon
+        .social
+             ul
+                li
+                    iframe#down(src='https://www.facebook.com/plugins/share_button.php?href=https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user1.username + '%2F&layout=button&size=small&width=67&height=20&appId'  width='77' height='28' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowtransparency='true' allow='encrypted-media')
+                    script(type='IN/Share' data-url='https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user1.username)
+        
+
+
 script(type='text/javascript' src='/js/jquery.1.11.1.js')
 script(type='text/javascript' src='/js/bootstrap.js')
 script(type='text/javascript' src='/js/SmoothScroll.js')
