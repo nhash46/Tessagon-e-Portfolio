@@ -61,7 +61,12 @@ userRouter.get("/signup/form", userController.authCheck, userController.infoPage
 
 // Populate info using info form details
 userRouter.post("/populateInfo", 
-    uploadController.upload.single('propic'),
+    uploadController.upload.fields([{
+        name: 'resume', maxCount: 1
+    }, {
+        name: 'propic', maxCount: 1
+    }]),
+    uploadController.uploadResume,
     uploadController.uploadProfilePic,
     userController.populateInfo,
     experienceController.addExperience, 
