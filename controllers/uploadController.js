@@ -43,7 +43,6 @@ const upload = multer({ storage });
 
 const uploadDocument = async (req,res,next) => {
 
-    //console.log(req.file);
     try {
         if(req.file) {
             // add the user id reference
@@ -73,11 +72,10 @@ const uploadDocument = async (req,res,next) => {
 
 const uploadResume = async (req,res,next) => {
 
-    //console.log(req.file);
     try {
-        if(req.file) {
+        if(req.files['resume']) {
             // add the user id reference
-            let doc = await Document.findById({_id: req.file.id})
+            let doc = await Document.findById({_id: req.files['resume'][0].id})
             doc.user = req.user._id;
             doc.title = req.body.title;
             doc.subHead = req.body.subHead;
@@ -105,9 +103,9 @@ const uploadResume = async (req,res,next) => {
 const uploadProfilePic = async (req, res, next) => {
 
     try {
-        if(req.file){
+        if(req.files['propic']){
             // add the user id reference
-            let doc = await Document.findById({_id: req.file.id})
+            let doc = await Document.findById({_id: req.files['propic'][0].id})
             doc.user = req.user._id;
             doc.docType = "profilePic";
             //console.log(doc);
@@ -118,7 +116,8 @@ const uploadProfilePic = async (req, res, next) => {
             await user.save();
             //console.log(user);
             next();
-        } else {
+        }
+        else {
             next();
         }
         
