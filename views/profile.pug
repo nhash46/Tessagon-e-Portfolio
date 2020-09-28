@@ -400,7 +400,7 @@ script(type='text/javascript' src='/js/typewriter.js')
             .modal-body
                 for doc_name in user1.document
                     h3 #{doc_name.title} - #{doc_name.subHead}
-                    button.btn.btn-secondary.delete-document(type ='submit', document-id=doc_name._id) Remove
+                    button.btn.btn-secondary.delete-document(type ='button', document-id=doc_name._id) Remove
                     hr
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close

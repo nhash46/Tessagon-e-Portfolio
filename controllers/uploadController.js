@@ -256,7 +256,10 @@ const deleteDocument = (req,res) => {
         if (err) {
             console.log(err.message);
             res.status(500).send("Server Error");
+        } else {
+            res.send('Success');
         }
+       
     });
 };
 
