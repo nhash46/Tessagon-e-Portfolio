@@ -51,7 +51,7 @@ userRouter.get("/image/:filename", uploadController.getImageByFilename);
 userRouter.get("/document/:filename", uploadController.getDocumentByFilename);
 
 // GET resume by filename
-userRouter.get("/resume/:filename", uploadController.getDocumentByFilename);
+userRouter.get("/resume/:filename", uploadController.getResumeByFilename);
 
 // DELETE document by filename
 userRouter.delete("/document/:_id", uploadController.deleteDocument);
