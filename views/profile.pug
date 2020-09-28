@@ -132,9 +132,9 @@ header#header.d-flex.flex-column.justify-content-center
                     br
                     br
                     .text-center
-                        a.btn.btn-primary(href='#')
+                        a.btn.btn-primary(href='http://localhost:3000/user/document/'+user1.resumeID+'?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
                             i.fa.fa-download
-                            |  Download Resume
+                            |  View Resume
 // Skills Section
 #skills.text-center
     .container
@@ -173,7 +173,9 @@ header#header.d-flex.flex-column.justify-content-center
             h2 Portfolio
             //embed(src='http://localhost:3000/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
             button.btn.btn-primary(type='button' data-toggle='modal' data-target='#portfolioModal')
-                |Edit Portfolio
+                |Add Portfolio Item
+            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPortfolioModal')
+                | Edit Portfolio
             br
             br
             hr
@@ -186,7 +188,7 @@ header#header.d-flex.flex-column.justify-content-center
                             .hover-bg
                                 a(href='http://localhost:3000/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
                                     .hover-text
-                                        h4=doc.title
+                                        h4 #{doc.title}
                                         small #{doc.subHead}
                                     embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
 
@@ -381,12 +383,27 @@ script(type='text/javascript' src='/js/typewriter.js')
                     label(for='uploadDocuments') Document Title
                     input.form-control-file(name='title' type='text' placeholder='Title' autofocus='' required='isRequired')
                     label(for='uploadDocuments') Document Subheading
-                    input.form-control-file(name='subHead' type='text' placeholder='Sub-Heading' autofocus='' required='isRequired')
+                    input.form-control-file.padLeft(name='subHead' type='text' placeholder='Sub-Heading' autofocus='' required='isRequired')
                     label(for='uploadDocuments') Upload a document
                     input#uploadDocuments.form-control-file(name='file' type='file' required='isRequired')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type ='submit') Upload file
+
+#editPortfolioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#editPortfolioModalLabel.modal-title Edit Portfolio
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                for doc in user1.document
+                    #{doc.title}
+                    button.btn.btn-secondary(type ='submit') Remove
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button.btn.btn-secondary(type ='submit') Upload file
 
 #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
     form(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
