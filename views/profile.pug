@@ -504,7 +504,7 @@ script(src='/js/educationScript.js')
                 br
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                    button.btn.btn-secondary(type='submit') Save changes
+                    button.btn.btn-secondary.edit-experience(type='submit') Save changes
 
 #editExperience.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='editExperiencelabel' aria-hidden='true')
     .modal-dialog.modal-dialog-centered.modal-lg(role='document')
@@ -533,7 +533,7 @@ script(src='/js/educationScript.js')
                         .container
                             .row
                                 .col-md-6
-                                    button.btn.btn-secondary(type='submit' experience-id=i._id) Save changes
+                                    button.btn.btn-secondary.edit-experience(href='/user/profile#experience' type='submit' experience-id=i._id) Save changes
                                     a.btn.btn-secondary.delete-experience(href='/user/profile#experience' experience-id=i._id) Delete Experience
                         br
                         hr.wide

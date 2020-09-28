@@ -4,9 +4,10 @@ $(document).ready(function(){
         $target = $(e.target);
         const _id = $target.attr('experience-id');
         $.ajax({
-            type: 'POST',
             url: '/user/editExperience/'+_id,
+            type: 'POST',
             success: function(response){
+                location.reload();
                 window.location.href='/user/profile#experience';
             },
             error: function(err){

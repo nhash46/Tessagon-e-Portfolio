@@ -54,7 +54,7 @@ const editExperience = (req,res) => {
         res.status(400);
       }
       else{
-        res.redirect('/user/profile#experience');
+          res.send('Success')
       } 
     });
 
