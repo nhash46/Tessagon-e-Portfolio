@@ -45,10 +45,13 @@ userRouter.get("/files", uploadController.getFilesByID);
 //userRouter.get("/image/:id", uploadController.getFileByID);
 
 // GET file by userID and Filename
-userRouter.get("/image/:filename", uploadController.getFileByFilename);
+userRouter.get("/image/:filename", uploadController.getImageByFilename);
 
 // GET document by filename
 userRouter.get("/document/:filename", uploadController.getDocumentByFilename);
+
+// GET resume by filename
+userRouter.get("/resume/:filename", uploadController.getDocumentByFilename);
 
 // Sign Up form
 userRouter.get("/signup", userController.newUserForm);
@@ -77,8 +80,13 @@ userRouter.post("/editHomeInfo",
 );
 
 // Edit about me
-userRouter.post("/editAboutMe", 
-    uploadController.upload.single('propic'),
+userRouter.post("/editAboutMe",
+    uploadController.upload.fields([{
+            name: 'resume', maxCount: 1
+        }, {
+            name: 'propic', maxCount: 1
+        }]),
+    uploadController.uploadResume,
     uploadController.uploadProfilePic,
     userController.editAboutMe
     );

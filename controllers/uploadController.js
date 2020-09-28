@@ -45,21 +45,56 @@ const uploadDocument = async (req,res,next) => {
 
     //console.log(req.file);
     try {
-        // add the user id reference
-        let doc = await Document.findById({_id: req.file.id})
-        doc.user = req.user._id;
-        doc.title = req.body.title;
-        doc.subHead = req.body.subHead
-        console.log(doc);
-        await doc.save();
+        if(req.file) {
+            // add the user id reference
+            let doc = await Document.findById({_id: req.file.id})
+            doc.user = req.user._id;
+            doc.title = req.body.title;
+            doc.subHead = req.body.subHead
+            //console.log(doc);
+            await doc.save();
 
-        // add the file id reference to the user
-        const filter = { _id: req.user._id};
-        const update = { "$push" : {"document" : req.file.id}};
-        let user = await User.findOneAndUpdate(filter, update, {new : true});
-        console.log(user.document);
+            // add the file id reference to the user
+            const filter = {_id: req.user._id};
+            const update = {"$push": {"document": req.file.id}};
+            let user = await User.findOneAndUpdate(filter, update, {new: true});
+            //console.log(user.document);
+            next();
+        }
+        else{
+            next();
+        }
+    } catch(err) {
+        console.log(err);
+        res.status(400);
+        return res.send(err);
+    }
+}
 
-        next();
+const uploadResume = async (req,res,next) => {
+
+    //console.log(req.file);
+    try {
+        if(req.file) {
+            // add the user id reference
+            let doc = await Document.findById({_id: req.file.id})
+            doc.user = req.user._id;
+            doc.title = req.body.title;
+            doc.subHead = req.body.subHead;
+            doc.docType = 'resume';
+            //console.log(doc);
+            await doc.save();
+
+            // add the file id reference to the user
+            let user = await User.findById({_id: req.user._id});
+            user.resumeID = doc._id
+            await user.save();
+            //console.log(user.document);
+            next();
+        }
+        else{
+            next();
+        }
     } catch(err) {
         console.log(err);
         res.status(400);
@@ -72,17 +107,17 @@ const uploadProfilePic = async (req, res, next) => {
     try {
         if(req.file){
             // add the user id reference
-        let doc = await Document.findById({_id: req.file.id})
-        doc.user = req.user._id;
-        doc.docType = "profilePic";
-        //console.log(doc);
-        await doc.save();
+            let doc = await Document.findById({_id: req.file.id})
+            doc.user = req.user._id;
+            doc.docType = "profilePic";
+            //console.log(doc);
+            await doc.save();
 
-        let user = await User.findById({_id: req.user._id});
-        user.profilePicID = doc._id
-        await user.save();
-        //console.log(user);
-        next();
+            let user = await User.findById({_id: req.user._id});
+            user.profilePicID = doc._id
+            await user.save();
+            //console.log(user);
+            next();
         } else {
             next();
         }
@@ -103,13 +138,13 @@ const uploadBackgroundPic = async (req, res, next) => {
             let doc = await Document.findById({_id: req.file.id})
             doc.user = req.user._id;
             doc.docType = "backgroundPic";
-            console.log(doc);
+            //console.log(doc);
             await doc.save();
 
             let user = await User.findById({_id: req.user._id});
             user.backgroundPicID = doc._id
             await user.save();
-            console.log(user);
+            //console.log(user);
             next();
         } else {
             next();
@@ -159,7 +194,7 @@ const getFileByID = (req, res, next) => {
         });
 }
 
-const getFileByFilename = (req, res, next) => {
+const getImageByFilename = (req, res, next) => {
     gfs
         .find({
             filename: req.params.filename
@@ -171,6 +206,25 @@ const getFileByFilename = (req, res, next) => {
                     err: "no files exist"
                 });
             }
+            gfs.openDownloadStreamByName(req.params.filename).pipe(res);
+        });
+}
+
+const getResumeByFilename = (req, res, next) => {
+    gfs
+        .find({
+            filename: req.params.filename
+        })
+        .toArray((err, files) => {
+            if (!files || files.length === 0) {
+                console.log('no files exist');
+                return res.status(404).json({
+                    err: "no files exist"
+                });
+            }
+
+            res.set('Content-Type', files[0].contentType);
+
             gfs.openDownloadStreamByName(req.params.filename).pipe(res);
         });
 }
@@ -191,7 +245,6 @@ const getDocumentByFilename = (req,res,next) => {
 
         res.set('Content-Type', files[0].contentType);
         res.set('Content-Disposition', `inline; filename:`+req.params.filename);
-        console.log(files[0]);
         gfs.openDownloadStreamByName(req.params.filename).pipe(res);
     });
 }
@@ -199,10 +252,12 @@ const getDocumentByFilename = (req,res,next) => {
 module.exports = {
     upload,
     uploadDocument,
+    uploadResume,
     uploadProfilePic,
     uploadBackgroundPic,
     getFilesByID,
     getFileByID,
-    getFileByFilename,
-    getDocumentByFilename
+    getImageByFilename,
+    getDocumentByFilename,
+    getResumeByFilename
 }
