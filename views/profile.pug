@@ -132,7 +132,7 @@ header#header.d-flex.flex-column.justify-content-center
                     br
                     br
                     .text-center
-                        a.btn.btn-primary(href='http://localhost:3000/user/document/'+user1.resumeID+'?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
+                        a.btn.btn-primary(href='http://localhost:3000/user/resume/'+user1.resumeID+'?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
                             i.fa.fa-download
                             |  View Resume
 // Skills Section
@@ -419,7 +419,7 @@ script(type='text/javascript' src='/js/typewriter.js')
                     label(for='AboutMe') Tell me about yourself! Max 500 characters.
                     br
                     label(for='editResume') Edit your resume!
-                    input#editResume.form-control-file(name='resume' type='file')
+                    input#editResume.form-control-file(name='resume' type='file' accept="application/pdf")
                     label(for='editProfilePic') Edit your profile picture!
                     input#editProfilePic.form-control-file(name='propic' type='file')
                 .modal-footer
