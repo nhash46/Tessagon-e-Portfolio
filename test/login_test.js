@@ -53,11 +53,23 @@ describe('User Tests', () => {
 
     describe('login', () => {
 
-        it('Should redirect to profile page', (done) => {
+        it('Should redirect to profile page on success', (done) => {
             request(app).post('/user/login')
                 .send({username: 'dccol', password: 'cold'})
                 .then((res) => {
                     expect(res.statusCode).to.equal(302);
+                    expect(res.headers.location).to.equal('/user/profile');
+                    done();
+                })
+                .catch((err) => done(err));
+        })
+
+        it('Should redirect to profile page on fail', (done) => {
+            request(app).post('/user/login')
+                .send({username: 'dccol2', password: 'cold'})
+                .then((res) => {
+                    expect(res.statusCode).to.equal(302);
+                    expect(res.headers.location).to.equal('/');
                     done();
                 })
                 .catch((err) => done(err));
