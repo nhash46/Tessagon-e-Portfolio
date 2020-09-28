@@ -398,12 +398,13 @@ script(type='text/javascript' src='/js/typewriter.js')
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
-                for doc in user1.document
-                    #{doc.title}
+                for doc_name in user1.document
+                    #{doc_name.title}
                     button.btn.btn-secondary(type ='submit') Remove
+                    hr
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                button.btn.btn-secondary(type ='submit') Upload file
+                button.btn.btn-secondary(type ='submit') Save changes
 
 #bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
     form(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
