@@ -3,8 +3,6 @@ const mongoose = require("mongoose");
 const Comment = mongoose.model("Comment");
 const Blog = mongoose.model("Blog");
 
-const blogController = require("../controllers/blogController");
-
 // adds a comment to comment collection
 const addComment = async (req, res) => {
 
@@ -79,10 +77,32 @@ const getCommentByParentId = async (req,res) => {
     });
   }
 
+  // function to save update to comments
+  const updateComment = (req, res) => {
+    // extract info. from body
+
+    let comment = {};
+
+    comment.content = req.body.content;
+    
+    let query = {_id:req.params._id}
+  
+    // update comment in db
+    Comment.updateOne(query, comment, function (err) {
+      if (err){
+        console.log(err);
+      }
+      else{
+        res.redirect('back');
+      } 
+    });
+  }
+
 
 module.exports = {
     addComment,
     getAllComments,
     getCommentByParentId,
-    deleteComment
+    deleteComment,
+    updateComment
 };

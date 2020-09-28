@@ -10,5 +10,9 @@ commentRouter.post('/:_id', commentController.addComment);
 // delete comment by id
 commentRouter.delete('/:_id', commentController.deleteComment);
 
+// update comment
+commentRouter.post("/edit/:_id", commentController.updateComment);
+
+
 
 module.exports = commentRouter;
