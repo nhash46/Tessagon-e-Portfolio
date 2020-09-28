@@ -10,4 +10,9 @@
     background-color: #D3D3D3;
     border-radius: 20vw;
 
+
+}
+#edit-comment-form{
+    display: none;
+    z-index: 9999;
 }

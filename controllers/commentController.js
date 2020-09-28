@@ -79,6 +79,7 @@ const getCommentByParentId = async (req,res) => {
     });
   }
 
+
 module.exports = {
     addComment,
     getAllComments,

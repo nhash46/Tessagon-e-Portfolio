@@ -23,8 +23,7 @@ html
     body
         style
             include ../public/css/blog.css
-        script
-            include ../public/js/main.js
+
         nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
             .container
                 a.navbar-brand(href='/blog-posts') Blogs
@@ -41,6 +40,7 @@ html
 
         block content
         script(src='/js/blogScript.js')
+        script(src='/js/editBlogComment.js')
 
 br
 br

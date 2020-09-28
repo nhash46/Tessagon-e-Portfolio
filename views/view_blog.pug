@@ -46,8 +46,13 @@ block content
                         #comment-top #{c.content}   
                             if user
                                 if user.username == c.author
-                                    a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id, user-username=user.username) delete
                                     a.btn.btn-link.edit-comment(type= 'button') edit
+
+                                    form.edit-comment-form(method='POST', action='/comments/edit/'+c._id)
+                                        input.form-control(name='content', value= c.content)
+                                        a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id, user-username=user.username) delete
+                                        input.btn.btn-link.save-comment(type='submit', value='save')
+   
    
                         .panel-footer#comment-bottom
                             p #[a(href = '/user/profile/'+c.author) #[i.glyphicon.glyphicon-user] #{' ' } ]
