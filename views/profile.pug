@@ -399,7 +399,7 @@ script(type='text/javascript' src='/js/typewriter.js')
                     span(aria-hidden='true') &times;
             .modal-body
                 for doc_name in user1.document
-                    #{doc_name.title}
+                    h3 #{doc_name.title} - #{doc_name.subHead}
                     button.btn.btn-secondary(type ='submit') Remove
                     hr
             .modal-footer
