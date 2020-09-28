@@ -248,6 +248,19 @@ const getDocumentByFilename = (req,res,next) => {
     });
 }
 
+const deleteDocument = (req,res) => {
+
+    const fileId = new mongoose.mongo.ObjectId(req.params.id);
+
+    gfs.delete({ _id: req.params._id, root: 'uploads' }, (err, GridFSBucket) => {
+        if (err) {
+            console.log(req.param._id);
+          console.log(err.message);
+          res.status(500).send("Server Error");
+        }
+    });
+};
+
 module.exports = {
     upload,
     uploadDocument,
@@ -258,5 +271,6 @@ module.exports = {
     getFileByID,
     getImageByFilename,
     getDocumentByFilename,
-    getResumeByFilename
+    getResumeByFilename,
+    deleteDocument
 }

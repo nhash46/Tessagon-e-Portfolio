@@ -53,6 +53,9 @@ userRouter.get("/document/:filename", uploadController.getDocumentByFilename);
 // GET resume by filename
 userRouter.get("/resume/:filename", uploadController.getDocumentByFilename);
 
+// DELETE document by filename
+userRouter.delete("/document/:_id", uploadController.deleteDocument);
+
 // Sign Up form
 userRouter.get("/signup", userController.newUserForm);
 

@@ -135,3 +135,22 @@ $(document).ready(function(){
       });
   });
 });
+
+$(document).ready(function(){
+    $('.delete-document').on('click', function(e){
+        $target = $(e.target);
+        const document_id = $target.attr('document-id');
+        $.ajax({
+            url: '/user/document/'+document_id,
+            type: 'DELETE',
+            success: function(response){
+                alert('Deleting Document');
+                location.reload();
+                window.location.href='/user/profile#portfolio';
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+});
