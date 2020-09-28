@@ -48,6 +48,8 @@ const uploadDocument = async (req,res,next) => {
         // add the user id reference
         let doc = await Document.findById({_id: req.file.id})
         doc.user = req.user._id;
+        doc.title = req.body.title;
+        doc.subHead = req.body.subHead
         console.log(doc);
         await doc.save();
 

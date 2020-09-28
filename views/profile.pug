@@ -186,8 +186,8 @@ header#header.d-flex.flex-column.justify-content-center
                             .hover-bg
                                 a(href='http://localhost:3000/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
                                     .hover-text
-                                        h4=doc.filename
-                                        small Web Design
+                                        h4=doc.title
+                                        small #{doc.subHead}
                                     embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
 
 // Resume Section
@@ -378,6 +378,10 @@ script(type='text/javascript' src='/js/typewriter.js')
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
+                    label(for='uploadDocuments') Document Title
+                    input.form-control-file(name='title' type='text' placeholder='Title' autofocus='' required='isRequired')
+                    label(for='uploadDocuments') Document Subheading
+                    input.form-control-file(name='subHead' type='text' placeholder='Sub-Heading' autofocus='' required='isRequired')
                     label(for='uploadDocuments') Upload a document
                     input#uploadDocuments.form-control-file(name='file' type='file' required='isRequired')
                 .modal-footer
