@@ -30,11 +30,11 @@ block content
                                     input#Aboutme.form-control(name="bio" type='text' placeholder='Aboutme' autofocus='' maxlength='500' required='isRequired')
                                     label(for='Aboutme') Tell me about yourself! Max 500 characters.
                                 .form-group
+                                label(for='uploadResume') Upload your resume!
+                                input#uploadResume.form-control-file(name='resume' type='file' required='isRequired')
+                                br
                                 label(for='uploadProfilePic') Upload a picture of yourself!
                                 input#uploadProfilePic.form-control-file(name='propic' type='file' required='isRequired')
-                                br
-                                label(for='uploadResume') Upload a picture of yourself!
-                                input#uploadResume.form-control-file(name='resume' type='file' required='isRequired')
                                 br
                                 hr
                                 .col-md-12
