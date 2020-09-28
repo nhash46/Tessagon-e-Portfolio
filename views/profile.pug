@@ -385,7 +385,7 @@ script(type='text/javascript' src='/js/typewriter.js')
                     label(for='uploadDocuments') Document Subheading
                     input.form-control-file.padLeft(name='subHead' type='text' placeholder='Sub-Heading' autofocus='' required='isRequired')
                     label(for='uploadDocuments') Upload a document
-                    input#uploadDocuments.form-control-file(name='file' type='file' required='isRequired')
+                    input#uploadDocuments.form-control-file(name='file' type='file' required='isRequired' accept="application/pdf")
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type ='submit') Upload file
