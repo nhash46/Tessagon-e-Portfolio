@@ -250,13 +250,12 @@ const getDocumentByFilename = (req,res,next) => {
 
 const deleteDocument = (req,res) => {
 
-    const fileId = new mongoose.mongo.ObjectId(req.params.id);
+    const fileId = new mongoose.mongo.ObjectId(req.params._id);
 
-    gfs.delete({ _id: req.params._id, root: 'uploads' }, (err, GridFSBucket) => {
+    gfs.delete(fileId, (err, GridFSBucket) => {
         if (err) {
-            console.log(req.param._id);
-          console.log(err.message);
-          res.status(500).send("Server Error");
+            console.log(err.message);
+            res.status(500).send("Server Error");
         }
     });
 };
