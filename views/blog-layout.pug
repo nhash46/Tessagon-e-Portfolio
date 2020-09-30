@@ -35,12 +35,12 @@ html
                             img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image') 
                             | #{user.first_name} #{user.last_name}
                         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-                            a.dropdown-item(href='/user/profile/'+user.username) My Profile
+                            a.dropdown-item(href='/user/profile/') My Profile
                             a.dropdown-item(href='/blog-posts/'+user.username) My Blog Page
-                            a.dropdown-item(href='#') Manage Account
-                            a.dropdown-item(href='#') Logout
+                            a.dropdown-item(href='/user/profile/') Manage Account
+                            a.dropdown-item(href='/user/logout') Logout
                 if !user    
-                    a(href='#') Login
+                    a(href='/user/login') Login
 
 
                         
