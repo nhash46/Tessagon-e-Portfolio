@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const commentSchema = new mongoose.Schema({
     author: {type: String},
     content: {type: String},
+    profilePicID: {type: Schema.Types.ObjectId, ref: "Document"},
     parentPost : {
         type: Schema.Types.ObjectId,
         ref: "Blog"

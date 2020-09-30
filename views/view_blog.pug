@@ -15,8 +15,8 @@ block content
         p= blog.body
         if user
             if user.username == blog.author
-                a.btn.btn-default.btn-sm(href='/blog-posts/edit/'+blog._id) Edit
-                a.btn.btn-danger.btn-sm.delete-blog(href='#', data-id=blog._id) Delete
+                a.btn.btn-default.btn-sm(href='/blog-posts/'+user.username+'/edit/'+blog._id) Edit
+                a.btn.btn-danger.btn-sm.delete-blog(href='#', data-id=blog._id, user-username=user.username) Delete
         hr
         .container
             if (user)
@@ -34,24 +34,31 @@ block content
                     .card-body
                         form
                             .form-group
-                                a.btn.btn-primary(href="/") Sign in to create a post!
+                                a.btn.btn-primary(href="/user/login") Sign in to comment!
                                 
             br
             br
             each c in blog.comments
-                .media.mb-4
-                    img.d-flex.mr-3.rounded-circle(src='http://placehold.it/50x50' alt='')
+                .media.mb-4#borderComment
+                    img#commentProfilePic(src='http://localhost:3000/user/images/'+ c.profilePicID alt='no_image')     
                     .media-body
                         h5.mt-0 #{c.author}  
-                        #comment-top #{c.content}   
-                            if user
-                                if user.username == c.author
-                                    a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id) delete
-                                    a.btn.btn-link.edit-comment(type= 'button') edit
+                        .bob
+                            #comment-top #{c.content}   
+                                if user
+                                    if user.username == c.author
+                                        a.btn.btn-link.edit-comment(type= 'button') edit
+
+                                        form.edit-comment-form(method='POST', action='/comments/edit/'+c._id)
+                                            input.form-control(name='content', value= c.content)
+                                            a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id, user-username=user.username) delete
+                                            input.btn.btn-link.save-comment(type='submit', value='save')
+   
    
                         .panel-footer#comment-bottom
                             p #[a(href = '/user/profile/'+c.author) #[i.glyphicon.glyphicon-user] #{' ' } ]
                                 span #{moment(c.date).startOf('day').fromNow()}
+                hr
                             
         script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
 

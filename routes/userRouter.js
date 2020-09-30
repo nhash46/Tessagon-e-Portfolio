@@ -42,7 +42,7 @@ userRouter.post("/upload",
 userRouter.get("/files", uploadController.getFilesByID);
 
 // GET file by userID and ID
-//userRouter.get("/image/:id", uploadController.getFileByID);
+userRouter.get("/images/:id", uploadController.getFileByID);
 
 // GET file by userID and Filename
 userRouter.get("/image/:filename", uploadController.getFileByFilename);

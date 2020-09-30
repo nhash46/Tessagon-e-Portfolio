@@ -3,14 +3,13 @@ const mongoose = require("mongoose");
 const Comment = mongoose.model("Comment");
 const Blog = mongoose.model("Blog");
 
-const blogController = require("../controllers/blogController");
-
 // adds a comment to comment collection
 const addComment = async (req, res) => {
 
     var newComment = new Comment({
         author : req.user.username,
         content : req.body.content,
+        profilePicID : req.user.profilePicID,
         parentPost : req.params._id,
         date: Date.now()
     });
@@ -29,7 +28,7 @@ const addComment = async (req, res) => {
     newComment.save(function (err) {
         if (err) return console.error(err);
     });
-    res.redirect('/blog-posts/'+req.params._id);
+    res.redirect('/blog-posts/'+req.params.username+'/'+req.params._id);
 
 };
 
@@ -78,9 +77,32 @@ const getCommentByParentId = async (req,res) => {
     });
   }
 
+  // function to save update to comments
+  const updateComment = (req, res) => {
+    // extract info. from body
+
+    let comment = {};
+
+    comment.content = req.body.content;
+    
+    let query = {_id:req.params._id}
+  
+    // update comment in db
+    Comment.updateOne(query, comment, function (err) {
+      if (err){
+        console.log(err);
+      }
+      else{
+        res.redirect('back');
+      } 
+    });
+  }
+
+
 module.exports = {
     addComment,
     getAllComments,
     getCommentByParentId,
-    deleteComment
+    deleteComment,
+    updateComment
 };
