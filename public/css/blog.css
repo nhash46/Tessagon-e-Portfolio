@@ -2,17 +2,37 @@
     border-radius: 20vw;
     border: 1px solid ;
     width: 4vw;
-    margin-right: 1vw;
+    margin-right: 4px;
 }
+#navbarProfilePic {
+    border-radius: 20vw;
+    border: 1px solid ;
+    width: 2vw;
+    margin-right: 1vw;
+}   
+#up {
+    margin-top: -1vw;
+=}
 #borderComment{
     border: 1vw dashed transparent ;
     padding: 1vw;
     background-color: #D3D3D3;
     border-radius: 20vw;
-
-
 }
 #edit-comment-form{
     display: none;
     z-index: 9999;
 }
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: white;
+}
+
+#colour {
+    background-color: #334f60;
+
+}
+#black {
+    color: black;
+}
+

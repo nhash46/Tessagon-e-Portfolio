@@ -6,7 +6,7 @@ block content
     br
     .container
         h5 Posted by 
-            a(href = '/user/profile/'+blog.author) #{blog.author}
+            a(href = '/user/profile/'+blog.author)#black #{blog.author}
             span  #[ #{moment(blog.date).startOf('day').fromNow()}]
         #blog-title
             h1= blog.title
