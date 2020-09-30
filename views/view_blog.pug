@@ -48,8 +48,9 @@ block content
                                 if user
                                     if user.username == c.author
                                         a.btn.btn-link.edit-comment(type= 'button') Edit
-                                    a.btn.btn-link.like-comment(type= 'button' comment-id=c._id blog-id=blog._id, user-username=user.username) Like
+                                    a.btn.btn-link.like-comment(type= 'button' comment-id=c._id blog-id=blog._id, user-username=user.username, comment-likes=c.numberOfLikes+1) Like
                                     a.btn.btn-link.reply-to-comment(type= 'button') Reply
+                                h7.card-header.number-of-likes Likes: #{c.numberOfLikes}
 
                                         form.edit-comment-form(method='POST', action='/comments/edit/'+c._id)
                                             input.form-control(name='content', value= c.content)
@@ -63,4 +64,10 @@ block content
                 hr
                             
         script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
-
+        
+        //script.
+            function incrementLikes(comment) {
+                $(".like-comment").click(function(){
+                    $(".number-of-likes").val(comment.numberOfLikes + 1);
+                }
+            }
