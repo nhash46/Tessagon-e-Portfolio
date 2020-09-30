@@ -97,8 +97,10 @@ $('#nav').affix({
 }());
 
 
+
 }
 main();
+
 
 // saves updated experience field
 $(document).ready(function(){

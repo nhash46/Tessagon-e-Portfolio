@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const blogSchema = new mongoose.Schema({
     title: {type: String, required: true},
     author: {type: String, required: true},
-    authorFullName: {type: String, required: true},
     body: {type: String, required: true},
     comments: [{
         type: Schema.Types.ObjectId,
