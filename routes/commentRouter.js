@@ -16,4 +16,8 @@ commentRouter.post("/edit/:_id", commentController.updateComment);
 // liked comment
 commentRouter.post("/likedComment/:_id", commentController.likedComment);
 
+// unliked comment
+commentRouter.post("/unlikeComment/:_id", commentController.unlikeComment);
+
+
 module.exports = commentRouter;
