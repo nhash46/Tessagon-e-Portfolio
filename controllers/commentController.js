@@ -102,16 +102,39 @@ const getCommentByParentId = async (req,res) => {
 const likedComment = async (req, res) => {
 
   let comment = await Comment.findOne({_id: req.params._id}, function(err,comment) { console.log(comment); });
+
   comment.likedUsers.push(req.user._id);
+  comment.numberOfLikes++;
+  
+  let query = {_id:req.params._id}
+
+  // update comment in db
+  Comment.updateOne(query, comment, function (err) {
+    if (err){
+      console.log(err.message);
+      res.send(500);
+    }
+    else{
+      console.log('user saved');
+      res.send("Success");
+    } 
+  });
+
+  /**
+  let comment = await Comment.findOne({_id: req.params._id}, function(err,comment) { console.log(comment); });
+  comment.likedUsers.push(req.user._id);
+  comment.numberOfLikes++;
   comment.save(function (err) {
     if (err) {
       return console.error(err.message)
     } else {
+      console.log(comment.numberOfLikes);
       console.log('user saved');
       res.send("Success");
       //res.redirect('/blog-posts/'+req.params.username+'/'+req.params._id);
     } 
   });
+   */
 
 };
 

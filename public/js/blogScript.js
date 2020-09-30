@@ -60,12 +60,24 @@ $(document).ready(function(){
             type: 'POST',
             success: function(response){
                 alert('1');
-                location.reload();
-                window.location.href='/blog-posts/'+username+'/'+blog_id;
+                //location.reload();
+                //window.location.href='/blog-posts/'+username+'/'+blog_id;
             },
             error: function(err){
                 console.log(err.message);
             }
         });
+    });
+});
+
+// like comment
+$(document).ready(function(){
+    $('.like-comment').on('click', function(e){
+        $target = $(e.target);
+        let comment_likes = $target.attr('comment-likes');
+        // const likes = comment_likes++;
+        const blog_id = $target.attr('blog-id');
+        const username = $target.attr('user-username');
+        $(".number-of-likes").text('Likes: '+ comment_likes);
     });
 });
