@@ -24,25 +24,34 @@ html
     body
         style
             include ../public/css/blog.css
-        script
-            include ../public/js/main.js
-        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
-            .container
+
+        nav.navbar.navbar-expand-lg.navbar-dark.fixed-top#colour
+            .container#colour
                 a.navbar-brand(href='/blog-posts') Blogs
                 button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
                     span.navbar-toggler-icon
-                #navbarResponsive.collapse.navbar-collapse
-                    ul.navbar-nav.ml-auto
-                        li.nav-item.active
-                        a.nav-link(href='#')
-                            | Home
-                            span.sr-only (current)
+                if user 
+                    .nav-item.dropdown
+                        a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                            img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image') 
+                            | #{user.first_name} #{user.last_name}
+                        .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                            a.dropdown-item(href='/user/profile/'+user.username) My Profile
+                            a.dropdown-item(href='/blog-posts/'+user.username) My Blog Page
+                            a.dropdown-item(href='#') Manage Account
+                            a.dropdown-item(href='#') Logout
+                if !user    
+                    a(href='#') Login
+
+
+                        
         br
         br
 
         block content
 
-        script(src='/js/customScripts.js')
+        script(src='/js/blogScript.js')
+        script(src='/js/editBlogComment.js')
 
 
 br

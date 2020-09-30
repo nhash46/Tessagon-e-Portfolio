@@ -6,7 +6,7 @@ block content
     .container#whiteBGEditBlog
         #blog-title
             h1 #{title}
-        form(method='POST', action='/blog-posts/edit/'+blog._id)
+        form(method='POST', action='/blog-posts/'+user.username+'/edit/'+blog._id)
             #form-group
                 label Title:
                 input.form-control(name='title', type='text', value=blog.title)

@@ -927,3 +927,12 @@ header .intro-text {
 #homescreen {
 	margin-top: 30vh;
 }
+#navbarProfilePic {
+	border-radius: 20vw;
+	border: 1px solid ;
+	width: 2vw;
+	margin-top: -0.4vw;
+}   
+#up {
+	margin-top: -1vw;
+}
