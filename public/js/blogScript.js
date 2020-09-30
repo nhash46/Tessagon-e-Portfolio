@@ -78,6 +78,6 @@ $(document).ready(function(){
         // const likes = comment_likes++;
         const blog_id = $target.attr('blog-id');
         const username = $target.attr('user-username');
-        $(".number-of-likes").text('Likes: '+ comment_likes);
+        $(this).siblings('.number-of-likes').text('Likes: '+ comment_likes);
     });
 });
