@@ -29,6 +29,7 @@ const addBlog = (req, res) => {
         var newPost = new Blog({
             title: req.body.title,
             author: req.user.username,
+            authorFullName: req.user.first_name + ' ' + req.user.last_name,
             body: req.body.body,
             date: Date.now()
         });
@@ -107,14 +108,21 @@ const showBlogs = (req, res) => {
                     noMatch = true;
 
                 }
-                res.render("blog-posts",
-                    {
-                        title: 'Blog',
-                        searchQuery: req.query.search,
-                        blogs: allBlogs,
-                        noMatch: noMatch,
-                        blogAuthor: req.params.username
-                    });
+                User.findOne({username:req.params.username}, function (err, author) {
+                    if(err){
+                        console.log(err);
+                    } else {
+                        res.render("blog-posts",
+                            {
+                                title: 'Blog',
+                                searchQuery: req.query.search,
+                                blogs: allBlogs,
+                                noMatch: noMatch,
+                                blogAuthor: req.params.username,
+                                authorFullName: author.first_name + ' ' + author.last_name
+                            });
+                    }
+                });
             }
         });
     } else {
@@ -123,13 +131,21 @@ const showBlogs = (req, res) => {
             if(err){
                 console.log(err);
             } else {
-                res.render("blog-posts",
-                    {   
-                        title: 'Blog',
-                        blogs: allBlogs,
-                        noMatch: noMatch,
-                        blogAuthor: req.params.username
-                    });
+                User.findOne({username:req.params.username}, function (err, author) {
+                    if(err){
+                        console.log(err);
+                    } else {
+                        res.render("blog-posts",
+                            {
+                                title: 'Blog',
+                                searchQuery: req.query.search,
+                                blogs: allBlogs,
+                                noMatch: noMatch,
+                                blogAuthor: req.params.username,
+                                authorFullName: author.first_name + ' ' + author.last_name                         
+                            });
+                    }
+                });
             }
         });
     }
