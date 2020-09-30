@@ -47,7 +47,9 @@ block content
                             #comment-top #{c.content}   
                                 if user
                                     if user.username == c.author
-                                        a.btn.btn-link.edit-comment(type= 'button') edit
+                                        a.btn.btn-link.edit-comment(type= 'button') Edit
+                                    a.btn.btn-link.like-comment(type= 'button' comment-id=c._id blog-id=blog._id, user-username=user.username) Like
+                                    a.btn.btn-link.reply-to-comment(type= 'button') Reply
 
                                         form.edit-comment-form(method='POST', action='/comments/edit/'+c._id)
                                             input.form-control(name='content', value= c.content)

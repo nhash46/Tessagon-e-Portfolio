@@ -98,11 +98,29 @@ const getCommentByParentId = async (req,res) => {
     });
   }
 
+// links User to liked comment
+const likedComment = async (req, res) => {
+
+  let comment = await Comment.findOne({_id: req.params._id}, function(err,comment) { console.log(comment); });
+  comment.likedUsers.push(req.user._id);
+  comment.save(function (err) {
+    if (err) {
+      return console.error(err.message)
+    } else {
+      console.log('user saved');
+      res.send("Success");
+      //res.redirect('/blog-posts/'+req.params.username+'/'+req.params._id);
+    } 
+  });
+
+};
+
 
 module.exports = {
     addComment,
     getAllComments,
     getCommentByParentId,
     deleteComment,
-    updateComment
+    updateComment,
+    likedComment
 };

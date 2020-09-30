@@ -13,6 +13,7 @@ commentRouter.delete('/:_id', commentController.deleteComment);
 // update comment
 commentRouter.post("/edit/:_id", commentController.updateComment);
 
-
+// liked comment
+commentRouter.post("/likedComment/:_id", commentController.likedComment);
 
 module.exports = commentRouter;
