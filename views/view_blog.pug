@@ -50,12 +50,14 @@ block content
                                         a.btn.btn-link.edit-comment(type= 'button') Edit
                                     a.btn.btn-link.like-comment(type= 'button' comment-id=c._id blog-id=blog._id, user-username=user.username, comment-likes=c.numberOfLikes+1) Like
                                     a.btn.btn-link.reply-to-comment(type= 'button') Reply
-                                h7.card-header.number-of-likes Likes: #{c.numberOfLikes}
 
                                         form.edit-comment-form(method='POST', action='/comments/edit/'+c._id)
                                             input.form-control(name='content', value= c.content)
                                             a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id, user-username=user.username) delete
                                             input.btn.btn-link.save-comment(type='submit', value='save')
+                                h7.card-header.number-of-likes Likes: #{c.numberOfLikes}
+
+                                        
    
    
                         .panel-footer#comment-bottom
