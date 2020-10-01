@@ -17,7 +17,7 @@ head
     // Bootstrap
     link(rel='stylesheet' type='text/css' href='/css/bootstrap.css')
     link(rel='stylesheet' type='text/css' href='/fonts/font-awesome/css/font-awesome.css')
-    
+
     //
       Stylesheet
       ==================================================
@@ -88,7 +88,8 @@ header#header.d-flex.flex-column.justify-content-center
                         |Edit Home Page
 
 
-#nav
+
+#nav.topnav
     nav.navbar.navbar-custom
         .container
             .navbar-header
@@ -97,13 +98,18 @@ header#header.d-flex.flex-column.justify-content-center
                 a.navbar-brand.page-scroll(href='#hero')
                     img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image')
                 a.navbar-brand.page-scroll(href='#hero') #{user1.first_name} #{user1.last_name} 
-            collapse.navbar-collapse.navbar-right.navbar-main-collapse
-                ul.nav.navbar-nav
-                    li.topnavbar
-                        // if user change this to edit..
-                        a.btn(href='/user/logout') Logout
-                    li.topnavbar
-                        a.button.btn(type='button' data-toggle='modal' data-target='#contactModal') Edit Account Details
+            .dropdown
+                button.dropbtn
+                    img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image')
+                    | #{user1.first_name} #{user1.last_name} 
+                    i.fa.fa-caret-down
+                .dropdown-content
+                    a(href='#') Link 1
+                    a(href='/user/logout') Logout
+                    a(type='button' data-toggle='modal' data-target='#contactModal') Edit Account Details
+
+
+
 
 
 
@@ -364,6 +370,9 @@ script(type='text/javascript' src='/js/jqBootstrapValidation.js')
 script(type='text/javascript' src='/js/contact_me.js')
 script(type='text/javascript' src='/js/main.js')
 script(type='text/javascript' src='/js/typewriter.js')
+script(type='text/javascript' src='/js/navbar.js')
+
+
 
 
 #portfolioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
