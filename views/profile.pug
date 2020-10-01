@@ -18,6 +18,7 @@ head
     link(rel='stylesheet' type='text/css' href='/css/bootstrap.css')
     link(rel='stylesheet' type='text/css' href='/fonts/font-awesome/css/font-awesome.css')
 
+
     //
       Stylesheet
       ==================================================
@@ -37,7 +38,10 @@ head
 header#header.d-flex.flex-column.justify-content-center
     nav.nav-menu
         ul.nav
+
             // Hidden li included to remove active class from about link when scrolled up past about section
+            li.hidden
+                a(href='#page-top')
             li.active
                 a.page-scroll(href='#hero').text-center
                     i.fa.fa-home.navbar-icons
@@ -89,24 +93,29 @@ header#header.d-flex.flex-column.justify-content-center
 
 
 
-#nav.topnav
-    nav.navbar.navbar-custom
-        .container
-            .navbar-header
-                button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-main-collapse')
-                    i.fa.fa-bars
-                a.navbar-brand.page-scroll(href='#hero')
-                    img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image')
-                a.navbar-brand.page-scroll(href='#hero') #{user1.first_name} #{user1.last_name} 
-            .dropdown
-                button.dropbtn
-                    img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image')
-                    | #{user1.first_name} #{user1.last_name} 
+#nav
+    nav.navbar.navbar-expand-lg.navbar-dark.navbar-static-top#colour
+        .container#colour
+            a.navbar-brand(href='/user/profile/') My Profile
+            .nav-item.dropdown#positionRight
+                a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                    img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image') 
+                    | #{user.first_name} #{user.last_name}     
+                
                     i.fa.fa-caret-down
-                .dropdown-content
-                    a(href='#') Link 1
-                    a(href='/user/logout') Logout
-                    a(type='button' data-toggle='modal' data-target='#contactModal') Edit Account Details
+                .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                    li
+                        a(href='/user/profile/')#dropdown-item My Profile
+                    li
+                        a.dropdown-item(href='/blog-posts/'+user.username)#dropdown-item My Blog Page
+                    li
+                        a.dropdown-item(type='button' data-toggle='modal' data-target='#contactModal')#dropdown-item Manage Account
+                    li
+                        a.dropdown-item(href='/user/logout')#dropdown-item Logout
+
+
+
+           
 
 
 
