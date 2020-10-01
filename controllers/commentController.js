@@ -125,10 +125,15 @@ const unlikeComment = async (req, res) => {
 
   let comment = await Comment.findOne({_id: req.params._id}, function(err,comment) { console.log(comment); });
 
+  const index = comment.likedUsers.indexOf(req.user._id);
+  if (index > -1) {
+      comment.likedUsers.splice(index, 1);
+  }
+
   //comment.likedUsers.remove(req.user._id);
   comment.numberOfLikes--;
   
-  let query = {_id:req.params._id}
+  let query = {_id:req.params._id};
 
   // update comment in db
   Comment.updateOne(query, comment, function (err) {
