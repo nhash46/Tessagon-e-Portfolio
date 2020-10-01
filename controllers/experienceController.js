@@ -11,7 +11,8 @@ const addExperience = async (req, res, next) => {
         company : req.body.company,
         role : req.body.role,
         experienceStartDate : req.body.experienceStartDate,
-        experienceEndDate : req.body.experienceEndDate
+        experienceEndDate : req.body.experienceEndDate,
+        description: req.body.description
     })
 
     // need to add this Id to Parent document 'comment' field 
@@ -39,11 +40,11 @@ const addExperience = async (req, res, next) => {
 const editExperience = (req,res, next) => {
 
     let experience = {};
-    
     experience.company = req.body.company;
     experience.role = req.body.role;
     experience.experienceStartDate = req.body.experienceStartDate;
     experience.experienceEndDate = req.body.experienceEndDate;
+    experience.description = req.body.description;
     
     let query = {_id:req.params._id}
   
@@ -54,13 +55,43 @@ const editExperience = (req,res, next) => {
         res.status(400);
       }
       else{
-        next();
+          res.send('Success')
       } 
     });
 
 };
 
+const deleteExperience = (req, res) => {
+  // check if user is logged in
+  if(!req.user){
+    console.log('user not logged in!');
+    res.status(500).send();
+  }
+
+  let query = {_id:req.params._id}
+
+  // check if experience object belongs to user
+  Experience.findById(query, function(err, experience){
+    if(experience.user.toString() != req.user._id.toString()){
+      console.log('experience user _id: ' + experience.user._id);
+      console.log('global user _id:     ' + req.user._id);
+      console.log('_id not found!');
+      res.status(500).send();
+    } 
+    else {
+      Experience.remove(query, function(err){
+        if(err){
+          console.log(err);
+        }
+        res.send('Success')
+
+      });
+    }
+  });
+}
+
 module.exports = {
     addExperience,
-    editExperience
+    editExperience,
+    deleteExperience
 };

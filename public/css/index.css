@@ -706,27 +706,13 @@ header .intro-text {
 
 /**{box-sizing: border-box;}*/
 
-#bioModal {
-	z-index: 9999;
+
+.topModal {
+	z-index: 9000;
 	margin-top: 15vh;
 }
 
-#portfolioModal {
-	z-index: 9999;
-	margin-top: 15vh;
-}
-
-#experienceModal {
-	z-index: 9999;
-	margin-top: 15vh;
-}
-
-#educationModal {
-	z-index: 9999;
-	margin-top: 15vh;
-}
-
-#contactModal {
+.ToptopModal {
 	z-index: 9999;
 	margin-top: 15vh;
 }
@@ -944,4 +930,21 @@ header .intro-text {
 }
 #down {
 	margin-bottom: -13px;
+
+.padButton {
+	margin: 0.5vw;
+}
+
+.wide {
+	width: 50vw;
+	margin-top: 2vh;
+	color: black;
+}
+
+.edit-experience {
+	margin-left: 2vw;
+}
+
+.padDate {
+	margin-left: 0.5vw;
 }

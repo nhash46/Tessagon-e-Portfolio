@@ -164,6 +164,21 @@ const logInPage = (req, res) => {
     });
 };
 
+// redirects to profile page
+const redirectProfile = (req, res) => {
+    res.redirect('/user/profile');
+}
+
+// redirects to education section
+const redirectEducation = (req, res) => {
+    res.redirect('/user/profile#education');
+}
+
+// redirects to experience section
+const redirectExperience = (req, res) => {
+    res.redirect('/user/profile#experience');
+}
+
 // function to handle a request to login - NOT IN USE
 const logIn = (req, res, next) => {
     passport.authenticate('google', { failureRedirect: '/' }),
