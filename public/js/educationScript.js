@@ -32,7 +32,6 @@ $(document).ready(function(){
             url: '/user/education/'+education_id,
             type: 'DELETE',
             success: function(response){
-                alert('Deleting Education');
                 location.reload();
                 window.location.href='/user/profile#education';
             },

@@ -533,11 +533,11 @@ script(src='/js/educationScript.js')
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
-                    input#addUniversity.form-control(name="school" type='text' autofocus='' required='isRequired')
-                    label(for='addUniversity') School Name
+                    input#university.form-control(name="school" type='text' autofocus='' required='isRequired')
+                    label(for='university') School Name
                     br
-                    input#addDegree.form-control(name="degree" type='text' autofocus='' required='isRequired')
-                    label(for='addDegree') Degree Name
+                    input#degree.form-control(name="degree" type='text' autofocus='' required='isRequired')
+                    label(for='degree') Degree Name
                     br
                     input#eduDescription.form-control(name="description" type='text' autofocus='' required='isRequired')
                     label(for='eduDescription') Add a bit about your degree!
@@ -554,7 +554,7 @@ script(src='/js/educationScript.js')
                 br
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                    button.btn.btn-secondary.edit-education(type='submit') Save changes
+                    button.btn.btn-secondary(type='submit') Save changes
 
 
 #editEducation.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='editEducationlabel' aria-hidden='true')
