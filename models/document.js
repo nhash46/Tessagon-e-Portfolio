@@ -8,7 +8,9 @@ const documentSchema = new Schema({
     },
     filename: String,
     contentType: String,
-    docType: String
+    docType: String,
+    title: String,
+    subHead: String
 
 }, { strict: false });
 

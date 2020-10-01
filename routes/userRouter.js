@@ -45,10 +45,16 @@ userRouter.get("/files", uploadController.getFilesByID);
 userRouter.get("/images/:id", uploadController.getFileByID);
 
 // GET file by userID and Filename
-userRouter.get("/image/:filename", uploadController.getFileByFilename);
+userRouter.get("/image/:filename", uploadController.getImageByFilename);
 
 // GET document by filename
 userRouter.get("/document/:filename", uploadController.getDocumentByFilename);
+
+// GET resume by filename
+userRouter.get("/resume/:filename", uploadController.getResumeByFilename);
+
+// DELETE document by filename
+userRouter.delete("/document/:_id", uploadController.deleteDocument);
 
 // Sign Up form
 userRouter.get("/signup", userController.newUserForm);
@@ -58,7 +64,12 @@ userRouter.get("/signup/form", userController.authCheck, userController.infoPage
 
 // Populate info using info form details
 userRouter.post("/populateInfo", 
-    uploadController.upload.single('propic'),
+    uploadController.upload.fields([{
+        name: 'resume', maxCount: 1
+    }, {
+        name: 'propic', maxCount: 1
+    }]),
+    uploadController.uploadResume,
     uploadController.uploadProfilePic,
     userController.populateInfo,
     experienceController.addExperience, 
@@ -77,8 +88,13 @@ userRouter.post("/editHomeInfo",
 );
 
 // Edit about me
-userRouter.post("/editAboutMe", 
-    uploadController.upload.single('propic'),
+userRouter.post("/editAboutMe",
+    uploadController.upload.fields([{
+            name: 'resume', maxCount: 1
+        }, {
+            name: 'propic', maxCount: 1
+        }]),
+    uploadController.uploadResume,
     uploadController.uploadProfilePic,
     userController.editAboutMe
     );
