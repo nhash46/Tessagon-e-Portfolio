@@ -1,7 +1,7 @@
 doctype html
 html
     head
-        title Tessagon | Your ePortfolio!
+        title ProFolio | Blogs
         // Required meta tags
         meta(charset='utf-8')
         meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
@@ -26,7 +26,7 @@ html
 
         nav.navbar.navbar-expand-lg.navbar-dark.fixed-top#colour
             .container#colour
-                a.navbar-brand(href='#') Blogs
+                a.navbar-brand.go-to-user-blog(href='/blog-posts/'+blogAuthor) Blogs
                 button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
                     span.navbar-toggler-icon
                 if user 

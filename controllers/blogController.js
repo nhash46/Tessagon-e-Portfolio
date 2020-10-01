@@ -158,7 +158,9 @@ const getBlogByID = async (req, res) => {
 
         //TODO change to view_blog
         res.render('view_blog', {
-            blog: blog
+            blog: blog,
+            blogAuthor: req.params.username,
+            //authorFullName: author.first_name + ' ' + author.last_name    
         });
     });
 };
@@ -278,6 +280,8 @@ const authCheck = (req, res, next) => {
         res.redirect('/blog-posts/'+req.params.username);
     }
 }
+
+// function that redirects viewing user to all blogs by one specific author
 
 // remember to export the functions
 module.exports = {

@@ -119,3 +119,22 @@ $(document).ready(function(){
         }
     });
 });
+
+// loads user blog home
+$(document).ready(function(){
+    $('.go-to-user-blog').on('click', function(e){
+        $target = $(e.target);
+        const username = req.params.username;
+        $.ajax({
+            url: '/blog-posts/'+username,
+            type: 'GET',
+            success: function(response){
+                alert(1);
+                window.location.href='/blog-posts/'+username;
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+});
