@@ -115,7 +115,28 @@ const likedComment = async (req, res) => {
       res.send(500);
     }
     else{
-      console.log('user saved');
+      res.send("Success");
+    } 
+  });
+};
+
+  // links User to liked comment
+const unlikeComment = async (req, res) => {
+
+  let comment = await Comment.findOne({_id: req.params._id}, function(err,comment) { console.log(comment); });
+
+  //comment.likedUsers.remove(req.user._id);
+  comment.numberOfLikes--;
+  
+  let query = {_id:req.params._id}
+
+  // update comment in db
+  Comment.updateOne(query, comment, function (err) {
+    if (err){
+      console.log(err.message);
+      res.send(500);
+    }
+    else{
       res.send("Success");
     } 
   });
@@ -145,5 +166,6 @@ module.exports = {
     getCommentByParentId,
     deleteComment,
     updateComment,
-    likedComment
+    likedComment,
+    unlikeComment
 };
