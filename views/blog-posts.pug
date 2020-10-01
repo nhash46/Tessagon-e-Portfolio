@@ -22,7 +22,7 @@ block content
                                     p.card-text #{blog.body}
                                     a.btn.btn-primary(href='/blog-posts/'+blogAuthor+'/'+blog._id) Read More &rarr;
                                 .card-footer.text-muted
-                                    | posted by #{blog.author}, #{moment(blog.date).startOf('day').fromNow()}
+                                    | posted by #{blog.author}, #{moment(blog.date).fromNow()}
                     // Pagination
                 ul.pagination.justify-content-center.mb-4
                     li.page-item
