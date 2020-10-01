@@ -11,7 +11,7 @@ const commentSchema = new mongoose.Schema({
         ref: "Blog"
     },
     date: {type:Date, default: Date.now},
-    likedUsers: [ {type: Schema.Types.ObjectId, ref: "User"}],
+    likedUsers: [{type: Schema.Types.ObjectId, ref: "User"}],
     numberOfLikes: {type: Number, default: 0}
 });
 
