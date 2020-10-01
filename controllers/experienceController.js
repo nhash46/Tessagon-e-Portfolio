@@ -39,7 +39,6 @@ const addExperience = async (req, res, next) => {
 const editExperience = (req,res) => {
 
     let experience = {};
-    
     experience.company = req.body.company;
     experience.role = req.body.role;
     experience.experienceStartDate = req.body.experienceStartDate;

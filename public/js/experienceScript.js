@@ -3,16 +3,16 @@ $(document).ready(function(){
     $('.edit-experience').on('click', function(e){
         $target = $(e.target);
         const _id = $target.attr('experience-id');
-        var company = $("#company").prev.val();
-        var role = $("#role").prev.val();
-        var expStart = $("#start").prev.val();
-        var expEnd = $("#end").prev.val();
+        var company = $("#company"+_id).val();
+        var role = $("#role"+_id).val();
+        var expStart = $("#expStart"+_id).val();
+        var expEnd = $("#expEnd"+_id).val();
         var dataString = 'company='+company+'&role='+role+'&experienceStartDate='+expStart+'&experienceEndDate='+expEnd;
         $.ajax({
             url: '/user/editExperience/'+_id,
             type: 'POST',
             data: dataString,
-            success: function(){
+            success: function(response){
                 location.reload();
                 window.location.href='/user/profile#experience';
             },
@@ -22,6 +22,9 @@ $(document).ready(function(){
         });
     });
   });
+
+
+
 
 $(document).ready(function(){
     $('.delete-experience').on('click', function(e){
