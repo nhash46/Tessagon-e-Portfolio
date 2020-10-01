@@ -3,10 +3,18 @@ $(document).ready(function(){
     $('.edit-education').on('click', function(e){
         $target = $(e.target);
         const _id = $target.attr('education-id');
+        var uni = $("#university"+_id).val();
+        var degree = $("#degree"+_id).val();
+        var eduStart = $("#eduStart"+_id).val();
+        var eduEnd = $("#eduEnd"+_id).val();
+        var desc = $("#eduDescription"+_id).val();
+        var dataString = 'university='+uni+'&degree='+degree+'&educationStartDate='+eduStart+'&educationEndDate='+eduEnd+'&description='+desc;
         $.ajax({
-            type: 'POST',
             url: '/user/editEducation/'+_id,
+            type: 'POST',
+            data: dataString,
             success: function(response){
+                location.reload();
                 window.location.href='/user/profile#education';
             },
             error: function(err){
@@ -14,7 +22,7 @@ $(document).ready(function(){
             }
         });
     });
-  });
+});
 
   $(document).ready(function(){
     $('.delete-education').on('click', function(e){

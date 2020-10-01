@@ -268,7 +268,7 @@ header#header.d-flex.flex-column.justify-content-center
                                         span #{c.role}
                                 .timeline-body
                                     p
-                                        | INSERT YOUR DESCRIPTION HERE !
+                                        | #{c.description}
                                     br
 
 // Education section                   
@@ -303,7 +303,7 @@ header#header.d-flex.flex-column.justify-content-center
                                         span #{c.degree}
                                 .timeline-body
                                     p
-                                        | INSERT YOUR DESCRIPTION HERE !
+                                        | #{c.description}
                                     br
 
 
@@ -468,6 +468,8 @@ script(src='/js/educationScript.js')
                     input#addRole.form-control(name="role" type='text' autofocus='' required='isRequired')
                     label(for='addRole') Role Name
                     br
+                    input#addDescription.form-control(name="description" type='text' autofocus='' required='isRequired')
+                    label(for='addDescription') Short description of your role!
                     br
                     .col-md-3
                         label(for='expStartDate') Start date:
@@ -494,9 +496,14 @@ script(src='/js/educationScript.js')
                 for i in user1.experience
                     h3 #{i.company}
                     form(method='POST' action='/user/editExperience/' + i._id)
+                        label(for='company'+i._id) Company Name
                         input.form-control(id='company'+i._id name="company" type='text' autofocus='' required='isRequired' value=i.company)
                         br
+                        label(for='role'+i._id) Role
                         input.form-control(id='role'+i._id name="role" type='text' autofocus='' required='isRequired' value=i.role)
+                        br
+                        label(for='eduDescription'+i._id) Short description of your role!
+                        input.form-control(id='eduDescription'+i._id name="description" type='text' autofocus='' required='isRequired' value=i.description)
                         br
                         .container
                             .row
@@ -510,7 +517,7 @@ script(src='/js/educationScript.js')
                         .container
                             .row
                                 .col-md-6
-                                    button.btn.btn-secondary.edit-experience(href='/user/profile#experience' type='submit' experience-id=i._id) Save changes
+                                    button.btn.btn-secondary.edit-experience(href='/user/profile#experience' experience-id=i._id) Save changes
                                     a.btn.btn-secondary.delete-experience(href='/user/profile#experience' experience-id=i._id) Delete Experience
                         br
                         hr.wide
@@ -526,12 +533,14 @@ script(src='/js/educationScript.js')
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
-                    input#addSchool.form-control(name="school" type='text' autofocus='' required='isRequired')
-                    label(for='addSchool') School Name
+                    input#addUniversity.form-control(name="school" type='text' autofocus='' required='isRequired')
+                    label(for='addUniversity') School Name
                     br
                     input#addDegree.form-control(name="degree" type='text' autofocus='' required='isRequired')
                     label(for='addDegree') Degree Name
                     br
+                    input#eduDescription.form-control(name="description" type='text' autofocus='' required='isRequired')
+                    label(for='eduDescription') Add a bit about your degree!
                     br
                     .col-md-3
                         label(for='eduStartDate') Start date:
@@ -545,4 +554,44 @@ script(src='/js/educationScript.js')
                 br
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                    button.btn.btn-secondary.edit-experience(type='submit') Save changes
+                    button.btn.btn-secondary.edit-education(type='submit') Save changes
+
+
+#editEducation.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='editEducationlabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#editEducationlabel.modal-title Edit Education
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                for i in user1.education
+                    h3 #{i.university}
+                    form(method='POST' action='/user/editEducation/' + i._id)
+                        label(for='university'+i._id) University Name
+                        input.form-control(id='university'+i._id name="university" type='text' autofocus='' required='isRequired' value=i.university)
+                        br
+                        label(for='degree'+i._id) Degree
+                        input.form-control(id='degree'+i._id name="degree" type='text' autofocus='' required='isRequired' value=i.degree)
+                        br
+                        label(for='eduDescription'+i._id) Short description about your degree!
+                        input.form-control(id='eduDescription'+i._id name="description" type='text' autofocus='' required='isRequired' value=i.description)
+                        br
+                        .container
+                            .row
+                                .col-md-6
+                                    | Start date:
+                                    input.padDate(id='eduStart'+i._id name= "educationStartDate" type='month' required='isRequired' value=i.educationStartDate)
+                                .col-md-6
+                                    | End date:
+                                    input.padDate(id='eduEnd'+i._id name= "educationEndDate" type='month' required='isRequired' value=i.educationEndDate)
+                        br
+                        .container
+                            .row
+                                .col-md-6
+                                    button.btn.btn-secondary.edit-education(href='/user/profile#education' type='submit' education-id=i._id) Save changes
+                                    a.btn.btn-secondary.delete-education(href='/user/profile#education' education-id=i._id) Delete Education
+                        br
+                        hr.wide
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
