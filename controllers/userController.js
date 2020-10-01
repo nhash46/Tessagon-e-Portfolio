@@ -208,21 +208,6 @@ const logInGoogleCallback = (req, res, next) => {
         }(req, res, next)
 }
 
-// redirects to profile page
-const redirectProfile = (req, res) => {
-    res.redirect('/user/profile');
-}
-
-// redirects to education section
-const redirectEducation = (req, res) => {
-    res.redirect('/user/profile#education');
-}
-
-// redirects to experience section
-const redirectExperience = (req, res) => {
-    res.redirect('/user/profile#experience');
-}
-
 /*const logInGoogleCallback = (req, res, next) => {
     passport.authenticate('google', (err, user, info) => {
         console.log(user);
