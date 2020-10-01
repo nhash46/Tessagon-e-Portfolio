@@ -11,7 +11,8 @@ const addExperience = async (req, res, next) => {
         company : req.body.company,
         role : req.body.role,
         experienceStartDate : req.body.experienceStartDate,
-        experienceEndDate : req.body.experienceEndDate
+        experienceEndDate : req.body.experienceEndDate,
+        description: req.body.description
     })
 
     // need to add this Id to Parent document 'comment' field 
@@ -43,6 +44,7 @@ const editExperience = (req,res) => {
     experience.role = req.body.role;
     experience.experienceStartDate = req.body.experienceStartDate;
     experience.experienceEndDate = req.body.experienceEndDate;
+    experience.description = req.body.description;
     
     let query = {_id:req.params._id}
   
