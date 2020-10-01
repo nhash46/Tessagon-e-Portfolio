@@ -517,23 +517,23 @@ script(src='/js/educationScript.js')
                 for i in user1.experience
                     h3 #{i.company}
                     form(method='POST' action='/user/editExperience/' + i._id)
-                        input.form-control(name="company" type='text' autofocus='' required='isRequired' value=i.company)
+                        input#company.form-control(name="company" type='text' autofocus='' required='isRequired' value=i.company)
                         br
-                        input.form-control(name="role" type='text' autofocus='' required='isRequired' value=i.role)
+                        input#role.form-control(name="role" type='text' autofocus='' required='isRequired' value=i.role)
                         br
                         .container
                             .row
                                 .col-md-6
                                     | Start date:
-                                    input.padDate(name= "experienceStartDate" type='month' required='isRequired' value=i.experienceStartDate)
+                                    input#expStart.padDate(name= "experienceStartDate" type='month' required='isRequired' value=i.experienceStartDate)
                                 .col-md-6
                                     | End date:
-                                    input.padDate(name= "experienceEndDate" type='month' required='isRequired' value=i.experienceEndDate)
+                                    input#expEnd.padDate(name= "experienceEndDate" type='month' required='isRequired' value=i.experienceEndDate)
                         br
                         .container
                             .row
                                 .col-md-6
-                                    button.btn.btn-secondary.edit-experience(href='/user/profile#experience' type='submit' experience-id=i._id) Save changes
+                                    button.btn.btn-secondary.edit-experience(href='/user/profile#experience' experience-id=i._id) Save changes
                                     a.btn.btn-secondary.delete-experience(href='/user/profile#experience' experience-id=i._id) Delete Experience
                         br
                         hr.wide
