@@ -10,7 +10,7 @@ block content
             // Blog Entries Column
             .col-md-8
                 h1.my-4
-                 | User blogs
+                 | #{authorFullName}'s blogs
                  small    Read below...
                 if noMatch
                     h5 Sorry, there were no blogs titled "#{searchQuery}". Try search again!
@@ -22,7 +22,7 @@ block content
                                     p.card-text #{blog.body}
                                     a.btn.btn-primary(href='/blog-posts/'+blogAuthor+'/'+blog._id) Read More &rarr;
                                 .card-footer.text-muted
-                                    | posted by #{blog.author}, #{moment(blog.date).startOf('day').fromNow()}
+                                    | posted by #{blog.author}, #{moment(blog.date).fromNow()}
                     // Pagination
                 ul.pagination.justify-content-center.mb-4
                     li.page-item
@@ -36,7 +36,7 @@ block content
                 .card.my-4
                    h5.card-header Search
                     .card-body
-                        form.form-inlne(action="/blog-posts" method="GET")
+                        form.form-inlne(action="/blog-posts/"+blogAuthor method="GET")
                             div.form-group
                                 input.form-control#normalfont(name='search', type='text', placeholder= 'Blog search...' class='form-control')
                                 input.btn.btn-primary(type='submit', value='Search')

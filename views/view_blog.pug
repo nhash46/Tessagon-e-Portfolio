@@ -6,7 +6,7 @@ block content
     br
     .container
         h5 Posted by 
-            a(href = '/user/profile/'+blog.author) #{blog.author}
+            a(href = '/user/profile/'+blog.author)#black #{blog.author}
             span  #[ #{moment(blog.date).startOf('day').fromNow()}]
         #blog-title
             h1= blog.title
@@ -47,18 +47,30 @@ block content
                             #comment-top #{c.content}   
                                 if user
                                     if user.username == c.author
-                                        a.btn.btn-link.edit-comment(type= 'button') edit
+                                        a.btn.btn-link.edit-comment(type= 'button') Edit
+                                    a.btn.btn-link.like-comment(type= 'button' comment-id=c._id blog-id=blog._id, user-username=user.username, comment-liked=c.numberOfLikes+1, comment-unliked=c.numberOfLikes) Like
+                                    //a.btn.btn-link.like-comment(type= 'button' comment-id=c._id blog-id=blog._id, user-username=user.username, comment-likes=c.numberOfLikes-1) Unlike
+                                    a.btn.btn-link.reply-to-comment(type= 'button') Reply
 
                                         form.edit-comment-form(method='POST', action='/comments/edit/'+c._id)
                                             input.form-control(name='content', value= c.content)
                                             a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id, user-username=user.username) delete
                                             input.btn.btn-link.save-comment(type='submit', value='save')
+                                h7.card-header.number-of-likes Likes: #{c.numberOfLikes}
+
+                                        
    
    
                         .panel-footer#comment-bottom
                             p #[a(href = '/user/profile/'+c.author) #[i.glyphicon.glyphicon-user] #{' ' } ]
-                                span #{moment(c.date).startOf('day').fromNow()}
+                                span #{moment(c.date).fromNow()}
                 hr
                             
         script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
-
+        
+        //script.
+            function incrementLikes(comment) {
+                $(".like-comment").click(function(){
+                    $(".number-of-likes").val(comment.numberOfLikes + 1);
+                }
+            }
