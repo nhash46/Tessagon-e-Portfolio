@@ -83,9 +83,9 @@ $(document).ready(function(){
         const username = $target.attr('user-username');
         //unlike comment
         if($(this).css("color") === "rgb(0, 0, 0)"){
-            $(this).css("color", "blue");
-            $(this).animate({fontSize: "18px"});
+            $(this).css("color", "#007bff");
             $(this).siblings('.number-of-likes').text('Likes: '+ comment_unliked);
+            $(this).animate({fontSize: "16px"});
             $.ajax({
                 url: '/comments/unlikeComment/'+comment_id,
                 type: 'POST',
@@ -98,12 +98,12 @@ $(document).ready(function(){
                     console.log(err.message);
                 }
             });
-        
+            //#007bff
         // like comment    
         } else {
             $(this).css("color", "black");
-            $(this).animate({fontSize: "16px"});
             $(this).siblings('.number-of-likes').text('Likes: '+ comment_liked);
+            $(this).animate({fontSize: "18px"});
             $.ajax({
                 url: '/comments/likedComment/'+comment_id,
                 type: 'POST',
