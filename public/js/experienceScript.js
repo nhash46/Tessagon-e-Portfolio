@@ -44,3 +44,10 @@ $(document).ready(function(){
         });
     });
 });
+
+$(document).ready(function(){
+    $('.add-experience').on('click', function(e){
+        location.reload();
+        window.location.href='/user/profile#experience';
+    })
+});

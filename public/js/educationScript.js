@@ -41,3 +41,21 @@ $(document).ready(function(){
         });
     });
 });
+
+$(document).ready(function(){
+    $('.add-education').on('click', function(e){
+        $target = $(e.target);
+        const education_id = $target.attr('education-id');
+        $.ajax({
+            url: '/user/addEducation/'+education_id,
+            type: 'POST',
+            success: function(response){
+                location.reload();
+                window.location.href='/user/profile#education';
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+});
