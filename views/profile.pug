@@ -81,7 +81,7 @@ header#header.d-flex.flex-column.justify-content-center
         if user1.backgroundPicID
             img.background(src='http://localhost:3000/user/image/' + user1.backgroundPicID.filename alt='no_image')
         if !user1.backgroundPicID
-            img.background(src='/img/profolio-tight.png' alt='no_image')
+            img.background(src='/img/defaultBackground.jpg' alt='no_image')
         .container
             .row#homescreen
                 .intro-text
@@ -142,7 +142,7 @@ header#header.d-flex.flex-column.justify-content-center
                 if user1.profilePicID
                     img.img-responsive(src='http://localhost:3000/user/image/'+ user1.profilePicID.filename)
                 if !user1.profilePicID
-                    img.img-responsive(src='' alt='No Profile Picture')
+                    img.img-responsive(src='/img/defaultProfile.png' alt='No Profile Picture')
             .col-md-8.col-md-offset-2
                 .about-text
                     p
