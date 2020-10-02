@@ -203,6 +203,18 @@ header#header.d-flex.flex-column.justify-content-center
             br
             hr
             .clearfix
+                .categories
+                    ul.cat
+                        li
+                            ol.type
+                                li
+                                    a.active(href='#' data-filter='*') All
+                                li
+                                    a(href='#' data-filter='.web') Web Design
+                                li
+                                    a(href='#' data-filter='.app') App Development
+                                li
+                                    a(href='#' data-filter='.branding') Branding
         .row
             .portfolio-items
                 for doc in user1.document
