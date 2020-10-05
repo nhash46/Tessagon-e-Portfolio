@@ -24,7 +24,7 @@ block content
                 .card.my-4
                     h5.card-header Leave a comment as #{user.username}:
                     .card-body
-                        form(method='POST', action='/comments/'+blog.author+'/'+blog._id)
+                        form(method='POST', action='/comments/'+blog._id)
                             .form-group
                                 textarea.form-control(rows='3' name='content')
                             button.btn.btn-primary(type='submit') Submit

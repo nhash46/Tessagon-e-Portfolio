@@ -159,7 +159,7 @@ const getBlogByID = async (req, res) => {
         //TODO change to view_blog
         res.render('view_blog', {
             blog: blog,
-            blogAuthor: req.params.username
+            blogAuthor: req.params.username,
             //authorFullName: author.first_name + ' ' + author.last_name    
         });
     });
