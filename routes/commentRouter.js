@@ -4,9 +4,6 @@ const commentRouter = express.Router();
 
 const commentController = require("../controllers/commentController.js");
 
-//comment on particular post
-commentRouter.post('/:username/:_id', commentController.addComment);
-
 // delete comment by id
 commentRouter.delete('/:_id', commentController.deleteComment);
 
@@ -18,6 +15,9 @@ commentRouter.post("/likedComment/:_id", commentController.likedComment);
 
 // unliked comment
 commentRouter.post("/unlikeComment/:_id", commentController.unlikeComment);
+
+//comment on particular post
+commentRouter.post('/:username/:_id', commentController.addComment);
 
 
 module.exports = commentRouter;
