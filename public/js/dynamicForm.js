@@ -1,3 +1,4 @@
+var counter = 0;
 $(function() {
     // Remove button click
     $(document).on(
@@ -17,9 +18,12 @@ $(function() {
             var container = $(this).closest('[data-role="dynamic-fields"]');
             new_field_group = container.children().filter('.form-inline:first-child').clone();
             new_field_group.find('input').each(function(){
+                $(this).attr('id', $(this).attr('id') + counter);
                 $(this).val('');
             });
+            counter = counter + 1;
             container.append(new_field_group);
         }
     );
 });
+
