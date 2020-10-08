@@ -44,7 +44,7 @@ block content
                                         .form-group.col-md-6
                                             input.round.form-control(id='role' name= "role" type='text' placeholder='Role Name' autofocus='' required='isRequired' style='width:24vw')
                                         .form-group.col-md-12
-                                            input.desc.round.form-control(id='ExpDesc' name="description" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:51vw')
+                                            input.desc.round.form-control(id='ExpDesc' name="description" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:40vw')
                                         .col-md-6.dates
                                             label(for='startDate') Start date:
                                                 input#startDate(name= "experienceStartDate" type='month' required='isRequired')
@@ -63,7 +63,7 @@ block content
                                             input.round.form-control(id= 'degree' name= "degree" type='text' placeholder='Degree' autofocus='' required='isRequired' style='width:24vw')
                                         br
                                         .form-group.col-md-12
-                                            input.desc.round.form-control(id='EducDesc' name="description" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:51vw')
+                                            input.desc.round.form-control(id='EducDesc' name="description" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:40vw')
                                             label(for='EducDesc') Tell us about your education (max 500 characters)...
                                         .dates
                                         label(for='uniStartDate') Start date:
@@ -75,7 +75,34 @@ block content
                                             span.glyphicon.glyphicon-remove
                                         button.btn.btn-primary(data-role='add')
                                             span.glyphicon.glyphicon-plus
-        
+                                .col-md-12
+                                    br
+                                    br
+                                    hr
+                                .col-md-6
+                                    br
+                                    h5.card-title.text-center Skills
+                                    p List down some of your skills!
+                                .col-md-6
+                                    br
+                                    h5.card-title.text-center Typewriter
+                                    p Words to describe yourself!
+                                div(data-role='dynamic-fields') 
+                                    .form-inline
+                                        .form-group.col-md-12
+                                            input.round.form-control(id='skills' name= "skills" type='text' placeholder='Skills' autofocus='' required='isRequired' style='width:18vw')
+                                            button.btn.btn-danger(data-role='remove')
+                                                span.glyphicon.glyphicon-remove
+                                            button.btn.btn-primary(data-role='add')
+                                                span.glyphicon.glyphicon-plus
+                                div(data-role='dynamic-fields')#moved
+                                    .form-inline
+                                        .form-group.col-md-12
+                                            input.round.form-control(id='typewriter' name= "typewriter" type='text' placeholder='Word' autofocus='' required='isRequired' style='width:18vw')
+                                            button.btn.btn-danger(data-role='remove')
+                                                span.glyphicon.glyphicon-remove
+                                            button.btn.btn-primary(data-role='add')
+                                                span.glyphicon.glyphicon-plus
 
                                 br
                                 button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Submit
