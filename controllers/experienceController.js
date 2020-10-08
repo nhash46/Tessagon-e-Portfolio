@@ -6,9 +6,38 @@ const User = mongoose.model("User");
 // adds a comment to comment collection
 const addExperience = async (req, res, next) => {
 
-    let lengthList = req.body.university.length
+    let lengthList = req.body.company.length
     let i = 0
-    if(lengthList > 1){
+    if(req.body.company instanceof String){ 
+      let newExperience = new Experience({
+        user: req.user._id,
+        company: req.body.company,
+        role: req.body.role,
+        experienceStartDate: req.body.experienceStartDate,
+        experienceEndDate: req.body.experienceEndDate,
+        description: req.body.description
+       })
+      // need to add this Id to Parent document 'comment' field
+      try {
+          const filter = {_id: req.user._id};
+          const update = {"$push": {"experience": newExperience._id}};
+          let user = await User.findOneAndUpdate(filter, update, {new: true});
+          console.log(user.experience);
+      } catch (err) {
+          res.status(400);
+          return res.send("Database query failed");
+      }
+
+      // add comment to database
+      newExperience.save(function (err) {
+          if (err) {
+              res.status(400);
+              return console.error(err);
+          } else {
+              next();
+          }
+      });
+    } else {
       for (i; i < lengthList; i++) {
         let newExperience = new Experience({
             user: req.user._id,
@@ -40,36 +69,6 @@ const addExperience = async (req, res, next) => {
             }
         });
       }
-    } else {
-      let newExperience = new Experience({
-        user: req.user._id,
-        company: req.body.company,
-        role: req.body.role,
-        experienceStartDate: req.body.experienceStartDate,
-        experienceEndDate: req.body.experienceEndDate,
-        description: req.body.description
-    })
-
-    // need to add this Id to Parent document 'comment' field
-    try {
-        const filter = {_id: req.user._id};
-        const update = {"$push": {"experience": newExperience._id}};
-        let user = await User.findOneAndUpdate(filter, update, {new: true});
-        console.log(user.experience);
-    } catch (err) {
-        res.status(400);
-        return res.send("Database query failed");
-    }
-
-    // add comment to database
-    newExperience.save(function (err) {
-        if (err) {
-            res.status(400);
-            return console.error(err);
-        } else {
-            next();
-        }
-    });
     }
     
 };
