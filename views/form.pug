@@ -45,16 +45,14 @@ block content
                                             input.round.form-control(id='role' name= "role" type='text' placeholder='Role Name' autofocus='' required='isRequired' style='width:24vw')
                                         .form-group.col-md-12
                                             input.desc.round.form-control(id='ExpDesc' name="description" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:51vw')
-                                        .dates
-                                        label(for='startDate') Start date:
-                                        input#startDate(name= "experienceStartDate" type='month' required='isRequired')
-                                        .col-md-2.dates
-                                        label(for='endDate') End date:
-                                        input#endDate(name= "experienceEndDate" type='month' required='isRequired')
-                                        button.btn.btn-danger(data-role='remove')
-                                            span.glyphicon.glyphicon-remove
-                                        button.btn.btn-primary(data-role='add')
-                                            span.glyphicon.glyphicon-plus
+                                        .col-md-6.dates
+                                            label(for='startDate') Start date:
+                                                input#startDate(name= "experienceStartDate" type='month' required='isRequired')
+                                        .col-md-6.dates
+                                            label(for='endDate') End date:
+                                                input#endDate(name= "experienceEndDate" type='month' required='isRequired')
+                                                button.btn.btn-danger(data-role='remove')
+                                                button.btn.btn-primary(data-role='add')
                                 .col-md-12
                                     h5.card-title.text-center Education
                                 div(data-role='dynamic-fields')
