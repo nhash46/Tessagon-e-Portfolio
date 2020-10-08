@@ -11,6 +11,7 @@ const userController = require("../controllers/userController");
 const educationController = require("../controllers/educationController.js");
 const experienceController = require("../controllers/experienceController.js");
 const uploadController = require("../controllers/uploadController");
+const skillController = require("../controllers/skillController");
 
 const db = require("../models");
 const blogController = require("../controllers/blogController.js");
@@ -74,6 +75,7 @@ userRouter.post("/populateInfo",
     userController.populateInfo,
     experienceController.addExperience, 
     educationController.addEducation, 
+    skillController.addSkill,
     userController.redirectProfile
 );
 

@@ -1,37 +1,32 @@
 const mongoose = require("mongoose");
 
-const Experience = mongoose.model("Experience");
+const Skill = mongoose.model("Skill");
 const User = mongoose.model("User");
 
-// adds a comment to comment collection
-const addExperience = async (req, res, next) => {
+// save skill to user and add skill collection
+const addSkill = async (req, res, next) => {
 
-    let lengthList = req.body.university.length
+    let lengthList = req.body.skills.length
     let i = 0
-    if(lengthList > 1){
-      for (i; i < lengthList; i++) {
-        let newExperience = new Experience({
+    for (i; i < lengthList; i++) {
+        let newSkill = new Skill({
             user: req.user._id,
-            company: req.body.company[i],
-            role: req.body.role[i],
-            experienceStartDate: req.body.experienceStartDate[i],
-            experienceEndDate: req.body.experienceEndDate[i],
             description: req.body.description[i]
         })
 
         // need to add this Id to Parent document 'comment' field
         try {
             const filter = {_id: req.user._id};
-            const update = {"$push": {"experience": newExperience._id}};
+            const update = {"$push": {"skills": newSkill._id}};
             let user = await User.findOneAndUpdate(filter, update, {new: true});
-            console.log(user.experience);
+            console.log(user.skills);
         } catch (err) {
             res.status(400);
             return res.send("Database query failed");
         }
 
         // add comment to database
-        newExperience.save(function (err) {
+        newSkill.save(function (err) {
             if (err) {
                 res.status(400);
                 return console.error(err);
@@ -39,41 +34,10 @@ const addExperience = async (req, res, next) => {
                 next();
             }
         });
-      }
-    } else {
-      let newExperience = new Experience({
-        user: req.user._id,
-        company: req.body.company,
-        role: req.body.role,
-        experienceStartDate: req.body.experienceStartDate,
-        experienceEndDate: req.body.experienceEndDate,
-        description: req.body.description
-    })
-
-    // need to add this Id to Parent document 'comment' field
-    try {
-        const filter = {_id: req.user._id};
-        const update = {"$push": {"experience": newExperience._id}};
-        let user = await User.findOneAndUpdate(filter, update, {new: true});
-        console.log(user.experience);
-    } catch (err) {
-        res.status(400);
-        return res.send("Database query failed");
     }
-
-    // add comment to database
-    newExperience.save(function (err) {
-        if (err) {
-            res.status(400);
-            return console.error(err);
-        } else {
-            next();
-        }
-    });
-    }
-    
 };
 
+/**
 const editExperience = (req,res, next) => {
 
     let experience = {};
@@ -126,9 +90,10 @@ const deleteExperience = (req, res) => {
     }
   });
 }
+ */
 
 module.exports = {
-    addExperience,
-    editExperience,
-    deleteExperience
+    addSkill,
+    //editExperience,
+    //deleteExperience
 };

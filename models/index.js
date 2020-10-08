@@ -43,6 +43,7 @@ require("./experience");
 require("./document");
 require("./comment")
 require("./blog");
+require("./skill");
 
 module.exports = {
   connect,
