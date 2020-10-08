@@ -29,6 +29,8 @@ const userSchema = new Schema({
     education: [{type: Schema.Types.ObjectId, ref: "Education"}],
     experience: [{type: Schema.Types.ObjectId, ref: "Experience"}],
     document: [ {type: Schema.Types.ObjectId, ref: "Document"}],
+    skills: [ {type: Schema.Types.ObjectId, ref: "Skill"} ],
+    typewriterWords: [ String ]
 });
 
 userSchema.plugin(findOrCreate);

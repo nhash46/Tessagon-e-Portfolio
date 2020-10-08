@@ -16,6 +16,7 @@ const authCheck = (req, res, next) => {
         next();
     }
 }
+
 // function to add user
 const addUser = (req, res, next) => {
 
@@ -61,6 +62,7 @@ const populateInfo = (req, res, next) => {
     // extract info. from body
     console.log(req.body);
     let user = {};
+    let lengthList = req.body.typewriter.length;
 
     user.first_name = req.body.first_name;
     user.last_name = req.body.last_name;
@@ -69,6 +71,14 @@ const populateInfo = (req, res, next) => {
     user.state = req.body.state;
     user.bio = req.body.bio;
 
+    let typewriterWords = [];
+
+    for(i = 0; i < lengthList; i++){
+        typewriterWords.push(req.body.typewriter[i]);
+    }
+
+    user.typewriterWords = typewriterWords;
+    
     let query = {_id:req.user._id}
 
     User.updateOne(query, user, function (err) {
