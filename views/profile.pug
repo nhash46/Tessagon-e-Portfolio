@@ -208,17 +208,13 @@ header#header.d-flex.flex-column.justify-content-center
                         li
                             ol.type
                                 li
-                                    a.active(href='#' data-filter='*') All
+                                    a.active(href='#' data-filter='.doc') Documents
                                 li
-                                    a(href='#' data-filter='.web') Web Design
-                                li
-                                    a(href='#' data-filter='.app') App Development
-                                li
-                                    a(href='#' data-filter='.branding') Branding
+                                    a(href='#' data-filter='.vid') Videos
         .row
             .portfolio-items
                 for doc in user1.document
-                    .col-sm-6.col-md-3.col-lg-3.web
+                    .col-sm-6.col-md-3.col-lg-3.doc
                         .portfolio-item
                             .hover-bg
                                 a(href='http://localhost:3000/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
@@ -226,6 +222,16 @@ header#header.d-flex.flex-column.justify-content-center
                                         h4 #{doc.title}
                                         small #{doc.subHead}
                                     embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
+        .row
+            .portfolio-items
+                .col-sm-6.col-md-3.col-lg-3.vid
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/portfolio/01-large.jpg' title='Project description' rel='prettyPhoto')
+                                .hover-text
+                                    h4 Project Title
+                                    small Web Design
+                                img.img-responsive(src='img/portfolio/01-small.jpg' alt='Project Title')
 
 // Resume Section
 #experience.text-center
