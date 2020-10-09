@@ -62,19 +62,6 @@ const populateInfo = (req, res, next) => {
     // extract info. from body
     console.log(req.body);
     let user = {};
-    let typewriterWords = [];
-
-    // checks if there is singular typewriter string or array
-    if(!Array.isArray(req.body.typewriter)){
-        // if singular then string then push to array 
-        typewriterWords.push(req.body.typewriter);
-    } else {
-        let lengthList = req.body.typewriter.length;
-        // otherwise iterate through req.body.typewriter to store all strings
-        for(i = 0; i < lengthList; i++){
-            typewriterWords.push(req.body.typewriter[i]);
-        }
-    }
 
     user.first_name = req.body.first_name;
     user.last_name = req.body.last_name;
@@ -82,7 +69,6 @@ const populateInfo = (req, res, next) => {
     user.city = req.body.city;
     user.state = req.body.state;
     user.bio = req.body.bio;
-    user.typewriterWords = typewriterWords;
 
     let query = {_id:req.user._id}
 
@@ -92,6 +78,36 @@ const populateInfo = (req, res, next) => {
         }
         else{
             console.log("saved");
+            next();
+        }
+    });
+}
+
+const addTypewriterWords = async (req, res, next) => {
+    
+    let user = await User.findOne({_id: req.user._id}, function(err,user) {});
+
+    // checks if there is singular typewriter string or array
+    if(!Array.isArray(req.body.typewriter)){
+        // if singular then string then push to array 
+        user.typewriterWords.push(req.body.typewriter);
+    } else {
+        let lengthList = req.body.typewriter.length;
+        // otherwise iterate through req.body.typewriter to store all strings
+        for(i = 0; i < lengthList; i++){
+            user.typewriterWords.push(req.body.typewriter[i]);
+        }
+    }
+    
+    let query = {_id:req.user._id};
+
+    User.updateOne(query, user, function (err) {
+        if (err){
+            console.log(err.message);
+            res.send(500);
+        }
+        else {
+            console.log("updated typewriter");
             next();
         }
     });
@@ -312,6 +328,7 @@ const getOtherUserProfile = async (req, res) => {
 module.exports = {
     addUser,
     populateInfo,
+    addTypewriterWords,
     newUserForm,
     infoPage,
     logIn,
