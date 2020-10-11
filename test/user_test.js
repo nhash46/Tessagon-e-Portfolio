@@ -51,13 +51,27 @@ describe('User Tests', () => {
         });
     });
 
-    describe('login', () => {
+    describe('successful login', () => {
 
         it('Should redirect to profile page', (done) => {
             request(app).post('/user/login')
                 .send({username: 'dccol', password: 'cold'})
                 .then((res) => {
                     expect(res.statusCode).to.equal(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        })
+    })
+
+    describe('unsuccessful login', () => {
+
+        it('Should redirect to login page', (done) => {
+            request(app).post('/user/login')
+                .send({username: 'unregistered_user', password: 'random'})
+                .then((res) => {
+                    expect(res.statusCode).to.equal(302);
+                    expect(res.headers.location).to.equal('/');
                     done();
                 })
                 .catch((err) => done(err));
