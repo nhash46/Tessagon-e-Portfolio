@@ -105,31 +105,25 @@ const editHomeInfo = (req,res) => {
 };
 
 
-const uploadVideo = async (req,res,next) => {
+const uploadVideo = (req,res) => {
 
+    console.log(req.user);
     var newLink = req.body.video;
 
     try {
         const filter = { _id: req.user._id};
-        const update = { "$push" : {"youtube_links" : newLink._id}};
-        let user = await User.findOneAndUpdate(filter, update, {new : true});
+        const update = { "$push" : {"youtube_links" : newLink}};
+        let user = User.findOneAndUpdate(filter, update, {new : true});
         console.log(user.youtube_links);
     } catch(err){
         res.status(400);
         return res.send("Databse query failed");
     }
 
-    newLink.save(function (err) {
-        if (err) {
-            return console.error(err);
-        } else {
-            res.status(302);
-            next();
-        }
-    });
 };
 
 const editNavInfo = (req,res) => {
+
 
     let user = {};
 
