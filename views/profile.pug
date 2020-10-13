@@ -195,8 +195,6 @@ header#header.d-flex.flex-column.justify-content-center
         .section-title.text-center.center
             h2 Portfolio
             //embed(src='http://localhost:3000/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
-            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#portfolioModal')
-                |Add Portfolio Item
             button.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPortfolioModal')
                 | Edit Portfolio
             br
@@ -207,8 +205,11 @@ header#header.d-flex.flex-column.justify-content-center
                     ul.cat
                         li
                             ol.type
+                                //li
+                                //TODO fix data-filter here
+                                    a.active(href='#') All
                                 li
-                                    a.active(href='#' data-filter='.doc') Documents
+                                    a(href='#' data-filter='.doc') Documents
                                 li
                                     a(href='#' data-filter='.vid') Videos
         .row
@@ -222,6 +223,13 @@ header#header.d-flex.flex-column.justify-content-center
                                         h4 #{doc.title}
                                         small #{doc.subHead}
                                     embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
+                .col-sm-6.col-md-3.col-lg-3.doc
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/plus.jpg' data-toggle='modal' data-target='#portfolioModal')
+                                .hover-text
+                                    h4 add item
+                                embed(src='/img/plus.png' width='255' height='250')
         .row
             .portfolio-items
                 .col-sm-6.col-md-3.col-lg-3.vid
@@ -232,6 +240,13 @@ header#header.d-flex.flex-column.justify-content-center
                                     h4 Project Title
                                     small Web Design
                                 img.img-responsive(src='img/portfolio/01-small.jpg' alt='Project Title')
+                .col-sm-6.col-md-3.col-lg-3.vid
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/plus.png' data-toggle='modal' data-target='#videoModal')
+                                .hover-text
+                                    h4 add item
+                                embed(src='/img/plus.png' width='255' height='250')
 
 // Resume Section
 #experience.text-center
@@ -629,3 +644,18 @@ script(type='text/javascript' src='/js/navbar.js')
                         hr.wide
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+
+#videoModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/upload' enctype="multipart/form-data").form-signin
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#videoModalLabel.modal-title Upload Video
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input.form-control-file(name='video' type='url' placeholder='Video' autofocus='' required='isRequired')
+                    label Video Link
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type ='submit') Upload Video
