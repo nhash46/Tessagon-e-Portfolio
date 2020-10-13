@@ -84,6 +84,10 @@ app.get('/signup/form', userController.authCheck, (req, res) => {
     res.render("form")
 });
 
+app.use(function(req,res){
+    res.status(404).render("error");
+});
+
 // routes
 const userRouter = require("./routes/userRouter");
 const commentRouter = require("./routes/commentRouter");
