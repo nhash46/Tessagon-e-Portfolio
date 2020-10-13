@@ -378,7 +378,7 @@ script(type='text/javascript' src='/js/navbar.js')
 
 
 
-#portfolioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+#portfolioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
     form(method='POST' action='/user/upload' enctype="multipart/form-data").form-signin
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
@@ -397,7 +397,7 @@ script(type='text/javascript' src='/js/navbar.js')
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type ='submit') Upload file
 
-#editPortfolioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+#editPortfolioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
     .modal-dialog.modal-dialog-centered.modal-lg(role='document')
         .modal-content
             .modal-header
@@ -413,7 +413,7 @@ script(type='text/javascript' src='/js/navbar.js')
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                 button.btn.btn-secondary(type ='submit') Save changes
 
-#bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
+#bioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
     form(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
@@ -459,7 +459,7 @@ script(type='text/javascript' src='/js/navbar.js')
                     button.btn.btn-secondary(type='submit') Save changes
 
 
-#homeModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='homeModalLabel' aria-hidden='true')
+#homeModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='homeModalLabel' aria-hidden='true')
     form(method='POST' action='/user/editHomeInfo' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
