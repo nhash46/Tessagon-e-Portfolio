@@ -198,9 +198,9 @@ html, body {
 #regForm {
     background-color: #ffffff;
     margin: 100px auto;
-    padding: 40px;
-    width: 70%;
-    min-width: 300px;
+    padding: 2px;
+    width: 60%;
+    min-width: 400px;
 }
   
   /* Style the input fields */
@@ -242,4 +242,7 @@ input.invalid {
 /* Mark the steps that are finished and valid: */
 .step.finish {
     background-color: #4CAF50;
+}
+#lessPadding {
+    padding: 5px;
 }

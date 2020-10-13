@@ -5,17 +5,17 @@ block content
         .row
             .col-lg-10.col-xl-9.mx-auto
                 .card.card-signin.flex-row.my-5
-                    .card-body
-                        h5.card-title.text-center Basic Information.
+                    .card-body#lessPadding
                         form#regForm(method='POST', action='/user/populateInfo/' enctype='multipart/form-data').form-signin
                             .tab
+                                h5.card-title.text-center Basic Information
                                 .form-label-group
                                     input#inputFirstname.form-control(name="first_name" type='text' placeholder='Firstname' autofocus='' required='isRequired')
                                     label(for='inputFirstname') Firstname
                                 .form-label-group
                                     input#inputSurname.form-control(name="last_name" type='text' placeholder='Surname' required='isRequired')
                                     label(for='inputSurname') Surname
-                                hr
+                                hr  
                                 .form-row
                                     .form-label-group.col-md-12
                                         input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' pattern='[0-9]{4} [0-9]{3} [0-9]{3}' required='isRequired' )
@@ -26,22 +26,20 @@ block content
                                     .form-label-group.col-md-6
                                         input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired')
                                         label(for='inputState') State
-                                    hr
                             .tab
+                                h5.card-title.text-center About yourself
                                 .form-label-group.col-md-12
                                     input#Aboutme.form-control(name="bio" type='text' placeholder='Aboutme' autofocus='' maxlength='500' required='isRequired')
-                                    label(for='Aboutme') Tell me about yourself! Max 500 characters.
+                                    label#AboutmeLabel(for='Aboutme') Tell me about yourself! Max 500 characters.
                                 .form-group
                                 label(for='uploadResume') Upload your resume!
                                 input#uploadResume.form-control-file(name='resume' type='file' accept="application/pdf")
                                 br
                                 label(for='uploadProfilePic') Upload a picture of yourself!
                                 input#uploadProfilePic.form-control-file(name='propic' type='file')
-                                br
                                 hr
                             .tab
-                                .col-md-12
-                                    h5.card-title.text-center Experience
+                                h5.card-title.text-center Experience
                                 div(data-role='dynamic-fields')
                                     .form-inline
                                         .form-group.col-md-6
@@ -59,8 +57,7 @@ block content
                                         button.btn.btn-primary(data-role='add')
                                             span.glyphicon.glyphicon-plus
                             .tab
-                                .col-md-12
-                                    h5.card-title.text-center Education
+                                h5.card-title.text-center Education
                                 div(data-role='dynamic-fields')
                                     .form-inline
                                         .form-group.col-md-6
@@ -78,7 +75,7 @@ block content
                                         button.btn.btn-primary(data-role='add')
                                             span.glyphicon.glyphicon-plus
                             div(style='overflow:auto;')
-                                div(style='float:right;')
+                                div
                                     button.btn.btn-lg.btn-primary.btn-block.text-uppercase#prevBtn(type='button' onclick='nextPrev(-1)') Previous
                                     button.btn.btn-lg.btn-primary.btn-block.text-uppercase#nextBtn(type='button' onclick='nextPrev(1)') Next
                             div(style='text-align:center;margin-top:40px;')
@@ -86,8 +83,6 @@ block content
                                 span.step
                                 span.step
                                 span.step
-                                br
-                            //button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Submit
 
 
 
