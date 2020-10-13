@@ -191,6 +191,7 @@ header#header.d-flex.flex-column.justify-content-center
                 h4 Illustrator
 // Portfolio Section
 #portfolio
+    - var isVid = false;
     .container
         .section-title.text-center.center
             h2 Portfolio
@@ -209,9 +210,10 @@ header#header.d-flex.flex-column.justify-content-center
                                 //TODO fix data-filter here
                                     a.active(href='#') All
                                 li
-                                    a(href='#' data-filter='.doc') Documents
+                                    a.active(href='#' data-filter='.doc').hideVid Documents
                                 li
-                                    a(href='#' data-filter='.vid') Videos
+                                    a(href='#' data-filter='.vid').showVid Videos
+
         .row
             .portfolio-items
                 for doc in user1.document
@@ -230,23 +232,24 @@ header#header.d-flex.flex-column.justify-content-center
                                 .hover-text
                                     h4 add item
                                 embed(src='/img/plus.png' width='255' height='250')
-        .row
-            .portfolio-items
-                .col-sm-6.col-md-3.col-lg-3.vid
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/01-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/01-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.vid
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/plus.png' data-toggle='modal' data-target='#videoModal')
-                                .hover-text
-                                    h4 add item
-                                embed(src='/img/plus.png' width='255' height='250')
+        //if isVid
+            .row
+                .portfolio-items
+                    .col-sm-6.col-md-3.col-lg-3.vid
+                        .portfolio-item
+                            .hover-bg
+                                a(href='img/portfolio/01-large.jpg' title='Project description' rel='prettyPhoto')
+                                    .hover-text
+                                        h4 Project Title
+                                        small Web Design
+                                    img.img-responsive(src='img/portfolio/01-small.jpg' alt='Project Title')
+                    .col-sm-6.col-md-3.col-lg-3.vid
+                        .portfolio-item
+                            .hover-bg
+                                a(href='img/plus.png' data-toggle='modal' data-target='#videoModal')
+                                    .hover-text
+                                        h4 add item
+                                    embed(src='/img/plus.png' width='255' height='250')
 
 // Resume Section
 #experience.text-center
@@ -646,7 +649,7 @@ script(type='text/javascript' src='/js/navbar.js')
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
 
 #videoModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/upload' enctype="multipart/form-data").form-signin
+    form(method='POST' action='/user/uploadVideo' enctype="multipart/form-data").form-signin
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
