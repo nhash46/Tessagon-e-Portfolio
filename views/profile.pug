@@ -232,7 +232,7 @@ header#header.d-flex.flex-column.justify-content-center
                                 .hover-text
                                     h4 add item
                                 embed(src='/img/plus.png' width='255' height='250')
-        //if isVid
+        -//if isVid
             .row
                 .portfolio-items
                     .col-sm-6.col-md-3.col-lg-3.vid
@@ -649,7 +649,7 @@ script(type='text/javascript' src='/js/navbar.js')
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
 
 #videoModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/uploadVideo' enctype="multipart/form-data").form-signin
+    form(method='POST' action='/user/uploadVid' enctype="multipart/form-data").form-signin
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
@@ -657,7 +657,7 @@ script(type='text/javascript' src='/js/navbar.js')
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
-                    input.form-control-file(name='video' type='url' placeholder='Video' autofocus='' required='isRequired')
+                    input.form-control-file(name='video' type='text' placeholder='Video' autofocus='' required='isRequired')
                     label Video Link
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
