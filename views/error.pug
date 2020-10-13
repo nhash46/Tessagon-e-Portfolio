@@ -1,24 +1,18 @@
-link(rel='stylesheet' type='text/css' href='/css/error.css')
-link(rel='stylesheet' type='text/css' href='/css/bootstrap.css')
-// CSS only
-link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' integrity='sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z' crossorigin='anonymous')
-script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js")
+head
 
-.hamburger-menu
-    button.burger(data-state='closed')
-        span
-        span
-        span
-nav(data-state='closed')
-    ul
-        li
-            a(href='#') Home
-        li
-            a(href='#') Services
-        li
-            a(href='#') About
-        li
-            a(href='#') Contact
+    title Error 404
+
+    //Favicons
+    link(rel='shortcut icon' href='/img/favicon1.ico' type='image/x-icon')
+    link(rel='apple-touch-icon' href='/img/apple-touch-icon.png')
+    link(rel='apple-touch-icon' sizes='72x72' href='/img/apple-touch-icon-72x72.png')
+    link(rel='apple-touch-icon' sizes='114x114' href='/img/apple-touch-icon-114x114.png')
+
+    link(rel='stylesheet' type='text/css' href='/css/error.css')
+    link(rel='stylesheet' type='text/css' href='/css/bootstrap.css')
+    // CSS only
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' integrity='sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z' crossorigin='anonymous')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js")
 main
     .container
         .row
@@ -149,12 +143,12 @@ main
                   278.436,375.599 383.003,264.076 364.393,251.618 264.807,364.928 				')
             .col-md-6.align-self-center
                 h1 404
-                h2 UH OH! You&apos;re lost.
+                h2 UH OH! The page you're looking for can't be found!
                 p
                     | The page you are looking for does not exist.
                     | How you got here is a mystery. But you can click the button below
                     | to go back to the homepage.
-                button.btn.green HOME
+                a.btn.blue(href='/') HOME
 
 
 
