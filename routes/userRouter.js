@@ -38,7 +38,7 @@ userRouter.post("/upload",
     userController.redirectProfile
     );
 
-userRouter.post("/uploadVid", userController.uploadVideo);
+userRouter.post("/uploadVid", userController.uploadVideo, userController.redirectProfile);
 
 // GET files by userID
 userRouter.get("/files", uploadController.getFilesByID);

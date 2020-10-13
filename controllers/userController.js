@@ -7,6 +7,7 @@ const {validationResult} = require('express-validator');
 // import user model
 const User = mongoose.model("User");
 const Document = mongoose.model("Document");
+const Link = mongoose.model("Link");
 
 const authCheck = (req, res, next) => {
     if(!req.user){
@@ -105,20 +106,32 @@ const editHomeInfo = (req,res) => {
 };
 
 
-const uploadVideo = (req,res) => {
+const uploadVideo = async (req,res,next) => {
 
-    console.log(req.user);
-    var newLink = req.body.video;
+    let newLink = new Link({
+        url: req.body.video,
+        user: req.user._id,
+    })
+    console.log(newLink);
 
     try {
         const filter = { _id: req.user._id};
-        const update = { "$push" : {"youtube_links" : newLink}};
-        let user = User.findOneAndUpdate(filter, update, {new : true});
-        console.log(user.youtube_links);
+        const update = { "$push" : {"youtubeLinks" : newLink._id}};
+        let user = await User.findOneAndUpdate(filter, update, {new : true});
+        console.log(user.youtubeLinks);
     } catch(err){
         res.status(400);
         return res.send("Databse query failed");
     }
+
+    await newLink.save(function (err) {
+        if (err) {
+            res.status(400);
+            return console.error(err);
+        } else {
+            next();
+        }
+    });
 
 };
 
@@ -289,6 +302,7 @@ const getUserProfile = async (req, res) => {
         .populate('profilePicID')
         .populate('backgroundPicID')
         .populate('resumeID')
+        .populate('youtubeLinks')
         .exec((err,user1) => {
         console.log(user1);
         res.render('profile', {
@@ -305,6 +319,7 @@ const getOtherUserProfile = async (req, res) => {
         .populate("profilePicID")
         .populate('backgroundPicID')
         .populate('resumeID')
+        .populate('youtubeLinks')
         .exec((err, user2) => {
         console.log(user2);
         res.render('index', {
