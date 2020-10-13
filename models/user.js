@@ -14,18 +14,11 @@ const userSchema = new Schema({
     city: String,
     state: String,
     phone_number: String,
+    youtube_links: [String],
     profilePicID: {type: Schema.Types.ObjectId, ref: "Document"},
     backgroundPicID: {type: Schema.Types.ObjectId, ref: "Document"},
     resumeID : {type: Schema.Types.ObjectId, ref: "Document"},
-    links: 
-        { 
-            facebook: String,
-            twitter: String,
-            dribble: String,
-            github: String,
-            instagram: String,
-            linkedIn: String
-        },
+    links: {type: Schema.Types.ObjectId, ref: "Links"},
     education: [{type: Schema.Types.ObjectId, ref: "Education"}],
     experience: [{type: Schema.Types.ObjectId, ref: "Experience"}],
     document: [ {type: Schema.Types.ObjectId, ref: "Document"}],
