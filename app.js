@@ -84,9 +84,6 @@ app.get('/signup/form', userController.authCheck, (req, res) => {
     res.render("form")
 });
 
-app.use(function(req,res){
-    res.status(404).render("error");
-});
 
 // routes
 const userRouter = require("./routes/userRouter");
@@ -109,5 +106,9 @@ db.connect()
         });
     })
     .catch((err) => console.log(err));
+
+app.use(function(req,res){
+    res.status(404).render("error");
+});
 
 module.exports = app;
