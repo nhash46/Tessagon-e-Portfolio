@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Education = mongoose.model("Education");
 const User = mongoose.model("User");
 
+
 // adds a comment to comment collection
 const addEducation = async (req, res, next) => {
 
