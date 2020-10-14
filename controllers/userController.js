@@ -284,6 +284,7 @@ const userID = async (req,res) => {
                     education: user.education,
                     experience: user.experience,
                     links: user.links,
+                    youtubeLinks: user.youtubeLinks,
                     documents: user.documents,
                     educationStartDate: user.educationStartDate,
                     degree: user.education
