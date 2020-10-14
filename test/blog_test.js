@@ -12,6 +12,8 @@ const expect = require('chai').expect;
 const should = require('chai').should;
 const chai = require('chai');
 const request = require('supertest');
+var session = require('supertest-session');
+var testSession = null;
 
 describe('Blog Tests', () => {
 
@@ -20,6 +22,20 @@ describe('Blog Tests', () => {
         conn.connect()
             .then(() => done())
             .catch((err) => done(err));
+    });
+    
+
+    var authenticatedSession;
+    beforeEach(function (done) {
+        testSession = session(app);
+        testSession.post('/user/login')
+            .send({ username: 'dccol', password: 'cold' })
+            .expect(302)
+            .end(function (err) {
+                if (err) return done(err);
+                authenticatedSession = testSession;
+                return done();
+        });
     });
 
     after(function (done) {
@@ -33,14 +49,20 @@ describe('Blog Tests', () => {
     describe('show blogs', () => {
 
         it('Should display list of blogs belonging to a user', (done) => {
-            request(app).get('/blog-posts/naz3')
+            authenticatedSession.get('/blog-posts/naz3')
                 .then((res) => {
-                    expect(res.statusCode).to.equal(200);
+                    expect(302);
                     //expect(res.headers.location).to.equal('/blog-posts/naz3');
                     done();
                 })
                 .catch((err) => done(err));
         });
+
+        it('should get a restricted page', function (done) {
+            authenticatedSession.get('/user/profile')
+              .expect(200)
+              .end(done)
+          });
     });
 
     /**
