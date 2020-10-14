@@ -15,7 +15,7 @@ const request = require('supertest');
 var session = require('supertest-session');
 var testSession = null;
 
-describe('Blog Tests', () => {
+describe('Profile Tests', () => {
 
     before(function (done) {
         this.timeout(10000);
@@ -33,6 +33,8 @@ describe('Blog Tests', () => {
             .expect(302)
             .end(function (err) {
                 if (err) return done(err);
+                //var user = request(app).get('/user/profile');
+                //console.log(user.username);
                 authenticatedSession = testSession;
                 return done();
         });
@@ -45,60 +47,62 @@ describe('Blog Tests', () => {
             .catch((err) => done(err));
     });
 
-    describe('show blogs', () => {
+    describe("Get current user's profile page (restricted)", () => {
 
-        it('Should display list of blogs belonging to a user', (done) => {
-            authenticatedSession.get('/blog-posts/naz3')
+        it('should get a restricted page', function (done) {
+            authenticatedSession.get('/user/profile')
+              .expect(200)
+              .end(done)
+          });
+    });
+
+    describe('Edit contanct info', () => {
+
+        it("should update contact information and redirect to profile", (done) => {
+            authenticatedSession.post('/editNavInfo')
+                .send({ 
+                    phone_number: '0412 345 678', 
+                    city: 'Melbourne' ,
+                    state: 'Victoria', 
+                    email: 'tessagon@tessagon123.com'
+                })
                 .then((res) => {
                     expect(302);
-                    //expect(res.headers.location).to.equal('/blog-posts/naz3');
                     done();
                 })
                 .catch((err) => done(err));
         });
     });
 
-    /**
-    describe('successful login', () => {
+    describe('Edit home info', () => {
 
-        it('Should redirect to profile page', (done) => {
-            request(app).post('/user/login')
-                .send({username: 'dccol', password: 'cold'})
+        it("should update home section and redirect to profile", (done) => {
+            authenticatedSession.post('/editHomeInfo')
+                .send({ 
+                    first_name: 'Tess', 
+                    last_name: 'Agon'
+                })
                 .then((res) => {
-                    expect(res.statusCode).to.equal(302);
+                    expect(302);
                     done();
                 })
                 .catch((err) => done(err));
-        })
-    })
+        });
+    });
 
-    describe('unsuccessful login', () => {
+    describe('Edit about me info', () => {
 
-        it('Should redirect to login page', (done) => {
-            request(app).post('/user/login')
-                .send({username: 'unregistered_user', password: 'random'})
+        it("should update about me section and redirect to profile", (done) => {
+            authenticatedSession.post('/editAboutMe')
+                .send({ 
+                    bio: 'This is a new bio', 
+                })
                 .then((res) => {
-                    expect(res.statusCode).to.equal(302);
-                    expect(res.headers.location).to.equal('/');
+                    expect(302);
                     done();
                 })
                 .catch((err) => done(err));
-        })
-    })
-
-    describe('logout', () => {
-
-        it('Should redirect to login page', (done) => {
-            request(app).get('/user/logout')
-                .then((res) => {
-                    expect(res.statusCode).to.equal(302);
-                    expect(res.headers.location).to.equal('/');
-                    done();
-                })
-                .catch((err) => done(err));
-        })
-    })
-    */
-    
+        });
+    });
 
 });

@@ -88,6 +88,7 @@ userRouter.post("/editNavInfo", userController.editNavInfo);
 
 // Edit info on the home page
 userRouter.post("/editHomeInfo",
+    userController.authCheck,
     uploadController.upload.single('background'),
     uploadController.uploadBackgroundPic,
     userController.editHomeInfo
@@ -95,6 +96,7 @@ userRouter.post("/editHomeInfo",
 
 // Edit about me
 userRouter.post("/editAboutMe",
+    userController.authCheck,
     uploadController.upload.fields([{
             name: 'resume', maxCount: 1
         }, {

@@ -21,7 +21,6 @@ describe('User Tests', () => {
     });
 
     after(function (done) {
-        console.log("closing");
         this.timeout(10000);
         conn.close()
             .then(() => done())
