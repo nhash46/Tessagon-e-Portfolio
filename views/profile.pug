@@ -210,9 +210,9 @@ header#header.d-flex.flex-column.justify-content-center
                                 //TODO fix data-filter here
                                     a.active(href='#') All
                                 li
-                                    a.active(href='#' data-filter='.doc').hideVid Documents
+                                    a.active(href='#portfolio' data-filter='.doc').hideVid Documents
                                 li
-                                    a(href='#' data-filter='.vid').showVid Videos
+                                    a(href='#portfolio' data-filter='.vid').showVid Videos
 
         .row
             .portfolio-items
@@ -241,8 +241,8 @@ header#header.d-flex.flex-column.justify-content-center
                                 .hover-bg
                                     a(href=vid title='Project description' rel='prettyPhoto')
                                         .hover-text
-                                            h4 #{vid}
-                                            small Web Design
+                                            h4 #{vid.title}
+                                            small #{vid.subheading}
                                         img.img-responsive(src=vid alt='Project Title')
                     .col-sm-6.col-md-3.col-lg-3.vid
                         .portfolio-item
@@ -660,6 +660,12 @@ script(type='text/javascript' src='/js/navbar.js')
                 .modal-body
                     input.form-control-file(name='video' type='text' placeholder='Video' autofocus='' required='isRequired')
                     label Video Link
+                    br
+                    input.form-control-file(name='title' type='text' placeholder='Video' autofocus='' required='isRequired')
+                    label Title
+                    br
+                    input.form-control-file(name='subheading' type='text' placeholder='Video' autofocus='' required='isRequired')
+                    label Topic
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type ='submit') Upload Video
