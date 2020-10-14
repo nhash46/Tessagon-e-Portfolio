@@ -110,8 +110,10 @@ const uploadVideo = async (req,res,next) => {
 
     let newLink = new Link({
         url: req.body.video,
+        title: req.body.title,
+        subheading: req.body.subheading,
         user: req.user._id,
-    })
+    });
     console.log(newLink);
 
     try {

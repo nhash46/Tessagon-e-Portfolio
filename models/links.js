@@ -3,6 +3,8 @@ const Schema = mongoose.Schema;
 
 const linkSchema = new mongoose.Schema({
     url: String,
+    title: String,
+    subheading: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"

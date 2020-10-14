@@ -18,7 +18,15 @@ const userSchema = new Schema({
     profilePicID: {type: Schema.Types.ObjectId, ref: "Document"},
     backgroundPicID: {type: Schema.Types.ObjectId, ref: "Document"},
     resumeID : {type: Schema.Types.ObjectId, ref: "Document"},
-    //links: {type: Schema.Types.ObjectId, ref: "Links"},
+    links:
+        {
+            facebook: String,
+            twitter: String,
+            dribble: String,
+            github: String,
+            instagram: String,
+            linkedIn: String
+        },
     education: [{type: Schema.Types.ObjectId, ref: "Education"}],
     experience: [{type: Schema.Types.ObjectId, ref: "Experience"}],
     document: [ {type: Schema.Types.ObjectId, ref: "Document"}],
