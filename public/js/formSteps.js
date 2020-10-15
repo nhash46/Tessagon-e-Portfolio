@@ -8,13 +8,21 @@ function showTab(n) {
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
     document.getElementById("prevBtn").style.display = "none";
+    document.getElementById("loading").style.display = "none";
   } else {
     document.getElementById("prevBtn").style.display = "inline";
   }
   if (n == (x.length - 1)) {
     document.getElementById("nextBtn").innerHTML = "Submit";
-  } else {
+    document.getElementById("loading").style.display = "none";
+  } 
+  else if (n >= (x.length))  {
+    document.getElementById("prevBtn").style.display = "none";
+    document.getElementById("nextBtn").style.display = "none";
+  }
+  else {
     document.getElementById("nextBtn").innerHTML = "Next";
+    document.getElementById("loading").style.display = "none";
   }
   // ... and run a function that displays the correct step indicator:
   fixStepIndicator(n)
@@ -30,9 +38,11 @@ function nextPrev(n) {
   // Increase or decrease the current tab by 1:
   currentTab = currentTab + n;
   // if you have reached the end of the form... :
-  if (currentTab >= x.length) {
+  if (currentTab >= x.length ) {
     //...the form gets submitted:
     document.getElementById("regForm").submit();
+    document.getElementById("prevBtn").style.display = "none";
+    document.getElementById("nextBtn").style.display = "none";
     return false;
   }
   // Otherwise, display the correct tab:

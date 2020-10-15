@@ -7,6 +7,7 @@ block content
                 .card.card-signin.flex-row.my-5
                     .card-body#lessPadding
                         form#regForm(method='POST', action='/user/populateInfo/' enctype='multipart/form-data').form-signin
+                            h#loading Creating your ProFolio...
                             .tab
                                 h5.card-title.text-center Basic Information
                                 .form-label-group
@@ -74,11 +75,38 @@ block content
                                             span.glyphicon.glyphicon-remove
                                         button.btn.btn-primary(data-role='add')
                                             span.glyphicon.glyphicon-plus
+                            .tab
+                               
+                                .col-md-12
+                                    br
+                                    h5.card-title.text-center Skills
+                                    p List down some of your skills!
+                                    div(data-role='dynamic-fields')
+                                        .form-inline
+                                            .form-group.col-md-12
+                                                input.round.form-control(id='skills' name= "skills" type='text' placeholder='Skills' autofocus='' required='isRequired' style='width:18vw')
+                                                button.btn.btn-danger(data-role='remove')
+                                                    span.glyphicon.glyphicon-remove
+                                                button.btn.btn-primary(data-role='add')
+                                                    span.glyphicon.glyphicon-plus
+                                .col-md-12
+                                    br
+                                    h5.card-title.text-center Typewriter
+                                    p Words to describe yourself!
+                                    div(data-role='dynamic-fields')#moved
+                                        .form-inline
+                                            .form-group.col-md-12
+                                                input.round.form-control(id='typewriter' name= "typewriter" type='text' placeholder='Word' autofocus='' required='isRequired' style='width:18vw')
+                                                button.btn.btn-danger(data-role='remove')
+                                                    span.glyphicon.glyphicon-remove
+                                                button.btn.btn-primary(data-role='add')
+                                                    span.glyphicon.glyphicon-plus
                             div(style='overflow:auto;')
                                 div
-                                    button.btn.btn-lg.btn-primary.btn-block.text-uppercase#prevBtn(type='button' onclick='nextPrev(-1)') Previous
                                     button.btn.btn-lg.btn-primary.btn-block.text-uppercase#nextBtn(type='button' onclick='nextPrev(1)') Next
+                                    button.btn.btn-lg.btn-primary.btn-block.text-uppercase#prevBtn(type='button' onclick='nextPrev(-1)') Previous
                             div(style='text-align:center;margin-top:40px;')
+                                span.step
                                 span.step
                                 span.step
                                 span.step

@@ -246,3 +246,6 @@ input.invalid {
 #lessPadding {
     padding: 5px;
 }
+.divPos {
+    align-items: center;
+}
