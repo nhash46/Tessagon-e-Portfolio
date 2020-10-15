@@ -18,44 +18,61 @@ const authCheck = (req, res, next) => {
 }
 
 // function to add user
-const addUser = (req, res, next) => {
+const addUser = async (req, res, next) => {
 
-    var newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
+    var usernameTaken = await User.exists({username: req.body.username});
+    var emailTaken = await User.exists({email: req.body.email});
 
-    });
-
-    let errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        req.flash(errors);
-        res.render('signup',
-            {
-                newUser:newUser,
-                errors: errors.mapped()
-            });
+    if( usernameTaken || emailTaken ){
+        // username is taken
+        if(usernameTaken){
+            res.render("signup");
+            //res.render("signup")
+        }
+        // email is taken
+        if(emailTaken){
+            res.render("signup");
+            //res.render("signup")
+        }
     } else {
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-                if(err){
-                    console.log(err);
-                }
-                newUser.password = hash;
+        var newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
 
-                // add user to database
-                newUser.save((err) => {
-                    if (err) {
+        });
+
+        let errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            req.flash(errors);
+            res.render('signup',
+                {
+                    newUser:newUser,
+                    errors: errors.mapped()
+                });
+        } else {
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    if(err){
                         console.log(err);
-
-                    } else {
-                        next();
                     }
+                    newUser.password = hash;
+
+                    // add user to database
+                    newUser.save((err) => {
+                        if (err) {
+                            console.log(err);
+
+                        } else {
+                            next();
+                        }
+                    });
                 });
             });
-        });
+        }
     }
+
 };
 
 const populateInfo = (req, res, next) => {
