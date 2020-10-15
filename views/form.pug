@@ -35,34 +35,36 @@ block content
                                 br
                                 label(for='uploadProfilePic') Upload a picture of yourself!
                                 input#uploadProfilePic.form-control-file(name='propic' type='file')
-                                br
-                                hr
                                 .col-md-12
                                     h5.card-title.text-center Experience
                                 div(data-role='dynamic-fields')
                                     .form-inline
                                         .form-group.col-md-6
-                                            input.round.form-control(name= "company" type='text' placeholder='Company' autofocus='' required='isRequired' style='width:24vw')
+                                            input.round.form-control(id='company' name= "company" type='text' placeholder='Company' autofocus='' required='isRequired' style='width:24vw')
                                         .form-group.col-md-6
-                                            input.round.form-control(name= "role" type='text' placeholder='Role Name' autofocus='' required='isRequired' style='width:24vw')
-                                        .dates
-                                        label(for='startDate') Start date:
-                                        input#startDate(name= "experienceStartDate" type='month' required='isRequired')
-                                        .col-md-2.dates
-                                        label(for='endDate') End date:
-                                        input#endDate(name= "experienceEndDate" type='month' required='isRequired')
-                                        button.btn.btn-danger(data-role='remove')
-                                            span.glyphicon.glyphicon-remove
-                                        button.btn.btn-primary(data-role='add')
-                                            span.glyphicon.glyphicon-plus
+                                            input.round.form-control(id='role' name= "role" type='text' placeholder='Role Name' autofocus='' required='isRequired' style='width:24vw')
+                                        .form-group.col-md-12
+                                            input.desc.round.form-control(id='ExpDesc' name="descriptionExp" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:40vw')
+                                        .col-md-6.dates
+                                            label(for='startDate') Start date:
+                                                input#startDate(name= "experienceStartDate" type='month' required='isRequired')
+                                        .col-md-6.dates
+                                            label(for='endDate') End date:
+                                                input#endDate(name= "experienceEndDate" type='month' required='isRequired')
+                                                button.btn.btn-danger(data-role='remove')
+                                                button.btn.btn-primary(data-role='add')
                                 .col-md-12
                                     h5.card-title.text-center Education
                                 div(data-role='dynamic-fields')
                                     .form-inline
                                         .form-group.col-md-6
-                                            input.round.form-control(name= "university" type='text' placeholder='University' autofocus='' required='isRequired' style='width:24vw')
+                                            input.round.form-control(id= 'university' name= "university" type='text' placeholder='University' autofocus=''  required='isRequired' style='width:24vw')
                                         .form-group.col-md-6
-                                            input.round.form-control(name= "degree" type='text' placeholder='Degree' autofocus='' required='isRequired' style='width:24vw')
+                                            input.round.form-control(id= 'degree' name= "degree" type='text' placeholder='Degree' autofocus='' required='isRequired' style='width:24vw')
+                                        br
+                                        .form-group.col-md-12
+                                            input.desc.round.form-control(id='EducDesc' name="descriptionEdu" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:40vw')
+                                            label(for='EducDesc') Tell us about your education (max 500 characters)...
                                         .dates
                                         label(for='uniStartDate') Start date:
                                         input#uniStartDate(name= "educationStartDate" type='month' required='isRequired')
@@ -73,6 +75,35 @@ block content
                                             span.glyphicon.glyphicon-remove
                                         button.btn.btn-primary(data-role='add')
                                             span.glyphicon.glyphicon-plus
+                                .col-md-12
+                                    br
+                                    br
+                                    hr
+                                .col-md-6
+                                    br
+                                    h5.card-title.text-center Skills
+                                    p List down some of your skills!
+                                .col-md-6
+                                    br
+                                    h5.card-title.text-center Typewriter
+                                    p Words to describe yourself!
+                                div(data-role='dynamic-fields') 
+                                    .form-inline
+                                        .form-group.col-md-12
+                                            input.round.form-control(id='skills' name= "skills" type='text' placeholder='Skills' autofocus='' required='isRequired' style='width:18vw')
+                                            button.btn.btn-danger(data-role='remove')
+                                                span.glyphicon.glyphicon-remove
+                                            button.btn.btn-primary(data-role='add')
+                                                span.glyphicon.glyphicon-plus
+                                div(data-role='dynamic-fields')#moved
+                                    .form-inline
+                                        .form-group.col-md-12
+                                            input.round.form-control(id='typewriter' name= "typewriter" type='text' placeholder='Word' autofocus='' required='isRequired' style='width:18vw')
+                                            button.btn.btn-danger(data-role='remove')
+                                                span.glyphicon.glyphicon-remove
+                                            button.btn.btn-primary(data-role='add')
+                                                span.glyphicon.glyphicon-plus
+
                                 br
                                 button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Submit
 
