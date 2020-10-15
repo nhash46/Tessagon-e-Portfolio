@@ -50,9 +50,9 @@ describe('User Tests', () => {
         });
     });
 
-    describe('successful login', () => {
+    describe('login', () => {
 
-        it('Should redirect to profile page', (done) => {
+        it('Should redirect to profile page on success', (done) => {
             request(app).post('/user/login')
                 .send({username: 'dccol', password: 'cold'})
                 .then((res) => {
@@ -61,11 +61,8 @@ describe('User Tests', () => {
                 })
                 .catch((err) => done(err));
         })
-    })
 
-    describe('unsuccessful login', () => {
-
-        it('Should redirect to login page', (done) => {
+        it('Should redirect to login page on fail', (done) => {
             request(app).post('/user/login')
                 .send({username: 'unregistered_user', password: 'random'})
                 .then((res) => {
