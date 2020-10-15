@@ -47,18 +47,27 @@ describe('Profile Tests', () => {
             .catch((err) => done(err));
     });*/
 
-    describe("Get current user's profile page (restricted)", () => {
+    describe("getUserProfile (restricted)", () => {
 
-        it('should get a restricted page', function (done) {
+        it('Should get a restricted page', function (done) {
             authenticatedSession.get('/user/profile')
               .expect(200)
               .end(done)
           });
     });
 
-    describe('Edit contanct info', () => {
+    describe("getOtherUserProfile", () => {
 
-        it("should update contact information and redirect to profile", (done) => {
+        it("Should get another user's profile", function (done) {
+            authenticatedSession.get('/user/profile/naz3')
+              .expect(200)
+              .end(done)
+          });
+    });
+
+    describe('editNavInfo', () => {
+
+        it("Should update contact information and redirect to profile", (done) => {
             authenticatedSession.post('/editNavInfo')
                 .send({ 
                     phone_number: '0412 345 678', 
@@ -74,9 +83,9 @@ describe('Profile Tests', () => {
         });
     });
 
-    describe('Edit home info', () => {
+    describe('editHomeInfo', () => {
 
-        it("should update home section and redirect to profile", (done) => {
+        it("Should update home section and redirect to profile", (done) => {
             authenticatedSession.post('/editHomeInfo')
                 .send({ 
                     first_name: 'Tess', 
@@ -90,11 +99,31 @@ describe('Profile Tests', () => {
         });
     });
 
-    describe('Edit about me info', () => {
+    describe('editAboutMe', () => {
 
-        it("should update about me section and redirect to profile", (done) => {
+        it("Should update about me section and redirect to profile", (done) => {
             authenticatedSession.post('/editAboutMe')
                 .send({ 
+                    bio: 'This is a new bio', 
+                })
+                .then((res) => {
+                    expect(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+    });
+
+    describe('populateInfo', () => {
+
+        it("Should populate profile with sign up form info and redirect to profile", (done) => {
+            authenticatedSession.post('/populateInfo')
+                .send({ 
+                    first_name: 'Tess', 
+                    last_name: 'Agon',
+                    phone_number: '0412 345 678', 
+                    city: 'Melbourne',
+                    state: 'Victoria', 
                     bio: 'This is a new bio', 
                 })
                 .then((res) => {
