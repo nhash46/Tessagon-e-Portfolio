@@ -200,7 +200,7 @@ const getImageByFilename = (req, res, next) => {
         })
         .toArray((err, files) => {
             if (!files || files.length === 0) {
-                console.log('no files exist');
+                //console.log('no files exist');
                 return res.status(404).json({
                     err: "no files exist"
                 });
@@ -236,7 +236,7 @@ const getDocumentByFilename = (req,res,next) => {
         })
         .toArray(function(err, files){
             if(!files || files.length === 0){
-                console.log('no files exist');
+                //console.log('no files exist');
                 return res.status(404).json({
                     err: "no files exist"
                 });

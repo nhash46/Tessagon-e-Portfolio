@@ -12,8 +12,8 @@ const expect = require('chai').expect;
 const should = require('chai').should;
 const chai = require('chai');
 const request = require('supertest');
-var session = require('supertest-session');
-var testSession = null;
+let session = require('supertest-session');
+let testSession = null;
 
 describe('Blog Tests', () => {
 
@@ -25,7 +25,7 @@ describe('Blog Tests', () => {
     });
     
 
-    var authenticatedSession;
+    let authenticatedSession;
     beforeEach(function (done) {
         testSession = session(app);
         testSession.post('/user/login')
@@ -38,12 +38,12 @@ describe('Blog Tests', () => {
         });
     });
 
-    after(function (done) {
+    /*after(function (done) {
         this.timeout(10000);
         conn.close()
             .then(() => done())
             .catch((err) => done(err));
-    });
+    });*/
 
     describe('show blogs', () => {
 
@@ -57,48 +57,4 @@ describe('Blog Tests', () => {
                 .catch((err) => done(err));
         });
     });
-
-    /**
-    describe('successful login', () => {
-
-        it('Should redirect to profile page', (done) => {
-            request(app).post('/user/login')
-                .send({username: 'dccol', password: 'cold'})
-                .then((res) => {
-                    expect(res.statusCode).to.equal(302);
-                    done();
-                })
-                .catch((err) => done(err));
-        })
-    })
-
-    describe('unsuccessful login', () => {
-
-        it('Should redirect to login page', (done) => {
-            request(app).post('/user/login')
-                .send({username: 'unregistered_user', password: 'random'})
-                .then((res) => {
-                    expect(res.statusCode).to.equal(302);
-                    expect(res.headers.location).to.equal('/');
-                    done();
-                })
-                .catch((err) => done(err));
-        })
-    })
-
-    describe('logout', () => {
-
-        it('Should redirect to login page', (done) => {
-            request(app).get('/user/logout')
-                .then((res) => {
-                    expect(res.statusCode).to.equal(302);
-                    expect(res.headers.location).to.equal('/');
-                    done();
-                })
-                .catch((err) => done(err));
-        })
-    })
-    */
-    
-
 });

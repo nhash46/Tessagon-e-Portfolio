@@ -13,12 +13,12 @@ const request = require('supertest');
 
 describe('User Tests', () => {
 
-    before(function (done) {
+    /*before(function (done) {
         this.timeout(10000);
         conn.connect()
             .then(() => done())
             .catch((err) => done(err));
-    });
+    });*/
 
     after(function (done) {
         this.timeout(10000);

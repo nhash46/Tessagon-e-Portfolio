@@ -12,20 +12,20 @@ const expect = require('chai').expect;
 const should = require('chai').should;
 const chai = require('chai');
 const request = require('supertest');
-var session = require('supertest-session');
-var testSession = null;
+let session = require('supertest-session');
+let testSession = null;
 
 describe('Profile Tests', () => {
 
-    before(function (done) {
+    /*before(function (done) {
         this.timeout(10000);
         conn.connect()
             .then(() => done())
             .catch((err) => done(err));
-    });
+    });*/
     
 
-    var authenticatedSession;
+    let authenticatedSession;
     beforeEach(function (done) {
         testSession = session(app);
         testSession.post('/user/login')
@@ -40,12 +40,12 @@ describe('Profile Tests', () => {
         });
     });
 
-    after(function (done) {
+    /*after(function (done) {
         this.timeout(10000);
         conn.close()
             .then(() => done())
             .catch((err) => done(err));
-    });
+    });*/
 
     describe("Get current user's profile page (restricted)", () => {
 

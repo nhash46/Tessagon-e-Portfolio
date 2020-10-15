@@ -38,6 +38,13 @@ userRouter.post("/upload",
     userController.redirectProfile
     );
 
+// Upload form
+userRouter.post("/uploadPic",
+    uploadController.upload.single('file'),
+    uploadController.uploadBackgroundPic,
+    userController.redirectProfile
+);
+
 // GET files by userID
 userRouter.get("/files", uploadController.getFilesByID);
 
