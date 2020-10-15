@@ -124,9 +124,10 @@ header#header.d-flex.flex-column.justify-content-center
                     p
                         | #{user2.bio}
                     .text-center
-                        a.btn.btn-primary(href='#')
-                            i.fa.fa-download
-                            |  Download Resume
+                        if user2.resumeID
+                            a.btn.btn-primary(href='http://localhost:3000/user/resume/' + user2.resumeID.filename + '?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
+                                i.fa.fa-download
+                                |  View Resume
 
 // Skills Section
 #skills.text-center
@@ -173,11 +174,11 @@ header#header.d-flex.flex-column.justify-content-center
                     .col-sm-6.col-md-3.col-lg-3.web
                         .portfolio-item
                             .hover-bg
-                                a(href='preview/route' title=doc.filename rel='prettyPhoto')
+                                a(href='http://localhost:3000/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
                                     .hover-text
                                         h4 #{doc.title}
                                         small #{doc.subHead}
-                                    embed(src='http://localhost:3000/user/document/'+doc.filename type='application/pdf' width='300' height='300' )
+                                    embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='250')
 
 
 // Resume Section
@@ -264,7 +265,7 @@ header#header.d-flex.flex-column.justify-content-center
                 p  #{user2.phone}
             .clearfix
         .col-md-8.col-md-offset-2
-            h3 Leave me a message
+            a.btn(href='mailto:'+user2.email) Send me an email!
 
             .social
                 ul
