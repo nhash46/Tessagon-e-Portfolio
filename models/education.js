@@ -6,7 +6,7 @@ const educationSchema = new Schema({
     degree: String,
     educationStartDate: Date,
     educationEndDate: Date,
-    description: String,
+    descriptionEdu: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
