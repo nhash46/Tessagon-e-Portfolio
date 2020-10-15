@@ -119,6 +119,7 @@ const editHomeInfo = (req,res) => {
 
     user.first_name = req.body.first_name;
     user.last_name = req.body.last_name;
+    user.typewriterWords = req.body.typewriterWords;
     // need to be able to edit photo
 
     let query = {_id:req.user._id};
