@@ -302,6 +302,7 @@ const getUserProfile = async (req, res) => {
         .populate('profilePicID')
         .populate('backgroundPicID')
         .populate('resumeID')
+        .populate('skills') 
         .exec((err,user1) => {
         console.log(user1);
         res.render('profile', {
@@ -318,6 +319,7 @@ const getOtherUserProfile = async (req, res) => {
         .populate("profilePicID")
         .populate('backgroundPicID')
         .populate('resumeID')
+        .populate('skills') 
         .exec((err, user2) => {
         console.log(user2);
         res.render('index', {
