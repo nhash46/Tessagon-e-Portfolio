@@ -239,11 +239,12 @@ header#header.d-flex.flex-column.justify-content-center
                         .col-sm-6.col-md-3.col-lg-3.vid
                             .portfolio-item
                                 .hover-bg
-                                    a(href=vid title='Project description' rel='prettyPhoto')
+                                    a(href=vid.url title='Project description' rel='prettyPhoto')
                                         .hover-text
                                             h4 #{vid.title}
                                             small #{vid.subheading}
-                                        img.img-responsive(href=vid alt='Project Title')
+                                        //img.img-responsive(href=vid alt='Project Title')
+                                        iframe(width='420' height='345' src=vid.url)
                     .col-sm-6.col-md-3.col-lg-3.vid
                         .portfolio-item
                             .hover-bg
@@ -430,9 +431,15 @@ script(type='text/javascript' src='/js/navbar.js')
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
+                h2 Documents
                 for doc_name in user1.document
                     h3 #{doc_name.title} - #{doc_name.subHead}
                     button.btn.btn-secondary.delete-document(type ='button', document-id=doc_name._id) Remove
+                    hr
+                h2 Videos
+                for vid in user1.youtubeLinks
+                    h3 #{vid.title} - #{vid.subheading}
+                    //button.btn.btn-secondary(type ='button', video-id = video.url) Remove
                     hr
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
