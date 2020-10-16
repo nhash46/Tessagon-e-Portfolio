@@ -134,4 +134,133 @@ describe('Profile Tests', () => {
         });
     });
 
+    describe('addExperience', () => {
+
+        it("Should create new experience artefeact, link to user and redirect to profile", (done) => {
+            authenticatedSession.post('/addExperience')
+                .send({ 
+                    company: 'Tessagon',
+                    role: 'Intern',
+                    experienceStartDate: Date.now(),
+                    experienceEndDate: Date.now(),
+                    descriptionExp: "My first internship"
+                })
+                .then((res) => {
+                    expect(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+    });
+
+    describe('editExperience', () => {
+
+        it("Should update existing experience artefeact and redirect to profile", (done) => {
+            authenticatedSession.post('/editExperience/5f6c51d6774064194cd9bc46')
+                .send({ 
+                    company: 'Tessagon',
+                    role: 'CEO',
+                    experienceStartDate: Date.now(),
+                    experienceEndDate: Date.now(),
+                    descriptionExp: "I'm the CEO now"
+                })
+                .then((res) => {
+                    expect(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+    });
+
+    /**
+    describe('deleteExperience', () => {
+
+        before(function (done) {
+            authenticatedSession.post('/addExperience')
+                .send({ 
+                    company: 'Tessagon',
+                    role: 'Intern',
+                    experienceStartDate: Date.now(),
+                    experienceEndDate: Date.now(),
+                    descriptionExp: "My first internship"
+                })
+                .then((res) => {
+                    expect(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+
+        it("Should update existing experience artefeact and redirect to profile", (done) => {
+            authenticatedSession.post('/editExperience/5f6c51d6774064194cd9bc46')
+                .send({ 
+                    company: 'Tessagon',
+                    role: 'CEO',
+                    experienceStartDate: Date.now(),
+                    experienceEndDate: Date.now(),
+                    descriptionExp: "I'm the CEO now"
+                })
+                .then((res) => {
+                    expect(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+    });
+     */
+
+    describe('addEducation', () => {
+
+        it("Should create new education artefeact, link to user and redirect to profile", (done) => {
+            authenticatedSession.post('/addEducation')
+                .send({ 
+                    university: 'Melbourne University',
+                    degree: 'Computing and Software Systems',
+                    educationStartDate: Date.now(),
+                    educationEndDate: Date.now(),
+                    descriptionEdu: 'My first degree'
+                })
+                .then((res) => {
+                    expect(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+    });
+
+    describe('editEducation', () => {
+
+        it("Should update existing education artefeact and redirect to profile", (done) => {
+            authenticatedSession.post('/editEducation/5f6c51d7774064194cd9bc47')
+                .send({ 
+                    university: 'Melbourne University',
+                    degree: 'Software Engineering',
+                    educationStartDate: Date.now(),
+                    educationEndDate: Date.now(),
+                    descriptionEdu: 'My updated degree'
+                })
+                .then((res) => {
+                    expect(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+    });
+    
+    /**
+    describe('addTypewriterWords', () => {
+
+        it("Should store typewriter words, link to user and redirect to profile", (done) => {
+            authenticatedSession.post('/populateProfile')
+                .send({ 
+                    type
+                })
+                .then((res) => {
+                    expect(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+    });
+     */
 });
