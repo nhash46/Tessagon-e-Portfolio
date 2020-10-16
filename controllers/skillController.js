@@ -6,11 +6,10 @@ const User = mongoose.model("User");
 // save skill to user and add skill collection
 const addSkill = async (req, res, next) => {
 
-    if(!Array.isArray(req.body.skills)){
+    if(!Array.isArray(req.body.skillName)){
       let newSkill = new Skill({
         user: req.user._id,
         name: req.body.skillName,
-        description: req.body.description
       })
 
       // need to add this Id to Parent document 'comment' field
@@ -39,6 +38,7 @@ const addSkill = async (req, res, next) => {
       for (i; i < lengthList; i++) {
         let newSkill = new Skill({
             user: req.user._id,
+            name: req.body.skillName,
             // description: req.body.description[i]
         })
 
