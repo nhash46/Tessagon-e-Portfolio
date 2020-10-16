@@ -26,11 +26,21 @@ const addUser = async (req, res, next) => {
     if( usernameTaken || emailTaken ){
         // username is taken
         if(usernameTaken){
+            req.session.message = {
+                type: 'danger',
+                intro: 'That username is already taken!',
+                message: 'Try another'
+              }
             res.render("signup");
             //res.render("signup")
         }
         // email is taken
         if(emailTaken){
+            req.session.message = {
+                type: 'danger',
+                intro: 'That email is already taken!',
+                message: 'Try another'
+              }
             res.render("signup");
             //res.render("signup")
         }

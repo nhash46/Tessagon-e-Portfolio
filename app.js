@@ -40,14 +40,13 @@ app.use(session({
       },
 }));
 
-
-// Express Messages Middleware
-app.use(require('connect-flash')());
-app.use(function (req, res, next) {
-    res.locals.messages = require('express-messages')(req, res);
-    next();
-});
-
+//flash message middleware
+app.use((req, res, next)=>{
+    res.locals.message = req.session.message
+    delete req.session.message
+    next()
+  })
+  
 // Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
