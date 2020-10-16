@@ -57,4 +57,40 @@ describe('Blog Tests', () => {
                 .catch((err) => done(err));
         });
     });
+
+    describe('post blog', () => {
+        after(async () => {
+            await Blog.deleteOne({title: "Test blog"});
+        });
+        it ('Should create a new blog post', (done) => {
+            authenticatedSession.post('/blog-posts/dccol/submit')
+                .send ({
+                    title: 'Test blog',
+                    author: 'dccol',
+                    authorFullName: 'Dan Cole',
+                    body: 'this is a test blog',
+                    date: Date.now()
+                })
+                .then((res) => {
+                    expect(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+    });
+
+    describe('edit blog post', () => {
+        it ('Should edit a blog post', (done) => {
+            authenticatedSession.post('/blog-posts/edit/5f87d203d97f8f1e03d1a058')
+                .send ({
+                    title: 'Updated Blog',
+                    body: 'Updated Blog'
+                })
+                .then((res) => {
+                    expect(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+    });
 });
