@@ -9,7 +9,7 @@ const addSkill = async (req, res, next) => {
     if(!Array.isArray(req.body.skills)){
       let newSkill = new Skill({
         user: req.user._id,
-        name: req.body.name,
+        name: req.body.skillName,
         description: req.body.description
       })
 
