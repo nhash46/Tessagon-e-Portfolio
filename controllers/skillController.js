@@ -38,7 +38,7 @@ const addSkill = async (req, res, next) => {
       for (i; i < lengthList; i++) {
         let newSkill = new Skill({
             user: req.user._id,
-            name: req.body.skills,
+            name: req.body.skills[i],
             // description: req.body.description[i]
         })
 
