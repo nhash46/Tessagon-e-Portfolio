@@ -9,7 +9,8 @@ const addSkill = async (req, res, next) => {
     if(!Array.isArray(req.body.skills)){
       let newSkill = new Skill({
         user: req.user._id,
-        // description: req.body.description[i]
+        name: req.body.name,
+        description: req.body.description
       })
 
       // need to add this Id to Parent document 'comment' field
