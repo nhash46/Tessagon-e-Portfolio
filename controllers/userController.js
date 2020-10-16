@@ -108,8 +108,10 @@ const editHomeInfo = (req,res) => {
 
 const uploadVideo = async (req,res,next) => {
 
+    let video_id  = video_id.split('=')[1];
     let newLink = new Link({
         url: req.body.video,
+        thumbnail: 'https://i3.ytimg.com/vi/'+video_id+'/maxresdefault.jpg',
         title: req.body.title,
         subheading: req.body.subheading,
         user: req.user._id,

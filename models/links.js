@@ -5,6 +5,7 @@ const linkSchema = new mongoose.Schema({
     url: String,
     title: String,
     subheading: String,
+    thumbnail: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
