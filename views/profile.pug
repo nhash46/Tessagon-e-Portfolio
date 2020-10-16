@@ -230,7 +230,7 @@ header#header.d-flex.flex-column.justify-content-center
                         .hover-bg
                             a(href='img/plus.jpg' data-toggle='modal' data-target='#portfolioModal')
                                 .hover-text
-                                    h4 add item
+                                    h4 Add Document
                                 embed(src='/img/plus.png' width='255' height='250')
         -//if isVids
             .row
@@ -243,13 +243,13 @@ header#header.d-flex.flex-column.justify-content-center
                                         .hover-text
                                             h4 #{vid.title}
                                             small #{vid.subheading}
-                                        img.img-responsive(src=vid alt='Project Title')
+                                        img.img-responsive(href=vid alt='Project Title')
                     .col-sm-6.col-md-3.col-lg-3.vid
                         .portfolio-item
                             .hover-bg
                                 a(href='img/plus.png' data-toggle='modal' data-target='#videoModal')
                                     .hover-text
-                                        h4 add item
+                                        h4 Add Video
                                     embed(src='/img/plus.png' width='255' height='250')
 
 // Resume Section
