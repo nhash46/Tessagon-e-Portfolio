@@ -1013,16 +1013,12 @@ header .intro-text {
 }
 
 @keyframes cssAnimation {
-	to {
-		width:0;
-		height:0;
-		overflow:hidden;
-	}
+	0%   {opacity: 1;}
+	90%  {opacity: 1;}
+	100% {opacity: 0;}
 }
 @-webkit-keyframes cssAnimation {
-	to {
-		width:0;
-		height:0;
-		visibility:hidden;
-	}
+	0%   {opacity: 1;}
+	90%  {opacity: 1;}
+	100% {opacity: 0;}
 }
