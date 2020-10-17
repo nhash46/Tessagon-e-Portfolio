@@ -8,7 +8,7 @@ exports.addUser =
             if (value !== req.body.password) {
                 //$(document.getElementById("#inputConfirmPassword").popover())
                 // throw error if passwords do not match
-                throw new Error("Passwords do not match");
+                throw new Error("Try again.");
             } else {
                 return value;
             }

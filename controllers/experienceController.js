@@ -32,6 +32,12 @@ const addExperience = async (req, res, next) => {
                 res.status(400);
                 return console.error(err);
             } else {
+              req.session.message = {
+                type: 'success',
+                intro: 'Experience added!',
+                message: 'Nice work'
+              }
+            res.redirect("/user/profile#experience");
               next();
             }
         });

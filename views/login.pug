@@ -20,6 +20,11 @@ html
             include ../public/css/signin.css
             include ../public/css/signup.css
 block content
+    if message
+        div(style='text-align: center' class='alert alert-'+message.type)
+            button.close(type='button' data-dismiss='alert') &times;
+            strong #{message.intro}
+            |  #{message.message}
     .container-fluid
         .row.no-gutter
             .d-none.d-md-flex.col-md-4.col-lg-6.bg-image

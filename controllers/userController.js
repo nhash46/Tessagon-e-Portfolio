@@ -55,12 +55,20 @@ const addUser = async (req, res, next) => {
         let errors = validationResult(req);
 
         if (!errors.isEmpty()) {
-            req.flash(errors);
+            req.session.message = {
+                type: 'danger',
+                intro: "Those passwords didn't match.",
+                message: ' Try again.'
+              }
+            res.redirect("/user/signup");
+            //req.flash(errors);
+            /**
             res.render('signup',
                 {
                     newUser:newUser,
                     errors: errors.mapped()
                 });
+             */
         } else {
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
