@@ -385,6 +385,11 @@ const getOtherUserProfile = async (req, res) => {
     });
 };
 
+const deleteMessage = (req, res, next) => {
+    delete req.session.message;
+    next();
+} 
+
 module.exports = {
     addUser,
     populateInfo,
@@ -406,5 +411,6 @@ module.exports = {
     redirectEducation,
     redirectExperience,
     redirectProfile,
-    redirectPortfolio
+    redirectPortfolio,
+    deleteMessage
 };
