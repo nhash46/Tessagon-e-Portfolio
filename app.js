@@ -120,4 +120,8 @@ app.use(function(req,res){
     res.status(404).render("error");
 });
 
+app.use(function(req,res){
+    res.status(500).render("error");
+});
+
 module.exports = app;

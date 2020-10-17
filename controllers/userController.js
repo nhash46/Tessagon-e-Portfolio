@@ -184,9 +184,19 @@ const editNavInfo = (req,res) => {
     User.updateOne(query, user, function (err) {
         if (err){
             console.log(err);
+            req.session.message = {
+                type: 'danger',
+                intro: 'Oops, something went wrong.',
+                message: ' Could not save contact information.'
+            }
+            res.redirect('/user/profile#contact');
         }
         else {
-            console.log("edited account details");
+            req.session.message = {
+                type: 'success',
+                intro: 'Contact information updated!',
+                message: ''
+            }
             res.redirect('/user/profile#contact');
         }
     });
@@ -203,9 +213,19 @@ const editAboutMe = (req,res,next) => {
     User.updateOne(query, user, function (err) {
         if (err){
             console.log(err);
+            req.session.message = {
+                type: 'danger',
+                intro: 'Oops, something went wrong.',
+                message: ' Could not save about me section.'
+            }
+            res.redirect('/user/profile#about');
         }
         else {
-            console.log("edited about me");
+            req.session.message = {
+                type: 'success',
+                intro: 'About me section updated!',
+                message: ''
+            }
             res.redirect('/user/profile#about');
             //next();
         }
@@ -243,6 +263,11 @@ const redirectEducation = (req, res) => {
 // redirects to experience section
 const redirectExperience = (req, res) => {
     res.redirect('/user/profile#experience');
+}
+
+// redirects to portfolio section
+const redirectPortfolio = (req, res) => {
+    res.redirect('/user/profile#portfolio');
 }
 
 // function to handle a request to login - NOT IN USE
@@ -380,5 +405,6 @@ module.exports = {
     editAboutMe,
     redirectEducation,
     redirectExperience,
-    redirectProfile
+    redirectProfile,
+    redirectPortfolio
 };

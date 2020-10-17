@@ -36,14 +36,14 @@ userRouter.get("/upload", (req, res) => {
 userRouter.post("/upload", 
     uploadController.upload.single('file'),
     uploadController.uploadDocument,
-    userController.redirectProfile
+    userController.redirectPortfolio
     );
 
 // Upload form
 userRouter.post("/uploadPic",
     uploadController.upload.single('file'),
     uploadController.uploadBackgroundPic,
-    userController.redirectProfile
+    userController.redirectPortfolio
 );
 
 // GET files by userID
