@@ -24,13 +24,11 @@ include "config.php";
    die;
 }*/
 
-<?php
+
 if(isset($_POST['username'])){
-   $username = $_POST['username'];
+    $username = $_POST['username'];
     $users = $mongo->my_db->users;
     $user = $users->findOne(array('username' => $username));
     print_r($user);
     die;
 }
-
-?>

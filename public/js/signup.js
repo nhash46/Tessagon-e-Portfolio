@@ -6,7 +6,7 @@ $(document).ready(function(){
         if(username != ''){
 
             $.ajax({
-                url: 'js/checkUser.php',
+                url: '/checkUser.php',
                 type: 'POST',
                 data: {username: username},
                 success: function(response){
