@@ -51,3 +51,9 @@ $(document).ready(function(){
         window.location.href='/user/profile#experience';
     })
 });
+$(document).ready(function(){
+    $('.reset').on('click', function(e){
+        location.reload('/user/profile#skills');
+        window.location.href='/user/profile#skills';
+    })
+});
