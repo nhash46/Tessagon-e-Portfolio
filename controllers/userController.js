@@ -31,7 +31,7 @@ const addUser = async (req, res, next) => {
                 intro: 'That username is already taken!',
                 message: 'Try another'
               }
-            res.render("signup");
+            res.redirect("/user/signup");
             //res.render("signup")
         }
         // email is taken
@@ -41,7 +41,7 @@ const addUser = async (req, res, next) => {
                 intro: 'That email is already taken!',
                 message: 'Try another'
               }
-            res.render("signup");
+            res.redirect("/user/signup");
             //res.render("signup")
         }
     } else {

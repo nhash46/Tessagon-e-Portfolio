@@ -21,6 +21,11 @@ html
       include ../public/css/signup.css
 
 block content
+    if message
+        div(style='text-align: center' class='alert alert-'+message.type)
+            button.close(type='button' data-dismiss='alert') &times;
+            strong #{message.intro}
+            |  #{message.message}
     .container
         .row
             .col-lg-10.col-xl-9.mx-auto
