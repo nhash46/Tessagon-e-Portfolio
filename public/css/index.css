@@ -1001,24 +1001,5 @@ header .intro-text {
 	top: 10%;
 	left: 30%;
 	width: 40%;
-	-moz-animation: cssAnimation 0s ease-in 2s forwards;
-	/* Firefox */
-	-webkit-animation: cssAnimation 0s ease-in 2s forwards;
-	/* Safari and Chrome */
-	-o-animation: cssAnimation 0s ease-in 2s forwards;
-	/* Opera */
-	animation: cssAnimation 0s ease-in 2s forwards;
-	-webkit-animation-fill-mode: forwards;
-	animation-fill-mode: forwards;
 }
 
-@keyframes cssAnimation {
-	0%   {opacity: 1;}
-	90%  {opacity: 1;}
-	100% {opacity: 0;}
-}
-@-webkit-keyframes cssAnimation {
-	0%   {opacity: 1;}
-	90%  {opacity: 1;}
-	100% {opacity: 0;}
-}
