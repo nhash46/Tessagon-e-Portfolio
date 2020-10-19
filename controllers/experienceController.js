@@ -32,6 +32,12 @@ const addExperience = async (req, res, next) => {
                 res.status(400);
                 return console.error(err);
             } else {
+              req.session.message = {
+                type: 'success',
+                intro: 'Experience added!',
+                message: ''
+              }
+            //res.redirect("/user/profile#experience");
               next();
             }
         });
@@ -92,6 +98,11 @@ const editExperience = (req,res, next) => {
         res.status(400);
       }
       else{
+          req.session.message = {
+            type: 'success',
+            intro: 'Experience updated!',
+            message: ''
+          }
           res.send('Success')
       } 
     });
@@ -119,6 +130,11 @@ const deleteExperience = (req, res) => {
       Experience.remove(query, function(err){
         if(err){
           console.log(err);
+        }
+        req.session.message = {
+          type: 'success',
+          intro: 'Experience deleted!',
+          message: ''
         }
         res.send('Success')
 

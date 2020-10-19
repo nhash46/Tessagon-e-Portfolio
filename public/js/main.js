@@ -118,3 +118,7 @@ $(document).ready(function(){
         });
     });
 });
+
+$(document).ready(function() {
+    $('#alert').fadeOut(4000); // 5 seconds x 1000 milisec = 5000 milisec
+});

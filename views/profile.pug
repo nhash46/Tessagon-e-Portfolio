@@ -39,6 +39,7 @@ head
     //if lt IE 9
       script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
       script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+
 // Header
 header#header.d-flex.flex-column.justify-content-center
     nav.nav-menu
@@ -101,11 +102,16 @@ header#header.d-flex.flex-column.justify-content-center
                         |Edit Home Page
 
 
-
 #nav
     nav.navbar.navbar-expand-lg.navbar-dark.navbar-static-top#colour
         .container#colour
             a.navbar-brand(href='/user/profile/') My Profile
+            #alert
+                if message
+                    div(style='text-align: center' class='alert alert-' + message.type).navbar-static-top
+                        button.close(type='button' data-dismiss='alert') &times;
+                        strong #{message.intro}
+                        |  #{message.message}
             .nav-item.dropdown#positionRight
                 a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                     img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image') 
@@ -434,7 +440,7 @@ script(type='text/javascript' src='/js/navbar.js')
                 h2 Documents
                 for doc_name in user1.document
                     h3 #{doc_name.title} - #{doc_name.subHead}
-                    button.btn.btn-secondary.delete-document(type ='button', document-id=doc_name._id) Remove
+                    button.btn.btn-secondary.delete-document(type ='button', document-id=doc_name._id data-dismiss='modal') Remove
                     hr
                 h2 Videos
                 for vid in user1.youtubeLinks
@@ -470,7 +476,7 @@ script(type='text/javascript' src='/js/navbar.js')
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
-                    h5#contactModalLabel.modal-title Edit Bio
+                    h5#contactModalLabel.modal-title Edit Contact Information
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
@@ -577,8 +583,8 @@ script(type='text/javascript' src='/js/navbar.js')
                         .container
                             .row
                                 .col-md-6
-                                    button.btn.btn-secondary.edit-experience(href='/user/profile#experience' experience-id=i._id) Save changes
-                                    a.btn.btn-secondary.delete-experience(href='/user/profile#experience' experience-id=i._id) Delete Experience
+                                    button.btn.btn-secondary.edit-experience(href='/user/profile#experience' experience-id=i._id data-dismiss='modal') Save changes
+                                    a.btn.btn-secondary.delete-experience(href='/user/profile#experience' experience-id=i._id data-dismiss='modal') Delete Experience
                         br
                         hr.wide
             .modal-footer
@@ -649,8 +655,8 @@ script(type='text/javascript' src='/js/navbar.js')
                         .container
                             .row
                                 .col-md-6
-                                    button.btn.btn-secondary.edit-education(href='/user/profile#education' type='submit' education-id=i._id) Save changes
-                                    a.btn.btn-secondary.delete-education(href='/user/profile#education' education-id=i._id) Delete Education
+                                    button.btn.btn-secondary.edit-education(href='/user/profile#education' type='submit' education-id=i._id data-dismiss='modal') Save changes
+                                    a.btn.btn-secondary.delete-education(href='/user/profile#education' education-id=i._id data-dismiss='modal') Delete Education
                         br
                         hr.wide
             .modal-footer

@@ -19,44 +19,79 @@ const authCheck = (req, res, next) => {
 }
 
 // function to add user
-const addUser = (req, res, next) => {
+const addUser = async (req, res, next) => {
 
-    var newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
+    var usernameTaken = await User.exists({username: req.body.username});
+    var emailTaken = await User.exists({email: req.body.email});
 
-    });
-
-    let errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        req.flash(errors);
-        res.render('signup',
-            {
-                newUser:newUser,
-                errors: errors.mapped()
-            });
+    if( usernameTaken || emailTaken ){
+        // username is taken
+        if(usernameTaken){
+            req.session.message = {
+                type: 'danger',
+                intro: 'That username is already taken!',
+                message: 'Try another'
+              }
+            res.redirect("/user/signup");
+            //res.render("signup")
+        }
+        // email is taken
+        if(emailTaken){
+            req.session.message = {
+                type: 'danger',
+                intro: 'That email is already taken!',
+                message: 'Try another'
+              }
+            res.redirect("/user/signup");
+            //res.render("signup")
+        }
     } else {
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-                if(err){
-                    console.log(err);
-                }
-                newUser.password = hash;
+        var newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
 
-                // add user to database
-                newUser.save((err) => {
-                    if (err) {
+        });
+
+        let errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            req.session.message = {
+                type: 'danger',
+                intro: "Those passwords didn't match.",
+                message: ' Try again.'
+              }
+            res.redirect("/user/signup");
+            //req.flash(errors);
+            /**
+            res.render('signup',
+                {
+                    newUser:newUser,
+                    errors: errors.mapped()
+                });
+             */
+        } else {
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    if(err){
                         console.log(err);
-
-                    } else {
-                        next();
                     }
+                    newUser.password = hash;
+
+                    // add user to database
+                    newUser.save((err) => {
+                        if (err) {
+                            console.log(err);
+
+                        } else {
+                            next();
+                        }
+                    });
                 });
             });
-        });
+        }
     }
+
 };
 
 const populateInfo = (req, res, next) => {
@@ -184,9 +219,19 @@ const editNavInfo = (req,res) => {
     User.updateOne(query, user, function (err) {
         if (err){
             console.log(err);
+            req.session.message = {
+                type: 'danger',
+                intro: 'Oops, something went wrong.',
+                message: ' Could not save contact information.'
+            }
+            res.redirect('/user/profile#contact');
         }
         else {
-            console.log("edited account details");
+            req.session.message = {
+                type: 'success',
+                intro: 'Contact information updated!',
+                message: ''
+            }
             res.redirect('/user/profile#contact');
         }
     });
@@ -203,9 +248,19 @@ const editAboutMe = (req,res,next) => {
     User.updateOne(query, user, function (err) {
         if (err){
             console.log(err);
+            req.session.message = {
+                type: 'danger',
+                intro: 'Oops, something went wrong.',
+                message: ' Could not save about me section.'
+            }
+            res.redirect('/user/profile#about');
         }
         else {
-            console.log("edited about me");
+            req.session.message = {
+                type: 'success',
+                intro: 'About me section updated!',
+                message: ''
+            }
             res.redirect('/user/profile#about');
             //next();
         }
@@ -243,6 +298,11 @@ const redirectEducation = (req, res) => {
 // redirects to experience section
 const redirectExperience = (req, res) => {
     res.redirect('/user/profile#experience');
+}
+
+// redirects to portfolio section
+const redirectPortfolio = (req, res) => {
+    res.redirect('/user/profile#portfolio');
 }
 
 // function to handle a request to login - NOT IN USE
@@ -363,6 +423,11 @@ const getOtherUserProfile = async (req, res) => {
     });
 };
 
+const deleteMessage = (req, res, next) => {
+    delete req.session.message;
+    next();
+} 
+
 module.exports = {
     addUser,
     populateInfo,
@@ -385,4 +450,6 @@ module.exports = {
     redirectExperience,
     redirectProfile,
     uploadVideo
+    redirectPortfolio,
+    deleteMessage
 };

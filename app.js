@@ -40,7 +40,6 @@ app.use(session({
       },
 }));
 
-
 // Express Messages Middleware
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
@@ -48,6 +47,13 @@ app.use(function (req, res, next) {
     next();
 });
 
+//flash message middleware
+app.use(function (req, res, next) {
+    res.locals.message = req.session.message
+    delete req.session.message
+    next()
+  })
+  
 // Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -112,6 +118,10 @@ db.connect()
 
 app.use(function(req,res){
     res.status(404).render("error");
+});
+
+app.use(function(req,res){
+    res.status(500).render("error");
 });
 
 module.exports = app;

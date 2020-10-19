@@ -994,3 +994,12 @@ header .intro-text {
 #homescreen {
 	margin-top: 30vh;
 }
+
+#alert {
+	z-index: 9600;
+	position: absolute;
+	top: 10%;
+	left: 30%;
+	width: 40%;
+}
+

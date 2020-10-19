@@ -58,6 +58,11 @@ const uploadDocument = async (req,res,next) => {
             const update = {"$push": {"document": req.file.id}};
             let user = await User.findOneAndUpdate(filter, update, {new: true});
             //console.log(user.document);
+            req.session.message = {
+                type: 'success',
+                intro: 'Document uploaded!',
+                message: ''
+            }
             next();
         }
         else{
@@ -88,9 +93,14 @@ const uploadResume = async (req,res,next) => {
             user.resumeID = doc._id
             await user.save();
             //console.log(user.document);
+            req.session.message = {
+                type: 'success',
+                intro: 'Resume updated!',
+                message: ''
+            }
             next();
         }
-        else{
+        else{  
             next();
         }
     } catch(err) {
@@ -115,6 +125,11 @@ const uploadProfilePic = async (req, res, next) => {
             user.profilePicID = doc._id
             await user.save();
             //console.log(user);
+            req.session.message = {
+                type: 'success',
+                intro: 'Profile picture updated!',
+                message: ''
+            }
             next();
         }
         else {
@@ -123,7 +138,7 @@ const uploadProfilePic = async (req, res, next) => {
         
     } catch(err) {
         console.log(err);
-        res.status(400);
+        res.status(500);
         // Need error page handling
         return res.send("Didn't work");
     }
@@ -151,7 +166,7 @@ const uploadBackgroundPic = async (req, res, next) => {
 
     } catch(err) {
         console.log(err);
-        res.status(400);
+        res.status(500);
         // Need error page handling
         return res.send("Didn't work");
     }
@@ -255,8 +270,19 @@ const deleteDocument = (req,res) => {
     gfs.delete(fileId, (err, GridFSBucket) => {
         if (err) {
             console.log(err.message);
-            res.status(500).send("Server Error");
+            req.session.message = {
+                type: 'danger',
+                intro: 'Oops, something went wrong.',
+                message: ' Document was not deleted.'
+            }
+            res.send('Success');
+            //res.status(500).send("Server Error");
         } else {
+            req.session.message = {
+                type: 'success',
+                intro: 'Document deleted!',
+                message: ''
+            }
             res.send('Success');
         }
        

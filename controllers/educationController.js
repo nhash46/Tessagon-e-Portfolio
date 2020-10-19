@@ -34,6 +34,11 @@ const addEducation = async (req, res, next) => {
                 return console.error(err);
             } else {
                 res.status(302);
+                req.session.message = {
+                  type: 'success',
+                  intro: 'Education added!',
+                  message: ''
+                }
                 next();
             }
         });
@@ -90,11 +95,16 @@ const editEducation = (req,res,next) => {
     // add post into db
     Education.updateOne(query, education, function (err) {
       if (err){
-        console.log(err);
-        res.status(400);
+          console.log(err);
+          res.status(400);
       }
       else{
-        next();
+          req.session.message = {
+            type: 'success',
+            intro: 'Education updated!',
+            message: ''
+          }
+          res.send("Success");
       } 
     });
 
@@ -121,6 +131,11 @@ const deleteEducation = (req, res) => {
       Education.remove(query, function(err){
         if(err){
           console.log(err);
+        }
+        req.session.message = {
+          type: 'success',
+          intro: 'Education deleted!',
+          message: ''
         }
         res.send('Success')
 
