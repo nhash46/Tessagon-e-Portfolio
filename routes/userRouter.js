@@ -84,6 +84,7 @@ userRouter.post("/populateInfo",
     userController.addTypewriterWords,
     experienceController.addExperience, 
     educationController.addEducation,
+    skillController.addSkill,
     userController.deleteMessage,
     userController.redirectProfile
 );

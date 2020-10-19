@@ -7,53 +7,21 @@ const User = mongoose.model("User");
 const addSkill = async (req, res, next) => {
 
     if(!Array.isArray(req.body.skills)){
-      let newSkill = new Skill({
-        user: req.user._id,
-        // description: req.body.description[i]
-      })
-
-      // need to add this Id to Parent document 'comment' field
-      try {
-          const filter = {_id: req.user._id};
-          const update = {"$push": {"skills": newSkill._id}};
-          let user = await User.findOneAndUpdate(filter, update, {new: true});
-          console.log(user.skills);
-      } catch (err) {
-          res.status(400);
-          return res.send("Database query failed");
-      }
-
-      // add comment to database
-      newSkill.save(function (err) {
-          if (err) {
-              res.status(400);
-              return console.error(err);
-          } else {
-              next();
-          }
-      });
-    } else {
-      let lengthList = req.body.skills.length
-      let i = 0
-      for (i; i < lengthList; i++) {
         let newSkill = new Skill({
             user: req.user._id,
-            // description: req.body.description[i]
+            name: req.body.skills,
         })
 
-        // need to add this Id to Parent document 'comment' field
         try {
             const filter = {_id: req.user._id};
             const update = {"$push": {"skills": newSkill._id}};
             let user = await User.findOneAndUpdate(filter, update, {new: true});
-            console.log(user.skills);
+            //console.log(user.skills);
         } catch (err) {
             res.status(400);
-            return res.send("Database query failed");
         }
 
-        // add comment to database
-        newSkill.save(function (err) {
+        await newSkill.save(function (err) {
             if (err) {
                 res.status(400);
                 return console.error(err);
@@ -61,8 +29,34 @@ const addSkill = async (req, res, next) => {
                 next();
             }
         });
+    } else {
+        let lengthList = req.body.skills.length
+        let i = 0
+        for (i; i < lengthList; i++) {
+            let newSkill = new Skill({
+                user: req.user._id,
+                name: req.body.skills[i],
+            })
+
+            try {
+                const filter = {_id: req.user._id};
+                const update = {"$push": {"skills": newSkill._id}};
+                let user = await User.findOneAndUpdate(filter, update, {new: true});
+                //console.log(user.skills);
+            } catch (err) {
+                res.status(400);
+            }
+
+            await newSkill.save(function (err) {
+                if (err) {
+                    res.status(400);
+                    console.error(err);
+                } else {
+                    next();
+                }
+            });
+        }
     }
-  }
 };
 
 /**

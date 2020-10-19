@@ -124,16 +124,26 @@ const addTypewriterWords = async (req, res, next) => {
     // checks if there is singular typewriter string or array
     if(!Array.isArray(req.body.typewriter)){
         // if singular then string then push to array
-        let update = {"$push": {"typewriterWords": req.body.typewriter}};
-        let query = {_id:req.user._id};
-        let user = await User.findOneAndUpdate(query, update, {new: true});
+        try {
+            let update = {"$push": {"typewriterWords": req.body.typewriter}};
+            let query = {_id: req.user._id};
+            let user = await User.findOneAndUpdate(query, update, {new: true});
+        }
+        catch{
+            res.status(500);
+        }
     } else {
         let lengthList = req.body.typewriter.length;
         // otherwise iterate through req.body.typewriter to store all strings
         for(i = 0; i < lengthList; i++){
-            let update = {"$push": {"typewriterWords": req.body.typewriter[i]}};
-            let query = {_id:req.user._id};
-            let user = await User.findOneAndUpdate(query, update, {new: true});
+            try {
+                let update = {"$push": {"typewriterWords": req.body.typewriter[i]}};
+                let query = {_id: req.user._id};
+                let user = await User.findOneAndUpdate(query, update, {new: true});
+            }
+            catch{
+                res.status(500);
+            }
         }
     }
     next();
@@ -396,8 +406,9 @@ const getUserProfile = async (req, res) => {
         .populate('backgroundPicID')
         .populate('resumeID')
         .populate('youtubeLinks')
+        .populate('skills')
         .exec((err,user1) => {
-        console.log(user1);
+        //console.log(user1);
         res.render('profile', {
             user1: user1
         });
@@ -413,6 +424,7 @@ const getOtherUserProfile = async (req, res) => {
         .populate('backgroundPicID')
         .populate('resumeID')
         .populate('youtubeLinks')
+        .populate('skills')
         .exec((err, user2) => {
         console.log(user2);
         res.render('index', {
