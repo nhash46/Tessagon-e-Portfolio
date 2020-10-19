@@ -449,7 +449,7 @@ module.exports = {
     redirectEducation,
     redirectExperience,
     redirectProfile,
-    uploadVideo
+    uploadVideo,
     redirectPortfolio,
     deleteMessage
 };
