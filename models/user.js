@@ -14,11 +14,12 @@ const userSchema = new Schema({
     city: String,
     state: String,
     phone_number: String,
+    youtubeLinks: [{type: Schema.Types.ObjectId, ref: "Link"}],
     profilePicID: {type: Schema.Types.ObjectId, ref: "Document"},
     backgroundPicID: {type: Schema.Types.ObjectId, ref: "Document"},
     resumeID : {type: Schema.Types.ObjectId, ref: "Document"},
-    links: 
-        { 
+    links:
+        {
             facebook: String,
             twitter: String,
             dribble: String,

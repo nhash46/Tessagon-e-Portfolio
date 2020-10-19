@@ -41,9 +41,10 @@ require("./user");
 require("./education");
 require("./experience");
 require("./document");
-require("./comment")
+require("./comment");
 require("./blog");
 require("./skill");
+require("./links");
 
 module.exports = {
   connect,

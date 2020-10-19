@@ -191,22 +191,33 @@ header#header.d-flex.flex-column.justify-content-center
                 h4 Illustrator
 // Portfolio Section
 #portfolio
+    - var isVid = false;
     .container
         .section-title.text-center.center
             h2 Portfolio
             //embed(src='http://localhost:3000/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
-            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#portfolioModal')
-                |Add Portfolio Item
             button.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPortfolioModal')
                 | Edit Portfolio
             br
             br
             hr
             .clearfix
+                .categories
+                    ul.cat
+                        li
+                            ol.type
+                                //li
+                                //TODO fix data-filter here
+                                    a.active(href='#') All
+                                li
+                                    a.active(href='#portfolio' data-filter='.doc').hideVid Documents
+                                li
+                                    a(href='#portfolio' data-filter='.vid').showVid Videos
+
         .row
             .portfolio-items
                 for doc in user1.document
-                    .col-sm-6.col-md-3.col-lg-3.web
+                    .col-sm-6.col-md-3.col-lg-3.doc
                         .portfolio-item
                             .hover-bg
                                 a(href='http://localhost:3000/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
@@ -214,6 +225,33 @@ header#header.d-flex.flex-column.justify-content-center
                                         h4 #{doc.title}
                                         small #{doc.subHead}
                                     embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
+                .col-sm-6.col-md-3.col-lg-3.doc
+                    .portfolio-item
+                        .hover-bg
+                            a(href='img/plus.jpg' data-toggle='modal' data-target='#portfolioModal')
+                                .hover-text
+                                    h4 Add Document
+                                embed(src='/img/plus.png' width='255' height='250')
+        -//if isVids
+            .row
+                .portfolio-items
+                    for vid in user1.youtubeLinks
+                        .col-sm-6.col-md-3.col-lg-3.vid
+                            .portfolio-item
+                                .hover-bg
+                                    a(href=vid.url title='Project description' rel='prettyPhoto')
+                                        .hover-text
+                                            h4 #{vid.title}
+                                            small #{vid.subheading}
+                                        img.img-responsive(src=vid.thumbnail alt='Project Title')
+                                        //iframe(width='420' height='345' src=vid.url)
+                    .col-sm-6.col-md-3.col-lg-3.vid
+                        .portfolio-item
+                            .hover-bg
+                                a(href='img/plus.png' data-toggle='modal' data-target='#videoModal')
+                                    .hover-text
+                                        h4 Add Video
+                                    embed(src='/img/plus.png' width='255' height='250')
 
 // Resume Section
 #experience.text-center
@@ -360,7 +398,7 @@ script(type='text/javascript' src='/js/navbar.js')
 
 
 
-#portfolioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+#portfolioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
     form(method='POST' action='/user/upload' enctype="multipart/form-data").form-signin
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
@@ -375,11 +413,17 @@ script(type='text/javascript' src='/js/navbar.js')
                     input.form-control-file.padLeft(name='subHead' type='text' placeholder='Sub-Heading' autofocus='' required='isRequired')
                     label(for='uploadDocuments') Upload a document
                     input#uploadDocuments.form-control-file(name='file' type='file' required='isRequired' accept="application/pdf")
+                    label(for='uploadDocuments') Document Title
+                    br
+                    input.form-control-file(name='title' type='text' placeholder='Title' autofocus='' required='isRequired')
+                    label(for='uploadDocuments') Video Subheading
+                    input.form-control-file.padLeft(name='subHead' type='text' placeholder='Sub-Heading' autofocus='' required='isRequired')
+                    label(for='uploadDocuments') Link a Video
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type ='submit') Upload file
 
-#editPortfolioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+#editPortfolioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
     .modal-dialog.modal-dialog-centered.modal-lg(role='document')
         .modal-content
             .modal-header
@@ -387,15 +431,21 @@ script(type='text/javascript' src='/js/navbar.js')
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
+                h2 Documents
                 for doc_name in user1.document
                     h3 #{doc_name.title} - #{doc_name.subHead}
                     button.btn.btn-secondary.delete-document(type ='button', document-id=doc_name._id) Remove
+                    hr
+                h2 Videos
+                for vid in user1.youtubeLinks
+                    h3 #{vid.title} - #{vid.subheading}
+                    //button.btn.btn-secondary(type ='button', video-id = video.url) Remove
                     hr
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                 button.btn.btn-secondary(type ='submit') Save changes
 
-#bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
+#bioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
     form(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
@@ -441,7 +491,7 @@ script(type='text/javascript' src='/js/navbar.js')
                     button.btn.btn-secondary(type='submit') Save changes
 
 
-#homeModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='homeModalLabel' aria-hidden='true')
+#homeModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='homeModalLabel' aria-hidden='true')
     form(method='POST' action='/user/editHomeInfo' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
@@ -605,3 +655,24 @@ script(type='text/javascript' src='/js/navbar.js')
                         hr.wide
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+
+#videoModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/uploadVid')
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#videoModalLabel.modal-title Upload Video
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input.form-control-file(name='video' type='text' placeholder='Video' autofocus='' required='isRequired')
+                    label Video Link
+                    br
+                    input.form-control-file(name='title' type='text' placeholder='Video' autofocus='' required='isRequired')
+                    label Title
+                    br
+                    input.form-control-file(name='subheading' type='text' placeholder='Video' autofocus='' required='isRequired')
+                    label Topic
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type ='submit') Upload Video
