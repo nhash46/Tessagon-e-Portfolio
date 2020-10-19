@@ -208,11 +208,21 @@ const editNavInfo = (req,res) => {
 
 
     let user = {};
+    let links = {
+        facebook : req.body.facebook,
+        twitter : req.body.twitter,
+        github : req.body.github,
+        instagram : req.body.instagram,
+        linkedIn : req.body.linkedIn
+    }
 
-    user.phone_number = req.body.phone_number;
-    user.city = req.body.city;
-    user.state = req.body.state;
-    user.email = req.body.email;
+    let user = {
+        phone_number : req.body.phone_number,
+        city :req.body.city,
+        state : req.body.state,
+        email : req.body.email,
+        links : links
+    }
 
     let query = {_id:req.user._id};
 
