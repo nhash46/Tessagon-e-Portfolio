@@ -9,12 +9,13 @@ const addExperience = async (req, res, next) => {
     if(!Array.isArray(req.body.company)){
         let newExperience = new Experience({
             user: req.user._id,
-            company: req.body.company,
-            role: req.body.role,
-            experienceStartDate: req.body.experienceStartDate,
-            experienceEndDate: req.body.experienceEndDate,
-            descriptionExp: req.body.descriptionExp
+            company: req.body.company[i],
+            role: req.body.role[i],
+            experienceStartDate: req.body.experienceStartDate[i],
+            experienceEndDate: req.body.experienceEndDate[i],
+            descriptionExp: req.body.descriptionExp[i]
         })
+
               // need to add this Id to Parent document 'comment' field
         try {
             const filter = {_id: req.user._id};
@@ -23,7 +24,8 @@ const addExperience = async (req, res, next) => {
             console.log(user.experience);
         } catch (err) {
             res.status(400);
-            return res.send("Database query failed");
+            //return res.send("Database query failed");
+            next();
         }
 
         // add comment to database
@@ -64,14 +66,16 @@ const addExperience = async (req, res, next) => {
                 console.log(user.experience);
             } catch (err) {
                 res.status(400);
-                return res.send("Database query failed");
+                //return res.send("Database query failed");
+                next();
             }
 
             // add comment to database
             newExperience.save(function (err) {
                 if (err) {
                     res.status(400);
-                    return console.error(err);
+                    console.error(err);
+                    next();
                 } else {
                     next();
                 }

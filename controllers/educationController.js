@@ -25,7 +25,8 @@ const addEducation = async (req, res, next) => {
             console.log(user.education);
         } catch (err) {
             res.status(400);
-            return res.send("Database query failed");
+            //return res.send("Database query failed");
+            next();
         }
 
         // add comment to database
@@ -53,7 +54,7 @@ const addEducation = async (req, res, next) => {
                 degree: req.body.degree[i],
                 educationStartDate: req.body.educationStartDate[i],
                 educationEndDate: req.body.educationEndDate[i],
-                descriptionExp: req.body.descriptionEdu[i]
+                descriptionEdu: req.body.descriptionEdu[i]
             });
 
             // need to add this Id to Parent document 'comment' field
@@ -64,7 +65,8 @@ const addEducation = async (req, res, next) => {
                 console.log(user.education);
             } catch (err) {
                 res.status(400);
-                return res.send("Database query failed");
+                //return res.send("Database query failed");
+                next()
             }
 
             // add comment to database
