@@ -38,6 +38,7 @@ const addExperience = async (req, res, next) => {
                 message: ''
               }
             //res.redirect("/user/profile#experience");
+            console.log(newExperience);
               next();
             }
         });
@@ -52,7 +53,7 @@ const addExperience = async (req, res, next) => {
                 role: req.body.role[i],
                 experienceStartDate: req.body.experienceStartDate[i],
                 experienceEndDate: req.body.experienceEndDate[i],
-                description: req.body.description[i]
+                descriptionExp: req.body.descriptionExp[i]
             })
 
             // need to add this Id to Parent document 'comment' field
@@ -87,7 +88,9 @@ const editExperience = (req,res, next) => {
     experience.role = req.body.role;
     experience.experienceStartDate = req.body.experienceStartDate;
     experience.experienceEndDate = req.body.experienceEndDate;
-    experience.description = req.body.description;
+    experience.descriptionExp = req.body.descriptionExp;
+
+    console.log(experience);
     
     let query = {_id:req.params._id}
   

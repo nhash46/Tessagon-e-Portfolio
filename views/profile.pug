@@ -291,7 +291,7 @@ header#header.d-flex.flex-column.justify-content-center
                                         span #{c.role}
                                 .timeline-body
                                     p
-                                        | #{c.description}
+                                        | #{c.descriptionExp}
                                     br
 
 // Education section                   
@@ -326,7 +326,7 @@ header#header.d-flex.flex-column.justify-content-center
                                         span #{c.degree}
                                 .timeline-body
                                     p
-                                        | #{c.description}
+                                        | #{c.descriptionEdu}
                                     br
 
 
@@ -534,7 +534,7 @@ script(type='text/javascript' src='/js/navbar.js')
                     input#addRole.form-control(name="role" type='text' autofocus='' required='isRequired')
                     label(for='addRole') Role Name
                     br
-                    input#addDescription.form-control(name="description" type='text' autofocus='' required='isRequired')
+                    input#addDescription.form-control(name="descriptionExp" type='text' autofocus='' required='isRequired')
                     label(for='addDescription') Short description of your role!
                     br
                     .col-md-3
@@ -568,8 +568,8 @@ script(type='text/javascript' src='/js/navbar.js')
                         label(for='role'+i._id) Role
                         input.form-control(id='role'+i._id name="role" type='text' autofocus='' required='isRequired' value=i.role)
                         br
-                        label(for='eduDescription'+i._id) Short description of your role!
-                        input.form-control(id='eduDescription'+i._id name="description" type='text' autofocus='' required='isRequired' value=i.description)
+                        label(for='expDescription'+i._id) Short description of your role!
+                        input.form-control(id='descriptionExp'+i._id name="descriptionExp" type='text' autofocus='' required='isRequired' value=i.descriptionExp)
                         br
                         .container
                             .row
@@ -605,7 +605,7 @@ script(type='text/javascript' src='/js/navbar.js')
                     input#degree.form-control(name="degree" type='text' autofocus='' required='isRequired')
                     label(for='degree') Degree Name
                     br
-                    input#eduDescription.form-control(name="description" type='text' autofocus='' required='isRequired')
+                    input#eduDescription.form-control(name="descriptionEdu" type='text' autofocus='' required='isRequired')
                     label(for='eduDescription') Add a bit about your degree!
                     br
                     .col-md-3
@@ -641,7 +641,7 @@ script(type='text/javascript' src='/js/navbar.js')
                         input.form-control(id='degree'+i._id name="degree" type='text' autofocus='' required='isRequired' value=i.degree)
                         br
                         label(for='eduDescription'+i._id) Short description about your degree!
-                        input.form-control(id='eduDescription'+i._id name="description" type='text' autofocus='' required='isRequired' value=i.description)
+                        input.form-control(id='descriptionEdu'+i._id name="descriptionEdu" type='text' autofocus='' required='isRequired' value=i.description)
                         br
                         .container
                             .row

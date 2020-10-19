@@ -53,7 +53,7 @@ const addEducation = async (req, res, next) => {
                 degree: req.body.degree[i],
                 educationStartDate: req.body.educationStartDate[i],
                 educationEndDate: req.body.educationEndDate[i],
-                description: req.body.description[i]
+                descriptionExp: req.body.descriptionEdu[i]
             });
 
             // need to add this Id to Parent document 'comment' field
@@ -88,7 +88,7 @@ const editEducation = (req,res,next) => {
     education.degree = req.body.degree;
     education.educationStartDate = req.body.educationStartDate;
     education.educationEndDate = req.body.educationEndDate;
-    education.description = req.body.description;
+    education.descriptionEdu = req.body.descriptionEdu;
     
     let query = {_id:req.params._id}
   

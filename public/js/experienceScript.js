@@ -7,8 +7,8 @@ $(document).ready(function(){
         var role = $("#role"+_id).val();
         var expStart = $("#expStart"+_id).val();
         var expEnd = $("#expEnd"+_id).val();
-        var desc = $("#expDescription"+_id).val();
-        var dataString = 'company='+company+'&role='+role+'&experienceStartDate='+expStart+'&experienceEndDate='+expEnd+'&description'+desc;
+        var desc = $("#descriptionExp"+_id).val();
+        var dataString = 'company='+company+'&role='+role+'&experienceStartDate='+expStart+'&experienceEndDate='+expEnd+'&descriptionExp='+desc;
         $.ajax({
             url: '/user/editExperience/'+_id,
             type: 'POST',

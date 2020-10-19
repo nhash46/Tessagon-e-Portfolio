@@ -399,7 +399,7 @@ const getUserProfile = async (req, res) => {
         .populate('resumeID')
         .populate('youtubeLinks')
         .exec((err,user1) => {
-        console.log(user1);
+        //console.log(user1);
         res.render('profile', {
             user1: user1
         });

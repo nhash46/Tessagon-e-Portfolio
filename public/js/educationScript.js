@@ -7,8 +7,8 @@ $(document).ready(function(){
         var degree = $("#degree"+_id).val();
         var eduStart = $("#eduStart"+_id).val();
         var eduEnd = $("#eduEnd"+_id).val();
-        var desc = $("#eduDescription"+_id).val();
-        var dataString = 'university='+uni+'&degree='+degree+'&educationStartDate='+eduStart+'&educationEndDate='+eduEnd+'&description='+desc;
+        var desc = $("#descriptionEdu"+_id).val();
+        var dataString = 'university='+uni+'&degree='+degree+'&educationStartDate='+eduStart+'&educationEndDate='+eduEnd+'&descriptionEdu='+desc;
         $.ajax({
             url: '/user/editEducation/'+_id,
             type: 'POST',
