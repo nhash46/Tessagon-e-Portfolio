@@ -1015,6 +1015,7 @@ header .intro-text {
 /* Add some padding inside the card container */
 .container {
 	padding: 2px 16px;
+
 }
 
 /* Float four columns side by side */
@@ -1056,12 +1057,10 @@ a.reset:hover {
   background: #535859;
   text-decoration: none;
 }
-.holder {
-  width: auto;
-  margin: auto; 
-  margin-top: 9vh;
-}
 
+.dot{
+	display: block;
+}
 div.dot {
   background: #8599b0;
   border-radius: 100px;
@@ -1069,28 +1068,28 @@ div.dot {
   overflow: hidden;
   position: absolute;
   width: 100px;
+  display: block;
+  
 }
 div.dot.top {
   z-index: 15;
-  align-items: center;
 }
 div.dot.mid {
   z-index: 10;
   margin-left: 10vw;
   margin-bottom: 10vh;
-  align-items: center;
 
 }
 div.dot.btm {
   z-index: 5;
   margin-left: 20vw;
   margin-bottom: 20vh;
-  align-items: center;
 
   
 }
 div.dot.dot1 {
   animation: pickup1 1.5s 1 forwards;
+  margin: auto;
 }
 div.dot.dot2 {
   animation: pickup2 1.5s 1 forwards;
@@ -1102,51 +1101,51 @@ div.dot.dot3 {
   0% {
     background: #8599b0;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
-    transform: scale3d(1, 1, 1) translate3d(350%, 0, 0);
+    transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   }
   50% {
     background: #94a6ba;
     box-shadow: 0 100px 30px rgba(0, 0, 0, 0.1);
-    transform: scale3d(1, 0.9, 1) translate3d(350%, -150%, 0);
+    transform: scale3d(1, 0.9, 1) translate3d(0, -150%, 0);
   }
   100% {
     background: #8599b0;
     box-shadow: none;
-    transform: scale3d(1, 1, 1) translate3d(350%, -125%, 0);
+    transform: scale3d(1, 1, 1) translate3d(0, -125%, 0);
   }
 }
 @keyframes pickup2 {
   0% {
     background: #8599b0;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.4);
-    transform: scale3d(1, 1, 1) translate3d(350%, 0, 0);
+    transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   }
   50% {
     background: #8ea1b6;
     box-shadow: 0 80px 20px rgba(0, 0, 0, 0.15);
-    transform: scale3d(1, 0.9, 1) translate3d(350%, -150%, 0);
+    transform: scale3d(1, 0.9, 1) translate3d(0, -150%, 0);
   }
   100% {
     background: #8599b0;
     box-shadow: none;
-    transform: scale3d(1, 1, 1) translate3d(350%, -125%, 0);
+    transform: scale3d(1, 1, 1) translate3d(0, -125%, 0);
   }
 }
 @keyframes pickup3 {
   0% {
     background: #8599b0;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
-    transform: scale3d(1, 1, 1) translate3d(350%, 0, 0);
+    transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   }
   50% {
     background: #889cb2;
     box-shadow: 0 60px 10px rgba(0, 0, 0, 0.3);
-    transform: scale3d(1, 0.9, 1) translate3d(350%, -150%, 0);
+    transform: scale3d(1, 0.9, 1) translate3d(0, -150%, 0);
   }
   100% {
     background: #8599b0;
     box-shadow: none;
-    transform: scale3d(1, 1, 1) translate3d(350%, -125%, 0);
+    transform: scale3d(1, 1, 1) translate3d(0, -125%, 0);
   }
 }
 
@@ -1199,4 +1198,14 @@ div.dot.dot3 {
 	}
 	100% {
 	  opacity:0;
+	}
+}
+.holder {
+	display: block;
+	margin-top: 14vh;
+}
+#dots {
+	margin-top: 9vh;
+	display: inline-block ; 
+	transform: translate(-50%, -50%);
 }
