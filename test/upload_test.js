@@ -59,7 +59,7 @@ describe('Upload Tests', () => {
                 .attach('file', __dirname + '/files/pdf.pdf')
                 .then((res) => {
                     expect(res.statusCode).to.equal(302);
-                    expect(res.headers.location).to.equal('/user/profile');
+                    expect(res.headers.location).to.equal('/user/profile#portfolio');
                     done();
                 })
                 .catch((err) => done(err));
@@ -69,7 +69,7 @@ describe('Upload Tests', () => {
                 .send({})
                 .then((res) => {
                     expect(res.statusCode).to.equal(302);
-                    expect(res.headers.location).to.equal('/user/profile');
+                    expect(res.headers.location).to.equal('/user/profile#portfolio');
                     done();
                 })
                 .catch((err) => done(err));
@@ -84,7 +84,7 @@ describe('Upload Tests', () => {
                 .attach('file', __dirname + '/files/tessagon-logo.png')
                 .then((res) => {
                     expect(res.statusCode).to.equal(302);
-                    expect(res.headers.location).to.equal('/user/profile');
+                    expect(res.headers.location).to.equal('/user/profile#portfolio');
                     done();
                 })
                 .catch((err) => done(err));
@@ -94,7 +94,7 @@ describe('Upload Tests', () => {
                 .send({})
                 .then((res) => {
                     expect(res.statusCode).to.equal(302);
-                    expect(res.headers.location).to.equal('/user/profile');
+                    expect(res.headers.location).to.equal('/user/profile#portfolio');
                     done();
                 })
                 .catch((err) => done(err));
