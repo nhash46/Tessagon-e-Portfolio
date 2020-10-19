@@ -127,8 +127,13 @@
   padding-left: 1.15vw;
 }
 #Aboutme {
-  padding-bottom: 10vh;
-  padding-left: 1.15vw;
+  padding-bottom: 5vh;
+  padding-left: 1.1vw;
+  padding-right: 2vw;
+}
+#AboutmeLabel {
+  padding-bottom: 5vh;
+  padding-left: 1.5vw;
 }
 .desc {
   padding-bottom: 10vh;
