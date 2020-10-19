@@ -206,8 +206,6 @@ const uploadVideo = async (req,res,next) => {
 
 const editNavInfo = (req,res) => {
 
-
-    let user = {};
     let links = {
         facebook : req.body.facebook,
         twitter : req.body.twitter,
