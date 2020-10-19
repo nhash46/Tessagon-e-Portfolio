@@ -96,7 +96,7 @@ const addUser = async (req, res, next) => {
 
 const populateInfo = (req, res, next) => {
     // extract info. from body
-    console.log(req.body);
+    //console.log(req.body);
     let user = {};
 
     user.first_name = req.body.first_name;
@@ -113,7 +113,7 @@ const populateInfo = (req, res, next) => {
             console.log(err);
         }
         else{
-            console.log("saved");
+            //console.log("saved");
             next();
         }
     });
@@ -121,7 +121,7 @@ const populateInfo = (req, res, next) => {
 
 const addTypewriterWords = async (req, res, next) => {
     
-    let user = await User.findOne({_id: req.user._id}, function(err,user) {});
+    let user = await User.findOne({_id: req.user._id});
 
     // checks if there is singular typewriter string or array
     if(!Array.isArray(req.body.typewriter)){
@@ -143,7 +143,7 @@ const addTypewriterWords = async (req, res, next) => {
             res.send(500);
         }
         else {
-            console.log("updated typewriter");
+            //console.log("updated typewriter");
             next();
         }
     });
@@ -407,7 +407,7 @@ const getUserProfile = async (req, res) => {
         .populate('resumeID')
         .populate('youtubeLinks')
         .exec((err,user1) => {
-        //console.log(user1);
+        console.log(user1);
         res.render('profile', {
             user1: user1
         });

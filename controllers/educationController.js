@@ -22,7 +22,7 @@ const addEducation = async (req, res, next) => {
             const filter = {_id: req.user._id};
             const update = {"$push": {"education": newEducation._id}};
             let user = await User.findOneAndUpdate(filter, update, {new: true});
-            console.log(user.education);
+            //console.log(user.education);
         } catch (err) {
             res.status(400);
             //return res.send("Database query failed");
@@ -62,7 +62,7 @@ const addEducation = async (req, res, next) => {
                 const filter = {_id: req.user._id};
                 const update = {"$push": {"education": newEducation._id}};
                 let user = await User.findOneAndUpdate(filter, update, {new: true});
-                console.log(user.education);
+                //console.log(user.education);
             } catch (err) {
                 res.status(400);
                 //return res.send("Database query failed");
