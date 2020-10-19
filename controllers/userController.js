@@ -120,33 +120,23 @@ const populateInfo = (req, res, next) => {
 }
 
 const addTypewriterWords = async (req, res, next) => {
-    
-    let user = await User.findOne({_id: req.user._id});
 
     // checks if there is singular typewriter string or array
     if(!Array.isArray(req.body.typewriter)){
-        // if singular then string then push to array 
-        user.typewriterWords.push(req.body.typewriter);
+        // if singular then string then push to array
+        let update = {"$push": {"typewriterWords": req.body.typewriter}};
+        let query = {_id:req.user._id};
+        let user = await User.findOneAndUpdate(query, update, {new: true});
     } else {
         let lengthList = req.body.typewriter.length;
         // otherwise iterate through req.body.typewriter to store all strings
         for(i = 0; i < lengthList; i++){
-            user.typewriterWords.push(req.body.typewriter[i]);
+            let update = {"$push": {"typewriterWords": req.body.typewriter[i]}};
+            let query = {_id:req.user._id};
+            let user = await User.findOneAndUpdate(query, update, {new: true});
         }
     }
-    
-    let query = {_id:req.user._id};
-
-    User.updateOne(query, user, function (err) {
-        if (err){
-            console.log(err.message);
-            res.send(500);
-        }
-        else {
-            //console.log("updated typewriter");
-            next();
-        }
-    });
+    next();
 }
 
 const editHomeInfo = (req,res) => {
