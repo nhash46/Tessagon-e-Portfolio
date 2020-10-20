@@ -9,20 +9,25 @@ function showTab(n) {
   if (n == 0) {
     document.getElementById("prevBtn").style.display = "none";
     document.getElementById("loading").style.display = "none";
+    document.getElementById("creating").style.display = "none";
   } else {
     document.getElementById("prevBtn").style.display = "inline";
+    document.getElementById("creating").style.display = "none";
   }
   if (n == (x.length - 1)) {
     document.getElementById("nextBtn").innerHTML = "Submit";
     document.getElementById("loading").style.display = "none";
+    document.getElementById("creating").style.display = "none";
   } 
   else if (n >= (x.length))  {
     document.getElementById("prevBtn").style.display = "none";
     document.getElementById("nextBtn").style.display = "none";
+    document.getElementById("creating").style.display = "block";
   }
   else {
     document.getElementById("nextBtn").innerHTML = "Next";
     document.getElementById("loading").style.display = "none";
+    document.getElementById("creating").style.display = "none";
   }
   // ... and run a function that displays the correct step indicator:
   fixStepIndicator(n)
@@ -43,6 +48,7 @@ function nextPrev(n) {
     document.getElementById("regForm").submit();
     document.getElementById("prevBtn").style.display = "none";
     document.getElementById("nextBtn").style.display = "none";
+    document.getElementById("creating").style.display = "block";
     return false;
   }
   // Otherwise, display the correct tab:

@@ -49,8 +49,8 @@ block content
                                             input.round.form-control(name= "role" type='text' placeholder='Role Name' autofocus='' required='isRequired' style='width:24vw')
                                         br
                                         .form-group.col-md-12
+                                            label(for='descriptionExp') Tell us about your experience (max 500 characters)...
                                             input.desc.round.form-control(id='descriptionExp' name="descriptionExp" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:40vw')
-                                            label(for='EducDesc') Tell us about your experience (max 500 characters)...
                                         .dates
                                         label(for='startDate') Start date:
                                         input#startDate(name= "experienceStartDate" type='month' required='isRequired')
@@ -71,8 +71,8 @@ block content
                                             input.round.form-control(id= 'degree' name= "degree" type='text' placeholder='Degree' autofocus='' required='isRequired' style='width:24vw')
                                         br
                                         .form-group.col-md-12
+                                            label(for='descriptionEdu') Tell us about your education (max 500 characters)...
                                             input.desc.round.form-control(id='descriptionEdu' name="descriptionEdu" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:40vw')
-                                            label(for='EducDesc') Tell us about your education (max 500 characters)...
                                         .dates
                                         label(for='uniStartDate') Start date:
                                         input#uniStartDate(name= "educationStartDate" type='month' required='isRequired')
@@ -113,12 +113,14 @@ block content
                                 div
                                     button.btn.btn-lg.btn-primary.btn-block.text-uppercase#nextBtn(type='button' onclick='nextPrev(1)') Next
                                     button.btn.btn-lg.btn-primary.btn-block.text-uppercase#prevBtn(type='button' onclick='nextPrev(-1)') Previous
+                                    p#creating
+                                        | Creating your ProFolio
+                                        span.txt-rotate(data-period='1000' data-rotate='[....]')
                             div(style='text-align:center;margin-top:40px;')
                                 span.step
                                 span.step
                                 span.step
                                 span.step
                                 span.step
-
 
 
