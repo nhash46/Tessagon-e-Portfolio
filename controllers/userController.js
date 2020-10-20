@@ -426,10 +426,14 @@ const getOtherUserProfile = async (req, res) => {
         .populate('youtubeLinks')
         .populate('skills')
         .exec((err, user2) => {
-        console.log(user2);
-        res.render('index', {
-            user2: user2
-        });
+            if(user2){
+                console.log(user2);
+                res.render('index', {
+                    user2: user2
+                });
+            } else {
+                res.render('error');
+            }
     });
 };
 
