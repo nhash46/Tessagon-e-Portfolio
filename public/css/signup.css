@@ -5,7 +5,7 @@
 
 body {
      background: #007bff;
-     background: url('../img/signupBackground.svg');
+     background: url('/img/signupBackground.svg') no-repeat;
 }
 
 .card-signin {
