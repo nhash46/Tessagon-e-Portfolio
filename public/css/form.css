@@ -254,3 +254,7 @@ input.invalid {
 .divPos {
     align-items: center;
 }
+
+#rocket {
+    padding: 8vw;
+}
