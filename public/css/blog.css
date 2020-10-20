@@ -39,7 +39,7 @@ a, a:hover, a:focus, a:active {
 #liked {
     color: black;
     font-size: 18px;
-    background:url('/img/thumbs.svg') no-repeat;
+    background:url('/img/liked.svg') no-repeat;
 }
 
 body {

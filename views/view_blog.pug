@@ -49,7 +49,7 @@ block content
                                     if user.username == c.author
                                         a.btn.btn-link.edit-comment(type= 'button') Edit
                                     if c.likedUsers.includes(user._id)
-                                        input.like-comment#liked(type= 'image' src='/img/thumbs.svg' comment-id=c._id blog-id=blog._id, user-username=user.username, comment-liked=c.numberOfLikes, comment-unliked=c.numberOfLikes-1)
+                                        input.like-comment#liked(type= 'image' src='/img/liked.svg' comment-id=c._id blog-id=blog._id, user-username=user.username, comment-liked=c.numberOfLikes, comment-unliked=c.numberOfLikes-1)
                                     else
                                         a.btn.btn-link.like-comment(type= 'button' comment-id=c._id blog-id=blog._id, user-username=user.username, comment-liked=c.numberOfLikes+1, comment-unliked=c.numberOfLikes) Like
                                     //a.btn.btn-link.reply-to-comment(type= 'button') Reply
