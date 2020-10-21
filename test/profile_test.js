@@ -246,6 +246,38 @@ describe('Profile Tests', () => {
                 .catch((err) => done(err));
         });
     });
+
+    describe('changePassword', () => {
+
+        it("Should update existing password and redirect to profile", (done) => {
+            authenticatedSession.post('/user/change-password')
+                .send({ 
+                    old_password: 'cold',
+                    new_password: 'cold',
+                })
+                .then((res) => {
+                    expect(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+
+        /**
+        it("Should fail to update existing password and reload change password page", (done) => {
+            authenticatedSession.post('/user/change-password')
+                .send({ 
+                    old_password: 'cold567',
+                    new_password: 'cold',
+                })
+                .then((res) => {
+                    expect(302);
+                    expect(res.headers.location).to.equal('/user/change-password');
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+         */
+    });
     
     /**
     describe('addTypewriterWords', () => {
