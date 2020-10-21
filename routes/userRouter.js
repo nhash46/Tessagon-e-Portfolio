@@ -169,5 +169,9 @@ userRouter.delete('/experience/:_id', experienceController.deleteExperience);
 // delete education object
 userRouter.delete('/education/:_id', educationController.deleteEducation);
 
+// change password
+userRouter.get('/change-password', userController.getChangePassword);
+userRouter.post('/change-password', userController.authCheck, userController.changePassword, userController.redirectPortfolio);
+
 
 module.exports = userRouter;

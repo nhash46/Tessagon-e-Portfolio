@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const flash = require('connect-flash');
 const {validationResult} = require('express-validator');
+const { render } = require("pug");
 
 // import user model
 const User = mongoose.model("User");
@@ -442,6 +443,31 @@ const deleteMessage = (req, res, next) => {
     next();
 } 
 
+const changePassword = async (req, res, next) => {
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const password = await bcrypt.hash(req.body.password, salt);
+        const userPassword = await User.findByIdAndUpdate({_id:req.user._id}, {password:password}, {new: true});
+        req.session.message = {
+            type: 'success',
+            intro: 'Password updated!',
+            message: ''
+        }
+        next();
+    } catch (error) {
+        req.session.message = {
+            type: 'danger',
+            intro: 'Oops, something went wrong.',
+            message: ' Could not change password.'
+        }
+        res.redirect('/user/profile#about');
+    }
+}
+
+const getChangePassword = (req, res) => {
+    res.render('change-password');
+}
+
 module.exports = {
     addUser,
     populateInfo,
@@ -465,5 +491,7 @@ module.exports = {
     redirectProfile,
     uploadVideo,
     redirectPortfolio,
-    deleteMessage
+    deleteMessage,
+    changePassword,
+    getChangePassword
 };
