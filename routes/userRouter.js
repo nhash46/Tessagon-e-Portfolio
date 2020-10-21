@@ -171,7 +171,7 @@ userRouter.delete('/education/:_id', educationController.deleteEducation);
 
 // change password
 userRouter.get('/change-password', userController.getChangePassword);
-userRouter.post('/change-password', userController.authCheck, userController.changePassword, userController.redirectPortfolio);
+userRouter.post('/change-password', userController.authCheck, userController.checkPassword, userController.changePassword, userController.redirectExperience);
 
 
 module.exports = userRouter;
