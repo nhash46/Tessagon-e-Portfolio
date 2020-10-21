@@ -443,10 +443,37 @@ const deleteMessage = (req, res, next) => {
     next();
 } 
 
+const checkPassword = async (req, res, next) => {
+    // Match password
+    try {
+        bcrypt.compare(req.body.old_password, req.user.password, async (err, isMatch) => {
+            if(err) console.log(err);
+            if(isMatch){
+                next();
+            } else {
+                req.session.message = {
+                    type: 'danger',
+                    intro: 'Oops, password entered was incorrect.',
+                    message: ' Try again.'
+                }
+                res.redirect("change-password");
+            }
+        });
+    } catch (error) {
+        req.session.message = {
+            type: 'danger',
+            intro: 'Oops, password entered was incorrect.',
+            message: ' Try again.'
+        }
+        res.redirect("change-password");
+    }
+    
+}
+
 const changePassword = async (req, res, next) => {
     try {
         const salt = await bcrypt.genSalt(10);
-        const password = await bcrypt.hash(req.body.password, salt);
+        const password = await bcrypt.hash(req.body.new_password, salt);
         const userPassword = await User.findByIdAndUpdate({_id:req.user._id}, {password:password}, {new: true});
         req.session.message = {
             type: 'success',
@@ -460,7 +487,7 @@ const changePassword = async (req, res, next) => {
             intro: 'Oops, something went wrong.',
             message: ' Could not change password.'
         }
-        res.redirect('/user/profile#about');
+        res.redirect('/user/change-password');
     }
 }
 
@@ -493,5 +520,6 @@ module.exports = {
     redirectPortfolio,
     deleteMessage,
     changePassword,
+    checkPassword,
     getChangePassword
 };
