@@ -471,21 +471,31 @@ const checkPassword = async (req, res, next) => {
 }
 
 const changePassword = async (req, res, next) => {
-    try {
-        const salt = await bcrypt.genSalt(10);
-        const password = await bcrypt.hash(req.body.new_password, salt);
-        const userPassword = await User.findByIdAndUpdate({_id:req.user._id}, {password:password}, {new: true});
-        req.session.message = {
-            type: 'success',
-            intro: 'Password updated!',
-            message: ''
+    // new passwords match
+    if (req.body.new_password == req.body.new_password1) {
+        try {
+            const salt = await bcrypt.genSalt(10);
+            const password = await bcrypt.hash(req.body.new_password, salt);
+            const userPassword = await User.findByIdAndUpdate({_id:req.user._id}, {password:password}, {new: true});
+            req.session.message = {
+                type: 'success',
+                intro: 'Password updated!',
+                message: ''
+            }
+            next();
+        } catch (error) {
+            req.session.message = {
+                type: 'danger',
+                intro: 'Oops, something went wrong.',
+                message: ' Could not change password.'
+            }
+            res.redirect('/user/change-password');
         }
-        next();
-    } catch (error) {
+    } else {
         req.session.message = {
             type: 'danger',
-            intro: 'Oops, something went wrong.',
-            message: ' Could not change password.'
+            intro: 'Oops, the new password you entered did not match.',
+            message: ' Try again.'
         }
         res.redirect('/user/change-password');
     }
@@ -521,5 +531,5 @@ module.exports = {
     deleteMessage,
     changePassword,
     checkPassword,
-    getChangePassword
+    getChangePassword,
 };
