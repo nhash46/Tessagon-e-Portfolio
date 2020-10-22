@@ -522,23 +522,24 @@ const sendResetPasswordEmail = (req, res, next) => {
         });
       },
       function(token, done) {
-        User.findOne({ email: req.body.email }, function(err, user) {
-          if (!user) {
-            req.session.message = {
-                type: 'info',
-                intro: 'If an account with that email is found, an email with directions will be sent.',
-                message: " If you don't see the email, check other places it might be, like your junk, spam, social or other folders."
-            }
-            res.redirect('/user/forgot-password');
-          }
-  
-          user.resetPasswordToken = token;
-          user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-  
-          user.save(function(err) {
-            done(err, token, user);
-          });
-        });
+            User.findOne({ email: req.body.email }, function(err, user) {
+                console.log(user);
+                if (user == null) {
+                    req.session.message = {
+                        type: 'info',
+                        intro: 'If an account with that email is found, an email with directions will be sent.',
+                        message: " If you don't see the email, check other places it might be, like your junk, spam, social or other folders."
+                    }
+                    res.redirect('/user/forgot-password');
+                } else {
+                    user.resetPasswordToken = token;
+                    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+            
+                    user.save(function(err) {
+                        done(err, token, user);
+                });
+                }
+            });
       },
       function(token, user, done) {
         var smtpTransport = nodemailer.createTransport({
