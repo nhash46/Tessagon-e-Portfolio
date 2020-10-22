@@ -166,11 +166,14 @@ header#header.d-flex.flex-column.justify-content-center
         .section-title
             h2 Skills
             hr
-        .row.w3-animate-opacity
-            for c in user1.skills  
-                .column
-                    h4 #{c.name}
-        
+    
+        for c in user1.skills
+            .column 
+                h4 #{c.name}
+                hr
+                br
+                
+    
 
         
          

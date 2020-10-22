@@ -196,3 +196,6 @@ html, body {
 .desc {
     padding-bottom: 20vh;
 }
+#skillsColumn {
+  display: inline-block;
+}
