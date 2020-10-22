@@ -146,7 +146,8 @@ userRouter.post('/login', function(req, res, next) {
         if (!user) {
             req.session.message = {
                 type: 'danger',
-                intro: 'Username/Password Is Incorrect',
+                intro: 'Oops, wrong username or password.',
+                message: ' Try again.'
             }
             res.redirect("/"); }
         req.logIn(user, function(err) {
