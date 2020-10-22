@@ -428,7 +428,6 @@ const getOtherUserProfile = async (req, res) => {
         .populate('skills')
         .exec((err, user2) => {
             if(user2){
-                console.log(user2);
                 res.render('index', {
                     user2: user2
                 });
