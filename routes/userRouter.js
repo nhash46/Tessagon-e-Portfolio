@@ -129,14 +129,32 @@ userRouter.post("/editExperience/:_id", experienceController.editExperience, use
 userRouter.get("/login", userController.logInPage);
 
 // logging in - auth done in route to prevent state loss
-userRouter.post("/login", passport.authenticate('local', { failureRedirect: '/' }),
+/*userRouter.post("/login", passport.authenticate('local', {failureRedirect: '/'}),
     function(req, res) {
         if(!req.user.state){
             res.redirect('/signup/form/');
-        } else {
+        }
+        else {
             res.redirect('/user/profile');
         }
     });
+
+ */
+
+userRouter.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+        if (!user) {
+            req.session.message = {
+                type: 'danger',
+                intro: 'Username/Password Is Incorrect',
+            }
+            res.redirect("/"); }
+        req.logIn(user, function(err) {
+            if (err) { return next(err); }
+            return res.redirect('/user/profile');
+        });
+    })(req, res, next);
+});
 
 // google auth
 userRouter.get("/auth/google", userController.logInGoogle)
