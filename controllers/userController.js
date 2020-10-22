@@ -22,8 +22,8 @@ const authCheck = (req, res, next) => {
 // function to add user
 const addUser = async (req, res, next) => {
 
-    var usernameTaken = await User.exists({username: req.body.username});
-    var emailTaken = await User.exists({email: req.body.email});
+    let usernameTaken = await User.exists({username: req.body.username});
+    let emailTaken = await User.exists({email: req.body.email});
 
     if( usernameTaken || emailTaken ){
         // username is taken
@@ -47,7 +47,7 @@ const addUser = async (req, res, next) => {
             //res.render("signup")
         }
     } else {
-        var newUser = new User({
+        let newUser = new User({
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
@@ -368,7 +368,7 @@ const logOutUser = (req, res) => {
 const userID = async (req,res) => {
     
 
-        var exists = await User.exists({username: req.params.username});
+        let exists = await User.exists({username: req.params.username});
         // Ensures that the user exists
         if (!exists) {
             res.render('/', {

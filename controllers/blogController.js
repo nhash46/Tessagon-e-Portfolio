@@ -26,7 +26,7 @@ const addBlog = (req, res) => {
             });
     } else {
         // extract info. from body
-        var newPost = new Blog({
+        let newPost = new Blog({
             title: req.body.title,
             author: req.user.username,
             authorFullName: req.user.first_name + ' ' + req.user.last_name,
@@ -96,7 +96,7 @@ const getAllBlogPosts = async (req, res) => {
 // function to search for forums upon query
 const showBlogs = (req, res) => {
     const searchQuery = null;
-    var noMatch = null;
+    let noMatch = null;
     if(req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all blogs from DB
@@ -180,7 +180,7 @@ function ensureAuthenticated(req, res, next){
 
 
 // backend function involved in updating a posts comment field upon adding a Comment. See commentController addComment().
-var getBlogByIDComment = async (req, res) => {
+const getBlogByIDComment = async (req, res) => {
 
     try {
         const post = await Blog.find({'_id': req.params._id});

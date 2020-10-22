@@ -6,7 +6,7 @@ const Blog = mongoose.model("Blog");
 // adds a comment to comment collection
 const addComment = async (req, res) => {
 
-    var newComment = new Comment({
+    let newComment = new Comment({
         author : req.user.username,
         content : req.body.content,
         profilePicID : req.user.profilePicID,
@@ -18,7 +18,7 @@ const addComment = async (req, res) => {
         const filter = {_id: req.params._id};
         const update = {"$push": {"comments": newComment._id}};
         let blog = await Blog.findOneAndUpdate(filter, update, {new: true});
-        console.log(blog.comment);
+        //console.log(blog.comment);
     } catch(err){
         res.status(400);
         return res.send("Database query failed");
