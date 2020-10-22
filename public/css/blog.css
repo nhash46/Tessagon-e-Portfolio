@@ -39,4 +39,10 @@ a, a:hover, a:focus, a:active {
 #liked {
     color: black;
     font-size: 18px;
+    background:url('/img/liked.svg') no-repeat;
+}
+
+body {
+    background: url('/img/blogBackground.svg');
+    background-attachment: fixed;
 }
