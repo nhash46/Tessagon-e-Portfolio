@@ -13,7 +13,10 @@ head
     // CSS only
     link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' integrity='sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z' crossorigin='anonymous')
     script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js")
+
+
 main
+    input(type='image' src='../img/profolio-tight.png' onclick='goHome()')
     .container
         .row
             .col-md-6.align-self-center
@@ -149,6 +152,7 @@ main
                     | How you got here is a mystery. But you can click the button below
                     | to go back to the homepage.
                 a.btn.blue(href='/') HOME
+                a#padLeft.btn.blue(onclick='goBack()') BACK
 
 
 
