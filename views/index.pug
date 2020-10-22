@@ -347,7 +347,13 @@ script(type='text/javascript' src='/js/typewriter.js')
                         input.form-control(type='password' placeholder='Password' required='required')
                     .form-group
                         input.btn.btn-primary.btn-block.btn-lg(type='submit' value='Login')
+                        a.button.btn-lg.btn-google.btn-block.text-uppercase(href='/user/auth/google')
+                            i.fa.fa-google.mr-2
+                            |  Sign up with Google
             .modal-footer
                 //TODO
+                a(href='/user/signup') Register for your own ProFolio!
+                br
+                br
                 a(href='/user/forgot-password') Forgot Password?
 

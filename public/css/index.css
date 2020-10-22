@@ -1096,3 +1096,8 @@ header .intro-text {
 #loginModal {
 
 }
+
+.btn-google {
+	color: white;
+	background-color: #ea4335;
+}
