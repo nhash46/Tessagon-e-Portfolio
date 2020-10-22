@@ -14,10 +14,8 @@
     margin-top: -1vw;
 }
 #borderComment{
-    border: 1vw dashed transparent ;
     padding: 1vw;
-    background-color: #c4def0;
-    border-radius: 20vw;
+    border-radius: 1vw;
 }
 #edit-comment-form{
     display: none;
@@ -46,3 +44,32 @@ body {
     background: url('/img/blogBackground.svg');
     background-attachment: fixed;
 }
+
+#AddBlogs {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0.2vh 0.2vw 1.5vh #000000;
+    overflow: hidden;
+    padding: 5vw;
+}
+
+.cardStyle {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0.2vh 0.2vw 1.5vh #000000;
+}
+.paddingBlogs {
+    padding: 1vw;
+}
+
+.cardStyleViewBlog {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0.2vh 0.2vw 1.5vh #000000;
+    padding: 2vw;
+}
+
+.buttonMargin {
+    width: 5vw;
+}
+

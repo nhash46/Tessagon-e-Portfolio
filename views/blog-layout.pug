@@ -35,7 +35,7 @@ html
                             img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image') 
                             | #{user.first_name} #{user.last_name}
                         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-                            a.dropdown-item(href='/user/profile/'+user.username) My Profile
+                            a.dropdown-item(href='/user/profile/') My Profile
                             a.dropdown-item(href='/blog-posts/'+user.username) My Blog Page
                             a.dropdown-item(href='/user/profile/') Manage Account
                             a.dropdown-item(href='/user/logout') Logout
@@ -56,9 +56,8 @@ br
 br
 br
 br
-hr
 // Footer
-footer.py-5.bg-dark
+footer.py-4#colour
     .container
         p.m-0.text-center.text-white Tessagon
 

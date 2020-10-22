@@ -16,13 +16,14 @@ block content
                     h5 Sorry, there were no blogs titled "#{searchQuery}". Try search again!
                 if !noMatch
                     each blog, i in blogs
-                        .card.mb-4
+                        .card.mb-4.cardStyle
+                            .paddingBlogs
                                 .card-body
                                     h2.card-title #{blog.title}
                                     p.card-text #{blog.body}
                                     a.btn.btn-primary(href='/blog-posts/'+blogAuthor+'/'+blog._id) Read More &rarr;
-                                .card-footer.text-muted
-                                    | posted by #{blog.author}, #{moment(blog.date).fromNow()}
+                            .card-footer.text-muted
+                                | posted by #{blog.author}, #{moment(blog.date).fromNow()}
                     // Pagination
                 ul.pagination.justify-content-center.mb-4
                     li.page-item
@@ -33,7 +34,7 @@ block content
             // Sidebar Widgets Column
             .col-md-4
                 // Search Widget
-                .card.my-4
+                .card.my-4.cardStyle
                    h5.card-header Search
                     .card-body
                         form.form-inlne(action="/blog-posts/"+blogAuthor method="GET")
