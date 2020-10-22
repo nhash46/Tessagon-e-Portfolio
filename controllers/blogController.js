@@ -142,7 +142,8 @@ const showBlogs = (req, res) => {
                                 blogs: allBlogs,
                                 noMatch: noMatch,
                                 blogAuthor: req.params.username,
-                                authorFullName: author.first_name + ' ' + author.last_name                         
+                                authorFullName: author.first_name + ' ' + author.last_name,
+                                author: author
                             });
                     }
                 });
