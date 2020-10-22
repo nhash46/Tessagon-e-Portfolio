@@ -38,6 +38,7 @@ html
                             a.dropdown-item(href='/user/profile/'+user.username) My Profile
                             a.dropdown-item(href='/blog-posts/'+user.username) My Blog Page
                             a.dropdown-item(href='/user/profile/') Manage Account
+                            a.dropdown-item(data-toggle='modal' data-target='#passwordModal') Change Password
                             a.dropdown-item(href='/user/logout') Logout
                 if !user    
                     a(href='/user/login') Login
@@ -51,6 +52,7 @@ html
         script(src='/js/blogScript.js')
         script(src='/js/editBlogComment.js')
 
+
 br
 br
 br
@@ -62,4 +64,23 @@ footer.py-5.bg-dark
     .container
         p.m-0.text-center.text-white Tessagon
 
+#passwordModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/change-password')
+        .modal-dialog.modal-dialog-centered.modal-med
+            .modal-content
+                .modal-header
+                    h5.modal-title Change Password
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                .modal-body
+                    input.form-control(name='old_password' type='password' autofocus='' required='isRequired')
+                    label Current Password
+                    br
+                    input.form-control(name='new_password' type='password' autofocus='' required='isRequired' pattern='(?=.*?[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}' title='Password must be at least 8 characters and contain 1 number')
+                    label New Password
+                    br
+                    input.form-control(name='new_password1' type='password' autofocus='' required='isRequired' pattern='(?=.*?[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}' title='Password must be at least 8 characters and contain 1 number')
+                    label Re-enter New Password
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type='submit') Save Changes
 
