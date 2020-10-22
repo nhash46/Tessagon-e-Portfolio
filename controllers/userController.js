@@ -425,7 +425,7 @@ const checkPassword = async (req, res, next) => {
                     intro: 'Oops, password entered was incorrect.',
                     message: ' Try again.'
                 }
-                res.redirect("change-password");
+                res.redirect('back');
             }
         });
     } catch (error) {
@@ -434,12 +434,12 @@ const checkPassword = async (req, res, next) => {
             intro: 'Oops, password entered was incorrect.',
             message: ' Try again.'
         }
-        res.redirect("change-password");
+        res.redirect('back');
     }
     
 }
 
-const changePassword = async (req, res, next) => {
+const changePassword = async (req, res) => {
     // new passwords match
     if (req.body.new_password == req.body.new_password1) {
         try {
@@ -451,14 +451,14 @@ const changePassword = async (req, res, next) => {
                 intro: 'Password updated!',
                 message: ''
             }
-            next();
+            res.redirect('back');
         } catch (error) {
             req.session.message = {
                 type: 'danger',
                 intro: 'Oops, something went wrong.',
                 message: ' Could not change password.'
             }
-            res.redirect('/user/change-password');
+            res.redirect('back');
         }
     } else {
         req.session.message = {
@@ -466,7 +466,7 @@ const changePassword = async (req, res, next) => {
             intro: 'Oops, the new password you entered did not match.',
             message: ' Try again.'
         }
-        res.redirect('/user/change-password');
+        res.redirect('back');
     }
 }
 
