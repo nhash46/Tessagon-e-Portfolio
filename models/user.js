@@ -14,8 +14,12 @@ const userSchema = new Schema({
     city: String,
     state: String,
     phone_number: String,
-    links: 
-        { 
+    youtubeLinks: [{type: Schema.Types.ObjectId, ref: "Link"}],
+    profilePicID: {type: Schema.Types.ObjectId, ref: "Document"},
+    backgroundPicID: {type: Schema.Types.ObjectId, ref: "Document"},
+    resumeID : {type: Schema.Types.ObjectId, ref: "Document"},
+    links:
+        {
             facebook: String,
             twitter: String,
             dribble: String,
@@ -25,7 +29,9 @@ const userSchema = new Schema({
         },
     education: [{type: Schema.Types.ObjectId, ref: "Education"}],
     experience: [{type: Schema.Types.ObjectId, ref: "Experience"}],
-    documents: [ {type: Schema.Types.Mixed} ],
+    document: [ {type: Schema.Types.ObjectId, ref: "Document"}],
+    skills: [ {type: Schema.Types.ObjectId, ref: "Skill"} ],
+    typewriterWords: [ String ]
 });
 
 userSchema.plugin(findOrCreate);

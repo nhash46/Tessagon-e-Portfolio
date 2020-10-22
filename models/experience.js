@@ -6,6 +6,7 @@ const experienceSchema = new Schema({
     role: String,
     experienceStartDate: Date,
     experienceEndDate: Date,
+    descriptionExp: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"

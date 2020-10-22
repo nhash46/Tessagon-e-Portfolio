@@ -1,0 +1,55 @@
+extends blog-layout
+
+block content
+    
+    br
+    br
+    //Page content
+    .container
+        .row
+            // Blog Entries Column
+            .col-md-8
+                h1.my-4
+                 | #{authorFullName}'s blogs
+                 small    Read below...
+                if noMatch
+                    h5 Sorry, there were no blogs titled "#{searchQuery}". Try search again!
+                if !noMatch
+                    each blog, i in blogs
+                        .card.mb-4
+                                .card-body
+                                    h2.card-title #{blog.title}
+                                    p.card-text #{blog.body}
+                                    a.btn.btn-primary(href='/blog-posts/'+blogAuthor+'/'+blog._id) Read More &rarr;
+                                .card-footer.text-muted
+                                    | posted by #{blog.author}, #{moment(blog.date).fromNow()}
+                    // Pagination
+                ul.pagination.justify-content-center.mb-4
+                    li.page-item
+                        a.page-link(href='#') &larr; Older
+                    li.page-item.disabled
+                        a.page-link(href='#') Newer &rarr;                
+                              
+            // Sidebar Widgets Column
+            .col-md-4
+                // Search Widget
+                .card.my-4
+                   h5.card-header Search
+                    .card-body
+                        form.form-inlne(action="/blog-posts/"+blogAuthor method="GET")
+                            div.form-group
+                                input.form-control#normalfont(name='search', type='text', placeholder= 'Blog search...' class='form-control')
+                                input.btn.btn-primary(type='submit', value='Search')
+                .card.my-4
+                    if user && (user.username == blogAuthor)
+                        a.btn.btn-primary(href='/blog-posts/'+user.username+'/submit') Create a post
+                    if !user
+                        a.btn.btn-primary(href='/user/login') Sign in to comment on a post!
+                    
+                    //script.
+                        function createPost() {
+                            window.location.href = '/blog-posts/'+user.username+'/submit'
+                        }
+                        function signIn() {
+                            window.location.href = '/user/login'
+                        }

@@ -34,51 +34,77 @@ head
       script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
       script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
 // Header
-header#header
+header#header.d-flex.flex-column.justify-content-center
+    nav.nav-menu
+        ul.nav
+            // Hidden li included to remove active class from about link when scrolled up past about section
+            li.active
+                a.page-scroll(href='#hero').text-center
+                    i.fa.fa-home.navbar-icons
+                        span Home
+            li
+                a.page-scroll(href='#about').text-center
+                    i.fa.fa-user.navbar-icons
+                        span About
+            li
+                a.page-scroll(href='#skills').text-center
+                    i.fa.fa-rocket.navbar-icons
+                        span skills
+            li
+                a.page-scroll(href='#portfolio').text-center
+                    i.fa.fa-suitcase.navbar-icons
+                        span Portfolio
+            li
+                a.page-scroll(href='#experience').text-center
+                    i.fa.fa-fire.navbar-icons
+                        span Experience
+            li
+                a.page-scroll(href='#education').text-center
+                    i.fa.fa-graduation-cap.navbar-icons
+                        span Education
+            li
+                a.page-scroll(href='#contact').text-center
+                    i.fa.fa-address-card.navbar-icons
+                        span Contact
+
+#hero.d-flex.flex-column.justify-content-center
     .intro
+        if user2.backgroundPicID
+            img.background(src='http://localhost:3000/user/image/' + user2.backgroundPicID.filename alt='no_image')
+        if !user2.backgroundPicID
+            img.background(src='/img/defaultBackground.jpg' alt='no_image')
         .container
-            .row
+            .row#homescreen
                 .intro-text
-                    h1
+                    h1.title
                         | Hello, I&apos;m
                         span.name  #{user2.first_name}
-                    p 
-                        |I'm a  
-                        span.txt-rotate(data-period='1000' data-rotate='[ "Designer.", "Developer.", "Typewriter!" ]')
+
+                    p
+                        |I'm a
+                        span.txt-rotate(data-period='1000' data-rotate='[ " Designer.", " Developer.", " Typewriter!" ]')
+
 
                     a.btn.btn-default.btn-lg.page-scroll(href='#about') Learn More
-// Navigation
+
+
 #nav
     nav.navbar.navbar-custom
         .container
             .navbar-header
                 button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-main-collapse')
                     i.fa.fa-bars
-                a.navbar-brand.page-scroll(href='#page-top') #{user2.first_name} #{user2.last_name}
+                img(src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png", alt="", width = "50vh")
+            //TODO add an "IF LOGGED IN HERE"
+            // a.navbar-brand.page-scroll(href='#page-top') #{user2.first_name} #{user2.last_name}
             // Collect the nav links, forms, and other content for toggling
             .collapse.navbar-collapse.navbar-right.navbar-main-collapse
                 ul.nav.navbar-nav
-                    // Hidden li included to remove active class from about link when scrolled up past about section
-                    li.hidden
-                        a(href='#page-top')
-                    li
-                        a.page-scroll(href='#about') About
-                    li
-                        a.page-scroll(href='#skills') Skills
-                    li
-                        a.page-scroll(href='#portfolio') Portfolio
-                    li
-                        a.page-scroll(href='#experience') Experience
-                    li
-                        a.page-scroll(href='#education') Education
-                    li
-                        a.page-scroll(href='#contact') Contact
-                    li
-                        if user
-                            a.page-scroll(href='/user/logout') Logout
-                        
-                        else
-                            a.page-scroll(href='/user/login') Login
+                    li.topnavbar
+                        // if user change this to edit..
+                        a.btn(href='/user/logout') Logout
+                    li.topnavbar
+                        a.button.btn(type='button' data-toggle='modal' data-target='#contactModal') Edit Account Details
                 
                     
 // About Section
@@ -89,15 +115,20 @@ header#header
             hr
         .row
             .col-md-12.text-center
-                img.img-responsive(src='img/about.jpg')
+                if user2.profilePicID
+                    img.img-responsive(src='http://localhost:3000/user/image/'+ user2.profilePicID.filename)
+                if !user2.profilePicID
+                    img.img-responsive(src='/img/defaultProfile.png' alt='no_img')
             .col-md-8.col-md-offset-2
                 .about-text
                     p
                         | #{user2.bio}
-                    p.text-center
-                        a.btn.btn-primary(href='#')
-                            i.fa.fa-download
-                            |  Download Resume
+                    .text-center
+                        if user2.resumeID
+                            a.btn.btn-primary(href='http://localhost:3000/user/resume/' + user2.resumeID.filename + '?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
+                                i.fa.fa-download
+                                |  View Resume
+
 // Skills Section
 #skills.text-center
     .container
@@ -129,16 +160,37 @@ header#header
                 span.chart(data-percent='65')
                     span.percent 65
                 h4 Illustrator
-// Portfolio Section
+
 #portfolio
     .container
         .section-title.text-center.center
             h2 Portfolio
+            //embed(src='http://localhost:3000/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
             hr
             .clearfix
+                .categories
+                    ul.cat
+                        li
+                            ol.type
+                                li
+                                    a.active(href='#' data-filter='.doc') Documents
+                                li
+                                    a(href='#' data-filter='.vid') Videos
         .row
             .portfolio-items
-                .col-sm-6.col-md-3.col-lg-3.web
+                for doc in user2.document
+                    .col-sm-6.col-md-3.col-lg-3.doc
+                        .portfolio-item
+                            .hover-bg
+                                a(href='http://localhost:3000/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
+                                    .hover-text
+                                        h4 #{doc.title}
+                                        small #{doc.subHead}
+                                    embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='250')
+
+        .row
+            .portfolio-items
+                .col-sm-6.col-md-3.col-lg-3.vid
                     .portfolio-item
                         .hover-bg
                             a(href='img/portfolio/01-large.jpg' title='Project description' rel='prettyPhoto')
@@ -146,68 +198,14 @@ header#header
                                     h4 Project Title
                                     small Web Design
                                 img.img-responsive(src='img/portfolio/01-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/02-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development
-                                img.img-responsive(src='img/portfolio/02-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/03-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/03-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/04-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/04-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/05-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development
-                                img.img-responsive(src='img/portfolio/05-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.branding
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/06-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Branding
-                                img.img-responsive(src='img/portfolio/06-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.branding.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/07-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development, Branding
-                                img.img-responsive(src='img/portfolio/07-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/08-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/08-small.jpg' alt='Project Title')
+
+
 // Resume Section
 #experience.text-center
     .container
         .section-title.center
             h2 Experience
-            
+
             br
             br
             hr
@@ -218,12 +216,11 @@ header#header
                         li
                             .timeline-image
                                 h4
-                                    span #{(c.experienceStartDate)}
+                                    span.dateSize #{moment(c.experienceStartDate).format('LL')}
                                     |
                                     br
-                                    |                 -
-                                    br
-                                    span #{c.experienceEndDate}
+                                    .dateSize                 To
+                                    span.dateSize #{moment(c.experienceEndDate).format('LL')}
                             .timeline-panel
                                 .timeline-heading
                                     h4
@@ -235,7 +232,7 @@ header#header
                                         | INSERT YOUR DESCRIPTION HERE !
                                     br
 
-// Education section                   
+// Education section
 #education.text-center
     .container
         .section-title.center
@@ -250,12 +247,11 @@ header#header
                         li.timeline-inverted
                             .timeline-image
                                 h4
-                                    span #{(c.educationStartDate)}
+                                    span.dateSize #{moment(c.educationStartDate).format('LL')}
                                     |
                                     br
-                                    |                 -
-                                    br
-                                    span #{c.educationEndDate}
+                                    .dateSize                 To
+                                    span.dateSize #{moment(c.educationEndDate).format('LL')}
                             .timeline-panel
                                 .timeline-heading
                                     h4
@@ -267,11 +263,14 @@ header#header
                                         | INSERT YOUR DESCRIPTION HERE !
                                     br
 
+
 // Contact Section
 #contact.text-center
     .container
         .section-title.center
             h2 Contact
+            br
+            br
             hr
         .col-md-8.col-md-offset-2
             .col-md-4
@@ -285,22 +284,8 @@ header#header
                 p  #{user2.phone}
             .clearfix
         .col-md-8.col-md-offset-2
-            h3 Leave me a message
-            form#contactForm(name='sentMessage' novalidate='')
-                .row
-                    .col-md-6
-                        .form-group
-                            input#name.form-control(type='text' placeholder='Name' required='required')
-                            p.help-block.text-danger
-                    .col-md-6
-                        .form-group
-                            input#email.form-control(type='email' placeholder='Email' required='required')
-                            p.help-block.text-danger
-                .form-group
-                    textarea#message.form-control(name='message' rows='4' placeholder='Message' required='')
-                    p.help-block.text-danger
-                #success
-                button.btn.btn-default(type='submit') Send Message
+            a.btn(href='mailto:'+user2.email) Send me an email!
+
             .social
                 ul
                     li
@@ -318,11 +303,18 @@ header#header
                     li
                         a(href='#')
                             i.fa.fa-linkedin
+
+
 #footer
     .container.text-center
         .fnav
             p
                 | Tessagon
+        .social
+            ul
+                li
+                    iframe#down(src='https://www.facebook.com/plugins/share_button.php?href=https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user2.username + '%2F&layout=button&size=small&width=67&height=20&appId'  width='77' height='28' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowtransparency='true' allow='encrypted-media')
+                    script(type='IN/Share' data-url='https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user2.username)
 script(type='text/javascript' src='/js/jquery.1.11.1.js')
 script(type='text/javascript' src='/js/bootstrap.js')
 script(type='text/javascript' src='/js/SmoothScroll.js')

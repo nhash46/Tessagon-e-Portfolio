@@ -17,6 +17,8 @@ head
     // Bootstrap
     link(rel='stylesheet' type='text/css' href='/css/bootstrap.css')
     link(rel='stylesheet' type='text/css' href='/fonts/font-awesome/css/font-awesome.css')
+
+
     //
       Stylesheet
       ==================================================
@@ -26,24 +28,72 @@ head
     link(rel='stylesheet' type='text/css' href='/css/prettyPhoto.css')
     link(href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css')
-    script(type='text/javascript' src='js/modernizr.custom.js')
+
+    // linkedIn share api
+    script(src='https://platform.linkedin.com/in.js' type='text/javascript')
+    script(src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous")
+    script(type='text/javascript' src='/js/modernizr.custom.js')
+
     // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
     // WARNING: Respond.js doesn't work if you view the page via file://
     //if lt IE 9
       script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
       script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+
 // Header
-header#header
+header#header.d-flex.flex-column.justify-content-center
+    nav.nav-menu
+        ul.nav
+
+            // Hidden li included to remove active class from about link when scrolled up past about section
+            li.hidden
+                a(href='#page-top')
+            li.active
+                a.page-scroll(href='#hero').text-center
+                    i.fa.fa-home.navbar-icons
+                        span Home
+            li
+                a.page-scroll(href='#about').text-center 
+                    i.fa.fa-user.navbar-icons
+                        span About
+            li
+                a.page-scroll(href='#skills').text-center
+                    i.fa.fa-rocket.navbar-icons
+                        span skills
+            li
+                a.page-scroll(href='#portfolio').text-center 
+                    i.fa.fa-suitcase.navbar-icons
+                        span Portfolio
+            li
+                a.page-scroll(href='#experience').text-center  
+                    i.fa.fa-fire.navbar-icons
+                        span Experience
+            li
+                a.page-scroll(href='#education').text-center
+                    i.fa.fa-graduation-cap.navbar-icons
+                        span Education
+            li
+                a.page-scroll(href='#contact').text-center
+                    i.fa.fa-address-card.navbar-icons
+                        span Contact
+
+#hero.d-flex.flex-column.justify-content-center
     .intro
+        if user1.backgroundPicID
+            img.background(src='http://localhost:3000/user/image/' + user1.backgroundPicID.filename alt='no_image')
+        if !user1.backgroundPicID
+            img.background(src='/img/defaultBackground.jpg' alt='no_image')
         .container
-            .row
+            .row#homescreen
                 .intro-text
-                    h1
+                    h1.title
                         | Hello, I&apos;m
                         span.name  #{user1.first_name}
+
                     p
-                        |I'm a
-                        span.txt-rotate(data-period='1000' data-rotate='[ " Designer.", " Developer.", " Typewriter!" ]')
+                        |I'm a &nbsp;
+                        span.txt-rotate(data-period='1000' data-rotate=user1.typewriterWords)
+                    
 
                     a.btn.btn-default.btn-lg.page-scroll(href='#about') Learn More
                     br
@@ -52,37 +102,38 @@ header#header
                         |Edit Home Page
 
 
-// Navigation
 #nav
-    nav.navbar.navbar-custom
-        .container
-            .navbar-header
-                button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-main-collapse')
-                    i.fa.fa-bars
-                a.navbar-brand.page-scroll(href='#page-top') #{user1.first_name} #{user1.last_name}
-            // Collect the nav links, forms, and other content for toggling
-            .collapse.navbar-collapse.navbar-right.navbar-main-collapse
-                ul.nav.navbar-nav
-                    // Hidden li included to remove active class from about link when scrolled up past about section
-                    li.hidden
-                        a(href='#page-top')
+    nav.navbar.navbar-expand-lg.navbar-dark.navbar-static-top#colour
+        .container#colour
+            a.navbar-brand(href='/user/profile/') My Profile
+            #alert
+                if message
+                    div(style='text-align: center' class='alert alert-' + message.type).navbar-static-top
+                        button.close(type='button' data-dismiss='alert') &times;
+                        strong #{message.intro}
+                        |  #{message.message}
+            .nav-item.dropdown#positionRight
+                a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                    img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image') 
+                    | #{user.first_name} #{user.last_name}     
+                
+                    i.fa.fa-caret-down
+                .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
                     li
-                        a.page-scroll(href='#about') About
+                        a(href='/user/profile/')#dropdown-item My Profile
                     li
-                        a.page-scroll(href='#skills') Skills
+                        a.dropdown-item(href='/blog-posts/'+user.username)#dropdown-item My Blog Page
                     li
-                        a.page-scroll(href='#portfolio') Portfolio
+                        a.dropdown-item(type='button' data-toggle='modal' data-target='#contactModal')#dropdown-item Manage Account
                     li
-                        a.page-scroll(href='#experience') Experience
-                    li
-                        a.page-scroll(href='#education') Education
-                    li
-                        a.page-scroll(href='#contact') Contact
-                    li
-                        // if user change this to edit..
-                        a.btn(href='/user/logout') Logout
-                    li 
-                        a.button.btn(type='button' data-toggle='modal' data-target='#contactModal') Edit Account Details
+                        a.dropdown-item(href='/user/logout')#dropdown-item Logout
+
+
+
+           
+
+
+
 
 
 
@@ -94,7 +145,10 @@ header#header
             hr
         .row
             .col-md-12.text-center
-                img.img-responsive(src='img/about.jpg')
+                if user1.profilePicID
+                    img.img-responsive(src='http://localhost:3000/user/image/'+ user1.profilePicID.filename)
+                if !user1.profilePicID
+                    img.img-responsive(src='/img/defaultProfile.png' alt='No Profile Picture')
             .col-md-8.col-md-offset-2
                 .about-text
                     p
@@ -106,9 +160,10 @@ header#header
                     br
                     br
                     .text-center
-                        a.btn.btn-primary(href='#')
-                            i.fa.fa-download
-                            |  Download Resume
+                        if user1.resumeID
+                            a.btn.btn-primary(href='http://localhost:3000/user/resume/'+user1.resumeID.filename+'?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
+                                i.fa.fa-download
+                                |  View Resume
 // Skills Section
 #skills.text-center
     .container
@@ -142,87 +197,77 @@ header#header
                 h4 Illustrator
 // Portfolio Section
 #portfolio
+    - var isVid = false;
     .container
         .section-title.text-center.center
             h2 Portfolio
-            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#portfolioModal')
-                |Edit Portfolio
+            //embed(src='http://localhost:3000/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
+            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPortfolioModal')
+                | Edit Portfolio
             br
             br
             hr
             .clearfix
+                .categories
+                    ul.cat
+                        li
+                            ol.type
+                                //li
+                                //TODO fix data-filter here
+                                    a.active(href='#') All
+                                li
+                                    a.active(href='#portfolio' data-filter='.doc').hideVid Documents
+                                li
+                                    a(href='#portfolio' data-filter='.vid').showVid Videos
+
         .row
             .portfolio-items
-                .col-sm-6.col-md-3.col-lg-3.web
+                for doc in user1.document
+                    .col-sm-6.col-md-3.col-lg-3.doc
+                        .portfolio-item
+                            .hover-bg
+                                a(href='http://localhost:3000/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
+                                    .hover-text
+                                        h4 #{doc.title}
+                                        small #{doc.subHead}
+                                    embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
+                .col-sm-6.col-md-3.col-lg-3.doc
                     .portfolio-item
                         .hover-bg
-                            a(href='img/portfolio/01-large.jpg' title='Project description' rel='prettyPhoto')
+                            a(href='img/plus.jpg' data-toggle='modal' data-target='#portfolioModal')
                                 .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/01-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/02-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development
-                                img.img-responsive(src='img/portfolio/02-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/03-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/03-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/04-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/04-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/05-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development
-                                img.img-responsive(src='img/portfolio/05-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.branding
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/06-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Branding
-                                img.img-responsive(src='img/portfolio/06-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.branding.app
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/07-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small App Development, Branding
-                                img.img-responsive(src='img/portfolio/07-small.jpg' alt='Project Title')
-                .col-sm-6.col-md-3.col-lg-3.web
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/08-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/08-small.jpg' alt='Project Title')
+                                    h4 Add Document
+                                embed(src='/img/plus.png' width='255' height='250')
+        -//if isVids
+            .row
+                .portfolio-items
+                    for vid in user1.youtubeLinks
+                        .col-sm-6.col-md-3.col-lg-3.vid
+                            .portfolio-item
+                                .hover-bg
+                                    a(href=vid.url title='Project description' rel='prettyPhoto')
+                                        .hover-text
+                                            h4 #{vid.title}
+                                            small #{vid.subheading}
+                                        img.img-responsive(src=vid.thumbnail alt='Project Title')
+                                        //iframe(width='420' height='345' src=vid.url)
+                    .col-sm-6.col-md-3.col-lg-3.vid
+                        .portfolio-item
+                            .hover-bg
+                                a(href='img/plus.png' data-toggle='modal' data-target='#videoModal')
+                                    .hover-text
+                                        h4 Add Video
+                                    embed(src='/img/plus.png' width='255' height='250')
+
 // Resume Section
 #experience.text-center
     .container
         .section-title.center
             h2 Experience
-            
+            a.btn.btn-primary.padButton(type='button' data-toggle='modal' data-target='#editExperience')
+                | Edit
+            a.btn.btn-primary.padButton(type='button' data-toggle='modal' data-target='#addExperience')
+                | Add
             br
             br
             hr
@@ -233,12 +278,11 @@ header#header
                         li
                             .timeline-image
                                 h4
-                                    span #{(c.experienceStartDate)}
+                                    span.dateSize #{moment(c.experienceStartDate).format('LL')}
                                     |
                                     br
-                                    |                 -
-                                    br
-                                    span #{c.experienceEndDate}
+                                    .dateSize                 To
+                                    span.dateSize #{moment(c.experienceEndDate).format('LL')}
                             .timeline-panel
                                 .timeline-heading
                                     h4
@@ -247,15 +291,18 @@ header#header
                                         span #{c.role}
                                 .timeline-body
                                     p
-                                        | INSERT YOUR DESCRIPTION HERE !
+                                        | #{c.descriptionExp}
                                     br
-                                    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#experienceModal')
-                                        | Edit Experience
+
 // Education section                   
 #education.text-center
     .container
         .section-title.center
             h2 Education
+            a.btn.btn-primary.padButton(type='button' data-toggle='modal' data-target='#editEducation')
+                | Edit
+            a.btn.btn-primary.padButton(type='button' data-toggle='modal' data-target='#addEducation')
+                | Add
             br
             br
             hr
@@ -266,12 +313,11 @@ header#header
                         li.timeline-inverted
                             .timeline-image
                                 h4
-                                    span #{(c.educationStartDate)}
+                                    span.dateSize #{moment(c.educationStartDate).format('LL')}
                                     |
                                     br
-                                    |                 -
-                                    br
-                                    span #{c.educationEndDate}
+                                    .dateSize                 To
+                                    span.dateSize #{moment(c.educationEndDate).format('LL')}
                             .timeline-panel
                                 .timeline-heading
                                     h4
@@ -280,11 +326,11 @@ header#header
                                         span #{c.degree}
                                 .timeline-body
                                     p
-                                        | INSERT YOUR DESCRIPTION HERE !
+                                        | #{c.descriptionEdu}
                                     br
-                                    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#educationModal')
-                                        | Edit Education
-                   
+
+
+                        
 // Contact Section
 #contact.text-center
     .container
@@ -305,30 +351,39 @@ header#header
                 p  #{user1.phone}
             .clearfix
         .col-md-8.col-md-offset-2
-            h3 Leave me a message
+            a.btn(href='mailto:'+user1.email) Send me an email!
 
             .social
                 ul
                     li
-                        a(href='#')
+                        a(href='http://' + user1.links.facebook)
                             i.fa.fa-facebook
                     li
-                        a(href='#')
+                        a(href='http://' + user1.links.twitter)
                             i.fa.fa-twitter
                     li
-                        a(href='#')
+                        a(href='http://' + user1.links.github)
                             i.fa.fa-github
                     li
-                        a(href='#')
+                        a(href='http://' + user1.links.instagram)
                             i.fa.fa-instagram
                     li
-                        a(href='#')
+                        a(href='http://' + user1.links.linkedIn)
                             i.fa.fa-linkedin
+                    
 #footer
     .container.text-center
         .fnav
             p
                 | Tessagon
+        .social
+             ul
+                li
+                    iframe#down(src='https://www.facebook.com/plugins/share_button.php?href=https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user1.username + '%2F&layout=button&size=small&width=67&height=20&appId'  width='77' height='28' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowtransparency='true' allow='encrypted-media')
+                    script(type='IN/Share' data-url='https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user1.username)
+        
+
+
 script(type='text/javascript' src='/js/jquery.1.11.1.js')
 script(type='text/javascript' src='/js/bootstrap.js')
 script(type='text/javascript' src='/js/SmoothScroll.js')
@@ -341,23 +396,63 @@ script(type='text/javascript' src='/js/jqBootstrapValidation.js')
 script(type='text/javascript' src='/js/contact_me.js')
 script(type='text/javascript' src='/js/main.js')
 script(type='text/javascript' src='/js/typewriter.js')
+script(type='text/javascript' src='/js/modalID.js')
+script(src='/js/experienceScript.js')
+script(src='/js/educationScript.js')
+script(type='text/javascript' src='/js/navbar.js')
 
 
-#portfolioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+
+
+#portfolioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/upload' enctype="multipart/form-data").form-signin
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#portfolioModalLabel.modal-title Edit Bio
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    label(for='uploadDocuments') Document Title
+                    input.form-control-file(name='title' type='text' placeholder='Title' autofocus='' required='isRequired')
+                    label(for='uploadDocuments') Document Subheading
+                    input.form-control-file.padLeft(name='subHead' type='text' placeholder='Sub-Heading' autofocus='' required='isRequired')
+                    label(for='uploadDocuments') Upload a document
+                    input#uploadDocuments.form-control-file(name='file' type='file' required='isRequired' accept="application/pdf")
+                    label(for='uploadDocuments') Document Title
+                    br
+                    input.form-control-file(name='title' type='text' placeholder='Title' autofocus='' required='isRequired')
+                    label(for='uploadDocuments') Video Subheading
+                    input.form-control-file.padLeft(name='subHead' type='text' placeholder='Sub-Heading' autofocus='' required='isRequired')
+                    label(for='uploadDocuments') Link a Video
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type ='submit') Upload file
+
+#editPortfolioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
     .modal-dialog.modal-dialog-centered.modal-lg(role='document')
         .modal-content
             .modal-header
-                h5#portfolioModalLabel.modal-title Edit Bio
+                h5#editPortfolioModalLabel.modal-title Edit Portfolio
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
-                |Edit documents here
+                h2 Documents
+                for doc_name in user1.document
+                    h3 #{doc_name.title} - #{doc_name.subHead}
+                    button.btn.btn-secondary.delete-document(type ='button', document-id=doc_name._id data-dismiss='modal') Remove
+                    hr
+                h2 Videos
+                for vid in user1.youtubeLinks
+                    h3 #{vid.title} - #{vid.subheading}
+                    //button.btn.btn-secondary(type ='button', video-id = video.url) Remove
+                    hr
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                button.btn.btn-secondary(type='button') Save change
+                button.btn.btn-secondary(type ='submit') Save changes
 
-#bioModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editAboutMe')
+#bioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
@@ -369,94 +464,55 @@ script(type='text/javascript' src='/js/typewriter.js')
                     label(for='AboutMe') Tell me about yourself! Max 500 characters.
                     br
                     label(for='editResume') Edit your resume!
-                    input#editResume.form-control-file(type='file')
+                    input#editResume.form-control-file(name='resume' type='file' accept="application/pdf")
                     label(for='editProfilePic') Edit your profile picture!
-                    input#editProfilePic.form-control-file(type='file')
+                    input#editProfilePic.form-control-file(name='propic' type='file')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save changes            
 
-#experienceModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='experienceModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editExperience')
-        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-            .modal-content
-                .modal-header
-                    h5#experienceModalLabel.modal-title Edit Bio
-                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                        span(aria-hidden='true') &times;
-                .modal-body
-                    input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.experience[0].company)
-                    label(for='companyName') Company
-                    br
-                    input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.experience[0].role)
-                    label(for='roleName') Role Title
-                    br
-                    label(for='startDate') Start date: NEED TO FIX
-                    br
-                    input#startDate(name= "experienceStartDate" type='month' required='isRequired' value = user1.experience[0].experienceStartDate) 
-                    br
-                    label(for='endDate') End date: NEED TO FIX
-                    br
-                    input#endDate(name= "experienceEndDate" type='month' required='isRequired' value = user1.experience[0].experienceEndDate)
-
-                .modal-footer
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                    button.btn.btn-secondary(type='submit') Save changes
-
-#educationModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='educationModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editEducation')
-        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
-            .modal-content
-                .modal-header
-                    h5#educationModalLabel.modal-title Edit Bio
-                    button.close(type='button' data-dismiss='modal' aria-label='Close')
-                        span(aria-hidden='true') &times;
-                .modal-body
-                    input#universityName.form-control(name= "university" type='text' placeholder='companyName' autofocus='' required='isRequired' value = user1.education[0].university)
-                    label(for='universityName') University
-                    br
-                    input#degree.form-control(name= "degree" type='text' placeholder='roleName' autofocus='' required='isRequired' value = user1.education[0].degree)
-                    label(for='degree') Degree
-                    br
-                    br
-                    label(for='uniStartDate') Start date:
-                    input#uniStartDate(name= "educationStartDate" type='month' required='isRequired' value = user1.education[0].educationStartDate)
-                    br
-                    br
-                    label(for='uniEndDate') Start date:
-                    input#uniStartDate(name= "educationEndDate" type='month' required='isRequired' value = user1.education[0].educationEndDate)
-                .modal-footer
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                    button.btn.btn-secondary(type='submit') Save changes
-
-#contactModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='contactModalLabel' aria-hidden='true')
+#contactModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='contactModalLabel' aria-hidden='true')
     form(method='POST' action='/user/editNavInfo')
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
-                    h5#contactModalLabel.modal-title Edit Bio
+                    h5#contactModalLabel.modal-title Edit Contact Information
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
+                    label Contact number (E.g 0412 345 678)
                     input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' pattern='[0-9]{4} [0-9]{3} [0-9]{3}' required='isRequired' value = user1.phone_number)
-                    label(for='contactNumber') Contact number (E.g 0412 345 678)
                     br
+                    label City
                     input#inputCity.form-control(name="city" type='text' placeholder='City' autofocus='' required='isRequired' value = user1.city)
-                    label(for='inputCity') City
                     br
+                    label State
                     input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired' value.user1.state)
-                    label(for='inputState') State
                     br
+                    label Email address
                     input#inputEmail.form-control(name='email' type='email' placeholder='Email address' required='' value = user1.email)
-                    label(for='inputEmail') Email address
-
+                    label Facebook
+                    input.form-control(name='facebook' type='text' autofocus='' value = user1.links.facebook)
+                    br
+                    label Twitter
+                    input.form-control(name='twitter' type='text' autofocus='' value = user1.links.twitter)
+                    br
+                    label Github
+                    input.form-control(name='github' type='text' autofocus='' value = user1.links.github)
+                    br
+                    label Instagram
+                    input.form-control(name='instagram' type='text' autofocus='' value = user1.links.instagram)
+                    br
+                    label LinkedIn
+                    input.form-control(name='linkedIn' type='text' autofocus='' value = user1.links.linkedIn)
+                    br
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save changes
 
 
-#homeModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='homeModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editHomeInfo')
+#homeModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='homeModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/editHomeInfo' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
@@ -471,11 +527,172 @@ script(type='text/javascript' src='/js/typewriter.js')
                     label(for='inputSurname') Last Name
                     br
                     br
-                    input#editBackgroundPic.form-control-file(type='file')
+                    input#editBackgroundPic.form-control-file(name='background' type='file')
                     label(for='editBackgroundPic') Edit your background picture!
-                    
-
                 .modal-footer
-                    
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save changes
+
+#addExperience.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addExperiencelabel' aria-hidden='true')
+    form(method='POST' action='/user/addExperience')
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#addExperiencelabel.modal-title Add new Experience
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input#addCompany.form-control(name="company" type='text' autofocus='' required='isRequired')
+                    label(for='addExperience') Company Name
+                    br
+                    input#addRole.form-control(name="role" type='text' autofocus='' required='isRequired')
+                    label(for='addRole') Role Name
+                    br
+                    input#addDescription.form-control(name="descriptionExp" type='text' autofocus='' required='isRequired')
+                    label(for='addDescription') Short description of your role!
+                    br
+                    .col-md-3
+                        label(for='expStartDate') Start date:
+                        input#expStartDate(name= "experienceStartDate" type='month' required='isRequired')
+                    .col-md-3
+                        label(for='expEndDate') End date:
+                        input#expEndDate(name= "experienceEndDate" type='month' required='isRequired')
+                br
+                br
+                br
+                br
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary.add-experience(type='submit') Save changes
+
+#editExperience.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='editExperiencelabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#editExperiencelabel.modal-title Edit Experience
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                for i in user1.experience
+                    h3 #{i.company}
+                    form(method='POST' action='/user/editExperience/' + i._id)
+                        label(for='company'+i._id) Company Name
+                        input.form-control(id='company'+i._id name="company" type='text' autofocus='' required='isRequired' value=i.company)
+                        br
+                        label(for='role'+i._id) Role
+                        input.form-control(id='role'+i._id name="role" type='text' autofocus='' required='isRequired' value=i.role)
+                        br
+                        label(for='expDescription'+i._id) Short description of your role!
+                        input.form-control(id='descriptionExp'+i._id name="descriptionExp" type='text' autofocus='' required='isRequired' value=i.descriptionExp)
+                        br
+                        .container
+                            .row
+                                .col-md-6
+                                    | Start date:
+                                    input.padDate(id='expStart'+i._id name= "experienceStartDate" type='month' required='isRequired' value=i.experienceStartDate)
+                                .col-md-6
+                                    | End date:
+                                    input.padDate(id='expEnd'+i._id name= "experienceEndDate" type='month' required='isRequired' value=i.experienceEndDate)
+                        br
+                        .container
+                            .row
+                                .col-md-6
+                                    button.btn.btn-secondary.edit-experience(href='/user/profile#experience' experience-id=i._id data-dismiss='modal') Save changes
+                                    a.btn.btn-secondary.delete-experience(href='/user/profile#experience' experience-id=i._id data-dismiss='modal') Delete Experience
+                        br
+                        hr.wide
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+
+#addEducation.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='educationModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/addEducation')
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#addEducationlabel.modal-title Add new Education
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input#university.form-control(name="university" type='text' autofocus='' required='isRequired')
+                    label(for='university') School Name
+                    br
+                    input#degree.form-control(name="degree" type='text' autofocus='' required='isRequired')
+                    label(for='degree') Degree Name
+                    br
+                    input#eduDescription.form-control(name="descriptionEdu" type='text' autofocus='' required='isRequired')
+                    label(for='eduDescription') Add a bit about your degree!
+                    br
+                    .col-md-3
+                        label(for='eduStartDate') Start date:
+                        input#eduStartDate(name= "educationStartDate" type='month' required='isRequired')
+                    .col-md-3
+                        label(for='eduEndDate') End date:
+                        input#eduEndDate(name= "educationEndDate" type='month' required='isRequired')
+                br
+                br
+                br
+                br
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary.add-education(type='submit') Save changes
+
+
+#editEducation.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='editEducationlabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#editEducationlabel.modal-title Edit Education
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                for i in user1.education
+                    h3 #{i.university}
+                    form(method='POST' action='/user/editEducation/' + i._id)
+                        label(for='university'+i._id) University Name
+                        input.form-control(id='university'+i._id name="university" type='text' autofocus='' required='isRequired' value=i.university)
+                        br
+                        label(for='degree'+i._id) Degree
+                        input.form-control(id='degree'+i._id name="degree" type='text' autofocus='' required='isRequired' value=i.degree)
+                        br
+                        label(for='eduDescription'+i._id) Short description about your degree!
+                        input.form-control(id='descriptionEdu'+i._id name="descriptionEdu" type='text' autofocus='' required='isRequired' value=i.description)
+                        br
+                        .container
+                            .row
+                                .col-md-6
+                                    | Start date:
+                                    input.padDate(id='eduStart'+i._id name= "educationStartDate" type='month' required='isRequired' value=i.educationStartDate)
+                                .col-md-6
+                                    | End date:
+                                    input.padDate(id='eduEnd'+i._id name= "educationEndDate" type='month' required='isRequired' value=i.educationEndDate)
+                        br
+                        .container
+                            .row
+                                .col-md-6
+                                    button.btn.btn-secondary.edit-education(href='/user/profile#education' type='submit' education-id=i._id data-dismiss='modal') Save changes
+                                    a.btn.btn-secondary.delete-education(href='/user/profile#education' education-id=i._id data-dismiss='modal') Delete Education
+                        br
+                        hr.wide
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+
+#videoModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/uploadVid')
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#videoModalLabel.modal-title Upload Video
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input.form-control-file(name='video' type='text' placeholder='Video' autofocus='' required='isRequired')
+                    label Video Link
+                    br
+                    input.form-control-file(name='title' type='text' placeholder='Video' autofocus='' required='isRequired')
+                    label Title
+                    br
+                    input.form-control-file(name='subheading' type='text' placeholder='Video' autofocus='' required='isRequired')
+                    label Topic
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type ='submit') Upload Video

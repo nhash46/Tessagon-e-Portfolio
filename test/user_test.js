@@ -13,15 +13,14 @@ const request = require('supertest');
 
 describe('User Tests', () => {
 
-    before(function (done) {
+    /*before(function (done) {
         this.timeout(10000);
         conn.connect()
             .then(() => done())
             .catch((err) => done(err));
-    });
+    });*/
 
     after(function (done) {
-        console.log("closing");
         this.timeout(10000);
         conn.close()
             .then(() => done())
@@ -53,11 +52,22 @@ describe('User Tests', () => {
 
     describe('login', () => {
 
-        it('Should redirect to profile page', (done) => {
+        it('Should redirect to profile page on success', (done) => {
             request(app).post('/user/login')
                 .send({username: 'dccol', password: 'cold'})
                 .then((res) => {
                     expect(res.statusCode).to.equal(302);
+                    done();
+                })
+                .catch((err) => done(err));
+        })
+
+        it('Should redirect to login page on fail', (done) => {
+            request(app).post('/user/login')
+                .send({username: 'unregistered_user', password: 'random'})
+                .then((res) => {
+                    expect(res.statusCode).to.equal(302);
+                    expect(res.headers.location).to.equal('/');
                     done();
                 })
                 .catch((err) => done(err));

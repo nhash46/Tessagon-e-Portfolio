@@ -1,0 +1,21 @@
+extends blog-layout
+
+block content
+    br
+    br
+    .container
+        #blog-title
+            h1 #{title}
+        br
+        form(method='POST', action='/blog-posts/'+user.username+'/submit')
+            .form-group
+                label Title:
+                input.form-control(name='title', type='text')
+            br
+            .form-group
+                label Body:
+                textarea.form-control(name='body')
+            br
+            br
+            input.btn.btn-primary(type='submit', value='Submit')
+        

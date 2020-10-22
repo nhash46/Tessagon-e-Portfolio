@@ -12,15 +12,20 @@ html
     // Page icon
     link(rel="icon" href='../img/favicon1.ico')
 
-    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
+    script(src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous")
     script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js' integrity='sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN' crossorigin='anonymous')
     script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js' integrity='sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV' crossorigin='anonymous')
-
+    script(type='text/javascript' src='/js/signup.js')
     style
       include ../public/css/signin.css
       include ../public/css/signup.css
 
 block content
+    if message
+        div(style='text-align: center' class='alert alert-'+message.type)
+            button.close(type='button' data-dismiss='alert') &times;
+            strong #{message.intro}
+            |  #{message.message}
     .container
         .row
             .col-lg-10.col-xl-9.mx-auto
@@ -32,6 +37,7 @@ block content
                             .form-label-group
                                 input#inputUserame.form-control(name='username' type='text' placeholder='Username' required='' autofocus='')
                                 label(for='inputUserame') Username
+                                span#uname_response
                             .form-label-group
                                 input#inputEmail.form-control(name='email' type='email' placeholder='Email address' required='')
                                 label(for='inputEmail') Email address

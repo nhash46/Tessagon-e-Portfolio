@@ -5,70 +5,122 @@ block content
         .row
             .col-lg-10.col-xl-9.mx-auto
                 .card.card-signin.flex-row.my-5
-                    .card-body
-                        h5.card-title.text-center Basic Information.
-                        form(method='POST', action='/user/populateInfo/').form-signin
-                            .form-label-group
-                                input#inputFirstname.form-control(name="first_name" type='text' placeholder='Firstname' autofocus='' required='isRequired')
-                                label(for='inputFirstname') Firstname
-                            .form-label-group
-                                input#inputSurname.form-control(name="last_name" type='text' placeholder='Surname' required='isRequired')
-                                label(for='inputSurname') Surname
-                            hr       
-                            .form-row
+                    .card-body#lessPadding
+                        form#regForm(method='POST', action='/user/populateInfo/' enctype='multipart/form-data').form-signin
+                            h#loading Creating your ProFolio...
+                            .tab
+                                h5.card-title.text-center Basic Information
+                                .form-label-group
+                                    input#inputFirstname.form-control(name="first_name" type='text' placeholder='Firstname' autofocus='' required='isRequired')
+                                    label(for='inputFirstname') Firstname
+                                .form-label-group
+                                    input#inputSurname.form-control(name="last_name" type='text' placeholder='Surname' required='isRequired')
+                                    label(for='inputSurname') Surname
+                                hr  
+                                .form-row
+                                    .form-label-group.col-md-12
+                                        input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' pattern='[0-9]{4} [0-9]{3} [0-9]{3}' required='isRequired' )
+                                        label(for='contactNumber') Contact number (E.g 0412 345 678)
+                                    .form-label-group.col-md-6
+                                        input#inputCity.form-control(name="city" type='text' placeholder='City' autofocus='' required='isRequired')
+                                        label(for='inputCity') City
+                                    .form-label-group.col-md-6
+                                        input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired')
+                                        label(for='inputState') State
+                            .tab
+                                h5.card-title.text-center About yourself
                                 .form-label-group.col-md-12
-                                    input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' pattern='[0-9]{4} [0-9]{3} [0-9]{3}' required='isRequired' )
-                                    label(for='contactNumber') Contact number (E.g 0412 345 678)
-                                .form-label-group.col-md-6
-                                    input#inputCity.form-control(name="city" type='text' placeholder='City' autofocus='' required='isRequired')
-                                    label(for='inputCity') City
-                                .form-label-group.col-md-6
-                                    input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired')
-                                    label(for='inputState') State
-                                hr
-                                .form-label-group.col-md-12 
                                     input#Aboutme.form-control(name="bio" type='text' placeholder='Aboutme' autofocus='' maxlength='500' required='isRequired')
-                                    label(for='Aboutme') Tell me about yourself! Max 500 characters.
+                                    label#AboutmeLabel(for='Aboutme') Tell me about yourself! Max 500 characters.
                                 .form-group
                                 label(for='uploadResume') Upload your resume!
-                                input#uploadResume.form-control-file(type='file')
+                                input#uploadResume.form-control-file(name='resume' type='file' accept="application/pdf")
                                 br
                                 label(for='uploadProfilePic') Upload a picture of yourself!
-                                input#uploadProfilePic.form-control-file(type='file')
-                                br
+                                input#uploadProfilePic.form-control-file(name='propic' type='file')
                                 hr
+                            .tab
+                                h5.card-title.text-center Experience
+                                div(data-role='dynamic-fields')
+                                    .form-inline
+                                        .form-group.col-md-6
+                                            input.round.form-control(id='company' name= "company" type='text' placeholder='Company' autofocus='' required='isRequired' style='width:24vw')
+                                        .form-group.col-md-6
+                                            input.round.form-control(name= "role" type='text' placeholder='Role Name' autofocus='' required='isRequired' style='width:24vw')
+                                        br
+                                        .form-group.col-md-12
+                                            label(for='descriptionExp') Tell us about your experience (max 500 characters)...
+                                            input.desc.round.form-control(id='descriptionExp' name="descriptionExp" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:40vw')
+                                        .dates
+                                        label(for='startDate') Start date:
+                                        input#startDate(name= "experienceStartDate" type='month' required='isRequired')
+                                        .col-md-2.dates
+                                        label(for='endDate') End date:
+                                        input#endDate(name= "experienceEndDate" type='month' required='isRequired')
+                                        button.btn.btn-danger(data-role='remove')
+                                            span.glyphicon.glyphicon-remove
+                                        button.btn.btn-primary(data-role='add')
+                                            span.glyphicon.glyphicon-plus
+                            .tab
+                                h5.card-title.text-center Education
+                                div(data-role='dynamic-fields')
+                                    .form-inline
+                                        .form-group.col-md-6
+                                            input.round.form-control(id= 'university' name= "university" type='text' placeholder='University' autofocus=''  required='isRequired' style='width:24vw')
+                                        .form-group.col-md-6
+                                            input.round.form-control(id= 'degree' name= "degree" type='text' placeholder='Degree' autofocus='' required='isRequired' style='width:24vw')
+                                        br
+                                        .form-group.col-md-12
+                                            label(for='descriptionEdu') Tell us about your education (max 500 characters)...
+                                            input.desc.round.form-control(id='descriptionEdu' name="descriptionEdu" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:40vw')
+                                        .dates
+                                        label(for='uniStartDate') Start date:
+                                        input#uniStartDate(name= "educationStartDate" type='month' required='isRequired')
+                                        .col-md-2.dates
+                                        label(for='uniEndDate') End date:
+                                        input#uniEndDate(name= "educationEndDate" type='month' required='isRequired')
+                                        button.btn.btn-danger(data-role='remove')
+                                            span.glyphicon.glyphicon-remove
+                                        button.btn.btn-primary(data-role='add')
+                                            span.glyphicon.glyphicon-plus
+                            .tab
+                               
                                 .col-md-12
-                                    h5.card-title.text-center Experience
-                                .form-label-group.col-md-6
-                                    input#companyName.form-control(name= "company" type='text' placeholder='companyName' autofocus='' required='isRequired')
-                                    label(for='companyName') Company
-                                .form-label-group.col-md-6
-                                    input#roleName.form-control(name= "role" type='text' placeholder='roleName' autofocus='' required='isRequired')
-                                    label(for='roleName') Role Title
-                                .col-md-6.dates
-                                    label(for='startDate') Start date:
-                                    input#startDate(name= "experienceStartDate" type='month' required='isRequired')
-                                .col-md-6.dates
-                                    label(for='endDate') End date:
-                                    input#endDate(name= "experienceEndDate" type='month' required='isRequired')
-                                .col-md-12 
-                                    h5.card-title.text-center Education
-                                .form-label-group.col-md-6
-                                    input#universityName.form-control(name= "university" type='text' placeholder='companyName' autofocus='' required='isRequired')
-                                    label(for='universityName') University
-                                .form-label-group.col-md-6
-                                    input#degree.form-control(name= "degree" type='text' placeholder='roleName' autofocus='' required='isRequired')
-                                    label(for='degree') Degree
-                                .col-md-6.dates
-                                    label(for='uniStartDate') Start date:
-                                    input#uniStartDate(name= "educationStartDate" type='month' required='isRequired')
-                                .col-md-6.dates
-                                    label(for='uniEndDate') End date:
-                                    input#uniEndDate(name= "educationEndDate" type='month' required='isRequired')
-                                br
-                                br
+                                    br
+                                    h5.card-title.text-center Skills
+                                    p List down some of your skills!
+                                    div(data-role='dynamic-fields')
+                                        .form-inline
+                                            .form-group.col-md-12
+                                                input.round.form-control(id='skills' name= "skills" type='text' placeholder='Skills' autofocus='' required='isRequired' style='width:18vw')
+                                                button.btn.btn-danger(data-role='remove')
+                                                    span.glyphicon.glyphicon-remove
+                                                button.btn.btn-primary(data-role='add')
+                                                    span.glyphicon.glyphicon-plus
+                                .col-md-12
+                                    br
+                                    h5.card-title.text-center Typewriter
+                                    p Words to describe yourself!
+                                    div(data-role='dynamic-fields')#moved
+                                        .form-inline
+                                            .form-group.col-md-12
+                                                input.round.form-control(id='typewriter' name= "typewriter" type='text' placeholder='Word' autofocus='' required='isRequired' style='width:18vw')
+                                                button.btn.btn-danger(data-role='remove')
+                                                    span.glyphicon.glyphicon-remove
+                                                button.btn.btn-primary(data-role='add')
+                                                    span.glyphicon.glyphicon-plus
+                            div(style='overflow:auto;')
+                                div
+                                    button.btn.btn-lg.btn-primary.btn-block.text-uppercase#nextBtn(type='button' onclick='nextPrev(1)') Next
+                                    button.btn.btn-lg.btn-primary.btn-block.text-uppercase#prevBtn(type='button' onclick='nextPrev(-1)') Previous
+                                    p#creating
+                                        | Creating your ProFolio
+                                        span.txt-rotate(data-period='1000' data-rotate='[....]')
+                            div(style='text-align:center;margin-top:40px;')
+                                span.step
+                                span.step
+                                span.step
+                                span.step
+                                span.step
 
-                                button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Submit
 
-                            
-                

@@ -76,6 +76,7 @@ $('#nav').affix({
         });
 
     });
+    
 	
 	  	
     // CounterUp
@@ -98,3 +99,26 @@ $('#nav').affix({
 
 }
 main();
+
+$(document).ready(function(){
+    $('.delete-document').on('click', function(e){
+        $target = $(e.target);
+        const document_id = $target.attr('document-id');
+        $.ajax({
+            url: '/user/document/'+document_id,
+            type: 'DELETE',
+            success: function(response){
+                alert('Deleting Document');
+                location.reload();
+                window.location.href='/user/profile#portfolio';
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $('#alert').fadeOut(4000); // 5 seconds x 1000 milisec = 5000 milisec
+});
