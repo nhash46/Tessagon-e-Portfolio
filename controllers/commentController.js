@@ -18,7 +18,7 @@ const addComment = async (req, res) => {
         const filter = {_id: req.params._id};
         const update = {"$push": {"comments": newComment._id}};
         let blog = await Blog.findOneAndUpdate(filter, update, {new: true});
-        console.log(blog.comment);
+        //console.log(blog.comment);
     } catch(err){
         res.status(400);
         return res.send("Database query failed");
@@ -123,7 +123,9 @@ const likedComment = async (req, res) => {
   // links User to liked comment
 const unlikeComment = async (req, res) => {
 
-  let comment = await Comment.findOne({_id: req.params._id}, function(err,comment) { console.log(comment); });
+  let comment = await Comment.findOne({_id: req.params._id}, function(err,comment) {
+      //console.log(comment);
+  });
 
   const index = comment.likedUsers.indexOf(req.user._id);
   if (index > -1) {

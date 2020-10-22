@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const {validationResult} = require('express-validator');
 
-// imprt blog model
+// import blog model
 const Blog = mongoose.model("Blog");
 
 // import comment model
@@ -163,7 +163,7 @@ const getBlogByID = async (req, res) => {
 
     try{
         let id = new mongoose.mongo.ObjectId(req.params._id)
-        console.log(id);
+        //console.log(id);
     } catch(err){
         console.log(err);
         res.status(404);
