@@ -17,6 +17,8 @@ head
     // Bootstrap
     link(rel='stylesheet' type='text/css' href='/css/bootstrap.css')
     link(rel='stylesheet' type='text/css' href='/fonts/font-awesome/css/font-awesome.css')
+    // W3 
+    link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
 
 
     //
@@ -91,7 +93,7 @@ header#header.d-flex.flex-column.justify-content-center
                         span.name  #{user1.first_name}
 
                     p
-                        |I'm a &nbsp;
+                        |I'm a&nbsp;
                         span.txt-rotate(data-period='1000' data-rotate=user1.typewriterWords)
                     
 
@@ -167,34 +169,20 @@ header#header.d-flex.flex-column.justify-content-center
 // Skills Section
 #skills.text-center
     .container
-        .section-title.center
+        .section-title
             h2 Skills
             hr
-        .row
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='95')
-                    span.percent 95
-                h4 HTML5
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='85')
-                    span.percent 85
-                h4 CSS3
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='80')
-                    span.percent 80
-                h4 jQuery
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='80')
-                    span.percent 80
-                h4 WordPress
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='70')
-                    span.percent 70
-                h4 Photoshop
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='65')
-                    span.percent 65
-                h4 Illustrator
+    
+        for c in user1.skills
+            .column 
+                h4 #{c.name}
+                hr
+                br
+                
+    
+
+        
+         
 // Portfolio Section
 #portfolio
     - var isVid = false;
@@ -520,12 +508,20 @@ script(type='text/javascript' src='/js/navbar.js')
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
+                    label First Name
                     input#inputFirstname.form-control(name="first_name" type='text' autofocus='' required='isRequired' value = user1.first_name)
-                    label(for='inputFirstname') First Name
                     br
+                    label Last Name
                     input#inputSurname.form-control(name="last_name" type='text' autofocus='' required='isRequired' value = user1.last_name)
-                    label(for='inputSurname') Last Name
                     br
+                    label Typewriter 1
+                    input.form-control(name='typewriterWords' type='text' autofocus='' value = user1.typewriterWords[0])
+                    br
+                    label Typewriter 2
+                    input.form-control(name='typewriterWords' type='text' autofocus='' value = user1.typewriterWords[1])
+                    br
+                    label Typewriter 3
+                    input.form-control(name='typewriterWords' type='text' autofocus='' value = user1.typewriterWords[2])
                     br
                     input#editBackgroundPic.form-control-file(name='background' type='file')
                     label(for='editBackgroundPic') Edit your background picture!

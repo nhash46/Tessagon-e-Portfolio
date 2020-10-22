@@ -1003,3 +1003,218 @@ header .intro-text {
 	width: 40%;
 }
 
+/* cards */
+.card {
+	/* Add shadows to create the "card" effect */
+  background-color:white;
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 1vw;
+  transition: 0.5s ease;
+  cursor: pointer;
+  width: 12vw;
+  margin: 1vw;
+}
+
+.card:hover {
+	transform: scale(1.15);
+	box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+}
+  
+/* Add some padding inside the card container */
+.container {
+	padding: 2px 16px;
+
+}
+
+/* Float four columns side by side */
+.column {
+	float: left;
+	width: 20%;
+	padding: 0 10px;
+}
+  
+/* Remove extra left and right margins, due to padding in columns */
+.row {margin: 0 -5px;}
+  
+/* Clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+/* ----- skills ----*/
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,600,700,900);
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 200;
+}
+a.reset {
+  background: #787f81;
+  border-radius: 24px;
+  bottom: 20px;
+  color: #fff;
+  display: block;
+  padding: 8px 0;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.15s ease-in;
+  width: 140px;
+  margin: auto;
+}
+a.reset:hover {
+  background: #535859;
+  text-decoration: none;
+}
+
+.dot{
+	display: block;
+}
+div.dot {
+  background: #8599b0;
+  border-radius: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: absolute;
+  width: 100px;
+  display: block;
+  
+}
+div.dot.top {
+  z-index: 15;
+}
+div.dot.mid {
+  z-index: 10;
+  margin-left: 10vw;
+  margin-bottom: 10vh;
+
+}
+div.dot.btm {
+  z-index: 5;
+  margin-left: 20vw;
+  margin-bottom: 20vh;
+
+  
+}
+div.dot.dot1 {
+  animation: pickup1 1.5s 1 forwards;
+  margin: auto;
+}
+div.dot.dot2 {
+  animation: pickup2 1.5s 1 forwards;
+}
+div.dot.dot3 {
+  animation: pickup3 1.5s 1 forwards;
+}
+@keyframes pickup1 {
+  0% {
+    background: #8599b0;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+    transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+  }
+  50% {
+    background: #94a6ba;
+    box-shadow: 0 100px 30px rgba(0, 0, 0, 0.1);
+    transform: scale3d(1, 0.9, 1) translate3d(0, -150%, 0);
+  }
+  100% {
+    background: #8599b0;
+    box-shadow: none;
+    transform: scale3d(1, 1, 1) translate3d(0, -125%, 0);
+  }
+}
+@keyframes pickup2 {
+  0% {
+    background: #8599b0;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.4);
+    transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+  }
+  50% {
+    background: #8ea1b6;
+    box-shadow: 0 80px 20px rgba(0, 0, 0, 0.15);
+    transform: scale3d(1, 0.9, 1) translate3d(0, -150%, 0);
+  }
+  100% {
+    background: #8599b0;
+    box-shadow: none;
+    transform: scale3d(1, 1, 1) translate3d(0, -125%, 0);
+  }
+}
+@keyframes pickup3 {
+  0% {
+    background: #8599b0;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
+    transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+  }
+  50% {
+    background: #889cb2;
+    box-shadow: 0 60px 10px rgba(0, 0, 0, 0.3);
+    transform: scale3d(1, 0.9, 1) translate3d(0, -150%, 0);
+  }
+  100% {
+    background: #8599b0;
+    box-shadow: none;
+    transform: scale3d(1, 1, 1) translate3d(0, -125%, 0);
+  }
+}
+
+.fade-in {
+	animation: fadeIn ease 10s;
+	-webkit-animation: fadeIn ease 10s;
+	-moz-animation: fadeIn ease 10s;
+	-o-animation: fadeIn ease 10s;
+	-ms-animation: fadeIn ease 10s;
+}
+@keyframes fadeOut {
+	0% {
+	  opacity:1;
+	}
+	100% {
+	  opacity:0;
+	}
+}
+  
+@-moz-keyframes fadeOut {
+	0% {
+	  opacity:1;
+	}
+	100% {
+	  opacity:0;
+	}
+}
+  
+@-webkit-keyframes fadeOut {
+	0% {
+	  opacity:1;
+	}
+	100% {
+	  opacity:0;
+	}
+}
+  
+@-o-keyframes fadeOut {
+	0% {
+	  opacity:1;
+	}
+	100% {
+	  opacity:0;
+	}
+}
+  
+@-ms-keyframes fadeOut {
+	0% {
+	  opacity:1;
+	}
+	100% {
+	  opacity:0;
+	}
+}
+.holder {
+	display: block;
+	margin-top: 14vh;
+}
+#dots {
+	margin-top: 9vh;
+	display: inline-block ; 
+	transform: translate(-50%, -50%);
+}

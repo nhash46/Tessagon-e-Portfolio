@@ -258,3 +258,6 @@ input.invalid {
 #rocket {
     padding: 8vw;
 }
+#skillsColumn {
+  display: inline-block;
+}
