@@ -137,9 +137,9 @@ userRouter.get("/login", userController.logInPage);
         else {
             res.redirect('/user/profile');
         }
-    });
+    });*/
 
- */
+
 
 userRouter.post('/login', function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
