@@ -169,9 +169,22 @@ userRouter.delete('/experience/:_id', experienceController.deleteExperience);
 // delete education object
 userRouter.delete('/education/:_id', educationController.deleteEducation);
 
-// change password
+// change password form - NOT IN USE
 userRouter.get('/change-password', userController.getChangePassword);
+
+// change password
 userRouter.post('/change-password', userController.authCheck, userController.checkPassword, userController.changePassword, userController.redirectExperience);
 
+// forgot password form
+userRouter.get('/forgot-password', userController.getForgotPassword);
+
+// forgot password 
+userRouter.post('/forgot-password', userController.sendResetPasswordEmail);
+
+// reset password form
+userRouter.get('/reset-password/:token', userController.getResetPasswordForm);
+
+// reset password
+userRouter.post('/reset-password/:token', userController.resetPassword);
 
 module.exports = userRouter;

@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const flash = require('connect-flash');
+const async = require("async");
+const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 const {validationResult} = require('express-validator');
 const { render } = require("pug");
 
@@ -506,6 +509,148 @@ const getChangePassword = (req, res) => {
     res.render('change-password');
 }
 
+const getForgotPassword = (req, res) => {
+    res.render('forgot-password');
+}
+
+const sendResetPasswordEmail = (req, res, next) => {
+    async.waterfall([
+      function(done) {
+        crypto.randomBytes(20, function(err, buf) {
+          var token = buf.toString('hex');
+          done(err, token);
+        });
+      },
+      function(token, done) {
+        User.findOne({ email: req.body.email }, function(err, user) {
+          if (!user) {
+            req.session.message = {
+                type: 'info',
+                intro: 'If an account with that email is found, an email with directions will be sent.',
+                message: " If you don't see the email, check other places it might be, like your junk, spam, social or other folders."
+            }
+            res.redirect('/user/forgot-password');
+          }
+  
+          user.resetPasswordToken = token;
+          user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+  
+          user.save(function(err) {
+            done(err, token, user);
+          });
+        });
+      },
+      function(token, user, done) {
+        var smtpTransport = nodemailer.createTransport({
+          service: 'Gmail', 
+          auth: {
+            user: 'donotreplyprofolio@gmail.com',
+            pass: process.env.GMAIL_PW
+          }
+        });
+        var mailOptions = {
+          to: user.email,
+          from: 'hello@profolio.com',
+          subject: 'Profolio password reset request',
+          text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+            'Please click on the following link, or paste this into your browser to complete the process within the next hour:\n\n' +
+            'http://' + req.headers.host + '/user/reset-password/' + token + '\n\n' +
+            'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+        };
+        smtpTransport.sendMail(mailOptions, function(err) {
+            console.log('mail sent');
+            done(err, 'done');
+        });
+      }
+    ], function(err) {
+        if (err) return next(err);
+        req.session.message = {
+            type: 'info',
+            intro: 'If an account with that email is found, an email with directions will be sent.',
+            message: " If you don't see the email, check other places it might be, like your junk, spam, social or other folders."
+        }
+        res.redirect('/user/forgot-password');
+    });
+};
+
+const getResetPasswordForm = (req, res) => {
+    User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+            req.session.message = {
+                type: 'danger',
+                intro: 'Password reset token is invalid or has expired.',
+                message: " Try again."
+            }
+            res.redirect('/user/forgot-password');
+        }
+        res.render('reset-password', {token: req.params.token});
+    });
+};
+
+const resetPassword = (req, res) => {
+    async.waterfall([
+      function(done) {
+        User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+          if (!user) {
+            req.session.message = {
+                type: 'danger',
+                intro: 'Password reset token is invalid or has expired.',
+                message: " Try again."
+            }
+            res.redirect('back');
+          }
+          if(req.body.password === req.body.confirm) {
+            user.setPassword(req.body.password, function(err) {
+              user.resetPasswordToken = undefined;
+              user.resetPasswordExpires = undefined;
+  
+              user.save(function(err) {
+                req.logIn(user, function(err) {
+                  done(err, user);
+                });
+              });
+            })
+          } else {
+                req.session.message = {
+                    type: 'danger',
+                    intro: "Passwords don't match.",
+                    message: " Try again."
+                }
+                res.redirect('back');
+          }
+        });
+      },
+      function(user, done) {
+        var smtpTransport = nodemailer.createTransport({
+            service: 'Gmail', 
+            auth: {
+              user: 'donotreplyprofolio@gmail.com',
+              pass: process.env.GMAIL_PW
+          }
+        });
+        var mailOptions = {
+          to: user.email,
+          from: 'hello@profolio.com',
+          subject: 'Your password has been changed',
+          text: 'Hello,\n\n' +
+            'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+        };
+        smtpTransport.sendMail(mailOptions, function(err) {
+            req.session.message = {
+                type: 'succuess',
+                intro: "Success!",
+                message: " Your password has been changed."
+            }
+          done(err);
+        });
+      }
+    ], function(err) {
+        res.redirect('/user/profile');
+    });
+};
+  
+
+
 module.exports = {
     addUser,
     populateInfo,
@@ -533,4 +678,8 @@ module.exports = {
     changePassword,
     checkPassword,
     getChangePassword,
+    getForgotPassword,
+    sendResetPasswordEmail,
+    getResetPasswordForm,
+    resetPassword
 };
