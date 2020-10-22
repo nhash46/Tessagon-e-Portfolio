@@ -50,6 +50,7 @@ describe('Profile Tests', () => {
     describe("getUserProfile (restricted)", () => {
 
         it('Should get a restricted page', function (done) {
+            this.timeout(4000);
             authenticatedSession.get('/user/profile')
               .expect(200)
               .end(done)
@@ -59,10 +60,21 @@ describe('Profile Tests', () => {
     describe("getOtherUserProfile", () => {
 
         it("Should get another user's profile", function (done) {
+            this.timeout(4000);
             authenticatedSession.get('/user/profile/naz3')
               .expect(200)
               .end(done)
-          });
+        });
+
+        it("Should go to error page if profile does not exist", function (done) {
+            this.timeout(4000);
+            authenticatedSession.get('/user/profile/imafakeuser')
+                .then((res) => {
+                    expect(res.statusCode).to.equal(404)
+                    done()
+                })
+                .catch((err) => done(err));
+        });
     });
 
     describe('editNavInfo', () => {
@@ -136,7 +148,7 @@ describe('Profile Tests', () => {
 
     describe('addExperience', () => {
 
-        it("Should create new experience artefeact, link to user and redirect to profile", (done) => {
+        it("Should create new experience artifact, link to user and redirect to profile", (done) => {
             authenticatedSession.post('/addExperience')
                 .send({ 
                     company: 'Tessagon',
@@ -155,7 +167,7 @@ describe('Profile Tests', () => {
 
     describe('editExperience', () => {
 
-        it("Should update existing experience artefeact and redirect to profile", (done) => {
+        it("Should update existing experience artifact and redirect to profile", (done) => {
             authenticatedSession.post('/editExperience/5f6c51d6774064194cd9bc46')
                 .send({ 
                     company: 'Tessagon',

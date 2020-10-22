@@ -365,39 +365,6 @@ const logOutUser = (req, res) => {
     res.redirect('/');
 };
 
-
-const userID = async (req,res) => {
-    
-
-        var exists = await User.exists({username: req.params.username});
-        // Ensures that the user exists
-        if (!exists) {
-            res.render('/', {
-                message:"Invalid user profile"
-            });
-        } else {
-            // Finds the relevant user within the database
-            User.findOne({username:req.params.username}, async function (err, user) {
-                return res.render('index', {
-                    first_name: user.first_name,
-                    last_name: user.last_name,
-                    bio: user.bio,
-                    city: user.city,
-                    state: user.state,
-                    phone: user.phone,
-                    education: user.education,
-                    experience: user.experience,
-                    links: user.links,
-                    youtubeLinks: user.youtubeLinks,
-                    documents: user.documents,
-                    educationStartDate: user.educationStartDate,
-                    degree: user.education
-
-                })
-            });
-        }
-    };
-
 // function that renders the user profile
 const getUserProfile = async (req, res) => {
     User.findById(req.user._id)
@@ -429,11 +396,12 @@ const getOtherUserProfile = async (req, res) => {
         .populate('skills')
         .exec((err, user2) => {
             if(user2){
-                console.log(user2);
+                //console.log(user2);
                 res.render('index', {
                     user2: user2
                 });
             } else {
+                res.status(404);
                 res.render('error');
             }
     });
@@ -518,7 +486,6 @@ module.exports = {
     logInGoogle,
     logInGoogleCallback,
     authCheck,
-    userID,
     getUserProfile,
     getOtherUserProfile,
     editHomeInfo,

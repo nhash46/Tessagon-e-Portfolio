@@ -96,7 +96,7 @@ const getAllBlogPosts = async (req, res) => {
 // function to search for forums upon query
 const showBlogs = (req, res) => {
     const searchQuery = null;
-    var noMatch = null;
+    let noMatch = null;
     if(req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all blogs from DB
@@ -134,16 +134,23 @@ const showBlogs = (req, res) => {
                 User.findOne({username:req.params.username}, function (err, author) {
                     if(err){
                         console.log(err);
-                    } else {
-                        res.render("blog-posts",
-                            {
-                                title: 'Blog',
-                                searchQuery: req.query.search,
-                                blogs: allBlogs,
-                                noMatch: noMatch,
-                                blogAuthor: req.params.username,
-                                authorFullName: author.first_name + ' ' + author.last_name                         
-                            });
+                    }
+                    else {
+                        if(author) {
+                            res.render("blog-posts",
+                                {
+                                    title: 'Blog',
+                                    searchQuery: req.query.search,
+                                    blogs: allBlogs,
+                                    noMatch: noMatch,
+                                    blogAuthor: req.params.username,
+                                    authorFullName: author.first_name + ' ' + author.last_name
+                                });
+                        }
+                        else{
+                            res.status(400);
+                            res.render('error');
+                        }
                     }
                 });
             }
@@ -154,14 +161,32 @@ const showBlogs = (req, res) => {
 // function to handle a request to a particular blog
 const getBlogByID = async (req, res) => {
 
-    Blog.findById(req.params._id).populate('comments').exec(function(err, blog){
+    try{
+        let id = new mongoose.mongo.ObjectId(req.params._id)
+        console.log(id);
+    } catch(err){
+        console.log(err);
+        res.status(404);
+        return res.render('error');
+    }
 
-        //TODO change to view_blog
-        res.render('view_blog', {
-            blog: blog,
-            blogAuthor: req.params.username
-            //authorFullName: author.first_name + ' ' + author.last_name    
-        });
+    Blog.findById(req.params._id).populate('comments').exec(function(err, blog){
+        if(err){
+            console.log(err)
+        }
+        else {
+            if(blog) {
+                res.render('view_blog', {
+                    blog: blog,
+                    blogAuthor: req.params.username
+                    //authorFullName: author.first_name + ' ' + author.last_name
+                });
+            }
+            else{
+                res.status(404);
+                res.render('error');
+            }
+        }
     });
 };
 

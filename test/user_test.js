@@ -29,7 +29,8 @@ describe('User Tests', () => {
 
     describe('addUser', () => {
 
-        after(async () => {
+        after(async function () {
+            this.timeout(3000);
             await User.deleteOne({username: "tessagon"});
         })
 
