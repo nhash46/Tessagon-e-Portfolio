@@ -80,7 +80,7 @@ header#header.d-flex.flex-column.justify-content-center
 #hero.d-flex.flex-column.justify-content-center
     .intro
         if user1.backgroundPicID
-            img.background(src='http://localhost:3000/user/image/' + user1.backgroundPicID.filename alt='no_image')
+            img.background(src='https://theprofolio.herokuapp.com/user/image/' + user1.backgroundPicID.filename alt='no_image')
         if !user1.backgroundPicID
             img.background(src='/img/defaultBackground.jpg' alt='no_image')
         .container
@@ -114,7 +114,7 @@ header#header.d-flex.flex-column.justify-content-center
                         |  #{message.message}
             .nav-item.dropdown#positionRight
                 a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                    img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image') 
+                    img#navbarProfilePic(src='https://theprofolio.herokuapp.com/user/images/'+ user.profilePicID alt='no_image')
                     | #{user.first_name} #{user.last_name}     
                 
                     i.fa.fa-caret-down
@@ -146,7 +146,7 @@ header#header.d-flex.flex-column.justify-content-center
         .row
             .col-md-12.text-center
                 if user1.profilePicID
-                    img.img-responsive(src='http://localhost:3000/user/image/'+ user1.profilePicID.filename)
+                    img.img-responsive(src='https://theprofolio.herokuapp.com/user/image/'+ user1.profilePicID.filename)
                 if !user1.profilePicID
                     img.img-responsive(src='/img/defaultProfile.png' alt='No Profile Picture')
             .col-md-8.col-md-offset-2
@@ -161,7 +161,7 @@ header#header.d-flex.flex-column.justify-content-center
                     br
                     .text-center
                         if user1.resumeID
-                            a.btn.btn-primary(href='http://localhost:3000/user/resume/'+user1.resumeID.filename+'?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
+                            a.btn.btn-primary(href='https://theprofolio.herokuapp.com/user/resume/'+user1.resumeID.filename+'?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
                                 i.fa.fa-download
                                 |  View Resume
 // Skills Section
@@ -201,7 +201,7 @@ header#header.d-flex.flex-column.justify-content-center
     .container
         .section-title.text-center.center
             h2 Portfolio
-            //embed(src='http://localhost:3000/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
+            //embed(src='https://theprofolio.herokuapp.com/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
             button.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPortfolioModal')
                 | Edit Portfolio
             br
@@ -226,11 +226,11 @@ header#header.d-flex.flex-column.justify-content-center
                     .col-sm-6.col-md-3.col-lg-3.doc
                         .portfolio-item
                             .hover-bg
-                                a(href='http://localhost:3000/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
+                                a(href='https://theprofolio.herokuapp.com/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
                                     .hover-text
                                         h4 #{doc.title}
                                         small #{doc.subHead}
-                                    embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
+                                    embed(src='https://theprofolio.herokuapp.com/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
                 .col-sm-6.col-md-3.col-lg-3.doc
                     .portfolio-item
                         .hover-bg
