@@ -144,34 +144,15 @@ header#header.d-flex.flex-column.justify-content-center
 // Skills Section
 #skills.text-center
     .container
-        .section-title.center
+        .section-title
             h2 Skills
             hr
-        .row
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='95')
-                    span.percent 95
-                h4 HTML5
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='85')
-                    span.percent 85
-                h4 CSS3
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='80')
-                    span.percent 80
-                h4 jQuery
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='80')
-                    span.percent 80
-                h4 WordPress
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='70')
-                    span.percent 70
-                h4 Photoshop
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='65')
-                    span.percent 65
-                h4 Illustrator
+
+        for c in user2.skills
+            .column
+                h4 #{c.name}
+                hr
+                br
 
 #portfolio
     .container
