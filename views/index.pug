@@ -341,10 +341,10 @@ script(type='text/javascript' src='/js/typewriter.js')
                 form(method='POST' action='/user/login')
                     .form-group
                         i.fa.fa-user
-                        input.form-control(type='text' placeholder='Username' required='required')
+                        input.form-control(name='username' type='text' placeholder='Username' required='required')
                     .form-group
                         i.fa.fa-lock
-                        input.form-control(type='password' placeholder='Password' required='required')
+                        input.form-control(name='password' type='password' placeholder='Password' required='required')
                     .form-group
                         input.btn.btn-primary.btn-block.btn-lg(type='submit' value='Login')
                         a.button.btn-lg.btn-google.btn-block.text-uppercase(href='/user/auth/google')
