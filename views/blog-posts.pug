@@ -47,11 +47,13 @@ block content
                                 input.form-control#normalfont(name='search', type='text', placeholder= 'Blog search...' class='form-control')
                                 br
                                 input.btn.btn-primary(type='submit', value='Search')
-                .card.my-4
+
                     if user && (user.username == blogAuthor)
-                        a.btn.btn-primary(href='/blog-posts/'+user.username+'/submit') Create a post
+                        .card.my-4
+                            a.btn.btn-primary(href='/blog-posts/'+user.username+'/submit') Create a post
                     if !user
-                        a.btn.btn-primary(href='/user/login') Sign in to comment on a post!
+                        .card.my-4
+                            a.btn.btn-primary(href='/user/login') Sign in to comment on a post!
                     
                     //script.
                         function createPost() {

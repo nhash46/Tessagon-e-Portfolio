@@ -616,7 +616,7 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 	max-width: 75%;
 }
 .intro .intro-text p {
-	font-family: 'Lato', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 20px;
 	margin-bottom: 40px;
 	margin-top: 20px;
@@ -1042,7 +1042,7 @@ header .intro-text {
 /* ----- skills ----*/
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,600,700,900);
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 200;
 }
 a.reset {
@@ -1311,4 +1311,8 @@ div.dot.dot3 {
 .btn-google {
 	color: white;
 	background-color: #ea4335;
+}
+
+nav.nav-menu {
+	font-family: 'Open Sans', sans-serif;
 }
