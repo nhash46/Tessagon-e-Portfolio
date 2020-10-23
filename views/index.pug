@@ -202,14 +202,16 @@ header#header.d-flex.flex-column.justify-content-center
 
         .row
             .portfolio-items
-                .col-sm-6.col-md-3.col-lg-3.vid
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/01-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/01-small.jpg' alt='Project Title')
+                for vid in user2.youtubeLinks
+                    .col-sm-6.col-md-3.col-lg-3.vid
+                        .portfolio-item
+                            .hover-bg
+                                a(href=vid.url title='Project description' rel='prettyPhoto')
+                                    .hover-text
+                                        h4 #{vid.title}
+                                        small #{vid.subheading}
+                                    img.img-responsive(src=vid.thumbnail alt='Project Title')
+                                    //iframe(width='420' height='345' src=vid.url)
 
 
 // Resume Section
@@ -302,23 +304,23 @@ header#header.d-flex.flex-column.justify-content-center
                 ul
                     if user2.links.facebook
                         li
-                            a(href='http://' + user2.links.facebook)
+                            a(href= user2.links.facebook)
                                 i.fa.fa-facebook
                     if user2.links.twitter
                         li
-                            a(href='http://' + user2.links.twitter)
+                            a(href= user2.links.twitter)
                                 i.fa.fa-twitter
                     if user2.links.github
                         li
-                            a(href='http://' + user2.links.github)
+                            a(href= user2.links.github)
                                 i.fa.fa-github
                     if user2.links.instagram
                         li
-                            a(href='http://' + user2.links.instagram)
+                            a(href= user2.links.instagram)
                                 i.fa.fa-instagram
                     if user2.links.linkedIn
                         li
-                            a(href='http://' + user2.links.linkedIn)
+                            a(href= user2.links.linkedIn)
                                 i.fa.fa-linkedin
 
 
