@@ -732,7 +732,7 @@ script(type='text/javascript' src='/js/navbar.js')
                 .modal-body
                     for skill in user1.skills
                         h3 #{skill.name}
-                        input.form-control#skills(name='skills' type='text' placeholder='Skills' autofocus='')
+                        input.form-control#skills(name='skill_name' type='text' placeholder='Skills' autofocus='')
                     input.form-control(name='skills' type='text' placeholder='Add a new skill' autofocus='')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
