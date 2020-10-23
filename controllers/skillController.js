@@ -73,7 +73,12 @@ const editSkill = (req,res, next) => {
         res.status(400);
       }
       else{
-          res.send('Success')
+        req.session.message = {
+            type: 'success',
+            intro: 'Skill updated!',
+            message: ''
+          }
+          res.send('Success');
       } 
     });
 
