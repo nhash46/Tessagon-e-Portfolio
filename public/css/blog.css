@@ -73,3 +73,17 @@ body {
     width: 5vw;
 }
 
+#centre {
+    text-align: center;
+}
+
+.blogProfilePic {
+    border-radius: 20vw;
+    border: 1px solid ;
+    width: 15vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}

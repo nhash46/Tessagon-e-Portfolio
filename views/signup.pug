@@ -51,12 +51,11 @@ block content
                                 != messages('message', locals)
                                 if errors
                                     each error, i in errors
-                                        div(class="alert alert-danger") #{error.msg}
+                                        div(class="alert alert-fixed") #{error.msg}
                                 small#emailHelp.form-text.text-muted Password must contain at least one number, one uppercase letter and at least 8 or more characters.
 
                             button.btn.btn-lg.btn-primary.btn-block.text-uppercase(type='submit') Register
                             a.d-block.text-center.mt-2.small(href='/') Already have an account? Sign In!
                             hr.my-4
                             a.button.btn.btn-lg.btn-google.btn-block.text-uppercase(href='/user/auth/google')
-                                i.fa.fa-google.mr-2
-                                |  Sign up with Google
+                                i.fa.fa-google.mr-2 |  Sign up with Google

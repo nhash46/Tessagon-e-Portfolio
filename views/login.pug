@@ -21,7 +21,7 @@ html
 
 block content
     if message
-        div(style='text-align: center' class='alert alert-'+message.type)
+        div(style='text-align: center' class='alert alert-danger mb-0')
             button.close(type='button' data-dismiss='alert') &times;
             strong #{message.intro}
             |  #{message.message}

@@ -38,9 +38,19 @@ const addBlog = (req, res) => {
         newPost.save(function (err) {
             if (err){
                 console.log(err);
+                req.session.message = {
+                    type: 'danger',
+                    intro: 'Oops, something went wrong.',
+                    messages: ' Blog could not be created.'
+                }
+                res.redirect('/blog-posts/'+req.user.username);
             }
             else{
                 //TODO change to blog-posts
+                req.session.message = {
+                    type: 'success',
+                    intro: 'Blog successfully created!'
+                }
                 res.redirect('/blog-posts/'+req.user.username);
             }
         });
@@ -134,23 +144,17 @@ const showBlogs = (req, res) => {
                 User.findOne({username:req.params.username}, function (err, author) {
                     if(err){
                         console.log(err);
-                    }
-                    else {
-                        if(author) {
-                            res.render("blog-posts",
-                                {
-                                    title: 'Blog',
-                                    searchQuery: req.query.search,
-                                    blogs: allBlogs,
-                                    noMatch: noMatch,
-                                    blogAuthor: req.params.username,
-                                    authorFullName: author.first_name + ' ' + author.last_name
-                                });
-                        }
-                        else{
-                            res.status(400);
-                            res.render('error');
-                        }
+                    } else {
+                        res.render("blog-posts",
+                            {
+                                title: 'Blog',
+                                searchQuery: req.query.search,
+                                blogs: allBlogs,
+                                noMatch: noMatch,
+                                blogAuthor: req.params.username,
+                                authorFullName: author.first_name + ' ' + author.last_name,
+                                author: author
+                            });
                     }
                 });
             }
@@ -259,10 +263,19 @@ const updateBlog = (req, res) => {
     // add post into db
     Blog.updateOne(query, blog, function (err) {
         if (err){
+            req.session.message = {
+                type: 'danger',
+                intro: 'Oops, something went wrong.',
+                messages: ' Blog could not be edited.'
+            }
             console.log(err);
         }
         else{
             //req.flash('success','Post Updated');
+            req.session.message = {
+                type: 'success',
+                intro: 'Blog successfully updated!.'
+            }
             res.redirect('/blog-posts/'+req.user.username+'/'+req.params._id);
         }
     });
@@ -284,9 +297,18 @@ const deleteBlog = (req, res) => {
         else {
             Blog.remove(query, function(err){
                 if(err){
+                    req.session.message = {
+                        type: 'danger',
+                        intro: 'Oops, something went wrong.',
+                        messages: ' Blog could not be deleted.'
+                    }
                     console.log(err);
                 }
                 //req.flash('success','Post Deleted');
+                req.session.message = {
+                    type: 'success',
+                    intro: 'Blog successfully deleted!',
+                }
                 res.send('Success');
             });
         }

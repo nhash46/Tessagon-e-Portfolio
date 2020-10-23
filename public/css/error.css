@@ -177,3 +177,21 @@ nav[data-state="open"] ul li:nth-child(4) {
     }
 }
 
+#padLeft {
+    margin-left: 1vw;
+}
+
+main {
+    z-index: 999;
+    padding-top: 20vh;
+}
+
+input {
+    width:40vw;
+    height:auto;
+    z-index: 1;
+    left: 30%;
+    top: 5%;
+    position: absolute;
+    padding-bottom: 10vh;
+}
