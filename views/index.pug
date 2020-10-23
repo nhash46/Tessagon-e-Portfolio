@@ -125,9 +125,11 @@ header#header.d-flex.flex-column.justify-content-center
         .row
             .col-md-12.text-center
                 if user2.profilePicID
-                    img.img-responsive(src='http://localhost:3000/user/image/'+ user2.profilePicID.filename)
+                    .circular
+                        img.img-responsive(src='http://localhost:3000/user/image/'+ user2.profilePicID.filename)
                 if !user2.profilePicID
-                    img.img-responsive(src='/img/defaultProfile.png' alt='no_img')
+                    .circular
+                        img.img-responsive(src='/img/defaultProfile.png' alt='no_img')
             .col-md-8.col-md-offset-2
                 .about-text
                     p
