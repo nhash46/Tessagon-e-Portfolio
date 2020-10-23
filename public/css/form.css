@@ -261,3 +261,6 @@ input.invalid {
 #skillsColumn {
   display: inline-block;
 }
+* {
+	font-family: 'Open Sans', sans-serif;
+}

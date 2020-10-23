@@ -1316,3 +1316,9 @@ div.dot.dot3 {
 nav.nav-menu {
 	font-family: 'Open Sans', sans-serif;
 }
+#BlogButton {
+	margin-left: 1vw;
+}
+* {
+	font-family: 'Open Sans', sans-serif;
+}
