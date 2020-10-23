@@ -1337,3 +1337,11 @@ nav.nav-menu {
 #wrap {
 	white-space: pre-wrap;
 }
+
+#BlogButton {
+	margin-left: 1vw;
+}
+* {
+	font-family: 'Open Sans', sans-serif;
+}
+
