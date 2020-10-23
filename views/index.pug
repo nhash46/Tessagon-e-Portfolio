@@ -94,17 +94,23 @@ header#header.d-flex.flex-column.justify-content-center
         .container#colour
             a.navbar-brand(href='/user/profile' + user2.username) #{user2.first_name} #{user2.last_name}
             if user
-                button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
-                span.navbar-toggler-icon
-                .nav-item.dropdown
+                .nav-item.dropdown#positionRight
                     a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                        img#navbarProfilePic(src='http://localhost:3000/user/images/' + user.profilePicID alt='no_image')
-                        | #{user.first_name} #{user.last_name}
+                        img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image') 
+                        | #{user.first_name} #{user.last_name}     
+                
+                        i.fa.fa-caret-down
                     .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-                        a.dropdown-item(href='/user/profile/' + user.username) My Profile
-                        a.dropdown-item(href='/blog-posts/' + user.username) My Blog Page
-                        a.dropdown-item(href='/user/profile/') Manage Account
-                        a.dropdown-item(href='/user/logout') Logout
+                        li
+                            a(href='/user/profile/')#dropdown-item My Profile
+                        li
+                            a.dropdown-item(href='/blog-posts/'+user.username)#dropdown-item My Blog Page
+                        li
+                            a.dropdown-item(type='button' data-toggle='modal' data-target='#contactModal')#dropdown-item Manage Account
+                        li
+                            a.drop-down-item(type='button' data-toggle='modal' data-target='#passwordModal')#dropdown-item Change Password
+                        li
+                            a.dropdown-item(href='/user/logout')#dropdown-item Logout
             else
                 a#login(data-toggle='modal' data-target='#loginModal') Login
                 
