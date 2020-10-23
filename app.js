@@ -93,6 +93,10 @@ app.get('/signup/form', userController.authCheck, (req, res) => {
     res.render("form")
 });
 
+app.get('/tessagon/about-us', (req, res) => {
+    res.render("about-us")
+});
+
 
 // routes
 const userRouter = require("./routes/userRouter");
