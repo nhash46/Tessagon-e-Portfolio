@@ -729,7 +729,7 @@ script(type='text/javascript' src='/js/navbar.js')
                         span(aria-hidden='true') &times;
                 .modal-body
                     for skill in user1.skills
-                        h3 #{skill}
+                        h3 #{skill.name}
                         input.form-control#skills(name='skills' type='text' placeholder='Skills' autofocus='')
                     input.form-control(name='skills' type='text' placeholder='Add a new skill' autofocus='')
                 .modal-footer
