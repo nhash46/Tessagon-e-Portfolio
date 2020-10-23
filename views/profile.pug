@@ -719,8 +719,10 @@ script(type='text/javascript' src='/js/navbar.js')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save Changes
+
+
 #editSkills.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='skillsModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/addSkills')
+    form(method='POST' action='/user/editSkills')
         .modal-dialog.modal-dialog-centered.modal-md
             .modal-content
                 .modal-header
@@ -731,6 +733,21 @@ script(type='text/javascript' src='/js/navbar.js')
                     for skill in user1.skills
                         h3 #{skill.name}
                         input.form-control#skills(name='skill_name' type='text' placeholder='Skills' autofocus='')
+                    input.form-control(name='skills' type='text' placeholder='Add a new skill' autofocus='')
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type='submit') Save Changes
+
+
+#addSkills.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addskillsModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/addSkills')
+        .modal-dialog.modal-dialog-centered.modal-md
+            .modal-content
+                .modal-header
+                    h5.modal-title Add Skills
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
                     input.form-control(name='skills' type='text' placeholder='Add a new skill' autofocus='')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
