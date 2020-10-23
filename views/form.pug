@@ -58,8 +58,7 @@ block content
                             .tab
                                 h5.card-title.text-center About yourself
                                 .form-label-group.col-md-12
-                                    input#Aboutme.form-control(name="bio" type='text' placeholder='Aboutme' autofocus='' maxlength='500' required='isRequired')
-                                    label#AboutmeLabel(for='Aboutme') Tell me about yourself! Max 500 characters.
+                                    textarea#Aboutme.form-control(form='regForm' name='bio' placeholder='Tell me about yourself!' autofocus='' cols='70' wrap='soft')
                                 .form-group
                                 label(for='uploadResume') Upload your resume!
                                 input#uploadResume.form-control-file(name='resume' type='file' accept="application/pdf")
@@ -77,8 +76,7 @@ block content
                                             input.round.form-control(name= "role" type='text' placeholder='Role Name' autofocus='' required='isRequired' style='width:24vw')
                                         br
                                         .form-group.col-md-12
-                                            label(for='descriptionExp') Tell us about your experience (max 500 characters)...
-                                            input.desc.round.form-control(id='descriptionExp' name="descriptionExp" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:40vw')
+                                            textarea.form-control(id='descriptionExp' form='regForm' name='descriptionExp' placeholder='Describe your experience!' autofocus='' cols='70' wrap='soft' style='width:40vw')
                                         .dates
                                         label(for='startDate') Start date:
                                         input#startDate(name= "experienceStartDate" type='month' required='isRequired')
@@ -99,8 +97,7 @@ block content
                                             input.round.form-control(id= 'degree' name= "degree" type='text' placeholder='Degree' autofocus='' required='isRequired' style='width:24vw')
                                         br
                                         .form-group.col-md-12
-                                            label(for='descriptionEdu') Tell us about your education (max 500 characters)...
-                                            input.desc.round.form-control(id='descriptionEdu' name="descriptionEdu" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:40vw')
+                                            textarea.form-control(id='descriptionEdu' form='regForm' name='descriptionEdu' placeholder='Describe your education!' autofocus='' cols='70' wrap='soft' style='width:40vw')
                                         .dates
                                         label(for='uniStartDate') Start date:
                                         input#uniStartDate(name= "educationStartDate" type='month' required='isRequired')

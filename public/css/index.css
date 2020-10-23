@@ -150,10 +150,27 @@ hr {
 #about .about-text {
 	margin-left: 10px;
 }
-#about img {
+#about .circular img {
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+#about .circular {
+	width: 300px;
+	height: 300px;
 	border-radius: 50%;
-	width: 200px;
-	height: 200px;
+	position: relative;
+	overflow: hidden;
+	justify-content: center;
 	display: inline-block;
 }
 #about p {
@@ -1315,4 +1332,8 @@ div.dot.dot3 {
 
 nav.nav-menu {
 	font-family: 'Open Sans', sans-serif;
+}
+
+#wrap {
+	white-space: pre-wrap;
 }

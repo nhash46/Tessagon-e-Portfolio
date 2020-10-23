@@ -150,12 +150,14 @@ header#header.d-flex.flex-column.justify-content-center
         .row
             .col-md-12.text-center
                 if user1.profilePicID
-                    img.img-responsive(src='http://localhost:3000/user/image/'+ user1.profilePicID.filename)
+                    .circular
+                        img.img-responsive(src='http://localhost:3000/user/image/'+ user1.profilePicID.filename)
                 if !user1.profilePicID
-                    img.img-responsive(src='/img/defaultProfile.png' alt='No Profile Picture')
+                    .circular
+                        img.img-responsive(src='/img/defaultProfile.png' alt='No Profile Picture')
             .col-md-8.col-md-offset-2
                 .about-text
-                    p
+                    p#wrap
                         | #{user1.bio}
                     .text-center
                         p.text-center
@@ -349,21 +351,27 @@ header#header.d-flex.flex-column.justify-content-center
 
             .social
                 ul
-                    li
-                        a(href='http://' + user1.links.facebook)
-                            i.fa.fa-facebook
-                    li
-                        a(href='http://' + user1.links.twitter)
-                            i.fa.fa-twitter
-                    li
-                        a(href='http://' + user1.links.github)
-                            i.fa.fa-github
-                    li
-                        a(href='http://' + user1.links.instagram)
-                            i.fa.fa-instagram
-                    li
-                        a(href='http://' + user1.links.linkedIn)
-                            i.fa.fa-linkedin
+                    if user1.links.facebook
+                        li
+                            a(href='http://' + user1.links.facebook)
+                                i.fa.fa-facebook
+                    if user1.links.twitter
+                        li
+                            a(href='http://' + user1.links.twitter)
+                                i.fa.fa-twitter
+                    if user1.links.github
+                        li
+                            a(href='http://' + user1.links.github)
+                                i.fa.fa-github
+                    if user1.links.instagram
+                        li
+                            a(href='http://' + user1.links.instagram)
+                                i.fa.fa-instagram
+                    if user1.links.linkedIn
+                        li
+                            a(href='http://' + user1.links.linkedIn)
+                                i.fa.fa-linkedin
+            a.btn(data-toggle='modal' data-target='#contactModal') Link your other socials!
                     
 #footer
     .container.text-center
@@ -394,6 +402,7 @@ script(type='text/javascript' src='/js/modalID.js')
 script(src='/js/experienceScript.js')
 script(src='/js/educationScript.js')
 script(type='text/javascript' src='/js/navbar.js')
+script(src='/js/skillScript.js')
 
 
 
@@ -446,7 +455,7 @@ script(type='text/javascript' src='/js/navbar.js')
                 button.btn.btn-secondary(type ='submit') Save changes
 
 #bioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
+    form#bioForm(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
@@ -454,8 +463,7 @@ script(type='text/javascript' src='/js/navbar.js')
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
-                    input#AboutMe.form-control(name="bio" type='text' autofocus='' maxlength='500' required='isRequired' value = user1.bio)
-                    label(for='AboutMe') Tell me about yourself! Max 500 characters.
+                    textarea#Aboutme.form-control(form='bioForm' name='bio' placeholder='Tell me about yourself!' autofocus='' rows='8' cols='70' wrap='soft') #{user1.bio}
                     br
                     label(for='editResume') Edit your resume!
                     input#editResume.form-control-file(name='resume' type='file' accept="application/pdf")
@@ -733,7 +741,7 @@ script(type='text/javascript' src='/js/navbar.js')
                     form(method='POST' action='/user/editSkill/'+skill._id)
                         h3 #{skill.name}
                         input.form-control(name='skill_name' type='text' placeholder='Skills' autofocus='' value=skill.name id="skills"+skill._id)
-                        button.btn.btn-secondary.edit-skill(type='submit' skill-id=skill._id) Save Changes
+                        button.btn.btn-secondary.edit-skill(href='/user/profile#skills' type='submit' skill-id=skill._id data-dismiss='modal') Save Changes
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                 
