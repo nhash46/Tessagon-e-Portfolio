@@ -87,3 +87,13 @@ body {
     margin-top: 1vh;
     margin-bottom: 1vh;
 }
+
+#comment-top {
+    font-weight: normal;
+}
+#indentComments {
+    margin-left: 5vw;
+}
+#indentProfilePic {
+    margin-left: 8vw;
+}
