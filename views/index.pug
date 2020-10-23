@@ -50,7 +50,7 @@ header#header.d-flex.flex-column.justify-content-center
             li
                 a.page-scroll(href='#skills').text-center
                     i.fa.fa-rocket.navbar-icons
-                        span skills
+                        span Skills
             li
                 a.page-scroll(href='#portfolio').text-center
                     i.fa.fa-suitcase.navbar-icons
@@ -82,8 +82,8 @@ header#header.d-flex.flex-column.justify-content-center
                         span.name  #{user2.first_name}
 
                     p
-                        |I'm a
-                        span.txt-rotate(data-period='1000' data-rotate='[ " Designer.", " Developer.", " Typewriter!" ]')
+                        |I'm a&nbsp;
+                        span.txt-rotate(data-period='1000' data-rotate=user2.typewriterWords)
 
 
                     a.btn.btn-default.btn-lg.page-scroll(href='#about') Learn More
