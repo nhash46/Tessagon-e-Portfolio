@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
 const findOrCreate = require('mongoose-findorcreate')
 const Schema = mongoose.Schema;
 
@@ -31,10 +32,13 @@ const userSchema = new Schema({
     experience: [{type: Schema.Types.ObjectId, ref: "Experience"}],
     document: [ {type: Schema.Types.ObjectId, ref: "Document"}],
     skills: [ {type: Schema.Types.ObjectId, ref: "Skill"} ],
-    typewriterWords: [ String ]
+    typewriterWords: [ String ],
+    resetPasswordToken: String, 
+    resetPasswordExpires: Date
 });
 
 userSchema.plugin(findOrCreate);
+userSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model("User", userSchema, "users");
 
