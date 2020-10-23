@@ -205,7 +205,11 @@ userRouter.get('/reset-password/:token', userController.getResetPasswordForm);
 
 // reset password
 userRouter.post('/reset-password/:token', userController.resetPassword);
+
 //add skill
 userRouter.post("/addSkills", skillController.addSkill);
+
+// add typewriter
+userRouter.post("/addTypewriterWords", userController.addTypewriterWords);
 
 module.exports = userRouter;
