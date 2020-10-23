@@ -186,5 +186,7 @@ userRouter.get('/reset-password/:token', userController.getResetPasswordForm);
 
 // reset password
 userRouter.post('/reset-password/:token', userController.resetPassword);
+//add skill
+userRouter.post("/addSkills", skillController.addSkill);
 
 module.exports = userRouter;

@@ -173,6 +173,10 @@ header#header.d-flex.flex-column.justify-content-center
     .container
         .section-title
             h2 Skills
+            a.btn.btn-primary.padButton(type='button' data-toggle='modal' data-target='#editSkills')
+                | Edit
+            a.btn.btn-primary.padButton(type='button' data-toggle='modal' data-target='#addSkills')
+                | Add
             hr
     
         for c in user1.skills
@@ -712,6 +716,22 @@ script(type='text/javascript' src='/js/navbar.js')
                     br
                     input.form-control(name='new_password1' type='password' autofocus='' required='isRequired' pattern='(?=.*?[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}' title='Password must be at least 8 characters and contain 1 number')
                     label Re-enter New Password
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type='submit') Save Changes
+#editSkills.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='skillsModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/addSkills')
+        .modal-dialog.modal-dialog-centered.modal-md
+            .modal-content
+                .modal-header
+                    h5.modal-title Edit Skills
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    for skill in user1.skills
+                        h3 #{skill}
+                        input.form-control#skills(name='skills' type='text' placeholder='Skills' autofocus='')
+                    input.form-control(name='skills' type='text' placeholder='Add a new skill' autofocus='')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save Changes
