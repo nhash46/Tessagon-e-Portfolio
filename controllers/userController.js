@@ -318,6 +318,12 @@ const redirectPortfolio = (req, res) => {
     res.redirect('/user/profile#portfolio');
 }
 
+// redirects to portfolio section
+const redirectSkills = (req, res) => {
+    res.redirect('/user/profile#skills');
+}
+
+
 // function to handle a request to login - NOT IN USE
 const logIn = (req, res, next) => {
     passport.authenticate('google', { failureRedirect: '/' }),
@@ -649,5 +655,6 @@ module.exports = {
     getForgotPassword,
     sendResetPasswordEmail,
     getResetPasswordForm,
-    resetPassword
+    resetPassword,
+    redirectSkills
 };
