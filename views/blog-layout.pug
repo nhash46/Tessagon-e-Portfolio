@@ -18,7 +18,9 @@ html
 
         // fontstyles (?)
         link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+Great+Primer:ital@1&display=swap")
-        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap")    
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap")
+
+        link(rel='stylesheet' type='text/css' href='/css/signin.css')    
 
     body
         style
@@ -41,7 +43,7 @@ html
                             a.dropdown-item(data-toggle='modal' data-target='#passwordModal') Change Password
                             a.dropdown-item(href='/user/logout') Logout
                 if !user    
-                    a(data-toggle='modal' data-target='#loginModal')  Login
+                    a(data-toggle='modal' data-target='#loginModal')#white Login
 
 
                         
@@ -102,7 +104,7 @@ footer.py-4#colour
                             input#customCheck1.custom-control-input(type='checkbox')
                             label.custom-control-label(for='customCheck1') Remember password
                         br
-                        button.btn.btn-lg.btn-primary.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(type='submit') Sign in
+                        button.btn.btn-lg.btn-primary1.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(type='submit') Sign in
                         br
                         a.button.btn.btn-lg.btn-google.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(href='/user/auth/google')
                             i.fa.fa-google.mr-2
