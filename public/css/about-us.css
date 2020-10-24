@@ -66,3 +66,9 @@ a {
 #profolio {
     width: 18vw;
 }
+
+#tess {
+    max-width: 15%;
+    height: auto;
+    margin-top: -5vh;
+}
