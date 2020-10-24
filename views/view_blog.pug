@@ -36,7 +36,7 @@ block content
                         .card-body
                             form
                                 .form-group
-                                    a.btn.btn-primary(href="/user/login") Sign in to comment!
+                                    a.btn.btn-primary(data-toggle='modal' data-target='#loginModal')  Sign in to comment!
                                     
             br
             br
@@ -66,7 +66,35 @@ block content
                                 span #{moment(c.date).fromNow()}
     
                 hr
-                            
+    #loginModal.topModal.modal.fade.customLogin
+        .modal-dialog.modal-dialog-centered.modal-wider
+            .modal-content
+                .modal-header#logo
+                    button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+                    img(src="/img/profolio-tight.png" width= 300 height= 70)
+                    h4.modal-title Login
+                .modal-body
+                    form(method='POST' action='/user/login')
+                        .form-label-group
+                            input#inputUsername.form-control(name= 'username' type='text' placeholder='Username' required='' autofocus='')
+                            label(for='inputUsername') Username
+                        .form-label-group
+                            input#inputPassword.form-control(name='password' type='password' placeholder='Password' required='')
+                            label(for='inputPassword') Password
+                        .custom-control.custom-checkbox.mb-3
+                            input#customCheck1.custom-control-input(type='checkbox')
+                            label.custom-control-label(for='customCheck1') Remember password
+                        br
+                        button.btn.btn-lg.btn-primary.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(type='submit') Sign in
+                        br
+                        a.button.btn.btn-lg.btn-google.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(href='/user/auth/google')
+                            i.fa.fa-google.mr-2
+                            |  Sign in with Google
+                .modal-footer.makeCentre
+                    a(href='/user/signup') Register for your own ProFolio!
+                    br
+                    a(href='/user/forgot-password') Forgot Password?
+                                
         script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
         
         //script.
