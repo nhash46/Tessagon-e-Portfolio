@@ -58,3 +58,7 @@ body {
     justify-content: center;
     display: inline-block;
 }
+
+a {
+    color: black;
+}
