@@ -1246,6 +1246,7 @@ div.dot.dot3 {
 	line-height: 20px;
 	font-weight: 400;
 	color: white;
+	cursor: pointer;
 }
 
 
@@ -1330,6 +1331,7 @@ div.dot.dot3 {
 	background-color: #ea4335;
 }
 
+
 nav.nav-menu {
 	font-family: 'Open Sans', sans-serif;
 }
@@ -1345,3 +1347,22 @@ nav.nav-menu {
 	font-family: 'Open Sans', sans-serif;
 }
 
+#logo {
+	position: relative;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.makeCentre {
+	justify-content: center;
+	text-align: center;
+}
+
+@media (min-width: 768px) {
+	.modal-wider {
+		width: 25%;
+		max-width:1200px;
+	}
+}
