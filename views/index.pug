@@ -19,6 +19,9 @@ head
     link(rel='stylesheet' type='text/css' href='/css/bootstrap.css')
     link(rel='stylesheet' type='text/css' href='/fonts/font-awesome/css/font-awesome.css')
     link(href='css/mdb.min.css' rel='stylesheet')
+
+    // linkedIn share api
+    script(src='https://platform.linkedin.com/in.js' type='text/javascript')
     //
       Stylesheet
       ==================================================
@@ -312,9 +315,10 @@ header#header.d-flex.flex-column.justify-content-center
                 | Tessagon
         .social
             ul
-                li
-                    iframe#down(src='https://www.facebook.com/plugins/share_button.php?href=https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user2.username + '%2F&layout=button&size=small&width=67&height=20&appId'  width='77' height='28' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowtransparency='true' allow='encrypted-media')
-                    script(type='IN/Share' data-url='https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user2.username)
+            
+                iframe#down(src='https://www.facebook.com/plugins/share_button.php?href=https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user2.username + '%2F&layout=button&size=small&width=67&height=20&appId'  width='77' height='28' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowtransparency='true' allow='encrypted-media')
+                script(type='IN/Share' data-url='https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user2.username)
+
 script(type='text/javascript' src='/js/jquery.1.11.1.js')
 script(type='text/javascript' src='/js/bootstrap.js')
 script(type='text/javascript' src='/js/SmoothScroll.js')
