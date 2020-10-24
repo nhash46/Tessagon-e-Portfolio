@@ -93,6 +93,7 @@ body {
 
 #comment-top {
     font-weight: normal;
+    margin-top: 0.5vh;
 }
 #indentComments {
     margin-left: 5vw;
@@ -102,14 +103,10 @@ body {
 }
 
 .like-comment {
-    margin-top: 1.5vh;
-    margin-bottom: -1.5vh;
+    margin-top: -2.5vh;
+    margin-bottom: -2.5vh;
 }
 
 .media-body {
     padding-left: 3vw;
-}
-
-#comment-top {
-    margin-top: -3vh;
 }
