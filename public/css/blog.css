@@ -100,3 +100,16 @@ body {
 #indentProfilePic {
     margin-left: 8vw;
 }
+
+.like-comment {
+    margin-top: 1.5vh;
+    margin-bottom: -1.5vh;
+}
+
+.media-body {
+    padding-left: 3vw;
+}
+
+#comment-top {
+    margin-top: -3vh;
+}
