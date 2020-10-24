@@ -365,7 +365,7 @@ const logInGoogleCallback = (req, res, next) => {
 const logOutUser = (req, res) => {
     req.logout();
     // req.flash('success', 'You have successfully logged out. Come back soon!');
-    res.redirect('/');
+    res.redirect('back');
 };
 
 // function that renders the user profile

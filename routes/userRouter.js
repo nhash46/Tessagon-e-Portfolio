@@ -157,6 +157,21 @@ userRouter.post('/login', function(req, res, next) {
     })(req, res, next);
 });
 
+userRouter.post('/login-modal', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+        if (!user) {
+            req.session.message = {
+                type: 'danger',
+                intro: 'Oops, wrong username or password.',
+                message: ' Try again.'
+            }
+            res.redirect('back'); }
+        req.logIn(user, function(err) {
+            if (err) { return next(err); }
+            return res.redirect('back');
+        });
+    })(req, res, next);
+});
 
 // google auth
 userRouter.get("/auth/google", userController.logInGoogle)
