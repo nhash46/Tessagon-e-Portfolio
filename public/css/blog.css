@@ -211,3 +211,16 @@ body {
 .btn-primary1 i.fa {
     margin-right: 10px;
 }
+
+#customLogin {
+	box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+}
+
+#btntbn {
+	padding-bottom: 1vh;
+	padding-top: 1vh;
+	border-radius: 20px;
+	font-size: 0.8vw;
+	margin-bottom: 0vw;
+}
+
