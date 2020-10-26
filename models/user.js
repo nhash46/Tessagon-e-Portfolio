@@ -36,7 +36,7 @@ const userSchema = new Schema({
     resetPasswordToken: String, 
     resetPasswordExpires: Date,
     isBanned: {type: String, default: false},
-    isAdmin: {type: Boolean, default: false}
+    isAdmin: {type: Boolean, default: false},
     achievement: [ {type: Schema.Types.ObjectId, ref: "Achievement"} ]
 });
 
