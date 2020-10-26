@@ -1331,6 +1331,22 @@ div.dot.dot3 {
 	background-color: #ea4335;
 }
 
+
+nav.nav-menu {
+	font-family: 'Open Sans', sans-serif;
+}
+
+#wrap {
+	white-space: pre-wrap;
+}
+
+#BlogButton {
+	margin-left: 1vw;
+}
+* {
+	font-family: 'Open Sans', sans-serif;
+}
+
 #logo {
 	position: relative;
 	display: block;
@@ -1350,18 +1366,3 @@ div.dot.dot3 {
 		max-width:1200px;
 	}
 }
-nav.nav-menu {
-	font-family: 'Open Sans', sans-serif;
-}
-
-#wrap {
-	white-space: pre-wrap;
-}
-
-#BlogButton {
-	margin-left: 1vw;
-}
-* {
-	font-family: 'Open Sans', sans-serif;
-}
-

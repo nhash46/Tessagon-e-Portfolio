@@ -105,7 +105,7 @@ const populateInfo = (req, res, next) => {
 
     user.first_name = req.body.first_name;
     user.last_name = req.body.last_name;
-    user.phone_number = req.body.number;
+    user.phone_number = req.body.phone_number;
     user.city = req.body.city;
     user.state = req.body.state;
     user.bio = req.body.bio;

@@ -93,7 +93,7 @@ $(document).ready(function(){
                 url: '/comments/unlikeComment/'+comment_id,
                 type: 'POST',
                 success: function(response){
-                    alert('unliking comment');
+                    //alert('unliking comment');
                     //location.reload();
                     //window.location.href='/blog-posts/'+username+'/'+blog_id;
                 },
@@ -113,7 +113,7 @@ $(document).ready(function(){
                 url: '/comments/likedComment/'+comment_id,
                 type: 'POST',
                 success: function(response){
-                    alert('liking comment');
+                    //alert('liking comment');
                     //location.reload();
                     //window.location.href='/blog-posts/'+username+'/'+blog_id;
                 },

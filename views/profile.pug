@@ -346,7 +346,7 @@ header#header.d-flex.flex-column.justify-content-center
                 p #{user1.email}
             .col-md-4
                 i.fa.fa-phone.fa-2x
-                p  #{user1.phone}
+                p  #{user1.phone_number}
             .clearfix
         .col-md-8.col-md-offset-2
             a.btn(href='mailto:'+user1.email) Send me an email!
@@ -492,7 +492,7 @@ script(src='/js/skillScript.js')
                     input#inputCity.form-control(name="city" type='text' placeholder='City' autofocus='' required='isRequired' value = user1.city)
                     br
                     label State
-                    input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired' value.user1.state)
+                    input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired' value = user1.state)
                     br
                     label Email address
                     input#inputEmail.form-control(name='email' type='email' placeholder='Email address' required='' value = user1.email)
