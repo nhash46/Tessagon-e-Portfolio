@@ -179,9 +179,13 @@ const editHomeInfo = (req,res) => {
 
 const uploadVideo = async (req,res,next) => {
 
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    var match = req.body.video.match(regExp);
+    var id = (match&&match[7].length===11)? match[7]: false;
+
     let newLink = new Link({
         url: req.body.video,
-        thumbnail: 'https://img.youtube.com/vi/'+req.body.video.split('=')[1]+'/maxresdefault.jpg',
+        thumbnail: 'https://img.youtube.com/vi/'+id+'/hqdefault.jpg',
         title: req.body.title,
         subheading: req.body.subheading,
         user: req.user._id,
