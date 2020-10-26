@@ -82,10 +82,13 @@ $(document).ready(function(){
         const blog_id = $target.attr('blog-id');
         const username = $target.attr('user-username');
         //unlike comment
-        if($(this).css("color") === "rgb(0, 0, 0)"){
+        /*if($(this).css("color") === "rgb(0, 0, 0)"){
             $(this).css("color", "#007bff");
             $(this).siblings('.number-of-likes').text('Likes: '+ comment_unliked);
-            $(this).animate({fontSize: "16px"});
+            $(this).animate({fontSize: "16px"});*/
+        if($(this).attr('src') === '/img/liked.svg') {
+            $(this).attr('src', '/img/unliked.svg');
+            $(this).siblings('.number-of-likes').text('Likes: '+ comment_unliked);
             $.ajax({
                 url: '/comments/unlikeComment/'+comment_id,
                 type: 'POST',
@@ -101,9 +104,11 @@ $(document).ready(function(){
             //#007bff
         // like comment    
         } else {
-            $(this).css("color", "black");
+            /*$(this).css("color", "black");
             $(this).siblings('.number-of-likes').text('Likes: '+ comment_liked);
-            $(this).animate({fontSize: "18px"});
+            $(this).animate({fontSize: "18px"});*/
+            $(this).attr('src', '/img/liked.svg');
+            $(this).siblings('.number-of-likes').text('Likes: '+ comment_liked);
             $.ajax({
                 url: '/comments/likedComment/'+comment_id,
                 type: 'POST',

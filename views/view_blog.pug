@@ -40,21 +40,20 @@ block content
                                     
             br
             br
-            #indentComments
-                each c in blog.comments
-                    .media#borderComment
-                        img#commentProfilePic(src='http://localhost:3000/user/images/'+ c.profilePicID alt='no_image')     
-                        .media-body
-                            h5.mt-0 #{c.author}  
-                                #comment-top #{c.content}   
-                                    if user
-                                        if user.username == c.author
-                                            a.btn.btn-link.edit-comment(type= 'button') Edit
-                                        if c.likedUsers.includes(user._id)
-                                            input.like-comment#liked(type= 'image' src='/img/liked.svg' comment-id=c._id blog-id=blog._id, user-username=user.username, comment-liked=c.numberOfLikes, comment-unliked=c.numberOfLikes-1)
-                                        else
-                                            a.btn.btn-link.like-comment(type= 'button' comment-id=c._id blog-id=blog._id, user-username=user.username, comment-liked=c.numberOfLikes+1, comment-unliked=c.numberOfLikes) Like
-                                        //a.btn.btn-link.reply-to-comment(type= 'button') Reply
+            each c in blog.comments
+                .media#borderComment
+                    img#commentProfilePic(src='http://localhost:3000/user/images/'+ c.profilePicID alt='no_image')     
+                    .media-body
+                        h5.mt-0 #{c.author}  
+                            #comment-top #{c.content}   
+                                if user
+                                    if user.username == c.author
+                                        a.btn.btn-link.edit-comment(type= 'button') Edit
+                                    if c.likedUsers.includes(user._id)
+                                        input.like-comment#liked(type= 'image' src='/img/liked.svg' comment-id=c._id blog-id=blog._id, user-username=user.username, comment-liked=c.numberOfLikes, comment-unliked=c.numberOfLikes-1)
+                                    else
+                                        input.like-comment(type= 'image' src='/img/unliked.svg' comment-id=c._id blog-id=blog._id, user-username=user.username, comment-liked=c.numberOfLikes+1, comment-unliked=c.numberOfLikes)
+                                    //a.btn.btn-link.reply-to-comment(type= 'button') Reply
 
                                         form.edit-comment-form(method='POST', action='/comments/edit/'+c._id)
                                             input.form-control(name='content', value= c.content)
