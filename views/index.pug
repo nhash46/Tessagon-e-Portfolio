@@ -39,7 +39,7 @@ header#header.d-flex.flex-column.justify-content-center
     nav.nav-menu
         ul.nav
             // Hidden li included to remove active class from about link when scrolled up past about section
-            li.active
+            li
                 a.page-scroll(href='#hero').text-center
                     i.fa.fa-home.navbar-icons
                         span Home
@@ -50,7 +50,7 @@ header#header.d-flex.flex-column.justify-content-center
             li
                 a.page-scroll(href='#skills').text-center
                     i.fa.fa-rocket.navbar-icons
-                        span skills
+                        span Skills
             li
                 a.page-scroll(href='#portfolio').text-center
                     i.fa.fa-suitcase.navbar-icons
@@ -82,11 +82,12 @@ header#header.d-flex.flex-column.justify-content-center
                         span.name  #{user2.first_name}
 
                     p
-                        |I'm a
-                        span.txt-rotate(data-period='1000' data-rotate='[ " Designer.", " Developer.", " Typewriter!" ]')
+                        |I'm a&nbsp;
+                        span.txt-rotate(data-period='1000' data-rotate=user2.typewriterWords)
 
 
                     a.btn.btn-default.btn-lg.page-scroll(href='#about') Learn More
+                    a.btn.btn-default.btn-lg.page-scroll(href='/blog-posts/'+user2.username)#BlogButton View Blogs
 
 
 #nav
@@ -124,9 +125,11 @@ header#header.d-flex.flex-column.justify-content-center
         .row
             .col-md-12.text-center
                 if user2.profilePicID
-                    img.img-responsive(src='http://localhost:3000/user/image/'+ user2.profilePicID.filename)
+                    .circular
+                        img.img-responsive(src='http://localhost:3000/user/image/'+ user2.profilePicID.filename)
                 if !user2.profilePicID
-                    img.img-responsive(src='/img/defaultProfile.png' alt='no_img')
+                    .circular
+                        img.img-responsive(src='/img/defaultProfile.png' alt='no_img')
             .col-md-8.col-md-offset-2
                 .about-text
                     p
@@ -136,38 +139,20 @@ header#header.d-flex.flex-column.justify-content-center
                             a.btn.btn-primary(href='http://localhost:3000/user/resume/' + user2.resumeID.filename + '?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
                                 i.fa.fa-download
                                 |  View Resume
+                            a.btn.btn-primary(href='/blog-posts/'+user2.username)#BlogButton View Blogs
 
 // Skills Section
 #skills.text-center
     .container
-        .section-title.center
+        .section-title
             h2 Skills
             hr
-        .row
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='95')
-                    span.percent 95
-                h4 HTML5
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='85')
-                    span.percent 85
-                h4 CSS3
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='80')
-                    span.percent 80
-                h4 jQuery
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='80')
-                    span.percent 80
-                h4 WordPress
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='70')
-                    span.percent 70
-                h4 Photoshop
-            .col-md-4.col-sm-6.skill
-                span.chart(data-percent='65')
-                    span.percent 65
-                h4 Illustrator
+
+        for c in user2.skills
+            .column
+                h4 #{c.name}
+                hr
+                br
 
 #portfolio
     .container
@@ -198,14 +183,16 @@ header#header.d-flex.flex-column.justify-content-center
 
         .row
             .portfolio-items
-                .col-sm-6.col-md-3.col-lg-3.vid
-                    .portfolio-item
-                        .hover-bg
-                            a(href='img/portfolio/01-large.jpg' title='Project description' rel='prettyPhoto')
-                                .hover-text
-                                    h4 Project Title
-                                    small Web Design
-                                img.img-responsive(src='img/portfolio/01-small.jpg' alt='Project Title')
+                for vid in user2.youtubeLinks
+                    .col-sm-6.col-md-3.col-lg-3.vid
+                        .portfolio-item
+                            .hover-bg
+                                a(href=vid.url title='Project description' rel='prettyPhoto')
+                                    .hover-text
+                                        h4 #{vid.title}
+                                        small #{vid.subheading}
+                                    img.img-responsive(src=vid.thumbnail alt='Project Title')
+                                    //iframe(width='420' height='345' src=vid.url)
 
 
 // Resume Section
@@ -237,7 +224,7 @@ header#header.d-flex.flex-column.justify-content-center
                                         span #{c.role}
                                 .timeline-body
                                     p
-                                        | INSERT YOUR DESCRIPTION HERE !
+                                        | #{c.descriptionExp}
                                     br
 
 // Education section
@@ -268,7 +255,7 @@ header#header.d-flex.flex-column.justify-content-center
                                         span #{c.degree}
                                 .timeline-body
                                     p
-                                        | INSERT YOUR DESCRIPTION HERE !
+                                        | #{c.descriptionEdu}
                                     br
 
 
@@ -296,21 +283,26 @@ header#header.d-flex.flex-column.justify-content-center
 
             .social
                 ul
-                    li
-                        a(href='#')
-                            i.fa.fa-facebook
-                    li
-                        a(href='#')
-                            i.fa.fa-twitter
-                    li
-                        a(href='#')
-                            i.fa.fa-github
-                    li
-                        a(href='#')
-                            i.fa.fa-instagram
-                    li
-                        a(href='#')
-                            i.fa.fa-linkedin
+                    if user2.links.facebook
+                        li
+                            a(href= user2.links.facebook)
+                                i.fa.fa-facebook
+                    if user2.links.twitter
+                        li
+                            a(href= user2.links.twitter)
+                                i.fa.fa-twitter
+                    if user2.links.github
+                        li
+                            a(href= user2.links.github)
+                                i.fa.fa-github
+                    if user2.links.instagram
+                        li
+                            a(href= user2.links.instagram)
+                                i.fa.fa-instagram
+                    if user2.links.linkedIn
+                        li
+                            a(href= user2.links.linkedIn)
+                                i.fa.fa-linkedin
 
 
 #footer
@@ -323,6 +315,7 @@ header#header.d-flex.flex-column.justify-content-center
                 li
                     iframe#down(src='https://www.facebook.com/plugins/share_button.php?href=https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user2.username + '%2F&layout=button&size=small&width=67&height=20&appId'  width='77' height='28' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowtransparency='true' allow='encrypted-media')
                     script(type='IN/Share' data-url='https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user2.username)
+                    a.btn(href='/tessagon/about-us') Meet the Tessagon Team!
 script(type='text/javascript' src='/js/jquery.1.11.1.js')
 script(type='text/javascript' src='/js/bootstrap.js')
 script(type='text/javascript' src='/js/SmoothScroll.js')

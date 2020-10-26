@@ -9,7 +9,7 @@
 }
 
 .bg-image {
-  background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
+  background-image: url('/img/loginBackground.svg');
   background-size: cover;
   background-position: center;
 }
@@ -125,6 +125,9 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+* {
+	font-family: 'Open Sans', sans-serif;
 }
 
 

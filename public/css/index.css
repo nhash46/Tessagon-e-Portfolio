@@ -7,11 +7,9 @@ body, html {
 	height: 100% !important;
 }
 h1 {
-	font-weight: 700;
+	font-weight: 500;
 }
-h1 strong {
-	font-weight: 900;
-}
+
 h2 {
 	line-height: 20px;
 	margin: 0;
@@ -152,10 +150,27 @@ hr {
 #about .about-text {
 	margin-left: 10px;
 }
-#about img {
+#about .circular img {
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+#about .circular {
+	width: 300px;
+	height: 300px;
 	border-radius: 50%;
-	width: 200px;
-	height: 200px;
+	position: relative;
+	overflow: hidden;
+	justify-content: center;
 	display: inline-block;
 }
 #about p {
@@ -612,13 +627,13 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 	letter-spacing: -2px;
 }
 .intro .name {
-	font-weight: 600;
+	font-weight: 700;
 }
 .intro .intro-text {
 	max-width: 75%;
 }
 .intro .intro-text p {
-	font-family: 'Lato', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 20px;
 	margin-bottom: 40px;
 	margin-top: 20px;
@@ -1044,7 +1059,7 @@ header .intro-text {
 /* ----- skills ----*/
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,600,700,900);
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 200;
 }
 a.reset {
@@ -1335,3 +1350,18 @@ div.dot.dot3 {
 		max-width:1200px;
 	}
 }
+nav.nav-menu {
+	font-family: 'Open Sans', sans-serif;
+}
+
+#wrap {
+	white-space: pre-wrap;
+}
+
+#BlogButton {
+	margin-left: 1vw;
+}
+* {
+	font-family: 'Open Sans', sans-serif;
+}
+

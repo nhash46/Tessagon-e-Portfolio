@@ -59,32 +59,32 @@ const addSkill = async (req, res, next) => {
     }
 };
 
-/**
-const editExperience = (req,res, next) => {
+const editSkill = (req,res, next) => {
 
-    let experience = {};
-    experience.company = req.body.company;
-    experience.role = req.body.role;
-    experience.experienceStartDate = req.body.experienceStartDate;
-    experience.experienceEndDate = req.body.experienceEndDate;
-    experience.description = req.body.description;
+    let skill = {};
+    skill.name = req.body.skill_name;
     
     let query = {_id:req.params._id}
   
     // add post into db
-    Experience.updateOne(query, experience, function (err) {
+    Skill.updateOne(query, skill, function (err) {
       if (err){
         console.log(err);
         res.status(400);
       }
       else{
-          res.send('Success')
+        req.session.message = {
+            type: 'success',
+            intro: 'Skill updated!',
+            message: ''
+          }
+          res.send('Success');
       } 
     });
 
 };
 
-const deleteExperience = (req, res) => {
+const deleteSkill = (req, res) => {
   // check if user is logged in
   if(!req.user){
     console.log('user not logged in!');
@@ -94,15 +94,12 @@ const deleteExperience = (req, res) => {
   let query = {_id:req.params._id}
 
   // check if experience object belongs to user
-  Experience.findById(query, function(err, experience){
-    if(experience.user.toString() != req.user._id.toString()){
-      console.log('experience user _id: ' + experience.user._id);
-      console.log('global user _id:     ' + req.user._id);
-      console.log('_id not found!');
+  Skill.findById(query, function(err, skill){
+    if(skill.user.toString() != req.user._id.toString()){
       res.status(500).send();
     } 
     else {
-      Experience.remove(query, function(err){
+      Skill.remove(query, function(err){
         if(err){
           console.log(err);
         }
@@ -112,10 +109,9 @@ const deleteExperience = (req, res) => {
     }
   });
 }
- */
 
 module.exports = {
     addSkill,
-    //editExperience,
-    //deleteExperience
+    editSkill,
+    deleteSkill
 };
