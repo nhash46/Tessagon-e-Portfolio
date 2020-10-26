@@ -48,7 +48,7 @@ describe('Blog Tests', () => {
     describe('show blogs', () => {
 
         it('Should display list of blogs belonging to a user', (done) => {
-            authenticatedSession.get('/blog-posts/naz3')
+            authenticatedSession.get('/blog-posts/nazhashem')
                 .then((res) => {
                     expect(302);
                     //expect(res.headers.location).to.equal('/blog-posts/naz3');

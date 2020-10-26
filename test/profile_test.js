@@ -61,7 +61,7 @@ describe('Profile Tests', () => {
 
         it("Should get another user's profile", function (done) {
             this.timeout(4000);
-            authenticatedSession.get('/user/profile/naz3')
+            authenticatedSession.get('/user/profile/nazhashem')
               .expect(200)
               .end(done)
         });
