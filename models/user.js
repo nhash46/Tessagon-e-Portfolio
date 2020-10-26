@@ -31,6 +31,7 @@ const userSchema = new Schema({
     experience: [{type: Schema.Types.ObjectId, ref: "Experience"}],
     document: [ {type: Schema.Types.ObjectId, ref: "Document"}],
     skills: [ {type: Schema.Types.ObjectId, ref: "Skill"} ],
+    achievement: [ {type: Schema.Types.ObjectId, ref: "Achievement"} ],
     typewriterWords: [ String ]
 });
 
