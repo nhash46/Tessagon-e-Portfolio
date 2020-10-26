@@ -59,7 +59,59 @@ const addAchievement = async (req, res, next) => {
     }
 };
 
+const editAchievement = (req,res, next) => {
+
+    let achievement = {};
+    achievement.name = req.body.achievementName;
+
+    let query = {_id:req.params._id}
+
+    // add post into db
+    Achievement.updateOne(query, achievement, function (err) {
+        if (err){
+            console.log(err);
+            res.status(400);
+        }
+        else{
+            req.session.message = {
+                type: 'success',
+                intro: 'Achievement updated!',
+                message: ''
+            }
+            res.send('Success');
+        }
+    });
+
+};
+
+const deleteAchievement = (req, res) => {
+    // check if user is logged in
+    if(!req.user){
+        console.log('user not logged in!');
+        res.status(500).send();
+    }
+
+    let query = {_id:req.params._id}
+
+    // check if achievement object belongs to user
+    Achievement.findById(query, function(err, achievement){
+        if(achievement.user.toString() != req.user._id.toString()){
+            res.status(500).send();
+        }
+        else {
+            Achievement.remove(query, function(err){
+                if(err){
+                    console.log(err);
+                }
+                res.send('Success')
+
+            });
+        }
+    });
+}
 
 module.exports = {
-    addAchievement
+    addAchievement,
+    editAchievement,
+    deleteAchievement
 };
