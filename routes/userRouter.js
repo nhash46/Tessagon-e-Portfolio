@@ -12,6 +12,7 @@ const educationController = require("../controllers/educationController.js");
 const experienceController = require("../controllers/experienceController.js");
 const uploadController = require("../controllers/uploadController");
 const skillController = require("../controllers/skillController");
+const achievementController = require("../controllers/achievementController.js");
 
 const db = require("../models");
 const blogController = require("../controllers/blogController.js");
@@ -84,6 +85,7 @@ userRouter.post("/populateInfo",
     userController.addTypewriterWords,
     experienceController.addExperience, 
     educationController.addEducation,
+    achievementController.addAchievement,
     skillController.addSkill,
     userController.deleteMessage,
     userController.redirectProfile
@@ -122,8 +124,14 @@ userRouter.post("/editAboutMe",
 // Edit education
 userRouter.post("/editEducation/:_id", educationController.editEducation, userController.redirectEducation);
 
+// Edit skill
+userRouter.post("/editSkill/:_id", skillController.editSkill, userController.redirectSkills);
+
 // Edit experience
 userRouter.post("/editExperience/:_id", experienceController.editExperience, userController.redirectExperience);
+
+//editAchivement 
+userRouter.post("/editAchievement/:_id", achievementController.editAchievement);
 
 // log in form Home
 userRouter.get("/login", userController.logInPage);
@@ -204,6 +212,9 @@ userRouter.delete('/experience/:_id', experienceController.deleteExperience);
 // delete education object
 userRouter.delete('/education/:_id', educationController.deleteEducation);
 
+// delete skill object
+userRouter.delete('/skill/:_id', skillController.deleteSkill);
+
 // change password form - NOT IN USE
 userRouter.get('/change-password', userController.getChangePassword);
 
@@ -223,7 +234,7 @@ userRouter.get('/reset-password/:token', userController.getResetPasswordForm);
 userRouter.post('/reset-password/:token', userController.resetPassword);
 
 //add skill
-userRouter.post("/addSkills", skillController.addSkill);
+userRouter.post("/addSkills", skillController.addSkill, userController.redirectSkills);
 
 // add typewriter
 userRouter.post("/addTypewriterWords", userController.addTypewriterWords);

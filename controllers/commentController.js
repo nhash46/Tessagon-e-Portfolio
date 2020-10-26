@@ -6,7 +6,7 @@ const Blog = mongoose.model("Blog");
 // adds a comment to comment collection
 const addComment = async (req, res) => {
 
-    var newComment = new Comment({
+    let newComment = new Comment({
         author : req.user.username,
         content : req.body.content,
         profilePicID : req.user.profilePicID,

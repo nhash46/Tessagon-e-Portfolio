@@ -49,7 +49,7 @@ header#header.d-flex.flex-column.justify-content-center
             // Hidden li included to remove active class from about link when scrolled up past about section
             li.hidden
                 a(href='#page-top')
-            li.active
+            li
                 a.page-scroll(href='#hero').text-center
                     i.fa.fa-home.navbar-icons
                         span Home
@@ -60,7 +60,7 @@ header#header.d-flex.flex-column.justify-content-center
             li
                 a.page-scroll(href='#skills').text-center
                     i.fa.fa-rocket.navbar-icons
-                        span skills
+                        span Skills
             li
                 a.page-scroll(href='#portfolio').text-center 
                     i.fa.fa-suitcase.navbar-icons
@@ -81,7 +81,7 @@ header#header.d-flex.flex-column.justify-content-center
 #hero.d-flex.flex-column.justify-content-center
     .intro
         if user1.backgroundPicID
-            img.background(src='http://localhost:3000/user/image/' + user1.backgroundPicID.filename alt='no_image')
+            img.background(src='https://theprofolio.herokuapp.com/user/image/' + user1.backgroundPicID.filename alt='no_image')
         if !user1.backgroundPicID
             img.background(src='/img/defaultBackground.jpg' alt='no_image')
         .container
@@ -97,6 +97,7 @@ header#header.d-flex.flex-column.justify-content-center
                     
 
                     a.btn.btn-default.btn-lg.page-scroll(href='#about') Learn More
+                    a.btn.btn-default.btn-lg.page-scroll(href='/blog-posts/'+user.username)#BlogButton View Blogs
                     br
                     br
                     a.btn.btn-default.btn-lg.page-scroll(type='button' data-toggle='modal' data-target='#homeModal')
@@ -115,7 +116,7 @@ header#header.d-flex.flex-column.justify-content-center
                         |  #{message.message}
             .nav-item.dropdown#positionRight
                 a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                    img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image') 
+                    img#navbarProfilePic(src='https://theprofolio.herokuapp.com/user/images/'+ user.profilePicID alt='no_image')
                     | #{user.first_name} #{user.last_name}     
                 
                     i.fa.fa-caret-down
@@ -149,22 +150,25 @@ header#header.d-flex.flex-column.justify-content-center
         .row
             .col-md-12.text-center
                 if user1.profilePicID
-                    img.img-responsive(src='http://localhost:3000/user/image/'+ user1.profilePicID.filename)
+                    .circular
+                        img.img-responsive(src='http://localhost:3000/user/image/'+ user1.profilePicID.filename)
                 if !user1.profilePicID
-                    img.img-responsive(src='/img/defaultProfile.png' alt='No Profile Picture')
+                    .circular
+                        img.img-responsive(src='/img/defaultProfile.png' alt='No Profile Picture')
             .col-md-8.col-md-offset-2
                 .about-text
-                    p
+                    p#wrap
                         | #{user1.bio}
                     .text-center
                         p.text-center
                         button.btn.btn-primary(type='button' data-toggle='modal' data-target='#bioModal')
                             | Edit About Me
+                        button.btn.btn-primary(href='/blog-posts/'+user.username)#BlogButton View Blogs
                     br
                     br
                     .text-center
                         if user1.resumeID
-                            a.btn.btn-primary(href='http://localhost:3000/user/resume/'+user1.resumeID.filename+'?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
+                            a.btn.btn-primary(href='https://theprofolio.herokuapp.com/user/resume/'+user1.resumeID.filename+'?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
                                 i.fa.fa-download
                                 |  View Resume
 // Skills Section
@@ -194,7 +198,7 @@ header#header.d-flex.flex-column.justify-content-center
     .container
         .section-title.text-center.center
             h2 Portfolio
-            //embed(src='http://localhost:3000/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
+            //embed(src='https://theprofolio.herokuapp.com/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
             button.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPortfolioModal')
                 | Edit Portfolio
             br
@@ -212,6 +216,8 @@ header#header.d-flex.flex-column.justify-content-center
                                     a.active(href='#portfolio' data-filter='.doc').hideVid Documents
                                 li
                                     a(href='#portfolio' data-filter='.vid').showVid Videos
+                                li
+                                    a(data-filter='.achievements').hideVid Achievements
 
         .row
             .portfolio-items
@@ -219,11 +225,11 @@ header#header.d-flex.flex-column.justify-content-center
                     .col-sm-6.col-md-3.col-lg-3.doc
                         .portfolio-item
                             .hover-bg
-                                a(href='http://localhost:3000/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
+                                a(href='https://theprofolio.herokuapp.com/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
                                     .hover-text
                                         h4 #{doc.title}
                                         small #{doc.subHead}
-                                    embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
+                                    embed(src='https://theprofolio.herokuapp.com/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
                 .col-sm-6.col-md-3.col-lg-3.doc
                     .portfolio-item
                         .hover-bg
@@ -251,6 +257,17 @@ header#header.d-flex.flex-column.justify-content-center
                                     .hover-text
                                         h4 Add Video
                                     embed(src='/img/plus.png' width='255' height='250')
+
+            .row
+                .portfolio-items
+                    for achievement in user1.achievement
+                        .col-sm-6.col-md-3.col-lg-3.achievements
+                            h4 #{achievement.name}
+                            br
+                            h5 #{achievement.description}
+                    .col-sm-6.col-md-3.col-lg-3.achievements
+                        a.btn-primary(data-toggle='modal' data-target='#editAchievements') Edit Achievements
+
 
 // Resume Section
 #experience.text-center
@@ -341,28 +358,34 @@ header#header.d-flex.flex-column.justify-content-center
                 p #{user1.email}
             .col-md-4
                 i.fa.fa-phone.fa-2x
-                p  #{user1.phone}
+                p  #{user1.phone_number}
             .clearfix
         .col-md-8.col-md-offset-2
             a.btn(href='mailto:'+user1.email) Send me an email!
 
             .social
                 ul
-                    li
-                        a(href='http://' + user1.links.facebook)
-                            i.fa.fa-facebook
-                    li
-                        a(href='http://' + user1.links.twitter)
-                            i.fa.fa-twitter
-                    li
-                        a(href='http://' + user1.links.github)
-                            i.fa.fa-github
-                    li
-                        a(href='http://' + user1.links.instagram)
-                            i.fa.fa-instagram
-                    li
-                        a(href='http://' + user1.links.linkedIn)
-                            i.fa.fa-linkedin
+                    if user1.links.facebook
+                        li
+                            a(href= user1.links.facebook)
+                                i.fa.fa-facebook
+                    if user1.links.twitter
+                        li
+                            a(href= user1.links.twitter)
+                                i.fa.fa-twitter
+                    if user1.links.github
+                        li
+                            a(href= user1.links.github)
+                                i.fa.fa-github
+                    if user1.links.instagram
+                        li
+                            a(href= user1.links.instagram)
+                                i.fa.fa-instagram
+                    if user1.links.linkedIn
+                        li
+                            a(href= user1.links.linkedIn)
+                                i.fa.fa-linkedin
+            a.btn(data-toggle='modal' data-target='#contactModal') Link your other socials!
                     
 #footer
     .container.text-center
@@ -374,9 +397,10 @@ header#header.d-flex.flex-column.justify-content-center
                 li
                     iframe#down(src='https://www.facebook.com/plugins/share_button.php?href=https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user1.username + '%2F&layout=button&size=small&width=67&height=20&appId'  width='77' height='28' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowtransparency='true' allow='encrypted-media')
                     script(type='IN/Share' data-url='https://tessagon-e-portfolio.herokuapp.com/user/profile/'+ user1.username)
-        
-
-
+                    br
+                    br
+                    hr
+                    a.btn(href='/tessagon/about-us') Meet the Tessagon Team!
 script(type='text/javascript' src='/js/jquery.1.11.1.js')
 script(type='text/javascript' src='/js/bootstrap.js')
 script(type='text/javascript' src='/js/SmoothScroll.js')
@@ -392,7 +416,9 @@ script(type='text/javascript' src='/js/typewriter.js')
 script(type='text/javascript' src='/js/modalID.js')
 script(src='/js/experienceScript.js')
 script(src='/js/educationScript.js')
+script(src='/js/achievementScript.js')
 script(type='text/javascript' src='/js/navbar.js')
+script(src='/js/skillScript.js')
 
 
 
@@ -445,7 +471,7 @@ script(type='text/javascript' src='/js/navbar.js')
                 button.btn.btn-secondary(type ='submit') Save changes
 
 #bioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='bioModalLabel' aria-hidden='true')
-    form(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
+    form#bioForm(method='POST' action='/user/editAboutMe' enctype="multipart/form-data")
         .modal-dialog.modal-dialog-centered.modal-lg(role='document')
             .modal-content
                 .modal-header
@@ -453,8 +479,7 @@ script(type='text/javascript' src='/js/navbar.js')
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
-                    input#AboutMe.form-control(name="bio" type='text' autofocus='' maxlength='500' required='isRequired' value = user1.bio)
-                    label(for='AboutMe') Tell me about yourself! Max 500 characters.
+                    textarea#Aboutme.form-control(form='bioForm' name='bio' placeholder='Tell me about yourself!' autofocus='' rows='8' cols='70' wrap='soft') #{user1.bio}
                     br
                     label(for='editResume') Edit your resume!
                     input#editResume.form-control-file(name='resume' type='file' accept="application/pdf")
@@ -474,13 +499,13 @@ script(type='text/javascript' src='/js/navbar.js')
                         span(aria-hidden='true') &times;
                 .modal-body
                     label Contact number (E.g 0412 345 678)
-                    input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' pattern='[0-9]{4} [0-9]{3} [0-9]{3}' required='isRequired' value = user1.phone_number)
+                    input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' required='isRequired' value = user1.phone_number)
                     br
                     label City
                     input#inputCity.form-control(name="city" type='text' placeholder='City' autofocus='' required='isRequired' value = user1.city)
                     br
                     label State
-                    input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired' value.user1.state)
+                    input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired' value = user1.state)
                     br
                     label Email address
                     input#inputEmail.form-control(name='email' type='email' placeholder='Email address' required='' value = user1.email)
@@ -718,19 +743,62 @@ script(type='text/javascript' src='/js/navbar.js')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save Changes
+
+
 #editSkills.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='skillsModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-md
+        .modal-content
+            .modal-header
+                h5.modal-title Edit Skills
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                for skill in user1.skills
+                    form(method='POST' action='/user/editSkill/'+skill._id)
+                        h3 #{skill.name}
+                        input.form-control(name='skill_name' type='text' placeholder='Skills' autofocus='' value=skill.name id="skills"+skill._id)
+                        button.btn.btn-secondary.edit-skill(href='/user/profile#skills' type='submit' skill-id=skill._id data-dismiss='modal') Save Changes
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                
+
+
+#addSkills.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addskillsModalLabel' aria-hidden='true')
     form(method='POST' action='/user/addSkills')
         .modal-dialog.modal-dialog-centered.modal-md
             .modal-content
                 .modal-header
-                    h5.modal-title Edit Skills
+                    h5.modal-title Add Skills
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
-                    for skill in user1.skills
-                        h3 #{skill.name}
-                        input.form-control#skills(name='skills' type='text' placeholder='Skills' autofocus='')
                     input.form-control(name='skills' type='text' placeholder='Add a new skill' autofocus='')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save Changes
+#editAchievements.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5.modal-title Edit Achievement
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                for achievement in user1.achievement
+                    h3 #{achievement.name}
+                    form(method='POST' action='/user/editAchievement/' + achievement._id)
+                        label(for='name'+achievement._id) Achievement Name
+                        input.form-control(id='achievement_name'+achievement._id name="achievement_name" type='text' autofocus='' required='isRequired' value=achievement.name)
+                        br
+                        label(for='role'+achievement._id) Description
+                        input.form-control.achievementDesc(id='descriptionAch'+achievement._id name="descriptionAch" type='text' autofocus='' required='isRequired' value=achievement.description)
+                        br
+                        .container
+                            .row
+                                .col-md-6
+                                    button.btn.btn-secondary.edit-achievement(href='/user/profile#portfolio' achievement-id=achievement._id data-dismiss='modal') Save changes
+                                    a.btn.btn-secondary.delete-achievement(href='/user/profile#portfolio' achievement-id=achievement._id data-dismiss='modal') Delete Achievement
+                        br
+                        hr.wide
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close

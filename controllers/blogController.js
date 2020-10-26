@@ -26,7 +26,7 @@ const addBlog = (req, res) => {
             });
     } else {
         // extract info. from body
-        var newPost = new Blog({
+        let newPost = new Blog({
             title: req.body.title,
             author: req.user.username,
             authorFullName: req.user.first_name + ' ' + req.user.last_name,
@@ -129,7 +129,8 @@ const showBlogs = (req, res) => {
                                 blogs: allBlogs,
                                 noMatch: noMatch,
                                 blogAuthor: req.params.username,
-                                authorFullName: author.first_name + ' ' + author.last_name
+                                authorFullName: author.first_name + ' ' + author.last_name,
+                                author: author
                             });
                     }
                 });
@@ -209,7 +210,7 @@ function ensureAuthenticated(req, res, next){
 
 
 // backend function involved in updating a posts comment field upon adding a Comment. See commentController addComment().
-var getBlogByIDComment = async (req, res) => {
+const getBlogByIDComment = async (req, res) => {
 
     try {
         const post = await Blog.find({'_id': req.params._id});

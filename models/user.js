@@ -37,6 +37,7 @@ const userSchema = new Schema({
     resetPasswordExpires: Date,
     isBanned: {type: String, default: false},
     isAdmin: {type: Boolean, default: false}
+    achievement: [ {type: Schema.Types.ObjectId, ref: "Achievement"} ]
 });
 
 userSchema.plugin(findOrCreate);

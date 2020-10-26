@@ -1,3 +1,6 @@
+.body {
+	font-family: 'Open Sans', sans-serif;
+}
 #commentProfilePic {
     border-radius: 20vw;
     border: 1px solid ;
@@ -224,3 +227,22 @@ body {
 	margin-bottom: 0vw;
 }
 
+#comment-top {
+    font-weight: normal;
+    margin-top: 0.5vh;
+}
+#indentComments {
+    margin-left: 5vw;
+}
+#indentProfilePic {
+    margin-left: 8vw;
+}
+
+.like-comment {
+    margin-top: -2.5vh;
+    margin-bottom: -2.5vh;
+}
+
+.media-body {
+    padding-left: 3vw;
+}
