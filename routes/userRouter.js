@@ -127,6 +127,9 @@ userRouter.post("/editEducation/:_id", educationController.editEducation, userCo
 // Edit experience
 userRouter.post("/editExperience/:_id", experienceController.editExperience, userController.redirectExperience);
 
+//editAchivement 
+userRouter.post("/editAchievement/:_id", achievementController.editAchievement);
+
 // log in form Home
 userRouter.get("/login", userController.logInPage);
 

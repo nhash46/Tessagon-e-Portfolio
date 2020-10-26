@@ -1002,4 +1002,7 @@ header .intro-text {
 	left: 30%;
 	width: 40%;
 }
+.achievementDesc {
+	padding-bottom: 5vh;
+}
 

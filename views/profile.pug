@@ -269,7 +269,7 @@ header#header.d-flex.flex-column.justify-content-center
                             br
                             h5 #{achievement.description}
                     .col-sm-6.col-md-3.col-lg-3.achievements
-                        a.btn-primary(data-toggle='modal' data-target='#achievementModal') Edit Achievements
+                        a.btn-primary(data-toggle='modal' data-target='#editAchievements') Edit Achievements
 
 
 // Resume Section
@@ -412,6 +412,7 @@ script(type='text/javascript' src='/js/typewriter.js')
 script(type='text/javascript' src='/js/modalID.js')
 script(src='/js/experienceScript.js')
 script(src='/js/educationScript.js')
+script(src='/js/achievementScript.js')
 script(type='text/javascript' src='/js/navbar.js')
 
 
@@ -709,3 +710,30 @@ script(type='text/javascript' src='/js/navbar.js')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type ='submit') Upload Video
+
+#editAchievements.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#editExperiencelabel.modal-title Edit Achievement
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                for achievement in user1.achievement
+                    h3 #{achievement.name}
+                    form(method='POST' action='/user/editAchievement/' + achievement._id)
+                        label(for='name'+achievement._id) Achievement Name
+                        input.form-control(id='achievement_name'+achievement._id name="achievement_name" type='text' autofocus='' required='isRequired' value=achievement.name)
+                        br
+                        label(for='role'+achievement._id) Description
+                        input.form-control.achievementDesc(id='descriptionAch'+achievement._id name="descriptionAch" type='text' autofocus='' required='isRequired' value=achievement.description)
+                        br
+                        .container
+                            .row
+                                .col-md-6
+                                    button.btn.btn-secondary.edit-achievement(href='/user/profile#portfolio' achievement-id=achievement._id data-dismiss='modal') Save changes
+                                    a.btn.btn-secondary.delete-achievement(href='/user/profile#portfolio' achievement-id=achievement._id data-dismiss='modal') Delete Achievement
+                        br
+                        hr.wide
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
