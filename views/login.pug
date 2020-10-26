@@ -70,7 +70,7 @@ block content
                 h4.modal-title Admin Login
                 button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
             .modal-body
-                form(method='POST' action='/user/login-modal')
+                form(method='POST' action='/admin/login')
                     .form-label-group
                         input#adminLogin.form-control(name= 'username' type='text' placeholder='Username' required='' autofocus='')
                         label(for='adminLogin') Username
