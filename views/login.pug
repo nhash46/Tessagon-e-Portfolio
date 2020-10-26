@@ -58,3 +58,27 @@ block content
                                         a.small(href='/user/forgot-password') Forgot password?
                                         br
                                         a.small(href='/signup') Sign up!
+                                        br
+                                        a#admin.small(data-toggle='modal' data-target='#adminModal') Admin Login
+
+
+
+#adminModal.modal.fade.customLogin
+    .modal-dialog.modal-dialog-centered.modal-wider
+        .modal-content
+            .modal-header
+                h4.modal-title Admin Login
+                button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+            .modal-body
+                form(method='POST' action='/user/login-modal')
+                    .form-label-group
+                        input#adminLogin.form-control(name= 'username' type='text' placeholder='Username' required='' autofocus='')
+                        label(for='adminLogin') Username
+                    .form-label-group
+                        input#adminPassword.form-control(name='password' type='password' placeholder='Password' required='')
+                        label(for='adminPassword') Password
+                    br
+                    button.btn.btn-lg.btn-primary.btn-block.btn-login.text-uppercase.font-weight-bold.mb-2(type='submit') Sign in
+            .modal-footer.makeCentre
+                a(href='/user/forgot-password') Forgot Password?
+
