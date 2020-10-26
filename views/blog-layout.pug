@@ -39,7 +39,7 @@ html
                         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
                             a.dropdown-item(href='/user/profile/') My Profile
                             a.dropdown-item(href='/blog-posts/'+user.username) My Blog Page
-                            a.dropdown-item(href='/user/profile/') Manage Account
+                            a.dropdown-item(data-toggle='modal' data-target='#contactModal') Manage Account
                             a.dropdown-item(data-toggle='modal' data-target='#passwordModal') Change Password
                             a.dropdown-item(href='/user/logout') Logout
                 if !user    
@@ -113,3 +113,43 @@ footer.py-4#colour
                         a(href='/user/signup') Register for your own ProFolio!
                         br
                         a(href='/user/forgot-password') Forgot Password?
+
+
+#contactModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='contactModalLabel' aria-hidden='true')
+    form(method='POST' action='/user/editNavInfo')
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#contactModalLabel.modal-title Edit Contact Information
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    label Contact number (E.g 0412 345 678)
+                    input#contactNumber.form-control(name="phone_number" type='tel' placeholder='phone' autofocus='' required='isRequired' value = user.phone_number)
+                    br
+                    label City
+                    input#inputCity.form-control(name="city" type='text' placeholder='City' autofocus='' required='isRequired' value = user.city)
+                    br
+                    label State
+                    input#inputState.form-control(name="state" type='text' placeholder='State' autofocus='' required='isRequired' value = user.state)
+                    br
+                    label Email address
+                    input#inputEmail.form-control(name='email' type='email' placeholder='Email address' required='' value = user.email)
+                    label Facebook
+                    input.form-control(name='facebook' type='text' autofocus='' value = user.links.facebook)
+                    br
+                    label Twitter
+                    input.form-control(name='twitter' type='text' autofocus='' value = user.links.twitter)
+                    br
+                    label Github
+                    input.form-control(name='github' type='text' autofocus='' value = user.links.github)
+                    br
+                    label Instagram
+                    input.form-control(name='instagram' type='text' autofocus='' value = user.links.instagram)
+                    br
+                    label LinkedIn
+                    input.form-control(name='linkedIn' type='text' autofocus='' value = user.links.linkedIn)
+                    br
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary(type='submit') Save changes

@@ -97,7 +97,7 @@ header#header.d-flex.flex-column.justify-content-center
 #nav
     nav.navbar.navbar-expand-lg.navbar-dark.fixed-top#colour
         .container#colour
-            a.navbar-brand(href='/user/profile' + user2.username) #{user2.first_name} #{user2.last_name}
+            a.navbar-brand(href='/user/profile/' + user2.username) #{user2.first_name} #{user2.last_name}
             if user
                 .nav-item.dropdown#positionRight
                     a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
