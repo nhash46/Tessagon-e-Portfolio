@@ -6,10 +6,11 @@ const User = mongoose.model("User");
 // save achievement to user and add achievement object collection
 const addAchievement = async (req, res, next) => {
 
-    if(!Array.isArray(req.body.achievement)){
+    if(!Array.isArray(req.body.achievement_name)){
         let newAchievement = new Achievement({
             user: req.user._id,
-            name: req.body.achievement,
+            name: req.body.achievement_name,
+            description: req.body.descriptionAch,
         })
 
         try {
@@ -30,12 +31,13 @@ const addAchievement = async (req, res, next) => {
             }
         });
     } else {
-        let lengthList = req.body.achievement.length
+        let lengthList = req.body.achievement_name.length
         let i = 0
         for (i; i < lengthList; i++) {
             let newAchievement = new Achievement({
                 user: req.user._id,
-                name: req.body.achievement[i],
+                name: req.body.achievement_name[i],
+                description: req.body.descriptionAch[i],
             })
 
             try {
@@ -62,7 +64,8 @@ const addAchievement = async (req, res, next) => {
 const editAchievement = (req,res, next) => {
 
     let achievement = {};
-    achievement.name = req.body.achievementName;
+    achievement.name = req.body.achievement_name;
+    achievement.description = req.body.descriptionAch;
 
     let query = {_id:req.params._id}
 
