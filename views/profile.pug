@@ -82,7 +82,7 @@ header#header.d-flex.flex-column.justify-content-center
 #hero.d-flex.flex-column.justify-content-center
     .intro
         if user1.backgroundPicID
-            img.background(src='http://localhost:3000/user/image/' + user1.backgroundPicID.filename alt='no_image')
+            img.background(src='https://theprofolio.herokuapp.com/user/image/' + user1.backgroundPicID.filename alt='no_image')
         if !user1.backgroundPicID
             img.background(src='/img/defaultBackground.jpg' alt='no_image')
         .container
@@ -117,7 +117,7 @@ header#header.d-flex.flex-column.justify-content-center
                         |  #{message.message}
             .nav-item.dropdown#positionRight
                 a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                    img#navbarProfilePic(src='http://localhost:3000/user/images/'+ user.profilePicID alt='no_image') 
+                    img#navbarProfilePic(src='https://theprofolio.herokuapp.com/user/images/'+ user.profilePicID alt='no_image')
                     | #{user.first_name} #{user.last_name}     
                 
                     i.fa.fa-caret-down
@@ -169,7 +169,7 @@ header#header.d-flex.flex-column.justify-content-center
                     br
                     .text-center
                         if user1.resumeID
-                            a.btn.btn-primary(href='http://localhost:3000/user/resume/'+user1.resumeID.filename+'?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
+                            a.btn.btn-primary(href='https://theprofolio.herokuapp.com/user/resume/'+user1.resumeID.filename+'?iframe=true&width=1000&height=1000' title= 'Resume' rel='prettyPhoto')
                                 i.fa.fa-download
                                 |  View Resume
 // Skills Section
@@ -199,7 +199,7 @@ header#header.d-flex.flex-column.justify-content-center
     .container
         .section-title.text-center.center
             h2 Portfolio
-            //embed(src='http://localhost:3000/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
+            //embed(src='https://theprofolio.herokuapp.com/user/document/'+user1.document[0].filename type='application/pdf' width='200' height='400')
             button.btn.btn-primary(type='button' data-toggle='modal' data-target='#editPortfolioModal')
                 | Edit Portfolio
             br
@@ -217,6 +217,8 @@ header#header.d-flex.flex-column.justify-content-center
                                     a.active(href='#portfolio' data-filter='.doc').hideVid Documents
                                 li
                                     a(href='#portfolio' data-filter='.vid').showVid Videos
+                                li
+                                    a(data-filter='.achievements').hideVid Achievements
 
         .row
             .portfolio-items
@@ -224,11 +226,11 @@ header#header.d-flex.flex-column.justify-content-center
                     .col-sm-6.col-md-3.col-lg-3.doc
                         .portfolio-item
                             .hover-bg
-                                a(href='http://localhost:3000/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
+                                a(href='https://theprofolio.herokuapp.com/user/document/'+doc.filename+'?iframe=true&width=1000&height=1000' title=doc.filename rel='prettyPhoto')
                                     .hover-text
                                         h4 #{doc.title}
                                         small #{doc.subHead}
-                                    embed(src='http://localhost:3000/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
+                                    embed(src='https://theprofolio.herokuapp.com/user/document/'+doc.filename + '#toolbar=0&navpanes=0&scrollbar=0' type='application/pdf' width='270' height='300')
                 .col-sm-6.col-md-3.col-lg-3.doc
                     .portfolio-item
                         .hover-bg
@@ -256,6 +258,17 @@ header#header.d-flex.flex-column.justify-content-center
                                     .hover-text
                                         h4 Add Video
                                     embed(src='/img/plus.png' width='255' height='250')
+
+            .row
+                .portfolio-items
+                    for achievement in user1.achievement
+                        .col-sm-6.col-md-3.col-lg-3.achievements
+                            h4 #{achievement.name}
+                            br
+                            h5 #{achievement.description}
+                    .col-sm-6.col-md-3.col-lg-3.achievements
+                        a.btn-primary(data-toggle='modal' data-target='#editAchievements') Edit Achievements
+
 
 // Resume Section
 #experience.text-center
@@ -404,6 +417,7 @@ script(type='text/javascript' src='/js/typewriter.js')
 script(type='text/javascript' src='/js/modalID.js')
 script(src='/js/experienceScript.js')
 script(src='/js/educationScript.js')
+script(src='/js/achievementScript.js')
 script(type='text/javascript' src='/js/navbar.js')
 script(src='/js/skillScript.js')
 
@@ -763,3 +777,29 @@ script(src='/js/skillScript.js')
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save Changes
+#editAchievements.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5.modal-title Edit Achievement
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                for achievement in user1.achievement
+                    h3 #{achievement.name}
+                    form(method='POST' action='/user/editAchievement/' + achievement._id)
+                        label(for='name'+achievement._id) Achievement Name
+                        input.form-control(id='achievement_name'+achievement._id name="achievement_name" type='text' autofocus='' required='isRequired' value=achievement.name)
+                        br
+                        label(for='role'+achievement._id) Description
+                        input.form-control.achievementDesc(id='descriptionAch'+achievement._id name="descriptionAch" type='text' autofocus='' required='isRequired' value=achievement.description)
+                        br
+                        .container
+                            .row
+                                .col-md-6
+                                    button.btn.btn-secondary.edit-achievement(href='/user/profile#portfolio' achievement-id=achievement._id data-dismiss='modal') Save changes
+                                    a.btn.btn-secondary.delete-achievement(href='/user/profile#portfolio' achievement-id=achievement._id data-dismiss='modal') Delete Achievement
+                        br
+                        hr.wide
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close

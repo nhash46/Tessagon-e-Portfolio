@@ -25,8 +25,8 @@ const authCheck = (req, res, next) => {
 // function to add user
 const addUser = async (req, res, next) => {
 
-    var usernameTaken = await User.exists({username: req.body.username});
-    var emailTaken = await User.exists({email: req.body.email});
+    let usernameTaken = await User.exists({username: req.body.username});
+    let emailTaken = await User.exists({email: req.body.email});
 
     if( usernameTaken || emailTaken ){
         // username is taken
@@ -50,7 +50,7 @@ const addUser = async (req, res, next) => {
             //res.render("signup")
         }
     } else {
-        var newUser = new User({
+        let newUser = new User({
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
@@ -374,6 +374,39 @@ const logOutUser = (req, res) => {
     res.redirect('back');
 };
 
+
+const userID = async (req,res) => {
+    
+
+        let exists = await User.exists({username: req.params.username});
+        // Ensures that the user exists
+        if (!exists) {
+            res.render('/', {
+                message:"Invalid user profile"
+            });
+        } else {
+            // Finds the relevant user within the database
+            User.findOne({username:req.params.username}, async function (err, user) {
+                return res.render('index', {
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    bio: user.bio,
+                    city: user.city,
+                    state: user.state,
+                    phone: user.phone,
+                    education: user.education,
+                    experience: user.experience,
+                    links: user.links,
+                    youtubeLinks: user.youtubeLinks,
+                    documents: user.documents,
+                    educationStartDate: user.educationStartDate,
+                    degree: user.education
+
+                })
+            });
+        }
+    };
+
 // function that renders the user profile
 const getUserProfile = async (req, res) => {
     User.findById(req.user._id)
@@ -385,6 +418,7 @@ const getUserProfile = async (req, res) => {
         .populate('resumeID')
         .populate('youtubeLinks')
         .populate('skills')
+        .populate('achievement')
         .exec((err,user1) => {
         //console.log(user1);
         res.render('profile', {
@@ -403,9 +437,9 @@ const getOtherUserProfile = async (req, res) => {
         .populate('resumeID')
         .populate('youtubeLinks')
         .populate('skills')
+        .populate('achievement')
         .exec((err, user2) => {
             if(user2){
-                //console.log(user2);
                 res.render('index', {
                     user2: user2
                 });

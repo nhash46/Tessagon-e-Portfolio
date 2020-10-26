@@ -12,6 +12,7 @@ const educationController = require("../controllers/educationController.js");
 const experienceController = require("../controllers/experienceController.js");
 const uploadController = require("../controllers/uploadController");
 const skillController = require("../controllers/skillController");
+const achievementController = require("../controllers/achievementController.js");
 
 const db = require("../models");
 const blogController = require("../controllers/blogController.js");
@@ -84,6 +85,7 @@ userRouter.post("/populateInfo",
     userController.addTypewriterWords,
     experienceController.addExperience, 
     educationController.addEducation,
+    achievementController.addAchievement,
     skillController.addSkill,
     userController.deleteMessage,
     userController.redirectProfile
@@ -127,6 +129,9 @@ userRouter.post("/editSkill/:_id", skillController.editSkill, userController.red
 
 // Edit experience
 userRouter.post("/editExperience/:_id", experienceController.editExperience, userController.redirectExperience);
+
+//editAchivement 
+userRouter.post("/editAchievement/:_id", achievementController.editAchievement);
 
 // log in form Home
 userRouter.get("/login", userController.logInPage);
