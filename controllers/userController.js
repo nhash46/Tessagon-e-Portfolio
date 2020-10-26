@@ -408,6 +408,7 @@ const getUserProfile = async (req, res) => {
         .populate('resumeID')
         .populate('youtubeLinks')
         .populate('skills')
+        .populate('achievement')
         .exec((err,user1) => {
         //console.log(user1);
         res.render('profile', {
@@ -426,6 +427,7 @@ const getOtherUserProfile = async (req, res) => {
         .populate('resumeID')
         .populate('youtubeLinks')
         .populate('skills')
+        .populate('achievement')
         .exec((err, user2) => {
             if(user2){
                 res.render('index', {
