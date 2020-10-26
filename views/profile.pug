@@ -219,6 +219,8 @@ header#header.d-flex.flex-column.justify-content-center
                                     a.active(href='#portfolio' data-filter='.doc').hideVid Documents
                                 li
                                     a(href='#portfolio' data-filter='.vid').showVid Videos
+                                li
+                                    a(data-filter='.achievements').hideVid Achievements
 
         .row
             .portfolio-items
@@ -258,6 +260,14 @@ header#header.d-flex.flex-column.justify-content-center
                                     .hover-text
                                         h4 Add Video
                                     embed(src='/img/plus.png' width='255' height='250')
+
+            .row
+                .portfolio-items.achievements
+                    for achievement in user1.achievement
+                        #{achievement.name}
+                        br
+                        #{achievement.description}
+
 
 // Resume Section
 #experience.text-center

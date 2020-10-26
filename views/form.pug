@@ -112,7 +112,6 @@ block content
                                         button.btn.btn-primary(data-role='add')
                                             span.glyphicon.glyphicon-plus
                             .tab
-                               
                                 .col-md-12
                                     br
                                     h5.card-title.text-center Skills
@@ -129,10 +128,24 @@ block content
                                     br
                                     h5.card-title.text-center Typewriter
                                     p Words to describe yourself!
-                                    div(data-role='dynamic-fields')#moved
+                                    div(data-role='dynamic-fields')
                                         .form-inline
                                             .form-group.col-md-12
                                                 input.round.form-control(id='typewriter' name= "typewriter" type='text' placeholder='Word' autofocus='' required='isRequired' style='width:18vw')
+                                                button.btn.btn-danger(data-role='remove')
+                                                    span.glyphicon.glyphicon-remove
+                                                button.btn.btn-primary(data-role='add')
+                                                    span.glyphicon.glyphicon-plus
+
+                                .col-md-12
+                                    br
+                                    h5.card-title.text-center Achievements
+                                    div(data-role='dynamic-fields')
+                                        .form-inline
+                                            .form-group.col-md-12
+                                                input.round.form-control(id='achievements' name='achievement_name' type='text' placeholder='achievement' autofocus='' required='isRequired' style='width:40vw')
+                                            .form-group.col-md-12
+                                                input.desc.round.form-control(id='descriptionAch' name="descriptionAch" type='text' placeholder='Description' autofocus='' maxlength='500' required='isRequired' style='width:40vw')
                                                 button.btn.btn-danger(data-role='remove')
                                                     span.glyphicon.glyphicon-remove
                                                 button.btn.btn-primary(data-role='add')
