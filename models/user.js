@@ -34,7 +34,9 @@ const userSchema = new Schema({
     skills: [ {type: Schema.Types.ObjectId, ref: "Skill"} ],
     typewriterWords: [ String ],
     resetPasswordToken: String, 
-    resetPasswordExpires: Date
+    resetPasswordExpires: Date,
+    isBanned: {type: String, default: false},
+    isAdmin: {type: Boolean, default: false}
 });
 
 userSchema.plugin(findOrCreate);
