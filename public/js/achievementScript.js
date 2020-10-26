@@ -6,7 +6,7 @@ $(document).ready(function(){
         var achievement_name = $("#achievement_name"+_id).val();
         var descriptionAch= $("#descriptionAch"+_id).val();
 
-        var dataString = 'achievement_name'=+achievement_name+'&descriptionAch='+descriptionAch;
+        var dataString = 'achievement_name='+achievement_name+'&descriptionAch='+descriptionAch;
         $.ajax({
             url: '/user/editAchievement/'+_id,
             type: 'POST',
