@@ -11221,3 +11221,9 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+#small {
+  margin-top: 4vh;
+  width: 100%;
+  height: auto;
+}
