@@ -97,6 +97,9 @@ userRouter.post("/addExperience", experienceController.addExperience, userContro
 // Adds new experience object to user
 userRouter.post("/addEducation", educationController.addEducation, userController.redirectEducation);
 
+// Adds new achievement object to user
+userRouter.post("/addAchievement", achievementController.addAchievement, userController.redirectPortfolio);
+
 // Edit info nav bar
 userRouter.post("/editNavInfo", userController.editNavInfo);
 
@@ -128,7 +131,7 @@ userRouter.post("/editEducation/:_id", educationController.editEducation, userCo
 userRouter.post("/editExperience/:_id", experienceController.editExperience, userController.redirectExperience);
 
 //editAchivement 
-userRouter.post("/editAchievement/:_id", achievementController.editAchievement);
+userRouter.post("/editAchievement/:_id", achievementController.editAchievement, userController.redirectPortfolio);
 
 // log in form Home
 userRouter.get("/login", userController.logInPage);
