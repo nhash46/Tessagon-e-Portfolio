@@ -35,8 +35,9 @@ const userSchema = new Schema({
     typewriterWords: [ String ],
     resetPasswordToken: String, 
     resetPasswordExpires: Date,
-    isBanned: {type: String, default: false},
+    isBanned: {type: Boolean, default: false},
     isAdmin: {type: Boolean, default: false},
+    isReported: {type: Boolean, default: false},
     achievement: [ {type: Schema.Types.ObjectId, ref: "Achievement"} ]
 });
 

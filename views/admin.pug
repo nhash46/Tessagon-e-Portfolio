@@ -46,11 +46,11 @@ head
                 button#sidebarToggleTop.btn.btn-link.d-md-none.rounded-circle.mr-3
                     i.fa.fa-bars
                 // Topbar Search
-                form.d-none.d-sm-inline-block.form-inline.mr-auto.ml-md-3.my-2.my-md-0.mw-100.navbar-search
+                form.d-none.d-sm-inline-block.form-inline.mr-auto.ml-md-3.my-2.my-md-0.mw-100.navbar-search(action="/admin" method="GET")
                     .input-group
-                        input.form-control.bg-light.border-0.small(type='text' placeholder='Search for...' aria-label='Search' aria-describedby='basic-addon2')
+                        input.form-control.bg-light.border-0.small(type='text' name='search' placeholder='Search for...' aria-label='Search' aria-describedby='basic-addon2')
                         .input-group-append
-                            button.btn.btn-primary(type='button')
+                            button.btn.btn-primary(type='submit')
                                 i.fas.fa-search.fa-sm
                 // Topbar Navbar
                 ul.navbar-nav.ml-auto
@@ -99,7 +99,7 @@ head
                         .card.shadow.mb-4
                             // Card Header - Dropdown
                             .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-                                h6.m-0.font-weight-bold.text-primary Users
+                                h6.m-0.font-weight-bold.text-primary #{title}
                                 .dropdown.no-arrow
                                     a#dropdownMenuLink.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                                         i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
@@ -112,10 +112,21 @@ head
                             // Card Body
                             .card-body
                                 .row
-                                    .col-xl-8.col-lg-7
-                                        h5 username
-                                    .col-xl-4.col-lg-5
-                                        h5 status
+                                    if noMatch
+                                        h5 user "#{searchQuery}" was not found
+                                    if !noMatch
+                                        each user, i in users
+                                            .col-xl-8.col-lg-7
+                                                h5 #{user.username}
+                                            .col-xl-4.col-lg-5
+                                                a.btn.btn-primary(href='#') VIEW REPORTS
+                                            .col-xl-4.col-lg-5
+                                                if user.isBanned
+                                                    a.btn.btn-primary(href='#') UNBAN
+                                                else
+                                                    a.btn.btn-primary(href='#') BAN
+   
+                                    
 
             // /.container-fluid
         // End of Main Content

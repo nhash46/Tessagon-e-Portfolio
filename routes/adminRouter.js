@@ -2,12 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const adminRouter = express.Router();
 const passport = require('passport');
-//const adminController = require("../controllers/adminController.js");
+const adminController = require("../controllers/adminController.js");
 const userController = require("../controllers/userController.js");
 
-adminRouter.get("/", userController.authCheck, (req, res) => {
-    res.render('admin');
-});
+adminRouter.get("/", userController.authCheck, adminController.searchAllUsers);
+
+adminRouter.get("/reported", userController.authCheck, adminController.searchReportedUsers);
+
+adminRouter.get("/banned", userController.authCheck, adminController.searchBannedUsers);
 
 adminRouter.post('/login', function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
