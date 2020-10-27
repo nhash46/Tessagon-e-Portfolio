@@ -1,6 +1,9 @@
 .body {
 	font-family: 'Open Sans', sans-serif;
 }
+.p {
+	font-weight: bolder;
+}
 #commentProfilePic {
     border-radius: 20vw;
     border: 1px solid ;
@@ -250,4 +253,13 @@ body {
 .topModal {
 	z-index: 9000;
 	margin-top: 15vh;
+}
+
+#floatEdit {
+	margin-right: 0;
+	margin-left: auto;
+	display: block;
+}
+#floatEditShadow :hover {
+	background: lightgrey;
 }
