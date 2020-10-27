@@ -152,7 +152,7 @@ header#header.d-flex.flex-column.justify-content-center
             .col-md-12.text-center
                 if user1.profilePicID
                     .circular
-                        img.img-responsive(src='http://localhost:3000/user/image/'+ user1.profilePicID.filename)
+                        img.img-responsive(src='https://theprofolio.herokuapp.com/user/image/'+ user1.profilePicID.filename)
                 if !user1.profilePicID
                     .circular
                         img.img-responsive(src='/img/defaultProfile.png' alt='No Profile Picture')
