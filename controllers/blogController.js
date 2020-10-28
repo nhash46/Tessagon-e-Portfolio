@@ -146,7 +146,8 @@ const showBlogs = (req, res) => {
                     if(err){
                         console.log(err);
                     } else {
-                        res.render("blog-posts",
+                        if(author){
+                            res.render("blog-posts",
                             {
                                 title: 'Blog',
                                 searchQuery: req.query.search,
@@ -156,6 +157,10 @@ const showBlogs = (req, res) => {
                                 authorFullName: author.first_name + ' ' + author.last_name,
                                 author: author
                             });
+                        } else {
+                            res.status(404);
+                            res.render('error');
+                        }
                     }
                 });
             }
