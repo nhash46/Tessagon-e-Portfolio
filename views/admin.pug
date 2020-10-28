@@ -91,7 +91,7 @@ head
 
 
             // Begin Page Content
-            .container-fluid
+            .container-fluid#size
                 // Content Row
                 .row
                     // Area Chart
@@ -110,8 +110,8 @@ head
                                         .dropdown-divider
                                         a.dropdown-item(href='#') Banned
                             // Card Body
-                            .card-body.overflow-auto
-                                .row
+                            .card-body
+                                .row#size
                                     if noMatch
                                         h5 user "#{searchQuery}" was not found
                                     if !noMatch

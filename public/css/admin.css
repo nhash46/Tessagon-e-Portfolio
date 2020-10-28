@@ -11228,6 +11228,44 @@ body.sidebar-toggled footer.sticky-footer {
   height: auto;
 }
 
-.card-body {
-  height: 70vh;
+#size {
+  height: 60vh;
+}
+
+table {
+  table-layout: fixed;
+}
+
+tbody , thead {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+tr {
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+th,td {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+}
+
+tbody {
+  height: 55vh;
+  position: absolute;
+  overflow-y: auto;
+}
+
+thead {
+  padding-right: 20px;
 }
