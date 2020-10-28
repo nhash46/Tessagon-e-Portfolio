@@ -213,6 +213,32 @@ const uploadVideo = async (req,res,next) => {
 
 };
 
+const deleteVideo = (req, res) => {
+    // check if user is logged in
+    if(!req.user){
+        console.log('user not logged in!');
+        res.status(500).send();
+    }
+
+    let query = {_id:req.params._id}
+
+    // check if experience object belongs to user
+    Link.findById(query, function(err, video){
+        if(video.user.toString() != req.user._id.toString()){
+            res.status(500).send();
+        }
+        else {
+            Link.remove(query, function(err){
+                if(err){
+                    console.log(err);
+                }
+                res.send('Success')
+
+            });
+        }
+    });
+}
+
 const editNavInfo = (req,res) => {
 
     let links = {
@@ -690,6 +716,7 @@ module.exports = {
     redirectExperience,
     redirectProfile,
     uploadVideo,
+    deleteVideo,
     redirectPortfolio,
     deleteMessage,
     changePassword,
