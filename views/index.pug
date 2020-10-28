@@ -193,11 +193,11 @@ header#header.d-flex.flex-column.justify-content-center
                     .col-sm-6.col-md-3.col-lg-3.vid
                         .portfolio-item
                             .hover-bg
-                                a(href=vid.url title='Project description' rel='prettyPhoto')
+                                a(href=vid.url title=vid.subheading rel='prettyPhoto')
                                     .hover-text
                                         h4 #{vid.title}
                                         small #{vid.subheading}
-                                    img.img-responsive(src=vid.thumbnail alt='Project Title')
+                                    img.img-responsive(src=vid.thumbnail alt=vid.title)
                                     //iframe(width='420' height='345' src=vid.url)
 
         .row
