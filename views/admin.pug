@@ -12,6 +12,11 @@ head
     // Custom styles for this template
     link(rel='stylesheet' type='text/css' href='/css/admin.css')
 
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js' integrity='sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN' crossorigin='anonymous')
+    script(src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous")
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js' integrity='sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV' crossorigin='anonymous')
+
+
 
 // Page Wrapper
 #wrapper
@@ -58,19 +63,11 @@ head
                     li.nav-item.dropdown.no-arrow.d-sm-none
                         a#searchDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                             i.fas.fa-search.fa-fw
-                        // Dropdown - Messages
-                        .dropdown-menu.dropdown-menu-right.p-3.shadow.animated--grow-in(aria-labelledby='searchDropdown')
-                            form.form-inline.mr-auto.w-100.navbar-search
-                                .input-group
-                                    input.form-control.bg-light.border-0.small(type='text' placeholder='Search for...' aria-label='Search' aria-describedby='basic-addon2')
-                                    .input-group-append
-                                        button.btn.btn-primary(type='button')
-                                            i.fas.fa-search.fa-sm
                     // Nav Item - User Information
                     li.nav-item.dropdown.no-arrow
                         a#userDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                             span.mr-2.d-none.d-lg-inline.text-gray-600.small Admin
-                            img.img-profile.rounded-circle(src='https://source.unsplash.com/QAB-WJcbgJk/60x60')
+                            img.img-profile.rounded-circle(src='/img/')
                         // Dropdown - User Information
                         .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby='userDropdown')
                             a.dropdown-item(href='#')
@@ -91,7 +88,7 @@ head
 
 
             // Begin Page Content
-            .container-fluid#size
+            .container-fluid
                 // Content Row
                 .row
                     // Area Chart
@@ -104,7 +101,7 @@ head
                                     a#dropdownMenuLink.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                                         i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
                                     .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in(aria-labelledby='dropdownMenuLink')
-                                        .dropdown-header Dropdown Header:
+                                        .dropdown-header View Header:
                                         a.dropdown-item(href='#') All
                                         a.dropdown-item(href='#') Reported
                                         .dropdown-divider
@@ -146,8 +143,8 @@ head
                                                     a.btn.btn-primary(href='#') BAN
 
 
-   
-                                    
+
+
 
             // /.container-fluid
         // End of Main Content
