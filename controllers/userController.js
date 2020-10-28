@@ -184,7 +184,7 @@ const uploadVideo = async (req,res,next) => {
     var id = (match&&match[7].length===11)? match[7]: false;
 
     let newLink = new Link({
-        url: req.body.video,
+        url: "http://www.youtube.com/embed/" + id,
         thumbnail: 'https://img.youtube.com/vi/'+id+'/hqdefault.jpg',
         title: req.body.title,
         subheading: req.body.subheading,
