@@ -117,7 +117,8 @@ header#header.d-flex.flex-column.justify-content-center
                         |  #{message.message}
             .nav-item.dropdown#positionRight
                 a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                    img#navbarProfilePic(src='https://theprofolio.herokuapp.com/user/images/'+ user.profilePicID alt='no_image')
+                    .crop
+                        img.img-responsive(src='https://theprofolio.herokuapp.com/user/images/'+ user.profilePicID alt='no_image')
                     | #{user.first_name} #{user.last_name}     
                 
                     i.fa.fa-caret-down
