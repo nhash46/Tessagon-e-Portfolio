@@ -37,7 +37,7 @@ block content
                 .card.my-4.cardStyle
                    h5.card-header#centre #{authorFullName}
                    if author.profilePicID
-                       img.blogProfilePic(src='http://localhost:3000/user/images/'+ author.profilePicID alt='')
+                       img.blogProfilePic(src='https://theprofolio.herokuapp.com/user/images/'+ author.profilePicID alt='')
                    else
                        img.blogProfilePic(src='/img/defaultProfile.png')
                    h5.card-header Search

@@ -48,9 +48,9 @@ block content
             #indentComments
                 each c in blog.comments
                     .media#borderComment
-                        img#commentProfilePic(src='http://localhost:3000/user/images/'+ c.profilePicID alt='no_image')     
+                        img#commentProfilePic(src='https://theprofolio.herokuapp.com/user/images/'+ c.profilePicID alt='no_image')
                         .media-body
-                            a(href='http://localhost:3000/user/profile/' + c.author)#commentUsername #{c.author}  
+                            a(href='https://theprofolio.herokuapp.com/user/profile/' + c.author)#commentUsername #{c.author}
                             p#comment-top #{c.content}   
                             .panel-footer#comment-bottom
                                 p #[a(href = '/user/profile/'+c.author) #[i.glyphicon.glyphicon-user] #{' ' } ]
