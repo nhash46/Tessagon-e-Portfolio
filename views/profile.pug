@@ -258,11 +258,6 @@ header#header.d-flex.flex-column.justify-content-center
                                     .hover-text
                                         h4 Add Video
                                     embed(src='/img/plus.png' width='255' height='250')
-            .column   
-                .section-title.center
-                    a.btn.btn-primary(data-toggle='modal' data-target='#editAchievements') Edit Achievements
-                    a.btn.btn-primary.padButton(type='button' data-toggle='modal' data-target='#addAchievement')
-                        | Add Achievement
             .row
                 .portfolio-items
                     for achievement in user1.achievement
@@ -270,6 +265,12 @@ header#header.d-flex.flex-column.justify-content-center
                             h4 #{achievement.name}
                             br
                             h5 #{achievement.description}
+                    .col-sm-6.col-md-3.col-lg-3.achievements
+                        .column
+                            .section-title.center
+                                a.btn.btn-primary(data-toggle='modal' data-target='#editAchievements') Edit Achievements
+                                a.btn.btn-primary.padButton(type='button' data-toggle='modal' data-target='#addAchievement')
+                                    | Add Achievement
                     
 
 
@@ -423,6 +424,7 @@ script(src='/js/educationScript.js')
 script(src='/js/achievementScript.js')
 script(type='text/javascript' src='/js/navbar.js')
 script(src='/js/skillScript.js')
+script(src='/js/deleteVideo.js')
 
 
 
@@ -463,7 +465,7 @@ script(src='/js/skillScript.js')
                 h2 Videos
                 for vid in user1.youtubeLinks
                     h3 #{vid.title} - #{vid.subheading}
-                    //button.btn.btn-secondary(type ='button', video-id = video.url._id) Remove
+                    button.btn.btn-secondary.delete-video(type ='button', video-id = vid._id data-dismiss='modal') Remove
                     hr
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close

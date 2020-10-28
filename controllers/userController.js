@@ -184,7 +184,7 @@ const uploadVideo = async (req,res,next) => {
     var id = (match&&match[7].length===11)? match[7]: false;
 
     let newLink = new Link({
-        url: "http://www.youtube.com/embed/" + id,
+        url: "https://www.youtube.com/embed/" + id + "?iframe=true",
         thumbnail: 'https://img.youtube.com/vi/'+id+'/hqdefault.jpg',
         title: req.body.title,
         subheading: req.body.subheading,
@@ -212,6 +212,32 @@ const uploadVideo = async (req,res,next) => {
     });
 
 };
+
+const deleteVideo = (req, res) => {
+    // check if user is logged in
+    if(!req.user){
+        console.log('user not logged in!');
+        res.status(500).send();
+    }
+
+    let query = {_id:req.params._id}
+
+    // check if experience object belongs to user
+    Link.findById(query, function(err, video){
+        if(video.user.toString() != req.user._id.toString()){
+            res.status(500).send();
+        }
+        else {
+            Link.remove(query, function(err){
+                if(err){
+                    console.log(err);
+                }
+                res.send('Success')
+
+            });
+        }
+    });
+}
 
 const editNavInfo = (req,res) => {
 
@@ -690,6 +716,7 @@ module.exports = {
     redirectExperience,
     redirectProfile,
     uploadVideo,
+    deleteVideo,
     redirectPortfolio,
     deleteMessage,
     changePassword,
