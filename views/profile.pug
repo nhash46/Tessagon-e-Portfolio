@@ -424,6 +424,7 @@ script(src='/js/educationScript.js')
 script(src='/js/achievementScript.js')
 script(type='text/javascript' src='/js/navbar.js')
 script(src='/js/skillScript.js')
+script(src='/js/deleteVideo.js')
 
 
 
@@ -464,7 +465,7 @@ script(src='/js/skillScript.js')
                 h2 Videos
                 for vid in user1.youtubeLinks
                     h3 #{vid.title} - #{vid.subheading}
-                    //button.btn.btn-secondary(type ='button', video-id = video.url._id) Remove
+                    button.btn.btn-secondary.delete-video(type ='button', video-id = vid._id data-dismiss='modal') Remove
                     hr
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close

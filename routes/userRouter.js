@@ -246,4 +246,6 @@ userRouter.post("/addSkills", skillController.addSkill, userController.redirectS
 // add typewriter
 userRouter.post("/addTypewriterWords", userController.addTypewriterWords);
 
+userRouter.delete("/video/:_id", userController.deleteVideo);
+
 module.exports = userRouter;
