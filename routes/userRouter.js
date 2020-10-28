@@ -97,6 +97,9 @@ userRouter.post("/addExperience", experienceController.addExperience, userContro
 // Adds new experience object to user
 userRouter.post("/addEducation", educationController.addEducation, userController.redirectEducation);
 
+// Adds new achievement object to user
+userRouter.post("/addAchievement", achievementController.addAchievement, userController.redirectPortfolio);
+
 // Edit info nav bar
 userRouter.post("/editNavInfo", userController.editNavInfo);
 
@@ -131,7 +134,7 @@ userRouter.post("/editSkill/:_id", skillController.editSkill, userController.red
 userRouter.post("/editExperience/:_id", experienceController.editExperience, userController.redirectExperience);
 
 //editAchivement 
-userRouter.post("/editAchievement/:_id", achievementController.editAchievement);
+userRouter.post("/editAchievement/:_id", achievementController.editAchievement, userController.redirectPortfolio);
 
 // log in form Home
 userRouter.get("/login", userController.logInPage);
@@ -216,6 +219,10 @@ userRouter.delete('/education/:_id', educationController.deleteEducation);
 userRouter.delete('/skill/:_id', skillController.deleteSkill);
 
 // change password form - NOT IN USE
+// delete achievement object
+userRouter.delete('/achievement/:_id',achievementController.deleteAchievement);
+
+// change password
 userRouter.get('/change-password', userController.getChangePassword);
 
 // change password

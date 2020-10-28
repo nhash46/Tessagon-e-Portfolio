@@ -18,7 +18,7 @@ head
     link(rel='stylesheet' type='text/css' href='/css/bootstrap.css')
     link(rel='stylesheet' type='text/css' href='/fonts/font-awesome/css/font-awesome.css')
     // W3 
-    link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
+    //link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
 
 
     //
@@ -258,7 +258,11 @@ header#header.d-flex.flex-column.justify-content-center
                                     .hover-text
                                         h4 Add Video
                                     embed(src='/img/plus.png' width='255' height='250')
-
+            .column   
+                .section-title.center
+                    a.btn.btn-primary(data-toggle='modal' data-target='#editAchievements') Edit Achievements
+                    a.btn.btn-primary.padButton(type='button' data-toggle='modal' data-target='#addAchievement')
+                        | Add Achievement
             .row
                 .portfolio-items
                     for achievement in user1.achievement
@@ -266,8 +270,7 @@ header#header.d-flex.flex-column.justify-content-center
                             h4 #{achievement.name}
                             br
                             h5 #{achievement.description}
-                    .col-sm-6.col-md-3.col-lg-3.achievements
-                        a.btn-primary(data-toggle='modal' data-target='#editAchievements') Edit Achievements
+                    
 
 
 // Resume Section
@@ -564,14 +567,14 @@ script(src='/js/skillScript.js')
                     button.close(type='button' data-dismiss='modal' aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
-                    input#addCompany.form-control(name="company" type='text' autofocus='' required='isRequired')
                     label(for='addExperience') Company Name
+                    input#addCompany.form-control(name="company" type='text' autofocus='' required='isRequired')
                     br
-                    input#addRole.form-control(name="role" type='text' autofocus='' required='isRequired')
                     label(for='addRole') Role Name
+                    input#addRole.form-control(name="role" type='text' autofocus='' required='isRequired')
                     br
-                    input#addDescription.form-control(name="descriptionExp" type='text' autofocus='' required='isRequired')
                     label(for='addDescription') Short description of your role!
+                    textarea#addDescription.form-control(name="descriptionExp" type='text' autofocus='' required='isRequired')
                     br
                     .col-md-3
                         label(for='expStartDate') Start date:
@@ -605,7 +608,7 @@ script(src='/js/skillScript.js')
                         input.form-control(id='role'+i._id name="role" type='text' autofocus='' required='isRequired' value=i.role)
                         br
                         label(for='expDescription'+i._id) Short description of your role!
-                        input.form-control(id='descriptionExp'+i._id name="descriptionExp" type='text' autofocus='' required='isRequired' value=i.descriptionExp)
+                        textarea.form-control(id='descriptionExp'+i._id name="descriptionExp" type='text' autofocus='' required='isRequired') #{i.descriptionExp}
                         br
                         .container
                             .row
@@ -677,7 +680,7 @@ script(src='/js/skillScript.js')
                         input.form-control(id='degree'+i._id name="degree" type='text' autofocus='' required='isRequired' value=i.degree)
                         br
                         label(for='eduDescription'+i._id) Short description about your degree!
-                        input.form-control(id='descriptionEdu'+i._id name="descriptionEdu" type='text' autofocus='' required='isRequired' value=i.description)
+                        textarea.form-control(id='descriptionEdu'+i._id name="descriptionEdu" type='text' autofocus='' required='isRequired') #{i.descriptionEdu}
                         br
                         .container
                             .row
@@ -798,3 +801,24 @@ script(src='/js/skillScript.js')
                         hr.wide
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+#addAchievement.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addExperiencelabel' aria-hidden='true')
+    form(method='POST' action='/user/addAchievement')
+        .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h5#addExperiencelabel.modal-title Add new achievement
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    input#addAchievement.form-control(name="achievement_name" type='text' autofocus='' required='isRequired')
+                    label(for='addExperience') Achievement Name
+                    br
+                    input#addDescription.form-control(name="descriptionAch" type='text' autofocus='' required='isRequired')
+                    label(for='addDescription') Short description of your achievement!
+                br
+                br
+                br
+                br
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-secondary.add-achievement(type='submit') Add
