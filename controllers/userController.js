@@ -312,6 +312,11 @@ const redirectEducation = (req, res) => {
     res.redirect('/user/profile#education');
 }
 
+// redirects to achievement section
+const redirectAchievement= (req, res) => {
+    res.redirect('/user/profile#portfolio');
+}
+
 // redirects to experience section
 const redirectExperience = (req, res) => {
     res.redirect('/user/profile#experience');
@@ -694,5 +699,6 @@ module.exports = {
     sendResetPasswordEmail,
     getResetPasswordForm,
     resetPassword,
-    redirectSkills
+    redirectSkills,
+    redirectAchievement
 };

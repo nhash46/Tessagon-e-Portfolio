@@ -263,3 +263,9 @@ body {
 #floatEditShadow :hover {
 	background: lightgrey;
 }
+
+#commentUsername {
+	color: black;
+	font-size: 1em;
+	font-weight: bolder;
+}
