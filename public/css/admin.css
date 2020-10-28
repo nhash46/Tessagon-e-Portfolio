@@ -11227,3 +11227,7 @@ body.sidebar-toggled footer.sticky-footer {
   width: 100%;
   height: auto;
 }
+
+.card-body {
+  height: 70vh;
+}

@@ -69,7 +69,7 @@ head
                     // Nav Item - User Information
                     li.nav-item.dropdown.no-arrow
                         a#userDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                            span.mr-2.d-none.d-lg-inline.text-gray-600.small Valerie Luna
+                            span.mr-2.d-none.d-lg-inline.text-gray-600.small Admin
                             img.img-profile.rounded-circle(src='https://source.unsplash.com/QAB-WJcbgJk/60x60')
                         // Dropdown - User Information
                         .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby='userDropdown')
@@ -110,21 +110,42 @@ head
                                         .dropdown-divider
                                         a.dropdown-item(href='#') Banned
                             // Card Body
-                            .card-body
+                            .card-body.overflow-auto
                                 .row
                                     if noMatch
                                         h5 user "#{searchQuery}" was not found
                                     if !noMatch
-                                        each user, i in users
-                                            .col-xl-8.col-lg-7
+                                        table.table
+                                            thead
+                                                tr
+                                                    th(scope='col') Name
+                                                    th(scope='col')
+                                                    th(scope='col')
+                                            tbody
+                                                each user, i in users
+                                                    tr
+                                                        td #{user.username}
+                                                        if user.isBanned
+                                                            td
+                                                                a(href='#') Unban
+                                                        else
+                                                            td
+                                                                a(href='#') Ban
+                                                        td
+                                                            a(href='#') View Reports
+
+
+                                            //.col-xl-8.col-lg-7
                                                 h5 #{user.username}
-                                            .col-xl-4.col-lg-5
+                                            //.col-xl-4.col-lg-5
                                                 a.btn.btn-primary(href='#') VIEW REPORTS
-                                            .col-xl-4.col-lg-5
+                                            //.col-xl-4.col-lg-5
                                                 if user.isBanned
                                                     a.btn.btn-primary(href='#') UNBAN
                                                 else
                                                     a.btn.btn-primary(href='#') BAN
+
+
    
                                     
 
