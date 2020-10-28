@@ -14,7 +14,7 @@ https://github.com/nhash46/Tessagon-e-Portfolio/wiki/Deployment-Guideline
 
 ## Development
 
-1. Navigate to the server directory with ```cd server```
+1. Navigate to the root directory.
 2. Execute ```npm run dev``` to start the Express server in development mode allowing instant refreshes. 
 3. The Express server listens on port 3000. Any changes in the code will be displayed after a page refresh.
 
