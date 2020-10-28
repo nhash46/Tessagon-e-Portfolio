@@ -1,5 +1,7 @@
 ![alt text](https://github.com/nhash46/Tessagon-e-Portfolio/blob/master/documentation/logo.png?raw=true)
 
+<p align="center">An artifact registry for IT Project (COMP30022).</p>
+
 ## Stack
 
 ProFolio is built using a Pug/CSS/JavaScript frontend served by a NodeJS backend running Express and connected to a MongoDB database.
