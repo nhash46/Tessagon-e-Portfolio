@@ -7,7 +7,7 @@ const Grid = require('gridfs-stream');
 CONNECTION_STRING = "mongodb+srv://nhash:<password>@mylibraryapp-n8rlv.mongodb.net/eportfolio?retryWrites=true&w=majority";
 MONGO_URL = CONNECTION_STRING.replace("<password>", process.env.MONGO_PASSWORD);
 
-console.log(MONGO_URL);
+console.log("mongodb+srv://nhash:<password>@mylibraryapp-n8rlv.mongodb.net/eportfolio?retryWrites=true&w=majority");
 
 function connect() {
   return new Promise((resolve, reject) => {

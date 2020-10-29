@@ -29,6 +29,8 @@ jobs:
     - run: npm test
       env:
         CI: true
+        MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+        GMAIL_PW: ${{ secrets.GMAIL_PW }}
 
     - name: Add remote origin
       run: |
