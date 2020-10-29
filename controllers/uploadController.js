@@ -17,7 +17,7 @@ mongoose.connection.once("open", async () => {
         bucketName: 'uploads'
     });
     //gfs.collection('uploads');
-    console.log("The gfs object" + gfs);
+    //console.log("The gfs object" + gfs);
 });
 
 const storage = new GridFsStorage({
