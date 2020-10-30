@@ -101,11 +101,11 @@ head
                                     a#dropdownMenuLink.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                                         i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
                                     .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in(aria-labelledby='dropdownMenuLink')
-                                        .dropdown-header View Header:
-                                        a.dropdown-item(href='#') All
-                                        a.dropdown-item(href='#') Reported
+                                        .dropdown-header View Users:
+                                        a.dropdown-item(href='/admin') All
                                         .dropdown-divider
-                                        a.dropdown-item(href='#') Banned
+                                        a.dropdown-item(href='/admin/reported') Reported
+                                        a.dropdown-item(href='/admin/banned') Banned
                             // Card Body
                             .card-body
                                 .row#size
@@ -124,10 +124,10 @@ head
                                                         td #{user.username}
                                                         if user.isBanned
                                                             td
-                                                                a(href='#') Unban
+                                                                a.unban-user(href='#' user-id=user._id) Unban
                                                         else
                                                             td
-                                                                a(href='#') Ban
+                                                                a.ban-user(href='#' user-id=user._id) Ban
                                                         td
                                                             a(href='#') View Reports
 
@@ -185,4 +185,6 @@ script(type='text/javascript' src='/js/admin/chart.js/Chart.min.js')
 // Page level custom scripts
 script(type='text/javascript' src='/js/admin/chart-area-demo.js')
 script(type='text/javascript' src='/js/admin/chart-pie-demo.js')
+
+script(src='/js/admin/adminScript.js')
 

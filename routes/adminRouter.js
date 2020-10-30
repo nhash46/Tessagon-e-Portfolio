@@ -30,4 +30,8 @@ adminRouter.post('/login', function(req, res, next) {
     })(req, res, next);
 });
 
+adminRouter.post("/ban/:_id", userController.authCheck, adminController.banUser);
+
+adminRouter.post("/unban/:_id", userController.authCheck, adminController.unbanUser);
+
 module.exports = adminRouter;

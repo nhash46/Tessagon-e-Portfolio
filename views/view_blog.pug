@@ -79,6 +79,7 @@ block content
                                         a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id, user-username=blog.author) delete
                                         input.btn.btn-link.save-comment(type='submit', value='save')
                                 h7.card-header.number-of-likes Likes: #{c.numberOfLikes}
+                                a.btn.btn-link.report-comment(type= 'button' comment-id=c._id harassing-user-id=c.author._id reporting-user-id=user._id) Report
     
                     hr
                             
