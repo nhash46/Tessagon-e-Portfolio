@@ -246,3 +246,27 @@ body {
 .media-body {
     padding-left: 3vw;
 }
+
+#dropdownMenuLink {
+	color: black;
+	float: right;
+}
+
+#reportModal {
+	padding-top: -5vh;
+}
+
+
+#confirm {
+	text-align: center;
+}
+
+#divide {
+	width: 2vw;
+	height: auto;
+	display: inline-block;
+}
+
+#centre {
+	justify-content: center;
+}

@@ -112,7 +112,7 @@ head
                                     if noMatch
                                         h5 user "#{searchQuery}" was not found
                                     if !noMatch
-                                        table.table
+                                        table.table.bigTable
                                             thead
                                                 tr
                                                     th(scope='col') Name
@@ -129,7 +129,7 @@ head
                                                             td
                                                                 a.ban-user(href='#' user-id=user._id) Ban
                                                         td
-                                                            a(href='#') View Reports
+                                                            a#blue(type='button' data-toggle='modal' data-target='#viewReports') View Reports
 
 
                                             //.col-xl-8.col-lg-7
@@ -188,3 +188,22 @@ script(type='text/javascript' src='/js/admin/chart-pie-demo.js')
 
 script(src='/js/admin/adminScript.js')
 
+#viewReports.modal.fade
+    .modal-dialog.modal-lg.modal-dialog-centered
+        .modal-content
+            .modal-header
+                //h6 Reports for #{user.username}
+                button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+            .modal-body
+                table.table
+                    thead.reportedTable
+                        tr
+                            th(scope='col') reportID
+                            th(scope='col') Reported By
+                            th(scope='col') Date Reported
+                    tbody
+                        tr
+                            td reportID here
+                            td reported by ...
+                            td data of report ....
+            .modal-footer

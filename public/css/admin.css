@@ -11260,12 +11260,19 @@ th,td {
   overflow: hidden;
 }
 
-tbody {
+.bigTable tbody {
   height: 55vh;
   position: absolute;
   overflow-y: auto;
 }
 
-thead {
+.bigTable thead {
   padding-right: 20px;
 }
+
+#blue {
+  color: #4e73df;
+}
+
+
+
