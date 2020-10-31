@@ -82,6 +82,19 @@ block content
                                 h7.card-header.number-of-likes Likes: #{c.numberOfLikes}
 
                     hr
+
+                    #reportModal.modal.fade
+                        .modal-dialog.modal-dialog-centered
+                            .modal-content
+                                .modal-header
+                                    button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+                                .modal-body
+                                    h5#centre Are you sure you want to report this post?
+                                    #confirm
+                                        btn.btn-primary.btn-sm.report-comment(href='#'  comment-id=c._id harassing-user=c.author) Yes
+                                        #divide
+                                        btn.report(data-dismiss='modal' type='button') No
+                                .modal-footer
                             
         script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
         
@@ -93,15 +106,4 @@ block content
             }
 
 
-    #reportModal.modal.fade
-        .modal-dialog.modal-dialog-centered
-            .modal-content
-                .modal-header
-                    button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
-                .modal-body
-                    h5#centre Are you sure you want to report this post?
-                    #confirm
-                        btn.btn-primary.btn-sm(href='#') Yes
-                        #divide
-                        btn.report(data-dismiss='modal' type='button') No
-                .modal-footer
+    

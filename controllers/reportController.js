@@ -5,22 +5,53 @@ const User = mongoose.model("User");
 const Comment = mongoose.model("Comment");
 
 // save report to user and add report collection
-const newReport = async (req, res, next) => {
+const newReport = async (req, res) => {
 
     let newReport = new Report({
-        reportingUser: req.body.reportingUser,
-        comment: req.body.email,
-        harassingUser: req.body.harassingUser,
+        reportingUser: req.user.username,
+        comment: req.params._commentid,
+        harassingUser: req.params._harassinguser,
 
     });
+
+    console.log(newReport.reportingUser);
+    console.log(newReport.comment);
+    console.log(newReport.harassingUser);
+
+
+    try {
+        const filter = {username: req.params._harassinguser};
+        const update = {isReported: true};
+        let user = await User.findOneAndUpdate(filter, update);
+        
+    } catch (err) {
+        res.status(400);
+        req.session.message = {
+          type: 'danger',
+          intro: 'Oops, comment could not be reported at this moment.',
+          message: " we're looking into it now."
+        }
+        res.send("Success");
+    }
 
     // add user to database
     newReport.save((err) => {
         if (err) {
             console.log(err);
+            req.session.message = {
+              type: 'danger',
+              intro: 'Oops, comment could not be reported at this moment.',
+              message: " we're looking into it now."
+            }
+            res.send("Success");
 
         } else {
-            next();
+            req.session.message = {
+              type: 'success',
+              intro: 'Comment reported.',
+              message: ' Administrators will review this comment.'
+            }
+            res.send("Success");
         }
     });
 

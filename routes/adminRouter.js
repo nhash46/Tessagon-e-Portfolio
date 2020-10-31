@@ -4,6 +4,7 @@ const adminRouter = express.Router();
 const passport = require('passport');
 const adminController = require("../controllers/adminController.js");
 const userController = require("../controllers/userController.js");
+const reportController = require("../controllers/reportController.js");
 
 adminRouter.get("/", userController.authCheck, adminController.searchAllUsers);
 
@@ -33,5 +34,7 @@ adminRouter.post('/login', function(req, res, next) {
 adminRouter.post("/ban/:_id", userController.authCheck, adminController.banUser);
 
 adminRouter.post("/unban/:_id", userController.authCheck, adminController.unbanUser);
+
+adminRouter.post("/report/:_commentid/:_harassinguser", userController.authCheck, reportController.newReport);
 
 module.exports = adminRouter;

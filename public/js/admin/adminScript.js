@@ -2,20 +2,14 @@
 $(document).ready(function(){
     $('.report-comment').on('click', function(e){
         $target = $(e.target);
-        const _id = $target.attr('education-id');
-        var uni = $("#university"+_id).val();
-        var degree = $("#degree"+_id).val();
-        var eduStart = $("#eduStart"+_id).val();
-        var eduEnd = $("#eduEnd"+_id).val();
-        var desc = $("#descriptionEdu"+_id).val();
-        var dataString = 'university='+uni+'&degree='+degree+'&educationStartDate='+eduStart+'&educationEndDate='+eduEnd+'&descriptionEdu='+desc;
+        const harassing_user = $target.attr('harassing-user');
+        const comment_id = $target.attr('comment-id');
         $.ajax({
-            url: '/user/editEducation/'+_id,
+            url: '/admin/report/'+comment_id+'/'+harassing_user,
             type: 'POST',
-            data: dataString,
             success: function(response){
                 location.reload();
-                window.location.href='/user/profile#education';
+                //window.location.href='/user/profile#education';
             },
             error: function(err){
                 console.log(err);

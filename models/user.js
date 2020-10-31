@@ -38,7 +38,8 @@ const userSchema = new Schema({
     isBanned: {type: Boolean, default: false},
     isAdmin: {type: Boolean, default: false},
     isReported: {type: Boolean, default: false},
-    achievement: [ {type: Schema.Types.ObjectId, ref: "Achievement"} ]
+    achievement: [ {type: Schema.Types.ObjectId, ref: "Achievement"} ],
+    reports: [ {type: Schema.Types.ObjectId, ref: "Report"} ]
 });
 
 userSchema.plugin(findOrCreate);
