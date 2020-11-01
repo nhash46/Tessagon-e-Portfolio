@@ -11,6 +11,7 @@ const newReport = async (req, res) => {
         reportingUser: req.user.username,
         comment: req.params._commentid,
         harassingUser: req.params._harassinguser,
+        date: Date.now()
 
     });
 
@@ -57,6 +58,23 @@ const newReport = async (req, res) => {
 
 };
 
+// function to search for Users upon query
+const showReports = (req, res) => {
+    
+  // Get all blogs from DB
+  Report.find({harassingUser: req.params.username}, function(err, reports){
+      if(err){
+          console.log(err);
+      } else {
+          res.render("admin",
+          {
+              title: 'Reports for '+req.params.username,
+              reports: reports,
+          });
+      }
+  });
+};
+
 const deleteReport = (req, res) => {
   // check if user is logged in
   if(!req.user){
@@ -80,5 +98,6 @@ const deleteReport = (req, res) => {
 
 module.exports = {
     newReport,
-    deleteReport
+    deleteReport,
+    showReports
 };

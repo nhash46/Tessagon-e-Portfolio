@@ -7,7 +7,8 @@ const reportSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Comment"
     },
-    harassingUser: String
+    harassingUser: String,
+    date: Date
 });
 
 const Report = mongoose.model("Report", reportSchema, "report");

@@ -68,3 +68,20 @@ $(document).ready(function(){
         });
     });
 });
+
+$(document).ready(function(){
+    $('.view-reports').on('click', function(e){
+        $target = $(e.target);
+        const user_username = $target.attr('user-username');
+        $.ajax({
+            url: '/admin/reports/'+user_username,
+            type: 'GET',
+            success: function(response){
+
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+});
