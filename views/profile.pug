@@ -292,11 +292,11 @@ header#header.d-flex.flex-column.justify-content-center
                     for c in user1.experience
                         li
                             .timeline-image
-                                h4
+                                h4.white-text
                                     span.dateSize #{moment(c.experienceStartDate).format('LL')}
                                     |
                                     br
-                                    .dateSize                 To
+                                    .dateSize                 -
                                     span.dateSize #{moment(c.experienceEndDate).format('LL')}
                             .timeline-panel
                                 .timeline-heading
@@ -445,9 +445,13 @@ script(src='/js/deleteVideo.js')
                     label(for='uploadDocuments') Upload a document
                     input#uploadDocuments.form-control-file(name='file' type='file' required='isRequired' accept="application/pdf")
                     label(for='uploadDocuments') Document Title
+                
+                    hr.wide
+
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type ='submit') Upload file
+    
 
 #editPortfolioModal.topModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='portfolioModalLabel' aria-hidden='true')
     .modal-dialog.modal-dialog-centered.modal-lg(role='document')
@@ -466,7 +470,7 @@ script(src='/js/deleteVideo.js')
                 for vid in user1.youtubeLinks
                     h3 #{vid.title} - #{vid.subheading}
                     button.btn.btn-secondary.delete-video(type ='button', video-id = vid._id data-dismiss='modal') Remove
-                    hr
+                    hr.wide
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                 button.btn.btn-secondary(type ='submit') Save changes
@@ -486,6 +490,7 @@ script(src='/js/deleteVideo.js')
                     input#editResume.form-control-file(name='resume' type='file' accept="application/pdf")
                     label(for='editProfilePic') Edit your profile picture!
                     input#editProfilePic.form-control-file(name='propic' type='file')
+                    hr.wide
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save changes            
@@ -525,6 +530,7 @@ script(src='/js/deleteVideo.js')
                     label LinkedIn
                     input.form-control(name='linkedIn' type='text' autofocus='' value = user1.links.linkedIn)
                     br
+                    hr.wide
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save changes
@@ -556,6 +562,7 @@ script(src='/js/deleteVideo.js')
                     br
                     input#editBackgroundPic.form-control-file(name='background' type='file')
                     label(for='editBackgroundPic') Edit your background picture!
+                    hr.wide
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save changes
@@ -659,6 +666,7 @@ script(src='/js/deleteVideo.js')
                 br
                 br
                 br
+                hr
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary.add-education(type='submit') Save changes
@@ -720,6 +728,7 @@ script(src='/js/deleteVideo.js')
                     br
                     input.form-control-file(name='subheading' type='text' placeholder='Video' autofocus='' required='isRequired')
                     label Topic
+                    hr.wide
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type ='submit') Upload Video
@@ -741,6 +750,7 @@ script(src='/js/deleteVideo.js')
                     br
                     input.form-control(name='new_password1' type='password' autofocus='' required='isRequired' pattern='(?=.*?[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}' title='Password must be at least 8 characters and contain 1 number')
                     label Re-enter New Password
+                    hr.wide
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary(type='submit') Save Changes
@@ -759,6 +769,7 @@ script(src='/js/deleteVideo.js')
                         h3 #{skill.name}
                         input.form-control(name='skill_name' type='text' placeholder='Skills' autofocus='' value=skill.name id="skills"+skill._id)
                         button.btn.btn-secondary.edit-skill(href='/user/profile#skills' type='submit' skill-id=skill._id data-dismiss='modal') Save Changes
+                hr.wide
             .modal-footer
                 button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                 
@@ -821,6 +832,7 @@ script(src='/js/deleteVideo.js')
                 br
                 br
                 br
+                hr.wide
                 .modal-footer
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-secondary.add-achievement(type='submit') Add
