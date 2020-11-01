@@ -35,11 +35,13 @@ block content
             .col-md-4
                 // Search Widget
                 .card.my-4.cardStyle
-                   h5.card-header#centre #{authorFullName}
-                   if author.profilePicID
-                       img.blogProfilePic(src='https://theprofolio.herokuapp.com/user/images/'+ author.profilePicID alt='')
-                   else
-                       img.blogProfilePic(src='/img/defaultProfile.png')
+                   a#black(href="/user/profile/"+blogAuthor)
+                    h5.card-header#centre #{authorFullName}
+                   a#black(href="/user/profile/"+blogAuthor) 
+                    if author.profilePicID
+                        img.blogProfilePic(src='https://theprofolio.herokuapp.com/user/images/'+ author.profilePicID alt='')
+                    else
+                        img.blogProfilePic(src='/img/defaultProfile.png')
                    h5.card-header Search
                     .card-body
                         form.form-inline(action="/blog-posts/"+blogAuthor method="GET")
