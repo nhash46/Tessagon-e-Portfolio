@@ -51,7 +51,7 @@ block content
                                     i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
                                 .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in(aria-labelledby='dropdownMenuLink')
                                     .dropdown-header Options
-                                    a.dropdown-item(type='button' data-toggle='modal' data-target='#reportModal') Report Post
+                                    a.dropdown-item(type='button' data-toggle='modal' data-target='#reportModal'+c._id) Report Post
                                 #comment-top #{c.content}
                                     if user
                                         if user.username == c.author
@@ -83,7 +83,7 @@ block content
 
                     hr
 
-                    #reportModal.modal.fade
+                    .modal.fade(id="reportModal"+c._id)
                         .modal-dialog.modal-dialog-centered
                             .modal-content
                                 .modal-header

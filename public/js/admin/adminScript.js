@@ -4,6 +4,7 @@ $(document).ready(function(){
         $target = $(e.target);
         const harassing_user = $target.attr('harassing-user');
         const comment_id = $target.attr('comment-id');
+        console.log(harassing_user);
         $.ajax({
             url: '/admin/report/'+comment_id+'/'+harassing_user,
             type: 'POST',
@@ -84,4 +85,13 @@ $(document).ready(function(){
             }
         });
     });
+});
+
+$('#viewReports').on('show.bs.modal', function(e) {
+
+    //get data-id attribute of the clicked element
+    var user = $target.attr('user-username');
+
+    //populate the textbox
+    $(".modal-header #userReport").val("Reports for "+ user);
 });
