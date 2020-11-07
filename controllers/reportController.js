@@ -35,6 +35,21 @@ const newReport = async (req, res) => {
         res.send("Success");
     }
 
+    try {
+      const filter = {username: req.params._harassinguser};
+      const update = {"$push": {"reports": newReport._id}};
+      let user = await User.findOneAndUpdate(filter, update);
+      
+    } catch (err) {
+        res.status(400);
+        req.session.message = {
+          type: 'danger',
+          intro: 'Oops, comment could not be reported at this moment.',
+          message: " we're looking into it now."
+        }
+        res.send("Success");
+    }
+
     // add user to database
     newReport.save((err) => {
         if (err) {
