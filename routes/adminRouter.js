@@ -37,7 +37,7 @@ adminRouter.post("/unban/:_id", userController.authCheck, adminController.unbanU
 
 adminRouter.post("/report/:_commentid/:_harassinguser", userController.authCheck, reportController.newReport);
 
-adminRouter.get("/reports/:_username", userController.authCheck, reportController.showReports);
+//adminRouter.get("/reports/:_username", userController.authCheck, reportController.showReports);
 
 adminRouter.get("/logout", userController.logOutUser);
 

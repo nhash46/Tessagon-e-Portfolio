@@ -23,7 +23,7 @@ head
     // Sidebar
     ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion
         // Sidebar - Brand
-        a.sidebar-brand.d-flex.align-items-center.justify-content-center(href='index.html')
+        a.sidebar-brand.d-flex.align-items-center.justify-content-center(href='/')
             .sidebar-brand-icon
                 img#small(src='/img/favicon1.ico')
             .sidebar-brand-text.mx-3
@@ -35,7 +35,7 @@ head
         hr.sidebar-divider.my-0
         // Nav Item - Dashboard
         li.nav-item.active
-            a.nav-link(href='index.html')
+            a.nav-link(href='/admin')
                 i.fas.fa-fw.fa-tachometer-alt
                 span Dashboard
         // Divider
@@ -128,8 +128,31 @@ head
                                                         else
                                                             td
                                                                 a.ban-user(href='#' user-id=user._id) Ban
-                                                        td
-                                                            a#blue.view-reports(type='button' data-toggle='modal' data-target='#viewReports' user-username=user.username) View Reports
+                                                        if user.reports
+                                                            td
+                                                                a#blue(type='button' data-toggle='modal' data-target='#viewReports'+user._id) View Reports
+                                                                .modal.fade(id='viewReports' + user._id)
+                                                                    .modal-dialog.modal-lg.modal-dialog-centered
+                                                                        .modal-content
+                                                                            .modal-header
+                                                                                h6#userReport
+                                                                                button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+                                                                            .modal-body
+                                                                                table.table
+                                                                                    thead.reportedTable
+                                                                                        tr
+                                                                                            th(scope='col') reportID
+                                                                                            th(scope='col') commentID
+                                                                                            th(scope='col') Reported By
+                                                                                            th(scope='col') Date Reported
+                                                                                    tbody
+                                                                                        for report in user.reports
+                                                                                            tr
+                                                                                                td #{report._id}
+                                                                                                //td #{report.comment._id}
+                                                                                                td #{report.reportingUser}
+                                                                                                td #{report.date}
+                                                                        .modal-footer
 
 
                                             //.col-xl-8.col-lg-7
@@ -189,7 +212,7 @@ script(type='text/javascript' src='/js/admin/chart-pie-demo.js')
 script(src='/js/admin/adminScript.js')
 
 if reports
-    #viewReports.modal.fade
+    .modal.fade(id='userReports'+i._id)
         .modal-dialog.modal-lg.modal-dialog-centered
             .modal-content
                 .modal-header
@@ -201,7 +224,7 @@ if reports
                             tr
                                 th(scope='col') reportID
                                 th(scope='col') commentID
-                                th(scope='col') Reported By 
+                                th(scope='col') Reported By
                                 th(scope='col') Date Reported
                         tbody
                             for report in reports
