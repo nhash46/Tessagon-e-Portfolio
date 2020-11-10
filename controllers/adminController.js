@@ -19,23 +19,24 @@ const searchAllUsers = (req, res) => {
     if(req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all blogs from DB
-        User.find({username: regex}, function(err, allUsers){
-            if(err){
-                console.log(err);
-            } else {
-                if(allUsers.length < 1) {
-                    noMatch = true;
+        User
+        .find({username: regex})
+        .populate('reports')
+        .exec((err, allUsers) => {
+            if(allUsers.length < 1) {
+                noMatch = true;
 
-                }
-                res.render("admin",
-                    {
-                        title: 'Users',
-                        searchQuery: req.query.search,
-                        users: allUsers,
-                        noMatch: noMatch,
-                    });
             }
-        });
+            //console.log(user1);
+            res.render("admin",
+                {
+                    title: 'Users',
+                    searchQuery: req.query.search,
+                    users: allUsers,
+                    noMatch: noMatch,
+                });
+            });
+        
     } else {
         // Get all blogs from DB
         User.find({}, function(err, allUsers){
@@ -61,14 +62,14 @@ const searchReportedUsers = (req, res) => {
     if(req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all blogs from DB
-        User.find({username: regex, isReported: true}, function(err, allUsers){
-            if(err){
-                console.log(err);
-            } else {
+        User.find({username: regex, isReported: true})
+            .populate('reports')
+            .exec((err, allUsers) => {
                 if(allUsers.length < 1) {
                     noMatch = true;
 
                 }
+                //console.log(user1);
                 res.render("admin",
                     {
                         title: 'Reported Users',
@@ -76,23 +77,21 @@ const searchReportedUsers = (req, res) => {
                         users: allUsers,
                         noMatch: noMatch,
                     });
-            }
-        });
+                });
     } else {
         // Get all blogs from DB
-        User.find({isReported: true}, function(err, allUsers){
-            if(err){
-                console.log(err);
-            } else {
-                res.render("admin",
-                    {
-                        title: 'Reported Users',
-                        searchQuery: req.query.search,
-                        users: allUsers,
-                        noMatch: noMatch,
-                    });
-            }
-        });
+        User.find({isReported: true})
+        .populate('reports')
+        .exec((err, allUsers) => {
+            //console.log(user1);
+            res.render("admin",
+                {
+                    title: 'Reported Users',
+                    searchQuery: req.query.search,
+                    users: allUsers,
+                    noMatch: noMatch,
+                });
+            });
     }
 };
 
@@ -103,38 +102,36 @@ const searchBannedUsers = (req, res) => {
     if(req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all blogs from DB
-        User.find({username: regex, isBanned: true}, function(err, allUsers){
-            if(err){
-                console.log(err);
-            } else {
-                if(allUsers.length < 1) {
-                    noMatch = true;
+        User.find({username: regex, isBanned: true})
+        .populate('reports')
+        .exec((err, allUsers) => {
+            if(allUsers.length < 1) {
+                noMatch = true;
 
-                }
-                res.render("admin",
-                    {
-                        title: 'Banned Users',
-                        searchQuery: req.query.search,
-                        users: allUsers,
-                        noMatch: noMatch,
-                    });
             }
-        });
+            //console.log(user1);
+            res.render("admin",
+                {
+                    title: 'Reported Users',
+                    searchQuery: req.query.search,
+                    users: allUsers,
+                    noMatch: noMatch,
+                });
+            });
     } else {
         // Get all blogs from DB
-        User.find({isBanned: true}, function(err, allUsers){
-            if(err){
-                console.log(err);
-            } else {
-                res.render("admin",
-                    {
-                        title: 'Banned Users',
-                        searchQuery: req.query.search,
-                        users: allUsers,
-                        noMatch: noMatch,
-                    });
-            }
-        });
+        User.find({isBanned: true})
+        .populate('reports')
+        .exec((err, allUsers) => {
+            //console.log(user1);
+            res.render("admin",
+                {
+                    title: 'Reported Users',
+                    searchQuery: req.query.search,
+                    users: allUsers,
+                    noMatch: noMatch,
+                });
+            });
     }
 };
 
