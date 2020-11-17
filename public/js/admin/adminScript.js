@@ -71,6 +71,23 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+    $('.unreport-user').on('click', function(e){
+        $target = $(e.target);
+        const user_id = $target.attr('user-id');
+        $.ajax({
+            url: '/admin/unreport/'+user_id,
+            type: 'POST',
+            success: function(response){
+                location.reload();
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+});
+
+$(document).ready(function(){
     $('.view-reports').on('click', function(e){
         $target = $(e.target);
         const user_username = $target.attr('user-username');

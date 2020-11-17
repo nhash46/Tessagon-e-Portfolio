@@ -192,6 +192,36 @@ const unbanUser = (req, res) => {
     });
 }
 
+const unreportUser = (req, res) => {
+
+    let user = {};
+
+    user.isReport = false;
+
+    let query = {_id:req.params._id};
+
+    // add post into db
+    User.updateOne(query, user, function (err) {
+        if (err){
+            req.session.message = {
+                type: 'danger',
+                intro: 'Oops, something went wrong.',
+                messages: " User's report status could not be dismissed."
+            }
+            console.log(err);
+            res.redirect('back');
+        }
+        else{
+            //req.flash('success','Post Updated');
+            req.session.message = {
+                type: 'success',
+                intro: 'User successfully unreported.'
+            }
+            res.redirect('back');
+        }
+    });
+}
+
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
@@ -202,5 +232,6 @@ module.exports = {
     searchReportedUsers,
     searchBannedUsers,
     banUser,
-    unbanUser
+    unbanUser,
+    unreportUser
 };
