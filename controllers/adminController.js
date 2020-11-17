@@ -19,8 +19,7 @@ const searchAllUsers = (req, res) => {
     if(req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all blogs from DB
-        User
-        .find({username: regex})
+        User.find({username: regex})
         .populate('reports')
         .exec((err, allUsers) => {
             if(allUsers.length < 1) {
@@ -38,20 +37,18 @@ const searchAllUsers = (req, res) => {
             });
         
     } else {
-        // Get all blogs from DB
-        User.find({}, function(err, allUsers){
-            if(err){
-                console.log(err);
-            } else {
-                res.render("admin",
-                    {
-                        title: 'Users',
-                        searchQuery: req.query.search,
-                        users: allUsers,
-                        noMatch: noMatch,
-                    });
-            }
-        });
+        User.find({})
+        .populate('reports')
+        .exec((err, allUsers) => {
+            //console.log(user1);
+            res.render("admin",
+                {
+                    title: 'Users',
+                    searchQuery: req.query.search,
+                    users: allUsers,
+                    noMatch: noMatch,
+                });
+            });
     }
 };
 
