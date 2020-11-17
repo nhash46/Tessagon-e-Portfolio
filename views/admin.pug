@@ -1,0 +1,241 @@
+doctype html
+head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description' content='')
+    meta(name='author' content='')
+    title Admin - Dashboard
+    link(rel='shortcut icon' href='/img/favicon1.ico' type='image/x-icon')
+    // Custom fonts for this template
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css')
+    link(href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet')
+    // Custom styles for this template
+    link(rel='stylesheet' type='text/css' href='/css/admin.css')
+
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js' integrity='sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN' crossorigin='anonymous')
+    script(src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous")
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js' integrity='sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV' crossorigin='anonymous')
+
+
+
+// Page Wrapper
+#wrapper
+    // Sidebar
+    ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion
+        // Sidebar - Brand
+        a.sidebar-brand.d-flex.align-items-center.justify-content-center(href='/')
+            .sidebar-brand-icon
+                img#small(src='/img/favicon1.ico')
+            .sidebar-brand-text.mx-3
+                br
+                | ProFolio Admin Dashboard
+                br
+        // Divider
+        br
+        hr.sidebar-divider.my-0
+        // Nav Item - Dashboard
+        li.nav-item.active
+            a.nav-link(href='/admin')
+                i.fas.fa-fw.fa-tachometer-alt
+                span Dashboard
+        // Divider
+        hr.sidebar-divider
+        // Heading
+    // Content Wrapper
+    #content-wrapper.d-flex.flex-column
+        // Main Content
+        #content
+            // Topbar
+            nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
+                // Sidebar Toggle (Topbar)
+                button#sidebarToggleTop.btn.btn-link.d-md-none.rounded-circle.mr-3
+                    i.fa.fa-bars
+                // Topbar Search
+                form.d-none.d-sm-inline-block.form-inline.mr-auto.ml-md-3.my-2.my-md-0.mw-100.navbar-search(action="/admin" method="GET")
+                    .input-group
+                        input.form-control.bg-light.border-0.small(type='text' name='search' placeholder='Search for...' aria-label='Search' aria-describedby='basic-addon2')
+                        .input-group-append
+                            button.btn.btn-primary(type='submit')
+                                i.fas.fa-search.fa-sm
+                // Topbar Navbar
+                ul.navbar-nav.ml-auto
+                    // Nav Item - Search Dropdown (Visible Only XS)
+                    li.nav-item.dropdown.no-arrow.d-sm-none
+                        a#searchDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                            i.fas.fa-search.fa-fw
+                    // Nav Item - User Information
+                    li.nav-item.dropdown.no-arrow
+                        a#userDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                            span.mr-2.d-none.d-lg-inline.text-gray-600.small Admin
+                            img.img-profile.rounded-circle(src='../img/defaultProfile.png')
+                        // Dropdown - User Information
+                        .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby='userDropdown')
+                            a.dropdown-item(href='#')
+                                i.fas.fa-user.fa-sm.fa-fw.mr-2.text-gray-400
+                                |                   Profile
+                            .dropdown-divider
+                            a.dropdown-item(href='#' data-toggle='modal' data-target='#logoutModal')
+                                i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
+                                |                   Logout
+            // End of Topbar
+
+
+
+            // Begin Page Content
+            .container-fluid
+                // Content Row
+                .row
+                    // Area Chart
+                    .col-xl-12.col-lg-12
+                        .card.shadow.mb-4
+                            // Card Header - Dropdown
+                            .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+                                h6.m-0.font-weight-bold.text-primary #{title}
+                                .dropdown.no-arrow
+                                    a#dropdownMenuLink.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                                        i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
+                                    .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in(aria-labelledby='dropdownMenuLink')
+                                        .dropdown-header View Users:
+                                        a.dropdown-item(href='/admin') All
+                                        .dropdown-divider
+                                        a.dropdown-item(href='/admin/reported') Reported
+                                        a.dropdown-item(href='/admin/banned') Banned
+                            // Card Body
+                            .card-body
+                                .row#size
+                                    if noMatch
+                                        h5 user "#{searchQuery}" was not found
+                                    if !noMatch
+                                        table.table.bigTable
+                                            thead
+                                                tr
+                                                    th(scope='col') Name
+                                                    th(scope='col')
+                                                    th(scope='col')
+                                                    th(scope='col')
+                                            tbody
+                                                each user, i in users
+                                                    tr
+                                                        td #{user.username}
+                                                        if user.isBanned
+                                                            td
+                                                                a.unban-user(href='#' user-id=user._id) Unban
+                                                        else
+                                                            td
+                                                                a.ban-user(href='#' user-id=user._id) Ban
+                                                        if (user.reports.length)
+                                                            td
+                                                                a#blue(type='button' data-toggle='modal' data-target='#viewReports'+user._id) View Reports
+                                                                .modal.fade(id='viewReports' + user._id)
+                                                                    .modal-dialog.modal-xl.modal-dialog-centered
+                                                                        .modal-content
+                                                                            .modal-header
+                                                                                h4#userReport Reports for #{user.username}
+                                                                                button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+                                                                            .modal-body
+                                                                                table.table.reportTable
+                                                                                    thead.reportedTable
+                                                                                        tr
+                                                                                            th(scope='col') reportID
+                                                                                            th(scope='col') commentID
+                                                                                            th(scope='col') Reported By
+                                                                                            th(scope='col') Date Reported
+                                                                                    tbody
+                                                                                        for report in user.reports
+                                                                                            tr
+                                                                                                td #{report._id}
+                                                                                                td #{report.comment._id}
+                                                                                                td #{report.reportingUser}
+                                                                                                td #{moment(report.date).format("MMMM Do YYYY, h:mm:ss a")}
+                                                                        .modal-footer
+                                                        else
+                                                            td
+                                                                | -
+                                                        if user.isReported
+                                                            td
+                                                                a.unreport-user(href='#' user-id=user._id) Unreport
+                                                        else
+                                                            td
+                                                                | -
+
+
+                                            //.col-xl-8.col-lg-7
+                                                h5 #{user.username}
+                                            //.col-xl-4.col-lg-5
+                                                a.btn.btn-primary(href='#') VIEW REPORTS
+                                            //.col-xl-4.col-lg-5
+                                                if user.isBanned
+                                                    a.btn.btn-primary(href='#') UNBAN
+                                                else
+                                                    a.btn.btn-primary(href='#') BAN
+
+
+
+
+
+            // /.container-fluid
+        // End of Main Content
+        // Footer
+        footer.sticky-footer.bg-white
+            .container.my-auto
+                .copyright.text-center.my-auto
+                    span Tessagon
+        // End of Footer
+    // End of Content Wrapper
+// End of Page Wrapper
+// Scroll to Top Button
+a.scroll-to-top.rounded(href='#page-top')
+    i.fas.fa-angle-up
+// Logout Modal
+#logoutModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+    .modal-dialog(role='document')
+        .modal-content
+            .modal-header
+                h5#exampleModalLabel.modal-title Ready to Leave?
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body Select &quot;Logout&quot; below if you are ready to end your current session.
+            .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Cancel
+                a.btn.btn-primary(href='/admin/logout') Logout
+
+
+script(type='text/javascript' src='/js/jquery.1.11.1.js')
+script(type='text/javascript' src='/js/bootstrap.js')
+// Core plugin JavaScript
+//script(src='vendor/jquery-easing/jquery.easing.min.js')
+// Custom scripts for all pages
+script(type='text/javascript' src='/js/sb-admin-2.js')
+// Page level plugins
+script(type='text/javascript' src='/js/admin/chart.js/Chart.min.js')
+
+// Page level custom scripts
+script(type='text/javascript' src='/js/admin/chart-area-demo.js')
+script(type='text/javascript' src='/js/admin/chart-pie-demo.js')
+
+script(src='/js/admin/adminScript.js')
+
+if reports
+    .modal.fade(id='userReports'+i._id)
+        .modal-dialog.modal-lg.modal-dialog-centered
+            .modal-content
+                .modal-header
+                    h6#userReport
+                    button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+                .modal-body
+                    table.table
+                        thead.reportedTable
+                            tr
+                                th(scope='col') reportID
+                                th(scope='col') commentID
+                                th(scope='col') Reported By
+                                th(scope='col') Date Reported
+                        tbody
+                            for report in reports
+                                tr
+                                    td #{report._id}
+                                    td #{comment._id}
+                                    td #{report.reportingUser}
+                                    td #{report.date}
+            .modal-footer

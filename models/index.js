@@ -45,7 +45,9 @@ require("./comment");
 require("./blog");
 require("./skill");
 require("./links");
+require("./report")
 require("./achievement");
+
 
 module.exports = {
   connect,

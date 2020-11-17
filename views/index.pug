@@ -224,11 +224,11 @@ header#header.d-flex.flex-column.justify-content-center
                         li
                             .timeline-image
                                 h4
-                                    span.dateSize #{moment(c.experienceStartDate).format('LL')}
+                                    span.dateSize #{moment(c.experienceStartDate).format('MMMM YYYY')}
                                     |
                                     br
                                     .dateSize                 To
-                                    span.dateSize #{moment(c.experienceEndDate).format('LL')}
+                                    span.dateSize #{moment(c.experienceEndDate).format('MMMM YYYY')}
                             .timeline-panel
                                 .timeline-heading
                                     h4
@@ -255,11 +255,11 @@ header#header.d-flex.flex-column.justify-content-center
                         li.timeline-inverted
                             .timeline-image
                                 h4
-                                    span.dateSize #{moment(c.educationStartDate).format('LL')}
+                                    span.dateSize #{moment(c.educationStartDate).format('MMMM YYYY')}
                                     |
                                     br
                                     .dateSize                 To
-                                    span.dateSize #{moment(c.educationEndDate).format('LL')}
+                                    span.dateSize #{moment(c.educationEndDate).format('MMMM YYYY')}
                             .timeline-panel
                                 .timeline-heading
                                     h4
@@ -376,7 +376,8 @@ script(type='text/javascript' src='/js/typewriter.js')
         .modal-content
             .modal-header#logo
                 button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
-                img(src="/img/profolio-tight.png" width= 300 height= 70 position = 'relative')
+                a(href='/')
+                    img(src="/img/profolio-tight.png" width= 300 height= 70 position = 'relative')
                 h4.modal-title Login
             .modal-body
                 form(method='POST' action='/user/login-modal')

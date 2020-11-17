@@ -51,7 +51,25 @@ block content
                         img#commentProfilePic(src='https://theprofolio.herokuapp.com/user/images/'+ c.profilePicID alt='no_image')
                         .media-body
                             a(href='https://theprofolio.herokuapp.com/user/profile/' + c.author)#commentUsername #{c.author}
-                            p#comment-top #{c.content}   
+                            //p#comment-top #{c.content}   
+                            //h5.mt-0 #{c.author}
+                            .dropdown.no-arrow
+                                a#dropdownMenuLink(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                                    i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
+                                .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in(aria-labelledby='dropdownMenuLink')
+                                    .dropdown-header Options
+                                    a.dropdown-item(type='button' data-toggle='modal' data-target='#reportModal'+c._id) Report Post
+                                #comment-top #{c.content}
+                                    if user
+                                        if user.username == c.author
+                                            a.btn.btn-link.edit-comment(type= 'button') Edit
+
+                                        form.edit-comment-form(method='POST', action='/comments/edit/'+c._id)
+                                            input.form-control(name='content', value= c.content)
+                                            a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id, user-username=blog.author) delete
+                                            input.btn.btn-link.save-comment(type='submit', value='save')
+                                    //h7.card-header.number-of-likes Likes: #{c.numberOfLikes}
+
                             .panel-footer#comment-bottom
                                 p #[a(href = '/user/profile/'+c.author) #[i.glyphicon.glyphicon-user] #{' ' } ]
                                     span #{moment(c.date).fromNow()}
@@ -69,8 +87,21 @@ block content
                                         a.btn.btn-link.delete-comment(href='#', blog-id=c.parentPost, comment-id=c._id, user-username=blog.author) delete
                                         input.btn.btn-link.save-comment(type='submit', value='save')
                                 h7.card-header.number-of-likes Likes: #{c.numberOfLikes}
-    
+
                     hr
+
+                    .modal.fade(id="reportModal"+c._id)
+                        .modal-dialog.modal-dialog-centered
+                            .modal-content
+                                .modal-header
+                                    button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+                                .modal-body
+                                    h5#centre Are you sure you want to report this post?
+                                    #confirm
+                                        btn.btn-primary.btn-sm.report-comment(href='#'  comment-id=c._id harassing-user=c.author) Yes
+                                        #divide
+                                        btn.report(data-dismiss='modal' type='button') No
+                                .modal-footer
                             
         script(src='https://kit.fontawesome.com/d7fc33007f.js', crossorigin='anonymous')
         
@@ -80,3 +111,6 @@ block content
                     $(".number-of-likes").val(comment.numberOfLikes + 1);
                 }
             }
+
+
+    

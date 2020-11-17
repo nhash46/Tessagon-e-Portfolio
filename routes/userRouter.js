@@ -160,7 +160,16 @@ userRouter.post('/login', function(req, res, next) {
                 intro: 'Oops, wrong username or password.',
                 message: ' Try again.'
             }
-            res.redirect("/"); }
+            res.redirect("/user/login"); 
+        }
+        if (user.isBanned){
+            req.session.message = {
+                type: 'danger',
+                intro: 'Oops,',
+                message: ' your account has been suspended.'
+            }
+            res.redirect("/user/login");
+        }
         req.logIn(user, function(err) {
             if (err) { return next(err); }
             return res.redirect('/user/profile');

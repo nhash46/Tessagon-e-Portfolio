@@ -102,6 +102,7 @@ app.get('/tessagon/about-us', (req, res) => {
 const userRouter = require("./routes/userRouter");
 const commentRouter = require("./routes/commentRouter");
 const blogRouter = require("./routes/blogRouter");
+const adminRouter = require("./routes/adminRouter");
 
 // user routes handled by userRouter
 app.use('/user', userRouter);
@@ -111,6 +112,8 @@ app.use('/comments', commentRouter);
 
 // blog routes handled by blogRouter
 app.use('/blog-posts', blogRouter);
+
+app.use('/admin', adminRouter);
 
 db.connect()
     .then(() => {

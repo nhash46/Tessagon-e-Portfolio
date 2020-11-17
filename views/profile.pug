@@ -16,7 +16,6 @@ head
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     // Bootstrap
     link(rel='stylesheet' type='text/css' href='/css/bootstrap.css')
-    link(rel='stylesheet' type='text/css' href='/fonts/font-awesome/css/font-awesome.css')
     // W3 
     //link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
 
@@ -292,12 +291,12 @@ header#header.d-flex.flex-column.justify-content-center
                     for c in user1.experience
                         li
                             .timeline-image
-                                h4.white-text
-                                    span.dateSize #{moment(c.experienceStartDate).format('LL')}
+                                h4
+                                    span.dateSize #{moment(c.experienceStartDate).format("MMMM YYYY")}
                                     |
                                     br
-                                    .dateSize                 -
-                                    span.dateSize #{moment(c.experienceEndDate).format('LL')}
+                                    .dateSize                 To
+                                    span.dateSize #{moment(c.experienceEndDate).format('MMMM YYYY')}
                             .timeline-panel
                                 .timeline-heading
                                     h4
@@ -328,11 +327,11 @@ header#header.d-flex.flex-column.justify-content-center
                         li.timeline-inverted
                             .timeline-image
                                 h4
-                                    span.dateSize #{moment(c.educationStartDate).format('LL')}
+                                    span.dateSize #{moment(c.educationStartDate).format('MMMM YYYY')}
                                     |
                                     br
                                     .dateSize                 To
-                                    span.dateSize #{moment(c.educationEndDate).format('LL')}
+                                    span.dateSize #{moment(c.educationEndDate).format('MMMM YYYY')}
                             .timeline-panel
                                 .timeline-heading
                                     h4
