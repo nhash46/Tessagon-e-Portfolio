@@ -196,7 +196,7 @@ const unreportUser = (req, res) => {
 
     let user = {};
 
-    user.isReport = false;
+    user.isReported = false;
 
     let query = {_id:req.params._id};
 
