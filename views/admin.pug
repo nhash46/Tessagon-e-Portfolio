@@ -6,6 +6,7 @@ head
     meta(name='description' content='')
     meta(name='author' content='')
     title Admin - Dashboard
+    link(rel='shortcut icon' href='/img/favicon1.ico' type='image/x-icon')
     // Custom fonts for this template
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css')
     link(href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet')
@@ -67,18 +68,12 @@ head
                     li.nav-item.dropdown.no-arrow
                         a#userDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                             span.mr-2.d-none.d-lg-inline.text-gray-600.small Admin
-                            img.img-profile.rounded-circle(src='/img/')
+                            img.img-profile.rounded-circle(src='../img/defaultProfile.png')
                         // Dropdown - User Information
                         .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby='userDropdown')
                             a.dropdown-item(href='#')
                                 i.fas.fa-user.fa-sm.fa-fw.mr-2.text-gray-400
                                 |                   Profile
-                            a.dropdown-item(href='#')
-                                i.fas.fa-cogs.fa-sm.fa-fw.mr-2.text-gray-400
-                                |                   Settings
-                            a.dropdown-item(href='#')
-                                i.fas.fa-list.fa-sm.fa-fw.mr-2.text-gray-400
-                                |                   Activity Log
                             .dropdown-divider
                             a.dropdown-item(href='#' data-toggle='modal' data-target='#logoutModal')
                                 i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
@@ -128,17 +123,17 @@ head
                                                         else
                                                             td
                                                                 a.ban-user(href='#' user-id=user._id) Ban
-                                                        if user.reports
+                                                        if (user.reports.length)
                                                             td
                                                                 a#blue(type='button' data-toggle='modal' data-target='#viewReports'+user._id) View Reports
                                                                 .modal.fade(id='viewReports' + user._id)
-                                                                    .modal-dialog.modal-lg.modal-dialog-centered
+                                                                    .modal-dialog.modal-xl.modal-dialog-centered
                                                                         .modal-content
                                                                             .modal-header
-                                                                                h6#userReport
+                                                                                h4#userReport Reports for #{user.username}
                                                                                 button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
                                                                             .modal-body
-                                                                                table.table
+                                                                                table.table.reportTable
                                                                                     thead.reportedTable
                                                                                         tr
                                                                                             th(scope='col') reportID
@@ -149,10 +144,13 @@ head
                                                                                         for report in user.reports
                                                                                             tr
                                                                                                 td #{report._id}
-                                                                                                //td #{report.comment._id}
+                                                                                                td #{report.comment._id}
                                                                                                 td #{report.reportingUser}
-                                                                                                td #{report.date}
+                                                                                                td #{moment(report.date).format("MMMM Do YYYY, h:mm:ss a")}
                                                                         .modal-footer
+                                                        else
+                                                            td
+                                                                | -
 
 
                                             //.col-xl-8.col-lg-7

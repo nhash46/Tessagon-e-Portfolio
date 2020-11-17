@@ -11274,5 +11274,15 @@ th,td {
   color: #4e73df;
 }
 
+.modal-body {
+  overflow: auto;
+}
+.modal-dialog {
+  height: 50%; /* = 90% of the .modal-backdrop block = %90 of the screen */
+}
+.modal-content {
+  height: 80%; /* = 100% of the .modal-dialog block */
+}
+
 
 
