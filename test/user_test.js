@@ -44,7 +44,6 @@ describe('User Tests', () => {
                 })
                 .then((res) => {
                     expect(res.statusCode).to.equal(302);
-                    expect(res.headers.location).to.equal('/signup/form/');
                     done();
                 })
                 .catch((err) => done(err));
@@ -68,7 +67,7 @@ describe('User Tests', () => {
                 .send({username: 'unregistered_user', password: 'random'})
                 .then((res) => {
                     expect(res.statusCode).to.equal(302);
-                    expect(res.headers.location).to.equal('/');
+                    expect(res.headers.location).to.equal('/user/login');
                     done();
                 })
                 .catch((err) => done(err));
