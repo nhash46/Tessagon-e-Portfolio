@@ -113,6 +113,7 @@ head
                                                     th(scope='col') Name
                                                     th(scope='col')
                                                     th(scope='col')
+                                                    th(scope='col')
                                             tbody
                                                 each user, i in users
                                                     tr
@@ -148,6 +149,12 @@ head
                                                                                                 td #{report.reportingUser}
                                                                                                 td #{moment(report.date).format("MMMM Do YYYY, h:mm:ss a")}
                                                                         .modal-footer
+                                                        else
+                                                            td
+                                                                | -
+                                                        if user.isReported
+                                                            td
+                                                                a.unreport-user(href='#' user-id=user._id) Unreport
                                                         else
                                                             td
                                                                 | -
